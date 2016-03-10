@@ -5,9 +5,16 @@ from user.models import User
 class Timetable(models.Model):
     event = models.ForeignKey(Activity_event, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    calender = model.ForeignKey(Calender, on_delete=models.CASCADE)
+
+class Event_terms(models.Model):
+    event_term = models.CharField(max_length=255, default="")
 
 class Activity_event(models.Model):
-	pass
+    location = models.CharField(max_length=255, default="")
+    description = models.TextField(default="")
+    activity_name = models.ForeignKey(Event_terms, on_delete=models.CASCADE)
 
 class Calendar(models.Model):
-	pass
+    name = models.CharField(max_length=255, default="")
+    description = models.TextField(default="")
