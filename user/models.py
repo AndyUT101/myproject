@@ -44,6 +44,18 @@ class Role(models.Model):
     def __str__(self):
         return self.role_user
 
+class Permission_key(models.Model):
+    permission_key = models.CharField(max_length=255, default="")
+    permission_description = models.CharField(max_length=255, default="")
+
+class Permission(models.Model):
+    permission_key = model.ForeignKey(Permission_key, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Session(models.Model):
+    session_token = models.CharField(max_length=32, default="")
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (
@@ -59,12 +71,6 @@ class Parent_contact(models.Model):
 
     # assign foreigh key linking to user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class Session(models.Model):
-    session_token = models.CharField(max_length=32, default="")
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
 
 """
 class_code
