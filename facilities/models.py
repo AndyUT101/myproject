@@ -13,7 +13,7 @@ class Room(models.Model):
         ('8', '8/F'),
     )
 
-    plate_name = model.CharField(max_length=6, default="")
+    plate_name = models.CharField(max_length=6, default="")
     floor = models.CharField(max_length = 1, choices = FLOOR_CHOICES, default = 'G')
     description = models.CharField(max_length=255, default="")
     available = models.BooleanField(default=True)
