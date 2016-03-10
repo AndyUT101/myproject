@@ -17,7 +17,7 @@ class Calendar(models.Model):
 class Timetable(models.Model):
     event = models.ForeignKey(Activity_event, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    calender = models.ForeignKey(Calender, on_delete=models.CASCADE)
+    calender = models.ForeignKey(Calendar, on_delete=models.CASCADE)
 
 
 
