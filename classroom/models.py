@@ -1,3 +1,12 @@
 from django.db import models
 
-# Create your models here.
+from user.models import User
+
+class Assignment(models.Model):
+    pass
+
+class Quiz(models.Model):
+    pass
+
+class Materials(models.Model):
+	pass
