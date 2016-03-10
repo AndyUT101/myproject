@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class Attendant(models.Model):
+    pass
+
+class Result(models.Model):
+    pass
