@@ -44,12 +44,12 @@ class Role(models.Model):
     def __str__(self):
         return self.role_user
 
-class Permission_key(models.Model):
+class Permission_meta(models.Model):
     permission_key = models.CharField(max_length=255, default="")
     permission_description = models.CharField(max_length=255, default="")
 
 class Permission(models.Model):
-    permission_key = models.ForeignKey(Permission_key, on_delete=models.CASCADE)
+    permission_key = models.ForeignKey(Permission_meta, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Session(models.Model):
