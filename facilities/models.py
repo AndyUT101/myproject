@@ -1,3 +1,23 @@
 from django.db import models
 
-# Create your models here.
+class Room(models.Model):
+    FLOOR_CHOICES = (
+        ('G', 'G/F'),
+        ('1', '1/F'),
+        ('2', '2/F'),
+        ('3', '3/F'),
+        ('4', '4/F'),
+        ('5', '5/F'),
+        ('6', '6/F'),
+        ('7', '7/F'),
+        ('8', '8/F'),
+    )
+
+    plate_name = model.CharField(max_length=6, default="")
+    floor = models.CharField(max_length = 1, choices = FLOOR_CHOICES, default = 'G')
+    description = models.CharField(max_length=255, default="")
+    available = models.BooleanField(default=True)
+
+class Facilities(models.Model):
+    name = models.CharField(max_length=255, default="")
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
