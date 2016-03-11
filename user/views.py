@@ -18,11 +18,13 @@ def index(request):
 
 def login(request):
     if 'token' not in request.session:
+        session_timeout_minutes = 30
+        request.session.set_expiry(session_timeout_minutes * 60)
         request.session['token'] = md5_crypt.encrypt(generate_token())
 
     return HttpResponse('Login page.')
 
 def logout(request):
-	del request.session['lucky_number']
+    del request.session['token']
     return HttpResponse('Logout page.')
 
