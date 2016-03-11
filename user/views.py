@@ -23,5 +23,6 @@ def login(request):
     return HttpResponse('Login page.')
 
 def logout(request):
+	del request.session['lucky_number']
     return HttpResponse('Logout page.')
 
