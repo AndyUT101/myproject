@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+
+admin.site.register(Event_terms)
+admin.site.register(Activity_event)
+
+admin.site.register(Calendar)
+admin.site.register(Timetable)

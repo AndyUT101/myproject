@@ -13,6 +13,6 @@ class Inbox(models.Model):
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver_profile')
     content = models.ForeignKey(Inbox_content, on_delete=models.CASCADE)
 
-class inbox_classroom(models.Model):
+class Inbox_classroom(models.Model):
     inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
