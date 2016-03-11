@@ -53,9 +53,12 @@ class Permission(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Session(models.Model):
+    timeout_delta = datetime.timedelta(hours=5)
+
     session_token = models.CharField(max_length=32, default="")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timeout = models.DateTimeField(default=datetime.datetime.now()+timeout_delta)
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (
