@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from passlib.hash import md5_crypt, bcrypt
@@ -25,7 +25,7 @@ def index(request):
     if 'token' in request.session:
         return HttpResponse('Index, session_id =' + request.session['token'])
 
-    return HttpResponse('Index')
+    return render(request, 'login.html')
 
 def login(request):
     # Review login session status
@@ -35,9 +35,10 @@ def login(request):
         return redirect('index')
 
     # Login authentication
-    login_account = request.POST['account']
-    login_password = request.POST['password']
-    if login_account == "" or login_password == "":
+    login_account = request.POST.get('account', False)
+    login_password = request.POST.get('password', False)
+
+    if not (login_account or login_password):
         pass
         # no need to process to db
 
