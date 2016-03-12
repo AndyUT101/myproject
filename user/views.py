@@ -1,7 +1,10 @@
 # from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-from passlib.hash import md5_crypt
+from django.core.exceptions import ObjectDoesNotExist
+from passlib.hash import md5_crypt, bcrypt
+
+from .models import User
 
 import random, string
 
@@ -25,7 +28,29 @@ def index(request):
     return HttpResponse('Index')
 
 def login(request):
-    if 'token' not in request.session:
+    # Review login session status
+    already_logged = False
+    if 'token' in request.session:
+        already_logged = True
+        return redirect('index')
+
+    # Login authentication
+    login_account = request.POST['account']
+    login_password = request.POST['password']
+    if login_account == "" or login_password == "":
+        pass
+        # no need to process to db
+
+    hashed_password = bcrypt.encrypt(login_password, rounds=8)
+
+    try:
+        user_auth = User.objects.get(username = login_account, password_hash = hashed_password)
+    
+    except ObjectDoesNotExist:
+        return redirect('index')
+
+    # Assign session token
+    if not already_logged:
         session_timeout_minutes = 30
         request.session.set_expiry(session_timeout_minutes * 60)
         request.session['token'] = generate_token()
