@@ -8,7 +8,7 @@ class User(models.Model):
 
     firstname = models.CharField(max_length=255, default="")
     lastname = models.CharField(max_length=255, default="")
-    password_hash = models.CharField(max_length=64, default="")
+    password_hash = models.CharField(max_length=96, default="")
     card_id = models.CharField(max_length=20, default="")
     strn_code = models.CharField(max_length=12, default="")
     sams_code = models.CharField(max_length=12, default="")
