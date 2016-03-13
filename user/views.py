@@ -39,8 +39,8 @@ def login(request):
 
         # Break process, return to index page
         return render('request', 'login.html', {
-                        'error_message': "Already logged, token:"+request.session['token'],
-                })
+            'error_message': "Already logged, token:"+request.session['token'],
+        })
 
     # Login authentication
     login_account = request.POST.get('account', '')
@@ -58,8 +58,8 @@ def login(request):
 
     except ObjectDoesNotExist:
         return render('request', 'login.html', {
-                        'error_message': "No such user.",
-                })
+            'error_message': "No such user.",
+        })
 
     ## Check password hash, assign session for logged user
     if check_password(login_password, user_object.password_hash):
@@ -70,8 +70,8 @@ def login(request):
 
     # Redirect to page
     return render('request', 'login.html', {
-                        'error_message': "Successful logged.",
-                })
+       'error_message': "Successful logged.",
+    })
 
 def logout(request):
     del request.session['token']
