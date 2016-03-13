@@ -7,7 +7,6 @@ from passlib.hash import md5_crypt, bcrypt
 from django.contrib.auth.hashers import check_password, make_password
 
 from .models import User
-from ..templates.str_pool import str_pool
 
 import random, string
 
