@@ -23,9 +23,6 @@ class Activity_event(models.Model):
     start_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE, related_name='start_time_profile', default="")
     end_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE, related_name='end_time_profile', default="")
 
-    def __str__(self):
-        return self.activity_name.event_term
-
 class Calendar(models.Model):
     name = models.CharField(max_length=255, default="")
     description = models.TextField(default="")
@@ -37,9 +34,6 @@ class Timetable(models.Model):
     event = models.ForeignKey(Activity_event, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     calender = models.ForeignKey(Calendar, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.event.activity_name.event_term
 
 
 
