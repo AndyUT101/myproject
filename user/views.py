@@ -68,9 +68,10 @@ def login(request):
             request.session['token'] = generate_token()
 
         # Redirect to page
-        return render(request, 'login.html', {
-           'error_message': "Successful logged.",
-        })
+        # return render(request, 'login.html', {
+        #    'error_message': "Successful logged.",
+        # })
+        return HttpResponseRedirect('/user/')
 
     return render(request, 'login.html', {
            'error_message': "Fail to login.",
