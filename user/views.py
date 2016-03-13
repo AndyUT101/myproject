@@ -2,7 +2,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
-from passlib.hash import md5_crypt, bcrypt
 
 from django.contrib.auth.hashers import check_password, make_password
 
@@ -18,7 +17,7 @@ def generate_token(length = 8):
     """
     random_string = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(length))
 
-    return md5_crypt.encrypt(random_string)
+    return make_password(random_string, hasher='md5')
     
 # cookies
 # http://dokelung-blog.logdown.com/posts/222552-django-notes-9-cookies-and-sessions
