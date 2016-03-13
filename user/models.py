@@ -55,6 +55,9 @@ class Permission(models.Model):
     permission_key = models.ForeignKey(Permission_meta, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.username + ": " + self.permission_key.permission_key
+
 class Session(models.Model):
     timeout_delta = datetime.timedelta(hours=5)
 

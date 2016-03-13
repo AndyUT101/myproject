@@ -95,8 +95,12 @@ def remove_user(request):
 def modify_user(request, user_id):
 
     return HttpResponse(user_id)
-    # check if process is string
-    if not isinstance(process, int):
-        return HttpResponseRedirect('/user/')
 
     #review_permission()
+
+def view_user(request, user_id):
+    pass
+
+def list_user(request, page=1, row_count=50):
+    pass
+
