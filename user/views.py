@@ -68,10 +68,14 @@ def login(request):
             request.session.set_expiry(session_timeout_minutes * 60)
             request.session['token'] = generate_token()
 
-    # Redirect to page
+        # Redirect to page
+        return render(request, 'login.html', {
+           'error_message': "Successful logged.",
+        })
+
     return render(request, 'login.html', {
-       'error_message': "Successful logged.",
-    })
+           'error_message': "Fail to login.",
+        })
 
 def logout(request):
     del request.session['token']
