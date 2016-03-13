@@ -38,6 +38,8 @@ def login(request):
 make_password("password", hasher='bcrypt_sha256')
 check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/kgjtRY7i./fo0V2IEp1l6f2')
     """
+
+    """
     # Review login session status
     already_logged = False
     if 'token' in request.session:
@@ -69,6 +71,42 @@ check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/k
         request.session['token'] = generate_token()
 
     return HttpResponse('Login page')
+
+    """
+    redirect_page = 'index'
+
+    # Review login session status
+    already_logged = False
+    if 'token' in request.session:
+        already_logged = True
+
+        # Break process, return to index page
+        return redirect(redirect_page)
+
+    # Login authentication
+    login_account = request.POST.get('account', '')
+    login_password = request.POST.get('password', '')
+
+    if not (login_account or login_password):
+        ## Skip database process, return index page
+        return redirect(redirect_page)
+
+    ## Access database for user data
+    try:
+        user_object = User.objects.get(username = login_account)
+
+    except ObjectDoesNotExist:
+        return redirect(redirect_page)
+
+    ## Check password hash, assign session for logged user
+    if check_password(login_password, user_object.password_hash):
+        if not already_logged:
+            session_timeout_minutes = 30
+            request.session.set_expiry(session_timeout_minutes * 60)
+            request.session['token'] = generate_token()
+
+    # Redirect to page
+    return redirect(redirect_page)
 
 def logout(request):
     del request.session['token']
