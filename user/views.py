@@ -10,6 +10,7 @@ from .models import User
 import random, string
 
 #https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/content/django/views_and_urlconfs.html
+# Helper function
 
 def generate_token(length = 8):
     """
@@ -18,6 +19,9 @@ def generate_token(length = 8):
     random_string = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(length))
 
     return make_password(random_string, hasher='md5')[4:]
+
+def review_permission(user, permission):
+    pass
     
 # cookies
 # http://dokelung-blog.logdown.com/posts/222552-django-notes-9-cookies-and-sessions
@@ -82,9 +86,14 @@ def logout(request):
         del request.session['token']
     return HttpResponse('Logout page')
 
-def modify(request, process):
+def add_user(request):
+    pass
 
-    return HttpResponse(process)
+def modify_user(request, user_id):
+
+    return HttpResponse(user_id)
     # check if process is string
-    if not isinstance(process, str):
+    if not isinstance(process, int):
         return HttpResponseRedirect('/user/')
+
+    #review_permission()

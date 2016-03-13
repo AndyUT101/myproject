@@ -25,7 +25,7 @@ class User(models.Model):
     intake_date = models.CharField(max_length=24, default="")
 
     def __str__(self):
-    	return self.username
+        return self.username
 
 class Role(models.Model):
     ROLE_USER_CHOICES = (
@@ -47,6 +47,9 @@ class Role(models.Model):
 class Permission_meta(models.Model):
     permission_key = models.CharField(max_length=255, default="")
     permission_description = models.CharField(max_length=255, default="")
+
+    def __str__(self):
+        return self.permission_key
 
 class Permission(models.Model):
     permission_key = models.ForeignKey(Permission_meta, on_delete=models.CASCADE)
