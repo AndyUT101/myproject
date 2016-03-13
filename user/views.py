@@ -89,6 +89,9 @@ def logout(request):
 def add_user(request):
     pass
 
+def remove_user(request):
+    pass
+
 def modify_user(request, user_id):
 
     return HttpResponse(user_id)
