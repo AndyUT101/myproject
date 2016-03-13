@@ -1,6 +1,11 @@
+import datetime
+
 from django.db import models
 
 from user.models import User
+
+class Time_meta(models.Model):
+    time_obj = models.DateTimeField(default=datetime.datetime.now(), unique=True)
 
 class Event_terms(models.Model):
     event_term = models.CharField(max_length=255, default="")
@@ -9,6 +14,8 @@ class Activity_event(models.Model):
     location = models.CharField(max_length=255, default="")
     description = models.TextField(default="")
     activity_name = models.ForeignKey(Event_terms, on_delete=models.CASCADE)
+    start_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE)
+    end_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE)
 
 class Calendar(models.Model):
     name = models.CharField(max_length=255, default="")

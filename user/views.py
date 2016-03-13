@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.hashers import check_password, make_password
 
-from .models import User
+from .models import User, Permission, Permission_meta
 
 import random, string
 
@@ -37,7 +37,7 @@ def login(request):
 
     # Review login session status
     already_logged = False
-    if 'token' in request.session:
+    if 'token' in request.session and 'user' in request.session:
         already_logged = True
 
         # Break process, return to index page
@@ -70,6 +70,7 @@ def login(request):
             session_timeout_minutes = 30
             request.session.set_expiry(session_timeout_minutes * 60)
             request.session['token'] = generate_token()
+            request.session['user'] = user_object.username
 
         # Redirect to page
         # return render(request, 'login.html', {
@@ -82,8 +83,13 @@ def login(request):
         })
 
 def logout(request):
+	"""
+	Logout user account, remove token and user session
+	"""
     if 'token' in request.session:
         del request.session['token']
+    if 'user' in request.session:
+        del request.session['user']
     return HttpResponse('Logout page')
 
 def add_user(request):

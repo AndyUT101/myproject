@@ -1,3 +1,14 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Helper function
+def calendar_list(request):
+    # parameter: user
+    pass
+
+
+def add(request):
+    # parameter: datatime, user
+    pass
+
+def modify(request, event_id):
+    pass
