@@ -28,7 +28,7 @@ def index(request):
     if 'token' in request.session:
         return HttpResponse('Index, session_id =' + request.session['token'])
 
-    return render(request, 'login.html', {'error_message': str_pool.text['index']})
+    return render(request, 'login.html', {'error_message': 'index'})
 
 def login(request):
     redirect_page = 'index'
