@@ -81,3 +81,10 @@ def logout(request):
     if 'token' in request.session:
         del request.session['token']
     return HttpResponse('Logout page')
+
+def modify(request, process):
+
+    return HttpResponse(process)
+    # check if process is string
+    if not isinstance(process, str):
+        return HttpResponseRedirect('/user/')
