@@ -77,5 +77,6 @@ def login(request):
         })
 
 def logout(request):
-    del request.session['token']
+    if 'token' in request.session:
+        del request.session['token']
     return HttpResponse('Logout page')
