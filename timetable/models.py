@@ -14,8 +14,8 @@ class Activity_event(models.Model):
     location = models.CharField(max_length=255, default="")
     description = models.TextField(default="")
     activity_name = models.ForeignKey(Event_terms, on_delete=models.CASCADE)
-    start_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE)
-    end_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE)
+    start_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE, related_name='start_time_profile', default="")
+    end_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE, related_name='end_time_profile', default="")
 
 class Calendar(models.Model):
     name = models.CharField(max_length=255, default="")
