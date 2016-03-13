@@ -38,7 +38,7 @@ def login(request):
         already_logged = True
 
         # Break process, return to index page
-        return render('request', 'login.html', {
+        return render(request, 'login.html', {
             'error_message': "Already logged, token:"+request.session['token'],
         })
 
@@ -48,7 +48,7 @@ def login(request):
 
     if not (login_account or login_password):
         ## Skip database process, return index page
-        return render('request', 'login.html', {
+        return render(request, 'login.html', {
 			'error_message': "Empty username or password.",
 		})
         
@@ -57,7 +57,7 @@ def login(request):
         user_object = User.objects.get(username = login_account)
 
     except ObjectDoesNotExist:
-        return render('request', 'login.html', {
+        return render(request, 'login.html', {
             'error_message': "No such user.",
         })
 
@@ -69,7 +69,7 @@ def login(request):
             request.session['token'] = generate_token()
 
     # Redirect to page
-    return render('request', 'login.html', {
+    return render(request, 'login.html', {
        'error_message': "Successful logged.",
     })
 
