@@ -52,8 +52,8 @@ def login(request):
     if not (login_account or login_password):
         ## Skip database process, return index page
         return render(request, 'login.html', {
-			'error_message': "Empty username or password.",
-		})
+            'error_message': "Empty username or password.",
+        })
         
     ## Access database for user data
     try:
@@ -83,9 +83,9 @@ def login(request):
         })
 
 def logout(request):
-	"""
-	Logout user account, remove token and user session
-	"""
+    """
+    Logout user account, remove token and user session
+    """
     if 'token' in request.session:
         del request.session['token']
     if 'user' in request.session:
