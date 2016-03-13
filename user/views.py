@@ -7,6 +7,7 @@ from passlib.hash import md5_crypt, bcrypt
 from django.contrib.auth.hashers import check_password, make_password
 
 from .models import User
+from ..templates.str_pool import str_pool
 
 import random, string
 
@@ -27,7 +28,7 @@ def index(request):
     if 'token' in request.session:
         return HttpResponse('Index, session_id =' + request.session['token'])
 
-    return render(request, 'login.html', {'error_message': 'index'})
+    return render(request, 'login.html', {'error_message': str_pool.text['index']})
 
 def login(request):
     redirect_page = 'index'
