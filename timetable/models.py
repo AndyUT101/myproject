@@ -24,7 +24,7 @@ class Activity_event(models.Model):
     end_date = models.ForeignKey(Time_meta, on_delete=models.CASCADE, related_name='end_time_profile', default="")
 
     def __str__(self):
-        return self.activity_name
+        return self.activity_name.event_term
 
 class Calendar(models.Model):
     name = models.CharField(max_length=255, default="")
@@ -39,7 +39,7 @@ class Timetable(models.Model):
     calender = models.ForeignKey(Calendar, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.event
+        return self.event.activity_name.event_term
 
 
 
