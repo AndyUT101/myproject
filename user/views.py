@@ -27,52 +27,9 @@ def index(request):
     if 'token' in request.session:
         return HttpResponse('Index, session_id =' + request.session['token'])
 
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'error_message': 'index'})
 
 def login(request):
-
-    """
-
-    from django.contrib.auth.hashers import check_password, make_password
-
-make_password("password", hasher='bcrypt_sha256')
-check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/kgjtRY7i./fo0V2IEp1l6f2')
-    """
-
-    """
-    # Review login session status
-    already_logged = False
-    if 'token' in request.session:
-        already_logged = True
-        return redirect('index')
-
-    # Login authentication
-    login_account = request.POST.get('account', False)
-    login_password = request.POST.get('password', False)
-
-    if not (login_account or login_password):
-        pass
-        # no need to process to db
-
-    try:
-        user_object = User.objects.get(username = login_account)
-    
-    except ObjectDoesNotExist:
-        return redirect('index')
-
-    if not check_password(login_password, user_object.password_hash):
-        return redirect('index')
-
-
-    # Assign session token
-    if not already_logged:
-        session_timeout_minutes = 30
-        request.session.set_expiry(session_timeout_minutes * 60)
-        request.session['token'] = generate_token()
-
-    return HttpResponse('Login page')
-
-    """
     redirect_page = 'index'
 
     # Review login session status
@@ -81,7 +38,9 @@ check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/k
         already_logged = True
 
         # Break process, return to index page
-        return redirect(redirect_page)
+        return render('request', 'login.html', {
+                        'error_message': "Already logged, token:"+request.session['token'],
+                })
 
     # Login authentication
     login_account = request.POST.get('account', '')
@@ -89,14 +48,18 @@ check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/k
 
     if not (login_account or login_password):
         ## Skip database process, return index page
-        return redirect(redirect_page)
-
+        return render('request', 'login.html', {
+			'error_message': "Empty username or password.",
+		})
+        
     ## Access database for user data
     try:
         user_object = User.objects.get(username = login_account)
 
     except ObjectDoesNotExist:
-        return redirect(redirect_page)
+        return render('request', 'login.html', {
+                        'error_message': "No such user.",
+                })
 
     ## Check password hash, assign session for logged user
     if check_password(login_password, user_object.password_hash):
@@ -106,7 +69,9 @@ check_password('password', 'bcrypt_sha256$$2b$12$VADBCPlCt0wMa2zjUgaXl.jnrvoNt/k
             request.session['token'] = generate_token()
 
     # Redirect to page
-    return redirect(redirect_page)
+    return render('request', 'login.html', {
+                        'error_message': "Successful logged.",
+                })
 
 def logout(request):
     del request.session['token']
