@@ -8,7 +8,7 @@ class Time_meta(models.Model):
     time_obj = models.DateTimeField(default=datetime.datetime.now(), unique=True)
     
     def __str__(self):
-        return self.time_obj
+        return str(self.time_obj)
 
 class Event_terms(models.Model):
     event_term = models.CharField(max_length=255, default="")
