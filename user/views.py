@@ -17,7 +17,7 @@ def generate_token(length = 8):
     """
     random_string = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(length))
 
-    return make_password(random_string, hasher='md5')
+    return make_password(random_string, hasher='md5')[4:]
     
 # cookies
 # http://dokelung-blog.logdown.com/posts/222552-django-notes-9-cookies-and-sessions
