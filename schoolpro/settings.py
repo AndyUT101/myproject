@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'booking.apps.BookingConfig',
     'classroom.apps.ClassroomConfig',
     'inbox.apps.InboxConfig',
-    'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
