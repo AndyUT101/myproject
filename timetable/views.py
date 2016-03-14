@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from user.models import User
+
 # Helper function
 def calendar_list(request):
     # parameter: user
