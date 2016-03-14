@@ -4,11 +4,17 @@ from django.db import models
 from django.utils import timezone
 
 class User(models.Model):
+    SEX_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+
     username = models.CharField(max_length=255, default="")
 
     firstname = models.CharField(max_length=255, default="")
     lastname = models.CharField(max_length=255, default="")
     password_hash = models.CharField(max_length=96, default="")
+    sex_code = models.CharField(max_length = 1, choices = SEX_CHOICES, default = '')
     card_id = models.CharField(max_length=20, default="")
     strn_code = models.CharField(max_length=12, default="")
     sams_code = models.CharField(max_length=12, default="")
@@ -97,3 +103,4 @@ class Class_code(models.Model):
 class Class_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     class_code = models.ForeignKey(Class_code, on_delete=models.CASCADE)
+    class_number = models.IntegerField(max_length=50, default=0)
