@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta
 
 from django.db import models
 from django.utils import timezone
@@ -65,12 +65,10 @@ class Permission(models.Model):
         return self.user.username + ": " + self.permission_key.permission_key
 
 class Session(models.Model):
-    timeout_delta = datetime.timedelta(hours=5)
-
     session_token = models.CharField(max_length=32, default="")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    timeout = models.DateTimeField(default=timezone.make_aware(datetime.datetime.now()+timeout_delta))
+    timeout = models.DateTimeField(default=datetime.now()+timedelta(hours=5))
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (
