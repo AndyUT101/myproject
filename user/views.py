@@ -107,6 +107,6 @@ def modify_user(request, user_id):
 def view_user(request, user_id):
     pass
 
-def list_user(request, page=1, row_count=50):
+def list_user(request, page=1, row_count=50, specific_usertype=None):
     pass
 
