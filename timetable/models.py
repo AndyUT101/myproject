@@ -1,11 +1,12 @@
 import datetime
 
 from django.db import models
+from django.utils import timezone
 
 from user.models import User
 
 class Time_meta(models.Model):
-    time_obj = models.DateTimeField(default=datetime.datetime.now(), unique=True)
+    time_obj = models.DateTimeField(auto_now_add=True, unique=True)
     
     def __str__(self):
         return str(self.time_obj)
