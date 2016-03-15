@@ -10,13 +10,13 @@ class Attandance(models.Model):
     logged_datetime = models.DateTimeField(default=timezone.now)
 
 class Rule(models.Model):
-	name = models.CharField(max_length=255, default="")
-	recursive = models.BooleanField(default=False)
-	priority = models.PositiveIntegerField(default=0)
-	start_time = models.TimeField(default=time(8,0,0))
-	end_time = models.TimeField(default=time(17,0,0))
+    name = models.CharField(max_length=255, default="")
+    recursive = models.BooleanField(default=False)
+    priority = models.PositiveIntegerField(default=0)
+    start_time = models.TimeField(default=time(8,0,0))
+    end_time = models.TimeField(default=time(17,0,0))
 
 class Applied_rule(models.Model):
     rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     applied_datetime = models.DateTimeField(default=timezone.now)

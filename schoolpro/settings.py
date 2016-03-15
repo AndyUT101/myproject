@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'booking.apps.BookingConfig',
     'classroom.apps.ClassroomConfig',
     'inbox.apps.InboxConfig',
+    'attendance.apps.AttendanceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
