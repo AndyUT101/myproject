@@ -68,7 +68,7 @@ class Session(models.Model):
     session_token = models.CharField(max_length=32, default="")
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    timeout = models.DateTimeField(default=datetime.now()+timedelta(hours=5))
+    timeout = models.DateTimeField(default=timezone.make_aware(datetime.now()+timedelta(hours=5)))
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (

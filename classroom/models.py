@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 from user.models import User
 
@@ -31,7 +32,7 @@ class Announce(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
     title = models.CharField(max_length=255, default="")
     content = models.TextField(default="")
-    announce_date = models.DateTimeField(auto_now_add=True)
+    announce_date = models.DateTimeField(default=datetime.now,blank=True)
 
 class Assignment_pool(models.Model):
     """
@@ -57,14 +58,14 @@ class Assignment(models.Model):
         ('T', 'Text'),
     )
     handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
-    deadline_datetime = models.DateTimeField(auto_now_add=True)
+    deadline_datetime = models.DateTimeField(default=datetime.now,blank=True)
     fullmark = models.PositiveSmallIntegerField(default=100)
 
 
 class User_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     assigment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
-    assign_date = models.DateTimeField(auto_now_add=True)
+    assign_date = models.DateTimeField(default=datetime.now,blank=True)
 
     ROLE_CHOICES = (
         ('STU', 'Student'),
@@ -92,7 +93,7 @@ class Note(models.Model):
     """
     title = models.CharField(max_length=255, default="")
     content = models.TextField(default="")
-    publish_datetime = models.DateTimeField(auto_now_add=True)
+    publish_datetime = models.DateTimeField(default=datetime.now,blank=True)
 
     STATUS_CHOICE = (
         ('P', 'Published'),
@@ -107,7 +108,7 @@ class Classroom_note(models.Model):
     A model for matching classroom and note, prevent many to many
     """
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
-    note = models.ForeignKey(note, on_delete=models.CASCADE, default="")
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, default="")
 
 class Material_type(models.Model):
     """
@@ -123,6 +124,6 @@ class Material_ext(models.Model):
 
 class Material(models.Model):
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    create_date = models.DateTimeField(auto_now_add=True)
+    create_date = models.DateTimeField(default=datetime.now,blank=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
-    path = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    path = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
