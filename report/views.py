@@ -7,3 +7,6 @@ def list_report():
 
 def generate_report(request):
     pass
+
+def attendent_report(request, username=None, class_code=None, start_date='', end_date=''):
+    pass
