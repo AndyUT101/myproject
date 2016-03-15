@@ -17,4 +17,6 @@ class Rule(models.Model):
 	end_time = models.TimeField(default=time(17,0,0))
 
 class Applied_rule(models.Model):
-    applied_rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
+    rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    applied_datetime = models.DateTimeField(default=timezone.now)
