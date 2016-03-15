@@ -104,9 +104,14 @@ def modify_user(request, user_id):
 
     #review_permission()
 
-def view_user(request, user_id):
+def view_user(request, user_id, specific_usertype=None):
     pass
 
-def list_user(request, page=1, row_count=50, specific_usertype=None):
+
+def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
     pass
 
+    # case 1: list all user
+    # case 2: list specific_usertype
+    # case 3: filter class_code
+    # case 4: search mode (GET + POST data)
