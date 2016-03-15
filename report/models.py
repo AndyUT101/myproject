@@ -1,5 +1,8 @@
 from django.db import models
 
+from attendance.models import Attandance
+from user.models import User
+
 class Attendant(models.Model):
     pass
 

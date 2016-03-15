@@ -85,12 +85,6 @@ class Parent_contact(models.Model):
     # assign foreigh key linking to user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-"""
-class_code
-class_assignment
-
-"""
-
 class Class_code(models.Model):
     class_name = models.CharField(max_length=2, default="")
     class_description = models.CharField(max_length=255, default="")
