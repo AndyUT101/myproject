@@ -2,49 +2,77 @@ from django.db import models
 
 from user.models import User
 
-class User_assignment(models.Model):
-    pass
-    """
-    user_id
-    assigment_id
-    assign_date (datetime)
-    role (stu, teacher)
-    """
-
 class Classroom(models.Model):
-    pass
     """
     name
     user_whoopen
     description
     status (open, close)
     """
+    name = models.CharField(max_length=255, default="")
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    description = models.TextField(default="")
+
+    STATUS_CHOICE = (
+        ('O', 'Open'),
+        ('C', 'Close'),
+    )
+    status = models.CharField(max_length=1, choices=STATUS_CHOICE, default="O")
+
 
 class Announce(models.Model):
-    pass
     """
     classroom_id
-    announce_title
-    announce_content
-    announce_type (sub-table?!)
+    title
+    content
+    announce_date
+    ## type (sub-table?!)
     """
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
+    title = models.CharField(max_length=255, default="")
+    content = models.TextField(default="")
+    announce_date = models.DateTimeField(auto_now_add=True)
 
 class Assignment_pool(models.Model):
-    pass
     """
     user
     content (json form)
     """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    content_json = models.TextField(default="")
 
 class Assignment(models.Model):
-    pass
     """
-    Assignment_title
-    Assignment_instruction
-    Assignment_method (upload, text)
-    Assignment_deadline
-    Assignment_fullmark
+    title
+    instruction
+    method (upload, text)
+    deadline
+    fullmark
     """
+    title = models.CharField(max_length=255, default="")
+    instruction = models.TextField(default="")
+
+    METHOD_CHOICE = (
+        ('U', 'Upload'),
+        ('T', 'Text'),
+    )
+    handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
+    deadline_datetime = models.DateTimeField(auto_now_add=True)
+    fullmark = models.PositiveSmallIntegerField(default=100)
+
+
+class User_assignment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    assigment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
+    assign_date = models.DateTimeField(auto_now_add=True)
+
+    ROLE_CHOICES = (
+        ('STU', 'Student'),
+        ('TEA', 'Teacher'),
+        ('ADM', 'Admin'),
+        ('VIS', 'Visitor'),
+    )
+    role = models.CharField(max_length=3, choices = ROLE_CHOICES, default = 'STU')
 
 class Exercise(models.Model):
     pass
@@ -52,46 +80,49 @@ class Exercise(models.Model):
     title
     instruction
     """
+    title = models.CharField(max_length=255, default="")
+    instruction = models.TextField(default="")
 
 class Note(models.Model):
-    pass
     """
     Title
     content
     publish_datetime
     status (publish, draft)
     """
+    title = models.CharField(max_length=255, default="")
+    content = models.TextField(default="")
+    publish_datetime = models.DateTimeField(auto_now_add=True)
+
+    STATUS_CHOICE = (
+        ('P', 'Published'),
+        ('D', 'Drafted'),
+        ('T', 'Trashed'),
+    )
+    status = models.CharField(max_length=1, choices=STATUS_CHOICE, default="D")
 
 
 class Classroom_note(models.Model):
     """
     A model for matching classroom and note, prevent many to many
     """
-    pass
-    """
-    classroom
-    note
-    """
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
+    note = models.ForeignKey(note, on_delete=models.CASCADE, default="")
 
 class Material_type(models.Model):
-    pass
     """
     type_name (eg. photo, document, zip)
     type_description
     """
+    type_name = models.CharField(max_length=255, default="")
+    type_description = models.TextField(default="")
 
 class Material_ext(models.Model):
-    pass
-    """
-    ext_name
-    material_type (foreign)
-    """
+    ext_name = models.CharField(max_length=255, default="", unique=True)
+    material_type = models.ForeignKey(Material_type, on_delete=models.CASCADE, default="")
 
 class Material(models.Model):
-    pass
-    """
-    uploader
-    datetime
-    classroom
-    material_path (unique)
-    """
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    create_date = models.DateTimeField(auto_now_add=True)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
+    path = models.FileField(upload_to='uploads/%Y/%m/%d/')
