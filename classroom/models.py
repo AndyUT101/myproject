@@ -34,14 +34,6 @@ class Announce(models.Model):
     content = models.TextField(default="")
     announce_date = models.DateTimeField(default=timezone.now, blank=True)
 
-class Assignment_pool(models.Model):
-    """
-    user
-    content (json form)
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    content_json = models.TextField(default="")
-
 class Assignment(models.Model):
     """
     title
@@ -61,6 +53,14 @@ class Assignment(models.Model):
     deadline_datetime = models.DateTimeField(default=timezone.now, blank=True)
     fullmark = models.PositiveSmallIntegerField(default=100)
 
+class Assignment_pool(models.Model):
+    """
+    user
+    content (json form)
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
+    content_json = models.TextField(default="")
 
 class User_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
