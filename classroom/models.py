@@ -76,16 +76,6 @@ class Assignment_pool(models.Model):
     content_json = models.TextField(default="")
     mark = models.PositiveSmallIntegerField(default=100)
 
-
-class Exercise(models.Model):
-    pass
-    """
-    title
-    instruction
-    """
-    title = models.CharField(max_length=255, default="")
-    instruction = models.TextField(default="")
-
 class Note(models.Model):
     """
     Title
