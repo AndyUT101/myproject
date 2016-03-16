@@ -7,8 +7,13 @@ body {
 	background: #ebf0f2;
 }
 
-.login_header {
-	text-align: center;
+
+h1.login_header {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 400px;
+	padding: none;
 }
 
 .login_infofield, .login_submitfield {
