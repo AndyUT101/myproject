@@ -53,15 +53,6 @@ class Assignment(models.Model):
     deadline_datetime = models.DateTimeField(default=timezone.now, blank=True)
     fullmark = models.PositiveSmallIntegerField(default=100)
 
-class Assignment_pool(models.Model):
-    """
-    user
-    content (json form)
-    """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
-    content_json = models.TextField(default="")
-
 class User_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     assigment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
@@ -74,6 +65,17 @@ class User_assignment(models.Model):
         ('VIS', 'Visitor'),
     )
     role = models.CharField(max_length=3, choices = ROLE_CHOICES, default = 'STU')
+
+
+class Assignment_pool(models.Model):
+    """
+    user
+    content (json form)
+    """
+    user_assignment = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
+    content_json = models.TextField(default="")
+    mark = models.PositiveSmallIntegerField(default=100)
+
 
 class Exercise(models.Model):
     pass
