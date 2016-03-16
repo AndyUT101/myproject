@@ -49,7 +49,7 @@ def login(request):
     login_account = request.POST.get('account', '')
     login_password = request.POST.get('password', '')
 
-    if not (login_account or login_password):
+    if not (login_account and login_password):
         ## Skip database process, return index page
         return render(request, 'login.html', {
             'error_message': "Login failed: Empty username or password!",
