@@ -94,6 +94,15 @@ def logout(request):
 
 def add_user(request):
     pass
+    form_checkpass = True
+    for parameter in [field.name for field in User._meta.get_fields()]:
+        if not request.POST.get(parameter, ''):
+            form_checkpass = False
+
+    if not form_checkpass:
+        return HttpResponse('No enoughs parameters received')
+
+
 
 def remove_user(request):
     pass
