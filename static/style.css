@@ -7,22 +7,24 @@ body {
 	background: #ebf0f2;
 }
 
-.login_submitfield, .login_infofield {
+.login_infofield, .login_submitfield {
 	width: 30%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 16px;
 	line-height: 20px;
 	min-width: 400px;
+
+	border: 1px solid #dde0e8;
+}
+
+.login_infofield .design_wrapper, .login_submitfield .design_wrapper {
+	width: 80%;
+	margin: 14px auto;
 }
 
 .login_infofield {
 	background: #fff;
-}
-
-.login_infofield .design_wrapper {
-	width: 80%;
-	margin: 14px auto;
 }
 
 .login_infofield .design_wrapper input {
@@ -39,7 +41,8 @@ body {
 .login_submitfield {
 	background: #f1f6f7;
 	max-height: 100px;
-}
+	border-top: none;
+	}
 
 .login_submitfield  a.forget {
 	color: #aaaaaa;
