@@ -1,0 +1,21 @@
+* {
+	font-family: 'Open Sans', sans-serif; 
+	font-size: 14px;
+}
+
+body {
+	background: #e9eef0;
+}
+
+.loginbox {
+	border: 1px #d0dbe0 solid;
+	padding: 10px;
+}
+
+.loginbox > p {
+	color: #444444;
+}
+
+.loginbox > p.note {
+	color: #aaaaaa;
+}
