@@ -4,20 +4,28 @@
 }
 
 body {
-	background: #e9eef0;
+	background: #ebf0f2;
 }
 
 .loginbox {
-	border: 1px #d0dbe0 solid;
+	border: 1px #dde0e8 solid;
+	border-radius: 10px;
 	padding: 10px;
+	background: #fff;
+
+	min-height: 280px;
 }
 
-.loginbox > p {
+.loginbox p {
 	color: #444444;
 }
 
-.loginbox > p.note {
+.loginbox a {
 	color: #aaaaaa;
+}
+
+.loginbox .bottomfield {
+	background: #f1f6f7;
 }
 
 h1 {
