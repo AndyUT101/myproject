@@ -16,6 +16,10 @@ h1.login_header {
 	padding: none;
 }
 
+h1.login_header img {
+	width: 100%;
+}
+
 .login_infofield, .login_submitfield {
 	width: 30%;
 	margin-left: auto;
