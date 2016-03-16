@@ -52,10 +52,12 @@ class Assignment(models.Model):
     handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
     deadline_datetime = models.DateTimeField(default=timezone.now, blank=True)
     fullmark = models.PositiveSmallIntegerField(default=100)
+    classroom = models.ForeignKey(classroom, on_delete=models.CASCADE, default="")
+    create_date = models.DateTimeField(default=timezone.now, blank=True)
+
 
 class User_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    assigment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
     assign_date = models.DateTimeField(default=timezone.now, blank=True)
 
     ROLE_CHOICES = (
@@ -65,6 +67,7 @@ class User_assignment(models.Model):
         ('VIS', 'Visitor'),
     )
     role = models.CharField(max_length=3, choices = ROLE_CHOICES, default = 'STU')
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
 
 
 class Assignment_pool(models.Model):
@@ -72,9 +75,10 @@ class Assignment_pool(models.Model):
     user
     content (json form)
     """
-    user_assignment = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
     content_json = models.TextField(default="")
     mark = models.PositiveSmallIntegerField(default=100)
+    user_assign = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
 
 class Note(models.Model):
     """
