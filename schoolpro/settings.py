@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'inbox.apps.InboxConfig',
     'attendance.apps.AttendanceConfig',
     'report.apps.ReportConfig',
+    'siteinfo.apps.SiteinfoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
