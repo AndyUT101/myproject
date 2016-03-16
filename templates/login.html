@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<h1 class="login_header">{% if template_title %}{{ template_title }}{% else %}SchoolPro{% endif %}</h1>
 {% if error_message %}<p>{{ error_message }}</p>{% endif  %}
 <form action="{% url 'user:login' %}" method="post">
 <div class="login_infofield">

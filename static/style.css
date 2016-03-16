@@ -7,6 +7,10 @@ body {
 	background: #ebf0f2;
 }
 
+.login_header {
+	text-align: center;
+}
+
 .login_infofield, .login_submitfield {
 	width: 30%;
 	margin-left: auto;
