@@ -7,6 +7,13 @@ body {
 	background: #ebf0f2;
 }
 
+.index_container {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 20px;
+	min-width: 400px;
+}
 
 h1.login_header {
 	width: 30%;
@@ -21,13 +28,7 @@ h1.login_header img {
 }
 
 .login_infofield, .login_submitfield {
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
 	padding: 16px;
-	line-height: 20px;
-	min-width: 400px;
-
 	border: 1px solid #dde0e8;
 }
 

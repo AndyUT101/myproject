@@ -1,26 +1,28 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
-<h1 class="login_header"><img src='{% static "img/index_banner.jpg" %}'/></h1>
-<form action="{% url 'user:login' %}" method="post">
-<div class="login_infofield">
-	<div class="design_wrapper">
-		{% if error_message %}<p class="errormsg">{{ error_message }}</p>{% endif  %}
-		{% csrf_token %}
-		<div class="form-group">
-			<label for="account">Login account</label>
-			<input type="text" class="form-control" id="account" placeholder="Account" name="account">
+<div class=index_container>
+	<h1 class="login_header"><img src='{% static "img/index_banner.jpg" %}' alt="SchoolPro application" /></h1>
+	<form action="{% url 'user:login' %}" method="post">
+		<div class="login_infofield">
+			<div class="design_wrapper">
+				{% if error_message %}<p class="errormsg">{{ error_message }}</p>{% endif  %}
+				{% csrf_token %}
+				<div class="form-group">
+					<label for="account">Login account</label>
+					<input type="text" class="form-control" id="account" placeholder="Account" name="account">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" placeholder="Password" name="password">
+				</div>		
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" id="password" placeholder="Password" name="password">
-		</div>		
-	</div>
+		<div class="login_submitfield">
+			<div class="design_wrapper">
+				<a href="#" class="forget">Forget your password?</a>
+				<button type="submit" class="btn btn-default floatright" value='login'>Login</button>
+			</div>
+		</div>
+	</form>
 </div>
-<div class="login_submitfield">
-	<div class="design_wrapper">
-		<a href="#" class="forget">Forget your password?</a>
-		<button type="submit" class="btn btn-default floatright" value='login'>Login</button>
-	</div>
-</div>
-</form>
 {% endblock %}
