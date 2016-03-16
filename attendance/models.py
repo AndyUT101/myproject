@@ -3,7 +3,7 @@ from datetime import date, time
 from django.db import models
 from django.utils import timezone
 
-from user.models import User
+from user.models import User, Class_code
 
 class Attandance(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -18,5 +18,5 @@ class Rule(models.Model):
 
 class Applied_rule(models.Model):
     rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    class_code = models.ForeignKey(Class_code, on_delete=models.CASCADE, default="")
     applied_datetime = models.DateTimeField(default=timezone.now)
