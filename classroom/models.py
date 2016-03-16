@@ -127,3 +127,4 @@ class Material(models.Model):
     create_date = models.DateTimeField(default=timezone.now, blank=True)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
     path = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
+    material_type = models.ForeignKey(Material_type, on_delete=models.CASCADE, default="")
