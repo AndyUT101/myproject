@@ -11,6 +11,6 @@ class Report_type(models.Model):
     layout_json = models.TextField(default="")
 
 class Report(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     generate_datetime = models.DateTimeField(default=timezone.now)
     report_type = models.ForeignKey(Report_type, on_delete=models.CASCADE, default="")
