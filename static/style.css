@@ -7,14 +7,17 @@ body {
 	background: #ebf0f2;
 }
 
-.login_infofield {
-	background: #fff;
-	min-width: 400px;
+.login_submitfield, .login_infofield {
 	width: 30%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 16px;
 	line-height: 20px;
+}
+
+.login_infofield {
+	background: #fff;
+	min-width: 400px;
 }
 
 .login_infofield .design_wrapper {
@@ -33,18 +36,29 @@ body {
 	color: #444444;
 }
 
-.loginbox a {
-	color: #aaaaaa;
-}
-
 .login_submitfield {
 	background: #f1f6f7;
-	min-height: 200px;
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 16px;
+	max-height: 100px;
 }
+
+.login_submitfield .forget a {
+	color: #aaaaaa;
+	font-size: 12px;
+}
+
+.login_submitfield .forget a:hover {
+	color: #444;
+}
+
+.floatright {
+	float: right;
+}
+
+.floatright:after {
+	content: ' ';
+	clear: right;
+}
+
 
 h1 {
 	font-size: 22px;
