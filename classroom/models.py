@@ -52,7 +52,7 @@ class Assignment(models.Model):
     handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
     deadline_datetime = models.DateTimeField(default=timezone.now, blank=True)
     fullmark = models.PositiveSmallIntegerField(default=100)
-    classroom = models.ForeignKey(classroom, on_delete=models.CASCADE, default="")
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
     create_date = models.DateTimeField(default=timezone.now, blank=True)
 
 
