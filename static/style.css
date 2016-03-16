@@ -41,7 +41,7 @@ body {
 	max-height: 100px;
 }
 
-.login_submitfield .forget a {
+.login_submitfield  a.forget {
 	color: #aaaaaa;
 	font-size: 12px;
 }
