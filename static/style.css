@@ -13,11 +13,11 @@ body {
 	margin-right: auto;
 	padding: 16px;
 	line-height: 20px;
+	min-width: 400px;
 }
 
 .login_infofield {
 	background: #fff;
-	min-width: 400px;
 }
 
 .login_infofield .design_wrapper {
@@ -46,7 +46,7 @@ body {
 	font-size: 12px;
 }
 
-.login_submitfield .forget a:hover {
+.login_submitfield a:hover {
 	color: #444;
 }
 
