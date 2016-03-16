@@ -1,22 +1,35 @@
 * {
 	font-family: 'Open Sans', sans-serif; 
-	font-size: 14px;
+	font-size: 1em;
 }
 
 body {
 	background: #ebf0f2;
 }
 
-.loginbox {
-	border: 1px #dde0e8 solid;
-	border-radius: 10px;
-	padding: 10px;
+.login_infofield {
 	background: #fff;
-
-	min-height: 280px;
+	min-width: 400px;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 16px;
+	line-height: 20px;
 }
 
-.loginbox p {
+.login_infofield .design_wrapper {
+	width: 80%;
+	margin: 14px auto;
+}
+
+.login_infofield .design_wrapper input {
+	width: 100%;
+	padding: 10px;
+	margin: 12px 0;
+}
+
+.login_infofield .design_wrapper label {
+	line-height: 20px;
 	color: #444444;
 }
 
@@ -24,8 +37,13 @@ body {
 	color: #aaaaaa;
 }
 
-.loginbox .bottomfield {
+.login_submitfield {
 	background: #f1f6f7;
+	min-height: 200px;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 16px;
 }
 
 h1 {
