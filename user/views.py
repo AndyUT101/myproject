@@ -52,7 +52,7 @@ def login(request):
     if not (login_account or login_password):
         ## Skip database process, return index page
         return render(request, 'login.html', {
-            'error_message': "Empty username or password.",
+            'error_message': "Login failed: Empty username or password!",
         })
         
     ## Access database for user data
@@ -61,7 +61,7 @@ def login(request):
 
     except ObjectDoesNotExist:
         return render(request, 'login.html', {
-            'error_message': "No such user.",
+            'error_message': "Login failed: No such user!",
         })
 
     ## Check password hash, assign session for logged user
@@ -79,7 +79,7 @@ def login(request):
         return HttpResponseRedirect('/user/')
 
     return render(request, 'login.html', {
-           'error_message': "Fail to login.",
+           'error_message': "Looks like these are not your correct details. Please try again.",
         })
 
 def logout(request):

@@ -40,6 +40,11 @@ h1.login_header img {
 	background: #fff;
 }
 
+.login_infofield .design_wrapper p.errormsg {
+	color: #d9534f;
+	text-align: center;
+}
+
 .login_infofield .design_wrapper input {
 	width: 100%;
 	padding: 10px;
