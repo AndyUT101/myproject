@@ -93,19 +93,40 @@ def logout(request):
     return HttpResponse('Logout page')
 
 def add_user(request):
-    pass
+    # form check
     form_checkpass = True
+    parameter_dict = {}
     for parameter in [field.name for field in User._meta.get_fields()]:
         if not request.POST.get(parameter, ''):
             form_checkpass = False
+            break
+        parameter_dict[parameter] = request.POST.get(parameter)
 
     if not form_checkpass:
         return HttpResponse('No enoughs parameters received')
 
+    insert = User(func(**parameter_dict))
+    try:
+        insert.save()
+    
+    except:
+        pass
+
+    return HttpResponse('user added.')
 
 
 def remove_user(request):
-    pass
+    if not request.POST.get(remove_confirm, ''):
+        return HttpResponse('User does not removed')
+
+    try:
+        delete_obj = User.objects.get(pk=request.POST.get(user_id))
+        delete_obj.delete()
+    except:
+        pass
+
+    return HttpResponse('user removed.')
+
 
 def modify_user(request, user_id):
 
