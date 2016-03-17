@@ -107,6 +107,12 @@ img.emoji {
 
 /* Home interface css */
 
+.home_header {
+	background: #497089 url(/static/img/home_header.jpg) no-repeat 50%;
+	height: 400px;
+    background-size: cover;
+}
+
 .home_header ul.notification {
 	padding: 0;
 }

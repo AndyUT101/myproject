@@ -1,22 +1,12 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
-<header role="banner" id="page-header">
+<header class="home_header">
 	<div class="heading-content">
-		<div>
-			<div class="highlighted-top">  
-				<div class="region region-highlighted-top">
-					<section id="block-custom-init-header-article-category" class="block block-custom-init clearfix">TECHNOLOGIES</section> 
-					</div>
-				</div>
-				<h1 class="page-header">Good to seeing you, {{ user_nicename }}</h1>
-
-				<div class="notification">
-					<ul>
-						<li class="date">{{ current_time }}}</li>
-						<li class="recent_inbox">5 messages</li>
-					</ul>
-			</div>
-		</div>
+		<h1 class="page-header">Good to seeing you, {{ user_nicename }}</h1>
+		<ul class="notification">
+			<li class="date">{{ current_time }}</li>
+			<li class="recent_inbox">5 messages</li>
+		</ul>
 	</div>
 </header>
 {% endblock %}
