@@ -19,7 +19,8 @@
 						<p>July 06, 2015</p>
 						<span class="recent_inbox"> 5 messages</span>
 						<script>
-							$('span.recent_inbox').html(twemoji.parse('\uD83D\uDCE8') +$('span.recent_inbox').text);
+						msg_notice = $('span.recent_inbox').text;
+							$('span.recent_inbox').html(twemoji.parse('\uD83D\uDCE8') + msg_notice);
 						</script>
 						</section>
 					</div>
