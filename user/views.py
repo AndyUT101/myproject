@@ -30,7 +30,7 @@ def index(request):
     if 'token' in request.session:
         return HttpResponse('Index, session_id =' + request.session['token'])
 
-    return render(request, 'login.html', {'error_message': 'index'})
+    return render(request, 'login.html', {'error_message': 'Please log-in before using SchoolPro system.'})
 
 def index_home(request):
     if not ('token' in request.session and 'user' in request.session):

@@ -104,3 +104,15 @@ img.emoji {
    margin: 0 .05em 0 .1em;
    vertical-align: -0.1em;
 }
+
+/* Home interface css */
+
+.home_header ul.notification {
+	padding: 0;
+}
+
+.home_header ul.notification li {
+	display: inline-block;
+    padding-right: 6px;
+    font-size: 0.9em;
+}

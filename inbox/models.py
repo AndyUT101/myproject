@@ -11,7 +11,8 @@ class Inbox(models.Model):
     send_datetime = models.DateTimeField(auto_now_add=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender_profile')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver_profile')
-    content = models.ForeignKey(Inbox_content, on_delete=models.CASCADE)
+    content = models.ForeignKey(Inbox_content, on_delete=models.CASCADE, blank=True)
+    read = models.BooleanField(default=False, blank=True)
 
 class Inbox_classroom(models.Model):
     inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE)
