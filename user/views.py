@@ -39,7 +39,7 @@ def index_home(request):
     user = User.objects.get(username = request.session['user'])
 
     return render(request, 'home.html', {
-        'user': user.username,
+        'user_nicename': user.lastname,
     })
 
 def login(request):
