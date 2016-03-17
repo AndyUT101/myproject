@@ -32,6 +32,16 @@ def index(request):
 
     return render(request, 'login.html', {'error_message': 'index'})
 
+def index_home(request):
+    if not ('token' in request.session and 'user' in request.session):
+        return HttpResponseRedirect('/user/', '?login_first')
+    
+    user = User.objects.get(username = request.session['user'])
+
+    return render(request, 'home.html', {
+        'user': user.username,
+    })
+
 def login(request):
     redirect_page = 'index'
 
@@ -76,7 +86,7 @@ def login(request):
         # return render(request, 'login.html', {
         #    'error_message': "Successful logged.",
         # })
-        return HttpResponseRedirect('/user/')
+        return HttpResponseRedirect('/user/home/')
 
     return render(request, 'login.html', {
            'error_message': "Looks like these are not your correct details. Please try again.",
