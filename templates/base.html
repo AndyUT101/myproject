@@ -9,13 +9,17 @@
     <title>{% if template_title %}{{ template_title }}{% else %}SchoolPro{% endif %}</title>
 
     <!-- Google Open Sans Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
     <!-- Twemoji emoji plugin -->
     <script src="//twemoji.maxcdn.com/2/twemoji.min.js"></script>
 
+    <!-- Twemoji emoji plugin -->
+    <script src="{% static "js/sweetalert.min.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/sweetalert.css" %}">
+
     <!-- CSS stylesheet -->
-    <link href='{% static 'style.css' %}' rel='stylesheet' type='text/css'>
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css">
     
   </head>
   <body>
