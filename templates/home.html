@@ -1,7 +1,5 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
-<h1>Welcome back, {{ user_nicename }}</h1>
-
 <header role="banner" id="page-header">
 	<div class="heading-content">
 		<div>
@@ -10,15 +8,13 @@
 					<section id="block-custom-init-header-article-category" class="block block-custom-init clearfix">TECHNOLOGIES</section> 
 					</div>
 				</div>
-				<h1 class="page-header">Good to seeing you, Kin Chung</h1>
+				<h1 class="page-header">Good to seeing you, {{ user_nicename }}</h1>
 
-				<div class="highlighted">
-					<div class="region region-highlighted">
-						<section id="block-custom-init-header-article-date" class="block block-custom-init clearfix">
-							<p>July 06, 2015</p>
-							<span class="recent_inbox">5 messages</span>
-						</section>
-					</div>
+				<div class="notification">
+					<ul>
+						<li class="date">{{ current_time }}}</li>
+						<li class="recent_inbox">5 messages</li>
+					</ul>
 			</div>
 		</div>
 	</div>

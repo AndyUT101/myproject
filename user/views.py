@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from .models import User, Permission, Permission_meta
 
 import random, string
+from datetime import datetime
 
 #https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/content/django/views_and_urlconfs.html
 # Helper function
@@ -37,9 +38,11 @@ def index_home(request):
         return HttpResponseRedirect('/user/', '?login_first')
     
     user = User.objects.get(username = request.session['user'])
+    current_systime = datetime.now().strftime("%B %d, %Y")
 
     return render(request, 'home.html', {
         'user_nicename': user.lastname,
+        'current_time': current_systime,
     })
 
 def login(request):
