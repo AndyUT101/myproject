@@ -17,7 +17,10 @@
 						<section id="block-custom-init-header-article-date" class="block block-custom-init clearfix">
 
 						<p>July 06, 2015</p>
-						<span><script>twemoji.parse('\uD83D\uDCE8');</script> 5 messages</span>
+						<span class="recent_inbox"> 5 messages</span>
+						<script>
+							$('span.recent_inbox').text = twemoji.parse('\uD83D\uDCE8') +$('span.recent_inbox').text;
+						</script>
 						</section>
 					</div>
 			</div>
