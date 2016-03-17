@@ -5,6 +5,7 @@
 
 body {
 	background: #ebf0f2;
+	margin: 0;
 }
 
 .index_container {
@@ -94,7 +95,7 @@ section.content {
 
 section.content ul li {
 	list-style-type: disc;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* emoji size fix */
@@ -110,7 +111,9 @@ img.emoji {
 .home_header {
 	background: #497089 url(/static/img/home_header.jpg) no-repeat 50%;
 	height: 400px;
-    background-size: cover;
+	background-size: cover;
+	color: #fff;
+	marks: 
 }
 
 .home_header ul.notification {
@@ -119,6 +122,6 @@ img.emoji {
 
 .home_header ul.notification li {
 	display: inline-block;
-    padding-right: 6px;
-    font-size: 0.9em;
+	padding-right: 6px;
+	font-size: 0.9em;
 }
