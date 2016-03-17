@@ -113,10 +113,10 @@ img.emoji {
 	height: 400px;
 	background-size: cover;
 	color: #fff;
-	marks: 
+	padding: 0;
 }
 
-.home_header .home_header {
+.home_header .heading-content {
 	padding: 10% 30%;
 }
 
