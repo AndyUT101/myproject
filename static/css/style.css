@@ -116,6 +116,10 @@ img.emoji {
 	marks: 
 }
 
+.home_header .home_header {
+	padding: 10% 30%;
+}
+
 .home_header ul.notification {
 	padding: 0;
 }
@@ -123,5 +127,11 @@ img.emoji {
 .home_header ul.notification li {
 	display: inline-block;
 	padding-right: 6px;
-	font-size: 0.9em;
+	font-size: 1em;
 }
+
+.home_header a {
+	color: #fff;
+}
+
+/*    padding: 10px 15%;  */

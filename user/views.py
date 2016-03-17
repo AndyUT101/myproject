@@ -28,8 +28,8 @@ def review_permission(user, permission):
 # http://dokelung-blog.logdown.com/posts/222552-django-notes-9-cookies-and-sessions
 
 def index(request):
-    if 'token' in request.session:
-        return HttpResponse('Index, session_id =' + request.session['token'])
+    if 'token' in request.session and 'user' in request.session:
+        return HttpResponseRedirect('/user/home/')
 
     return render(request, 'login.html', {'error_message': 'Please log-in before using SchoolPro system.'})
 
