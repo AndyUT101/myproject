@@ -88,6 +88,15 @@ h1 {
 	padding-bottom: 5px;
 }
 
+section.content {
+	font-size: 0.95em; line-height: 1.6em;
+}
+
+section.content ul li {
+	list-style-type: disc;
+    box-sizing: border-box;
+}
+
 /* emoji size fix */
 img.emoji {
    height: 1em;
