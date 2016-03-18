@@ -11,6 +11,7 @@ class Classroom(models.Model):
     status (open, close)
     """
     name = models.CharField(max_length=255, default="")
+    shortcode = models.CharField(max_length=255, default="", unique=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default="")
     description = models.TextField(default="")
 
