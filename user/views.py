@@ -32,7 +32,12 @@ def index(request):
     if 'token' in request.session and 'user' in request.session:
         return HttpResponseRedirect('/home/')
 
-    return render(request, 'login.html', {'error_message': 'Please log-in before using SchoolPro system.'})
+    if request.POST.get('logout', ''):
+        error_message = 'Logout successful, goodbye!'
+    else:
+        error_message = 'Please log-in before using SchoolPro system.'
+
+    return render(request, 'login.html', {'error_message': error_message})
 
 def index_home(request):
     if not ('token' in request.session and 'user' in request.session):
@@ -101,13 +106,20 @@ def logout(request):
     """
     Logout user account, remove token and user session
     """
+
+    logout_progress = False
     if 'token' in request.session:
         del request.session['token']
+        logout_progress = True
     if 'user' in request.session:
         del request.session['user']
+        logout_progress = True
 
     # Logout success, return index page
-    return HttpResponseRedirect('/?logout')
+    if logout_progress:
+        return HttpResponseRedirect('/?logout')
+
+    return HttpResponseRedirect('/')
 
 def add_user(request):
     # form check
