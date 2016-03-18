@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^home/$', index_home, name='index_home'),
 
     url(r'^user/', include('user.urls', namespace="user")),
+    url(r'^inbox/', include('inbox.urls', namespace="inbox")),
     url(r'^admin/', admin.site.urls),
 ]

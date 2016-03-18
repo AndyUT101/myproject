@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password, make_password
 
 from .models import User, Permission, Permission_meta
+from inbox.models import Inbox
 from .form import UserForm
 
 import random, string
@@ -52,9 +53,14 @@ def index_home(request):
     user = User.objects.get(username = request.session['user'])
     current_systime = datetime.now().strftime("%B %d, %Y")
 
+    # inbox count
+    inbox = Inbox.object.filter(read=False, user=user.pk).count()
+
     return render(request, 'home.html', {
         'page_header': 'Good to seeing you, ' + user.lastname,
-        'current_time': current_systime,
+        'notification': {    
+            'current_time': current_systime,
+        },
         'template': 'home',
         'form': UserForm(request.POST),
     })
