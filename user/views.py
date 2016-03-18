@@ -140,7 +140,7 @@ def logout(request):
 
     return HttpResponseRedirect('/')
 
-def edituser_view(request, process):
+def edituser_view(request, process, specific_id = None):
     pass
     # case 1: new user -> blank table, sumbit to view "add_user"
     acceptable_process = ('add', 'modify')

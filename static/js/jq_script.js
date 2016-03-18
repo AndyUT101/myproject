@@ -4,7 +4,7 @@ $(document).ready(function(){
 		$('span.inbox_emoji').html(twemoji.parse('\uD83D\uDCE8')+'&nbsp;');
 	}
     if ($('span.classroom_emoji').length > 0) {
-		$('span.classroom_emoji').html(twemoji.parse('\uD83C\uDF92')+'&nbsp;');
+		$('span.classroom_emoji').html(twemoji.parse('\uD83C\uDFEB')+'&nbsp;');
 	}
 
 });
