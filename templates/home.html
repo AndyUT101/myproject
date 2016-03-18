@@ -7,7 +7,7 @@
 		<ul class="notification">
 			<li class="date">{{ notification.current_date }}</li>
 			{% if notification.inbox > 0 %}<li class="recent_inbox"><span class="inbox_emoji">&nbsp;</span><a href="{% url 'inbox:inbox' %}">{{ notification.inbox }} unread messages</a></li>{% endif %}
-			{% if notification.classroom > 0 %}<li class="active_classroom"><span class="classroom_emoji">&nbsp;</span><a href="{% url 'classroom:classroom' %}">{{ notification.inbox }} unread messages</a></li>{% endif %}
+			{% if notification.classroom > 0 %}<li class="active_classroom"><span class="classroom_emoji">&nbsp;</span><a href="{% url 'classroom:classroom_list' %}">{{ notification.inbox }} unread messages</a></li>{% endif %}
 			<li class='logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 		{% endif %}
