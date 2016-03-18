@@ -20,6 +20,8 @@ class Classroom(models.Model):
     )
     status = models.CharField(max_length=1, choices=STATUS_CHOICE, default="O")
 
+    def __str__(self):
+        return self.name
 
 class Announce(models.Model):
     """
@@ -68,6 +70,9 @@ class User_assignment(models.Model):
     )
     role = models.CharField(max_length=3, choices = ROLE_CHOICES, default = 'STU')
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
+
+    def __str__(self):
+        return self.user.username + ": " + self.classroom.name
 
 
 class Assignment_pool(models.Model):
