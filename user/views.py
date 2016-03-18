@@ -54,12 +54,13 @@ def index_home(request):
     current_systime = datetime.now().strftime("%B %d, %Y")
 
     # inbox count
-    inbox = Inbox.object.filter(read=False, user=user.pk).count()
+    inbox = Inbox.objects.filter(read=False, user=user.pk).count()
 
     return render(request, 'home.html', {
         'page_header': 'Good to seeing you, ' + user.lastname,
         'notification': {    
             'current_time': current_systime,
+            'inbox': inbox
         },
         'template': 'home',
         'form': UserForm(request.POST),
