@@ -117,7 +117,7 @@ def logout(request):
 
     # Logout success, return index page
     if logout_progress:
-        return HttpResponseRedirect('/?logout')
+        return HttpResponseRedirect('/?logout=True')
 
     return HttpResponseRedirect('/')
 
