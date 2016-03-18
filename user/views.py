@@ -66,7 +66,7 @@ def index_home(request):
         'notification': {    
             'current_date': current_sysdate,
             'inbox': inbox_count,
-            'classroom': classroom_count;
+            'classroom': classroom_count,
         },
         'template': 'home',
         'form': UserForm(request.POST),
