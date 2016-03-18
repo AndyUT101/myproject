@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.hashers import check_password, make_password
@@ -47,7 +47,7 @@ def index_home(request):
     current_systime = datetime.now().strftime("%B %d, %Y")
 
     return render(request, 'home.html', {
-        'user_nicename': user.lastname,
+        'page_header': 'Good to seeing you,', user.lastname,
         'current_time': current_systime,
         'form': UserForm(request.POST),
     })
@@ -120,6 +120,23 @@ def logout(request):
         return HttpResponseRedirect('/?logout=True')
 
     return HttpResponseRedirect('/')
+
+def edituser_view(request, process):
+    pass
+    # case 1: new user -> blank table, sumbit to view "add_user"
+    acceptable_process = ('add', 'modify')
+    if process not in acceptable_process:
+        return HttpResponseNotFound('<h1>Page not found</h1>')
+
+    if process == 'add':
+        return render(request, 'home.html', {
+            'user_nicename': user.lastname,
+            'current_time': current_systime,
+            'form': UserForm(request.POST),
+        })
+
+    elif process == 'modify':
+        pass
 
 def add_user(request):
     # form check
