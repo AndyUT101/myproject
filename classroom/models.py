@@ -72,7 +72,7 @@ class User_assignment(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
 
     def __str__(self):
-        return self.user.username + ": " + self.classroom.name
+        return self.user.username + ": " + self.classroom.name + " [" + self.classroom.role + "]"
 
 
 class Assignment_pool(models.Model):
