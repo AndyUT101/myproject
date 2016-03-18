@@ -132,6 +132,12 @@ img.emoji {
 
 .home_header a {
 	color: #fff;
+	text-decoration: none;
 }
+
+.home_header a:hover {
+	text-decoration: underline;
+}
+
 
 /*    padding: 10px 15%;  */
