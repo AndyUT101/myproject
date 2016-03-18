@@ -32,7 +32,7 @@ def index(request):
     if 'token' in request.session and 'user' in request.session:
         return HttpResponseRedirect('/home/')
 
-    if request.POST.get('logout', ''):
+    if request.GET.get('logout', ''):
         error_message = 'Logout successful, goodbye!'
     else:
         error_message = 'Please log-in before using SchoolPro system.'
