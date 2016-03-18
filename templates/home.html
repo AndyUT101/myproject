@@ -6,7 +6,7 @@
 		{% if template == 'home' %}
 		<ul class="notification">
 			<li class="date">{{ notification.current_time }}</li>
-			{% if notification.inbox > 0 %}<li class="recent_inbox"><a href="{% url 'inbox:inbox' %}">{{ notification.inbox }} unread messages</a></li>{% endif %}
+			{% if notification.inbox > 0 %}<li class="recent_inbox"><span class="inbox_emoji">&nbsp;</span><a href="{% url 'inbox:inbox' %}">{{ notification.inbox }} unread messages</a></li>{% endif %}
 			<li class='logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 		{% endif %}
