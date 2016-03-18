@@ -5,8 +5,8 @@
 		<h1 class="page-header">{{ page_header }}</h1>
 		{% if template == 'home' %}
 		<ul class="notification">
-			<li class="date">{{ template.current_time }}</li>
-			<li class="recent_inbox">{{ template.inbox }} messages</li>
+			<li class="date">{{ notification.current_time }}</li>
+			<li class="recent_inbox">{{ notification.inbox }} messages</li>
 			<li class='logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 		{% endif %}
