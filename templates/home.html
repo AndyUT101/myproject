@@ -3,11 +3,13 @@
 <header class="home_header">
 	<div class="heading-content">
 		<h1 class="page-header">{{ page_header }}</h1>
+		{% if template == 'home' %}
 		<ul class="notification">
 			<li class="date">{{ current_time }}</li>
 			<li class="recent_inbox">5 messages</li>
 			<li class='logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
+		{% endif %}
 	</div>
 </header>
 

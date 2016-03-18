@@ -14,6 +14,12 @@ from datetime import datetime
 #https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/content/django/views_and_urlconfs.html
 # Helper function
 
+"""
+
+template = ('home', 'list', 'form', 'detail', 'none')
+
+"""
+
 def generate_token(length = 8):
     """
     Generate random token for session
@@ -49,6 +55,7 @@ def index_home(request):
     return render(request, 'home.html', {
         'page_header': 'Good to seeing you,', user.lastname,
         'current_time': current_systime,
+        'template': 'home',
         'form': UserForm(request.POST),
     })
 
@@ -130,7 +137,7 @@ def edituser_view(request, process):
 
     if process == 'add':
         return render(request, 'home.html', {
-            'user_nicename': user.lastname,
+            'page_header': 'Add a user',
             'current_time': current_systime,
             'form': UserForm(request.POST),
         })

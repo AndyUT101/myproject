@@ -5,7 +5,7 @@
 	<form action="{% url 'user:login' %}" method="post">
 		<div class="login_infofield">
 			<div class="design_wrapper">
-				{% if error_message %}<p class="errormsg">{{ error_message }}</p>{% endif  %}
+				{% if error_message %}<p class="errormsg">{{ error_message }}</p>{% endif %}
 				{% csrf_token %}
 				<div class="form-group">
 					<label for="account">Login account</label>
