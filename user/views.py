@@ -44,7 +44,7 @@ def index_home(request):
     return render(request, 'home.html', {
         'user_nicename': user.lastname,
         'current_time': current_systime,
-        'form': UserForm(),
+        'form': UserForm(request.POST),
     })
 
 def login(request):
