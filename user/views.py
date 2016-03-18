@@ -30,13 +30,13 @@ def review_permission(user, permission):
 
 def index(request):
     if 'token' in request.session and 'user' in request.session:
-        return HttpResponseRedirect('/user/home/')
+        return HttpResponseRedirect('/home/')
 
     return render(request, 'login.html', {'error_message': 'Please log-in before using SchoolPro system.'})
 
 def index_home(request):
     if not ('token' in request.session and 'user' in request.session):
-        return HttpResponseRedirect('/user/', '?login_first')
+        return HttpResponseRedirect('/', '?login_first')
     
     user = User.objects.get(username = request.session['user'])
     current_systime = datetime.now().strftime("%B %d, %Y")
@@ -91,7 +91,7 @@ def login(request):
         # return render(request, 'login.html', {
         #    'error_message': "Successful logged.",
         # })
-        return HttpResponseRedirect('/user/home/')
+        return HttpResponseRedirect('/home/')
 
     return render(request, 'login.html', {
            'error_message': "Looks like these are not your correct details. Please try again.",
@@ -107,7 +107,7 @@ def logout(request):
         del request.session['user']
 
     # Logout success, return index page
-    return HttpResponseRedirect('/user/')
+    return HttpResponseRedirect('/')
 
 def add_user(request):
     # form check
