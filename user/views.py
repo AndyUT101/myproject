@@ -53,7 +53,7 @@ def index_home(request):
     current_systime = datetime.now().strftime("%B %d, %Y")
 
     return render(request, 'home.html', {
-        'page_header': 'Good to seeing you,', user.lastname,
+        'page_header': 'Good to seeing you, ' + user.lastname,
         'current_time': current_systime,
         'template': 'home',
         'form': UserForm(request.POST),
