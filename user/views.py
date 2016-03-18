@@ -107,7 +107,7 @@ def logout(request):
         del request.session['user']
 
     # Logout success, return index page
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/?logout')
 
 def add_user(request):
     # form check
