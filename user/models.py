@@ -9,7 +9,7 @@ class User(models.Model):
         ('F', 'Female'),
     )
 
-    username = models.CharField(max_length=255, default="")
+    username = models.CharField(max_length=255, default="", unique=True)
 
     firstname = models.CharField(max_length=255, default="")
     lastname = models.CharField(max_length=255, default="")
@@ -63,12 +63,6 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.user.username + ": " + self.permission_key.permission_key
-
-class Session(models.Model):
-    session_token = models.CharField(max_length=32, default="")
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    timeout = models.DateTimeField(default=timezone.make_aware(datetime.now()+timedelta(hours=5)))
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (
