@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
-class list_classroom(request):
+def list_classroom(request):
     pass
 
-class view_classroom(request, shortcode):
+def view_classroom(request, shortcode):
     pass
