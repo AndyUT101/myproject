@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password, make_password
 
 from .models import User, Permission, Permission_meta
+from .form import UserForm
 
 import random, string
 from datetime import datetime
@@ -43,6 +44,7 @@ def index_home(request):
     return render(request, 'home.html', {
         'user_nicename': user.lastname,
         'current_time': current_systime,
+        'form': UserForm(),
     })
 
 def login(request):
