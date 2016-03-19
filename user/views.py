@@ -166,7 +166,7 @@ def add_user(request):
     if not form.is_valid():
         return HttpResponse('No enoughs parameters received')
 
-    insert = User(**parameter_dict)
+    insert = User(**request.POST)
     try:
         insert.save()
     
