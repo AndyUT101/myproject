@@ -162,19 +162,29 @@ def modifyuser_view(request, username):
 
 def add_user(request):
     # form check
-    form = UserForm(request.POST)
-    if not form.is_valid():
-        return HttpResponse('No enoughs parameters received')
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if not form.is_valid():
+            return HttpResponse('No enoughs parameters received')
 
-    try:
-        form.save(commit=False)
-        form.save()
-    
-    except:
-        pass
+        try:
+            form.save(commit=False)
+            form.save()
+        
+        except:
+            pass
 
-    return HttpResponse('user added.')
+        return HttpResponse('user added.')
 
+    else: 
+        form = UserForm(request.POST)
+
+        return render(request, 'home.html', {
+            'page_header': 'Add a user',
+            'template': 'form',
+            'redirect_url': 'user:add_user',
+            'form': UserForm().as_ul(),
+        })
 
 def remove_user(request):
     if not request.POST.get(remove_confirm, ''):
