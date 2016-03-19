@@ -15,9 +15,13 @@
 </header>
 
 <div class="sp_content">
-
-{{ form|linebreaks }}
-
+{% if template == "form" %}
+	<section class="content_form">
+		<form action="{% url redirect_url %}" method="post">
+			{{ form|linebreaks }}
+		</form>
+	</section>
+{% endif %}
 </div>
 
 {% endblock %}
