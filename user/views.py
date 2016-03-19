@@ -159,10 +159,10 @@ def add_user(request):
         user_form = UserForm(request.POST)
 
         # Form checking
-        if form.is_valid():
+        if user_form.is_valid():
             try:
                 # form.save(commit=False) # if any content need to correct
-                form.save()
+                user_form.save()
 
             except IntegrityError:
                 pass
@@ -173,7 +173,7 @@ def add_user(request):
             'page_header': 'Add a user',
             'template': 'form',
             'redirect_url': 'user:add_user',
-            'form': form.as_ul(),
+            'form': user_form.as_ul(),
         })
 
 
@@ -224,12 +224,12 @@ def modify_user(request, user_id):
         user_form = UserForm(request.POST)
 
         # Form checking
-        if form.is_valid():
+        if user_form.is_valid():
             try:
                 # form.save(commit=False) # if any content need to correct
                 user = get_object_or_404(User, pk=user_id)
-                form = UserForm(request.POST, instance = user)
-                form.save()
+                user_form = UserForm(request.POST, instance = user)
+                user_form.save()
 
             except IntegrityError:
                 pass
@@ -240,7 +240,7 @@ def modify_user(request, user_id):
             'page_header': 'Add a user',
             'template': 'form',
             'redirect_url': 'user:add_user',
-            'form': form.as_ul(),
+            'form': user_form.as_ul(),
         })
 
 
