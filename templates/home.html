@@ -18,7 +18,9 @@
 {% if template == "form" %}
 	<section class="content_form">
 		<form action="{% url redirect_url %}" method="post">
+			{% csrf_token %}
 			{{ form|linebreaks }}
+			<input type="submit" name="Submit">
 		</form>
 	</section>
 {% endif %}
