@@ -153,7 +153,8 @@ def adduser_view(request):
     return render(request, 'home.html', {
         'page_header': 'Add a user',
         'template': 'form',
-        'form': UserForm(request.POST),
+        'redirect_url': 'user:add_user',
+        'form': UserForm().as_ul(),
     })
 
 def modifyuser_view(request, username):
