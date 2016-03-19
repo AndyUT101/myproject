@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.hashers import check_password, make_password
 
@@ -12,9 +13,6 @@ from .form import UserForm
 
 import random, string
 from datetime import datetime
-
-#https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/content/django/views_and_urlconfs.html
-# Helper function
 
 """
 
@@ -33,9 +31,6 @@ def generate_token(length = 8):
 def review_permission(user, permission):
     pass
     
-# cookies
-# http://dokelung-blog.logdown.com/posts/222552-django-notes-9-cookies-and-sessions
-
 def index(request):
     if 'token' in request.session and 'user' in request.session:
         return HttpResponseRedirect(reverse('index_home'))
