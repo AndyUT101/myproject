@@ -155,7 +155,7 @@ def adduser_view(request):
 def modifyuser_view(request, username):
     user_object = get_object_or_404(User, username = username)
 
-    edituser_view(request, process='modify', user_object)
+    edituser_view(request, process='modify', user=user_object)
 
 def add_user(request):
     # form check
