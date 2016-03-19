@@ -165,7 +165,12 @@ def add_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if not form.is_valid():
-            return HttpResponse('No enoughs parameters received')
+            return render(request, 'home.html', {
+            'page_header': 'Add a user',
+            'template': 'form',
+            'redirect_url': 'user:add_user',
+            'form': UserForm().as_ul(),
+        })
 
         try:
             form.save(commit=False)
@@ -175,16 +180,6 @@ def add_user(request):
             pass
 
         return HttpResponse('user added.')
-
-    else: 
-        form = UserForm(request.POST)
-
-        return render(request, 'home.html', {
-            'page_header': 'Add a user',
-            'template': 'form',
-            'redirect_url': 'user:add_user',
-            'form': UserForm().as_ul(),
-        })
 
 def remove_user(request):
     if not request.POST.get(remove_confirm, ''):
