@@ -6,6 +6,7 @@ from django.utils import timezone
 from user.models import User
 
 class Time_meta(models.Model):
+    # fix this
     time_obj = models.DateTimeField(auto_now_add=True, unique=True)
     
     def __str__(self):

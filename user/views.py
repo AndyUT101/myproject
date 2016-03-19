@@ -38,7 +38,7 @@ def review_permission(user, permission):
 
 def index(request):
     if 'token' in request.session and 'user' in request.session:
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect(reverse('index_home'))
 
     if request.GET.get('logout', ''):
         error_message = 'Logout successful, goodbye!'
@@ -49,7 +49,7 @@ def index(request):
 
 def index_home(request):
     if not ('token' in request.session and 'user' in request.session):
-        return HttpResponseRedirect('/', '?login_first')
+        return HttpResponseRedirect('/?login_first')
     
     user = User.objects.get(username = request.session['user'])
     current_sysdate = datetime.now().strftime("%B %d, %Y")
@@ -115,7 +115,7 @@ def login(request):
         # return render(request, 'login.html', {
         #    'error_message': "Successful logged.",
         # })
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect(reverse('index_home'))
 
     return render(request, 'login.html', {
            'error_message': "Looks like these are not your correct details. Please try again.",
@@ -138,7 +138,7 @@ def logout(request):
     if logout_progress:
         return HttpResponseRedirect('/?logout=True')
 
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(reverse('index'))
 
 def edituser_view(request, process, specific_id = None):
     pass
