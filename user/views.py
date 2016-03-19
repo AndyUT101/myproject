@@ -150,7 +150,11 @@ def edituser_view(request, process, user = None):
         pass
 
 def adduser_view(request):
-    edituser_view(request, process='add')
+    return render(request, 'home.html', {
+        'page_header': 'Add a user',
+        'template': 'form',
+        'form': UserForm(request.POST),
+    })
 
 def modifyuser_view(request, username):
     user_object = get_object_or_404(User, username = username)
