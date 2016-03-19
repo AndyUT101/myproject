@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import IntegrityError
 
 from django.contrib.auth.hashers import check_password, make_password
 
@@ -44,7 +46,7 @@ def index(request):
 
 def index_home(request):
     if not ('token' in request.session and 'user' in request.session):
-        return HttpResponseRedirect('/?login_first')
+        return HttpResponseRedirect(reverse('index')+'?login_first')
     
     user = User.objects.get(username = request.session['user'])
     current_sysdate = datetime.now().strftime("%B %d, %Y")
@@ -131,26 +133,29 @@ def logout(request):
 
     # Logout success, return index page
     if logout_progress:
-        return HttpResponseRedirect('/?logout=True')
+        return HttpResponseRedirect(reverse('index')+'?logout=True')
 
     return HttpResponseRedirect(reverse('index'))
 
-def edituser_view(request, process, specific_id = None):
-    pass
+def edituser_view(request, process, user = None):
     # case 1: new user -> blank table, sumbit to view "add_user"
-    acceptable_process = ('add', 'modify')
-    if process not in acceptable_process:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
-
     if process == 'add':
         return render(request, 'home.html', {
             'page_header': 'Add a user',
-            'current_time': current_systime,
+            'template': 'form',
             'form': UserForm(request.POST),
         })
 
     elif process == 'modify':
         pass
+
+def adduser_view(request):
+    edituser_view(request, process='add')
+
+def modifyuser_view(request, username):
+    user_object = get_object_or_404(User, username = username)
+
+    edituser_view(request, process='modify', user_object)
 
 def add_user(request):
     # form check
