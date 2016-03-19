@@ -166,9 +166,9 @@ def add_user(request):
     if not form.is_valid():
         return HttpResponse('No enoughs parameters received')
 
-    insert = User(**request.POST)
     try:
-        insert.save()
+        form.save(commit=False)
+        form.save()
     
     except:
         pass
