@@ -135,18 +135,6 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('index'))
 
-def edituser_view(request, process, user = None):
-    # case 1: new user -> blank table, sumbit to view "add_user"
-    if process == 'add':
-        return render(request, 'home.html', {
-            'page_header': 'Add a user',
-            'template': 'form',
-            'form': UserForm(request.POST),
-        })
-
-    elif process == 'modify':
-        pass
-
 def adduser_view(request):
     return render(request, 'home.html', {
         'page_header': 'Add a user',
@@ -158,10 +146,44 @@ def adduser_view(request):
 def modifyuser_view(request, username):
     user_object = get_object_or_404(User, username = username)
 
-    edituser_view(request, process='modify', user=user_object)
+    return render(request, 'home.html', {
+        'page_header': 'Add a user',
+        'template': 'form',
+        'redirect_url': 'user:modify_user',
+        'form': UserForm(instance=user_object).as_ul(),
+    })
 
 def add_user(request):
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+
+        # Form checking
+        if form.is_valid():
+            try:
+                # form.save(commit=False) # if any content need to correct
+                form.save()
+
+            except IntegrityError:
+                pass
+
+            return HttpResponse('user_added')
+
+        return render(request, 'home.html', {
+            'page_header': 'Add a user',
+            'template': 'form',
+            'redirect_url': 'user:add_user',
+            'form': form.as_ul(),
+        })
+
+
+    return HttpResponseRedirect(reverse('index_home'))
+
+
+    #######
+    # old code
     # form check
+    """
     if request.method == "POST":
         form = UserForm(request.POST)
         if not form.is_valid():
@@ -180,6 +202,7 @@ def add_user(request):
             pass
 
         return HttpResponse('user added.')
+    """
 
 def remove_user(request):
     if not request.POST.get(remove_confirm, ''):
@@ -196,6 +219,32 @@ def remove_user(request):
 
 
 def modify_user(request, user_id):
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+
+        # Form checking
+        if form.is_valid():
+            try:
+                # form.save(commit=False) # if any content need to correct
+                user = get_object_or_404(User, pk=user_id)
+                form = UserForm(request.POST, instance = user)
+                form.save()
+
+            except IntegrityError:
+                pass
+
+            return HttpResponse('user_edited')
+
+        return render(request, 'home.html', {
+            'page_header': 'Add a user',
+            'template': 'form',
+            'redirect_url': 'user:add_user',
+            'form': form.as_ul(),
+        })
+
+
+    return HttpResponseRedirect(reverse('index_home'))
     return HttpResponse(user_id)
 
 def view_user(request, user_id, specific_usertype=None):
