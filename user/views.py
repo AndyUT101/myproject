@@ -17,9 +17,7 @@ import random, string
 from datetime import datetime
 
 """
-
 template = ('home', 'list', 'form', 'detail', 'none')
-
 """
 
 def generate_token(length = 8):
@@ -164,18 +162,11 @@ def modifyuser_view(request, username):
 
 def add_user(request):
     # form check
-    form_checkpass = True
-    parameter_dict = {}
-    for parameter in [field.name for field in User._meta.get_fields()]:
-        if not request.POST.get(parameter, ''):
-            form_checkpass = False
-            break
-        parameter_dict[parameter] = request.POST.get(parameter)
-
-    if not form_checkpass:
+    form = UserForm(request.POST)
+    if not form.is_valid():
         return HttpResponse('No enoughs parameters received')
 
-    insert = User(func(**parameter_dict))
+    insert = User(**parameter_dict)
     try:
         insert.save()
     
@@ -190,23 +181,20 @@ def remove_user(request):
         return HttpResponse('User does not removed')
 
     try:
-        delete_obj = User.objects.get(pk=request.POST.get(user_id))
+        delete_obj = get_object_or_404(User, pk=request.POST.get(user_id))
         delete_obj.delete()
-    except:
+
+    except IntegrityError:
         pass
 
     return HttpResponse('user removed.')
 
 
 def modify_user(request, user_id):
-
     return HttpResponse(user_id)
-
-    #review_permission()
 
 def view_user(request, user_id, specific_usertype=None):
     pass
-
 
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
     pass
