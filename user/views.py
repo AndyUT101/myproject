@@ -169,7 +169,7 @@ def add_user(request):
             'page_header': 'Add a user',
             'template': 'form',
             'redirect_url': 'user:add_user',
-            'form': UserForm().as_ul(),
+            'form': form.as_ul(),
         })
 
         try:
