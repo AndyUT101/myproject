@@ -30,6 +30,13 @@ def generate_token(length = 8):
 
 def review_permission(user, permission):
     pass
+
+def user_alreadyloggedin():
+    status = False
+    if 'token' in request.session and 'user' in request.session:
+        status = Trues
+
+    return status
     
 def index(request):
     if 'token' in request.session and 'user' in request.session:
@@ -136,6 +143,9 @@ def logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def adduser_view(request):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
+
     return render(request, 'home.html', {
         'page_header': 'Add a user',
         'template': 'form',
@@ -144,6 +154,9 @@ def adduser_view(request):
     })
 
 def modifyuser_view(request, username):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
+
     user_object = get_object_or_404(User, username = username)
 
     return render(request, 'home.html', {
@@ -154,6 +167,8 @@ def modifyuser_view(request, username):
     })
 
 def add_user(request):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -205,6 +220,9 @@ def add_user(request):
     """
 
 def remove_user(request):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
+
     if not request.POST.get(remove_confirm, ''):
         return HttpResponse('User does not removed')
 
@@ -219,6 +237,8 @@ def remove_user(request):
 
 
 def modify_user(request, user_id):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -248,9 +268,13 @@ def modify_user(request, user_id):
     return HttpResponse(user_id)
 
 def view_user(request, user_id, specific_usertype=None):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
     pass
 
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
+    if not user_alreadyloggedin:
+        raise Http404("Not yet logged in")
     pass
 
     # case 1: list all user
