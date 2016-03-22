@@ -84,9 +84,7 @@ def login(request):
         already_logged = True
 
         # Break process, return to index page
-        return render(request, 'login.html', {
-            'error_message': "Already logged, token:"+request.session['token'],
-        })
+        return HttpResponseRedirect(reverse('index_home'))
 
     # Login authentication
     login_account = request.POST.get('account', '')
