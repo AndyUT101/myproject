@@ -3,7 +3,7 @@
 <header class="home_header">
 	<div class="heading-content">
 		<h1 class="page-header">{{ page_header }}</h1>
-		{% if template in ['home', 'list', 'form', 'detail']  %}
+		{% if template == 'home' or template == 'list' or template == 'form' or template == 'detail']  %}
 		<ul class="notification">
 
 		{% if content.notification.current_date %}
