@@ -143,7 +143,7 @@ def logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 def adduser_view(request):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
     return render(request, 'home.html', {
@@ -154,7 +154,7 @@ def adduser_view(request):
     })
 
 def modifyuser_view(request, username):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
     user_object = get_object_or_404(User, username = username)
@@ -167,7 +167,7 @@ def modifyuser_view(request, username):
     })
 
 def add_user(request):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
     if request.method == 'POST':
@@ -220,7 +220,7 @@ def add_user(request):
     """
 
 def remove_user(request):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
     if not request.POST.get(remove_confirm, ''):
@@ -237,7 +237,7 @@ def remove_user(request):
 
 
 def modify_user(request, user_id):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
     if request.method == 'POST':
@@ -268,12 +268,12 @@ def modify_user(request, user_id):
     return HttpResponse(user_id)
 
 def view_user(request, user_id, specific_usertype=None):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
     pass
 
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
-    if not user_alreadyloggedin():
+    if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
     pass
 
