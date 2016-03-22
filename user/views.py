@@ -63,14 +63,16 @@ def index_home(request):
     classroom_count = User_assignment.objects.filter(user=user.id).count()
 
     return render(request, 'home.html', {
+        'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ' + user.lastname,
-        'notification': {    
-            'current_date': current_sysdate,
-            'inbox': inbox_count,
-            'classroom': classroom_count,
-        },
         'template': 'home',
-        'form': UserForm(request.POST),
+        'content': {   
+            'notification': {
+                'current_date': current_sysdate,
+                'inbox': inbox_count,
+                'classroom': classroom_count,
+            },
+        },
     })
 
 def login(request):
@@ -147,10 +149,13 @@ def adduser_view(request):
         raise Http404("Not yet logged in")
 
     return render(request, 'home.html', {
+        'page_title': 'Add a user',
         'page_header': 'Add a user',
         'template': 'form',
-        'redirect_url': 'user:add_user',
-        'form': UserForm().as_ul(),
+        'content': {
+            'form': UserForm().as_ul(),
+            'submit_url': 'user:add_user',
+        },
     })
 
 def modifyuser_view(request, username):
@@ -160,10 +165,13 @@ def modifyuser_view(request, username):
     user_object = get_object_or_404(User, username = username)
 
     return render(request, 'home.html', {
-        'page_header': 'Add a user',
+        'page_title': 'Modify a user',
+        'page_header': 'Modify a user',
         'template': 'form',
-        'redirect_url': 'user:modify_user',
-        'form': UserForm(instance=user_object).as_ul(),
+        'content': {
+            'form': UserForm(instance=user_object).as_ul(),
+            'submit_url': 'user:modify_user',
+        },
     })
 
 def add_user(request):
@@ -184,12 +192,7 @@ def add_user(request):
 
             return HttpResponse('user_added')
 
-        return render(request, 'home.html', {
-            'page_header': 'Add a user',
-            'template': 'form',
-            'redirect_url': 'user:add_user',
-            'form': user_form.as_ul(),
-        })
+        return HttpResponseRedirect(reverse('add_user_view'))
 
 
     return HttpResponseRedirect(reverse('index_home'))
