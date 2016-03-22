@@ -31,7 +31,7 @@ def generate_token(length = 8):
 def review_permission(user, permission):
     pass
 
-def user_alreadyloggedin():
+def user_alreadyloggedin(request):
     status = False
     if 'token' in request.session and 'user' in request.session:
         status = True
