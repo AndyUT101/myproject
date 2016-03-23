@@ -6,6 +6,9 @@ from classroom.models import Classroom
 class Inbox_content(models.Model):
     title = models.CharField(max_length=255, default="No title")
     content = models.TextField(default="")
+    
+    def __str__(self):
+        return self.title
 
 class Inbox(models.Model):
     send_datetime = models.DateTimeField(auto_now_add=True)
@@ -13,6 +16,9 @@ class Inbox(models.Model):
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver_profile')
     content = models.ForeignKey(Inbox_content, on_delete=models.CASCADE, blank=True)
     read = models.BooleanField(default=False, blank=True)
+
+    def __str__(self):
+        return self.sender, " --> ", self.receiver, " : ", self.content
 
 class Inbox_classroom(models.Model):
     inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE)
