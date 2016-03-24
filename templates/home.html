@@ -56,6 +56,27 @@
 			<li></li>
 			{% endfor %}
 			{% endif %}
+
+			<table>
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>Read</td>
+						<td>Title</td>
+						<td>Sender</td>
+						<td>Date</td>
+					<tr>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" name="msg_id{{ msg.sender.pk }}" value="{{ msg.sender.pk }}"></td>
+						<td><span class="{% if msg.read == True %}read{% elif %}unread{% endif %}"></span></td>
+						<td>{{ msg.content.title }}</td>
+						<td>{{ msg.sender.username }}</td>
+						<td>{{ msg.send_datetime }}</td>
+					<tr>					
+				</tbody>
+				
+			</table>
 		</div>
 	{% endif %}
 		<div class="adv_operation"></div>
