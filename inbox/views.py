@@ -14,7 +14,7 @@ def list_inboxmsg(request):
     # GET: ?page=page_num
 
     user = User.objects.get(username=request.session['user'])
-    inbox_msg = Inbox.objects.filter(receiver=user.pk).order_by('send_datetime')
+    inbox_msg = Inbox.objects.filter(receiver=user.pk).order_by('-send_datetime')
 
     message_count = inbox_msg.count()
 
@@ -29,7 +29,14 @@ def list_inboxmsg(request):
 
             ),
             'list': {
-                'header': (['read'], ['sender'], ['send_datetime'], ['content', 'title']),
+                'checkbox': True,
+                'header': (
+                # list pattern ('title', 'models field')
+                    ('', ('read')), 
+                    ('Subject', ('content', 'title')),
+                    ('Sender', ('sender', 'username')), 
+                    ('Send Date', ('send_datetime')), 
+                ),
                 'body': inbox_msg,
                 'foot': (),
             },

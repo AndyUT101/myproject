@@ -44,7 +44,20 @@
 		{% endfor %}
 		</div>
 	{% endif %}
-		<div class="list_table"></div>
+	{% if content.list %}
+		<div class="list_table">
+			{% if content.list.name == 'inbox' %}
+			{% for msg in content.list.body %}
+			<p>{ msg.read }</p>
+			<p>{ msg.content.title }</p>
+			<p>{ msg.sender.username }</p>
+			
+			<p>{ msg.send_datetime }</p>
+			<li></li>
+			{% endfor %}
+			{% endif %}
+		</div>
+	{% endif %}
 		<div class="adv_operation"></div>
 	</section>
 {% endif %}
