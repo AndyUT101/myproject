@@ -69,9 +69,9 @@
 				<tbody>
 					<tr>
 					{% for msg in content.list.body %}
-						<td><input type="checkbox" name="msg_id{{ msg.sender.pk }}" value="{{ msg.sender.pk }}"></td>
+						<td><input type="checkbox" name="msg_id{{ msg.pk }}" value="{{ msg.pk }}"></td>
 						<td><span class="{% if msg.read %}read{% else %}unread{% endif %}"></span></td>
-						<td>{{ msg.content.title }}</td>
+						<td><a href="{% url inbox:view msg.pk %}">{{ msg.content.title }}</a></td>
 						<td>{{ msg.sender.username }}</td>
 						<td>{{ msg.send_datetime }}</td>
 					<tr>
