@@ -64,3 +64,6 @@ def compose_view(request):
         raise Http404("Not yet logged in")
 
     pass
+
+def delete_msg(request):
+    pass

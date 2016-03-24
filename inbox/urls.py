@@ -8,4 +8,6 @@ urlpatterns = [
 
     url(r'^compose/$', views.compose_view, name='compose'),
     url(r'^send/$', views.send_msg, name='send'),
+
+    url(r'^delete/$', views.delete_msg, name='delete'),
 ]
