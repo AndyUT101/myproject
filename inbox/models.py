@@ -18,7 +18,7 @@ class Inbox(models.Model):
     read = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
-        return self.content
+        return self.content.title
 
 class Inbox_classroom(models.Model):
     inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE)
