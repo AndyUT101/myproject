@@ -68,12 +68,14 @@
 					<tr>
 				<tbody>
 					<tr>
+					{% for msg in content.list.body %}
 						<td><input type="checkbox" name="msg_id{{ msg.sender.pk }}" value="{{ msg.sender.pk }}"></td>
 						<td><span class="{% if msg.read %}read{% else %}unread{% endif %}"></span></td>
 						<td>{{ msg.content.title }}</td>
 						<td>{{ msg.sender.username }}</td>
 						<td>{{ msg.send_datetime }}</td>
-					<tr>					
+					<tr>
+					{% endfor %}					
 				</tbody>
 				
 			</table>
