@@ -30,13 +30,7 @@ def list_inboxmsg(request):
             ),
             'list': {
                 'checkbox': True,
-                'header': (
-                # list pattern ('title', 'models field')
-                    ('', ('read')), 
-                    ('Subject', ('content', 'title')),
-                    ('Sender', ('sender', 'username')), 
-                    ('Send Date', ('send_datetime')), 
-                ),
+                'name': 'inbox',
                 'body': inbox_msg,
                 'foot': (),
             },
