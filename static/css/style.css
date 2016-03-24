@@ -171,6 +171,18 @@ div.operation li:last {
     color: #222;
 }
 
+section.content_form form li {
+	display: inline-block;
+	margin: 10px 0;
+}
+
+section.content_form form li label {
+	margin-right: 6px;
+    padding-right: 8px;
+    font-size: .7em;
+    font-weight: bold;
+    border-right: 1px solid #666;
+}
 /*    padding: 10px 15%;  */
 
 
