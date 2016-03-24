@@ -48,11 +48,11 @@
 		<div class="list_table">
 			{% if content.list.name == 'inbox' %}
 			{% for msg in content.list.body %}
-			<p>{ msg.read }</p>
-			<p>{ msg.content.title }</p>
-			<p>{ msg.sender.username }</p>
+			<p>{{ msg.read }}</p>
+			<p>{{ msg.content.title }}</p>
+			<p>{{ msg.sender.username }}</p>
 			
-			<p>{ msg.send_datetime }</p>
+			<p>{{ msg.send_datetime }}</p>
 			<li></li>
 			{% endfor %}
 			{% endif %}
