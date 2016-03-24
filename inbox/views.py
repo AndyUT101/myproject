@@ -13,8 +13,24 @@ def list_inboxmsg(request):
 
     # GET: ?page=page_num
 
+    # GET: order by para
+    available_para = ('send_datetime', 'content', 'read')
+    available_order = ('asc', 'desc')
+    order_by_para = '-send_datetime'
+
+    get_para = request.GET.get('by', '')
+    get_order = request.GET.get('order', '')
+
+    if get_para and get_order:
+        if get_para in available_para:
+            order_by_para = get_para
+            if get_order in available_order:
+                if get_order == available_order[1]:
+                    order_by_para = '-' + order_by_para
+
+
     user = User.objects.get(username=request.session['user'])
-    inbox_msg = Inbox.objects.filter(receiver=user.pk).order_by('-send_datetime')
+    inbox_msg = Inbox.objects.filter(receiver=user.pk).order_by(order_by_para)
 
     message_count = inbox_msg.count()
 
