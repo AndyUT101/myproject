@@ -34,6 +34,21 @@
 		</form>
 	</section>
 {% endif %}
+
+{% if template == "list" %}
+	<section class="info_list">
+	{% if content.operation %}
+		<div class="operation">
+		{% for list_item in content.operation %}
+			<li><a href="{{ list_item[1] }}" class="{% for class_name in list_item[2] %} {{ class_name }} {% endfor %}">{{ list_item[0] }}</a></li>
+		}
+		{% endfor %}
+		</div>
+	{% endif %}
+		<div class="list_table"></div>
+		<div class="adv_operation"></div>
+	</section>
+{% endif %}
 </div>
 
 {% endblock %}

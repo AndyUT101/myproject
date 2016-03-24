@@ -11,9 +11,32 @@ def list_inboxmsg(request):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
+    # GET: ?page=page_num
+
     user = User.objects.get(username=request.session['user'])
-    inbox_msg = Inbox.objects.filter(receiver=user.pk)
-    order_assign = inbox_msg.order_by('send_datetime')
+    inbox_msg = Inbox.objects.filter(receiver=user.pk).order_by('send_datetime')
+
+    message_count = inbox_msg.count()
+
+    return render(request, 'home.html', {
+        'page_header': 'Inbox',
+        'template': 'list', # operation, list, 
+        'content': {
+            'operation': ( 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                ('Compose', 'inbox:compose', ['compose']),
+                ('Delete', 'inbox:delete', ['delete']),
+
+            ),
+            'list': {
+                'header': (['read'], ['sender'], ['send_datetime'], ['content', 'title']),
+                'body': inbox_msg,
+                'foot': (),
+            },
+            'operation2': '',
+        },
+    })
+
 
     pass
 
@@ -34,7 +57,7 @@ def send_msg(request, reply_id = None):
 
     pass
 
-def generate_msgform(request):
+def compose_view(request):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 

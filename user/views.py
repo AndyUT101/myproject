@@ -256,12 +256,15 @@ def modify_user(request, user_id):
                 pass
 
             return HttpResponse('user_edited')
-
+            
         return render(request, 'home.html', {
-            'page_header': 'Add a user',
+            'page_title': 'Modify a user',
+            'page_header': 'Modify a user',
             'template': 'form',
-            'redirect_url': 'user:add_user',
-            'form': user_form.as_ul(),
+            'content': {
+                'form': user_form.as_ul(),
+                'submit_url': 'user:modify_user',
+            },
         })
 
 
