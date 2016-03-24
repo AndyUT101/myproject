@@ -43,11 +43,9 @@ def list_inboxmsg(request):
 def view_msg(request, msg_id = None):
     # check msg -> user_id == user_id, if fail, return
     if msg_id == None:
-    	try:
-    		Inbox.objects.get(pk = msg_id).filter() 
+        try:
+            Inbox.objects.get(pk = msg_id).filter() 
     raise Http404("Not yet logged in")
-	pass
-
 
 def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
