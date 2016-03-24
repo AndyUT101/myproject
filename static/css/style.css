@@ -140,8 +140,10 @@ img.emoji {
 }
 
 div.sp_content {
-	padding: 30px;
+	padding: 16px;
 	margin: 30px;
+	background: #fff;
+    border-radius: 6px;
 }
 
 div.operation {
