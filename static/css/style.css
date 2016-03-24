@@ -139,6 +139,35 @@ img.emoji {
 	text-decoration: underline;
 }
 
+div.sp_content {
+	padding: 30px;
+	margin: 30px;
+}
+
+div.operation {
+	padding: 16px;
+    background: #f1f6f7;
+    border: 1px solid #dde0e8;
+}
+
+div.operation li {
+    display: inline-block;
+    padding-right: 12px;
+}
+
+div.operation li:last {
+    padding-right: 0;
+}
+
+.operation li a {
+    color: #444;
+    text-decoration: none;
+    font-size: .8em;
+}
+
+.operation li a:hover {
+    color: #222;
+}
 
 /*    padding: 10px 15%;  */
 
