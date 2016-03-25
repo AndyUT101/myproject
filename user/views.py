@@ -11,7 +11,7 @@ from .models import User, Permission, Permission_meta
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
 
-from .form import UserForm
+from .forms import UserForm
 
 import random, string
 from datetime import datetime
@@ -181,6 +181,10 @@ def add_user(request):
 
         # Form checking
         if user_form.is_valid():
+            # Edit password field
+            user_form.save(commit=False)
+            user_form.password_hash = make_password(user_form.password_hash, hasher='bcrypt')
+
             try:
                 # form.save(commit=False) # if any content need to correct
                 user_form.save()
@@ -246,6 +250,8 @@ def modify_user(request, user_id):
 
         # Form checking
         if user_form.is_valid():
+            user_form.save(commit=False)
+            user_form.password_hash = make_password(user_form.password_hash, hasher='bcrypt')
             try:
                 # form.save(commit=False) # if any content need to correct
                 user = get_object_or_404(User, pk=user_id)

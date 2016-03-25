@@ -110,7 +110,28 @@ def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
+    reply_mode = False
+    user = User.objects.get(username=request.session['user'])
+
     # check reply_id -> user_id == user_id, if fail, return
+    if not reply_id == None:
+        try:
+            reply_msg = Inbox.objects.get(pk=reply_id, receiver=user.pk)
+
+        except ObjectDoesNotExist:
+            break
+
+        reply_mode = True # Read "reply_msg" on after process
+
+    return render(request, 'home.html', {
+        'page_title': 'Reply message: Inbox',
+        'page_header': 'Reply message',
+        'template': 'testing', # operation, form 
+        'content': {
+            'form': (),
+            'submit_url': '',
+        },
+    });
 
     pass
 
