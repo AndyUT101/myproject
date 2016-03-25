@@ -330,7 +330,7 @@ def modify_user(request, user_id):
     return HttpResponseRedirect(reverse('index_home'))
     return HttpResponse(user_id)
 
-def view_user(request, user_id, specific_usertype=None):
+def view_user(request, user, specific_usertype=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
     pass
