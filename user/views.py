@@ -181,7 +181,7 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index'))
 
     current_user = User.objects.get(username=request.session['user'])
-    if not current_user.role_set.all()[0].role_user == 'ADM':
+    if not current_user.role.role_user == 'ADM':
         return HttpResponseRedirect(reverse('index'))
 
     # 2. Check GET or POST method
