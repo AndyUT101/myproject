@@ -219,9 +219,8 @@ def add_user(request):
             commit_form.save()
 
             # 6. Return success page
-            return HttpResponse('user_added')
+            #return HttpResponse('user_added')
 
-            """
             return render(request, 'home.html', {
                 'page_title': 'Add user',
                 'page_header': 'Add user',
@@ -230,9 +229,11 @@ def add_user(request):
                     'notification': 'User ' + commit_form.username + 'add successful',
                     'redirect_text': 'user page',
                     'redirect_url': 'user:add_user',
+                    'auto_redirect': True,
                 },
             })
-            """
+
+        """
         else:
             # 6. Return user page with posted data
             return render(request, 'home.html', {

@@ -89,6 +89,12 @@
 	</section>
 {% endif %}
 
+{% if template == 'notification' %}
+	<section class="notification">
+		{% if content.notification %}<h1 class="notification_title">{{ content.notification }}</h1>{% endif %}
+		{% if content.auto_redirect %}You will automatically be redirected to <a href="{% url content.redirect_url %}">{{ content.redirect_text }}</a> in 5 seconds...<script>setTimeout('window.location="{% url content.redirect_url %}"', 5000)</script>{% endif %}
+	</section>
+{% endif %}
 
 {% if template == 'testing' %}<p>{{ page_title }}</p><p>{{ page_header }}</p><p>{{ content }}</p>{% endif %}{% endblock %}
 
