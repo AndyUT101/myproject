@@ -85,6 +85,19 @@
 		<div class="adv_operation"></div>
 	</section>
 {% endif %}
+
+{% if template == 'detail' %}
+	<section class="info_detail">
+	{% if content.detail %}
+		{% for key,value in content.detail %}
+			<p>{{ value.0 }}</p>
+			<p>{{ value.1 }}</p>
+			<p>{{ value.2 }}</p>
+			<p>{% for item in value %}{{ item }}{% endfor %}</p>
+		{% endfor %}
+	{% endif %}
+	</section>
+{% endif %}
 </div>
 
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 from user.models import User
 from .models import Inbox_content, Inbox, Inbox_classroom
@@ -13,7 +14,7 @@ def list_inboxmsg(request):
 
     # GET: ?page=page_num
 
-    # GET: order by para
+    # GET: order by parameter
     available_para = ('send_datetime', 'content', 'read')
     available_order = ('asc', 'desc')
     order_by_para = '-send_datetime'
@@ -50,7 +51,12 @@ def list_inboxmsg(request):
                 'body': inbox_msg,
                 'foot': (),
             },
-            'operation2': '',
+            'adv_operation': ( 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                ('Compose', 'inbox:compose', ['compose']),
+                ('Delete', 'inbox:delete', ['delete']),
+
+            ),
         },
     })
 
@@ -66,7 +72,40 @@ def view_msg(request, msg_id = None):
         try:
             Inbox.objects.get(pk = msg_id).filter()
     """
-    pass
+    if not user_alreadyloggedin(request):
+        raise Http404("Not yet logged in")
+
+    if msg_id == None:
+        return HttpResponseRedirect(reverse('inbox'))
+
+    try: 
+        user = User.objects.get(username=request.session['user'])
+        msg = Inbox.objects.get(pk = msg_id, receiver = user.pk)
+
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse('inbox'))
+
+    if not msg.read:
+        msg.read = True
+        msg.save()
+
+    return render(request, 'home.html', {
+        'page_header': msg.content.title+' : Inbox',
+        'template': 'detail', # operation, list, 
+        'content': {
+            'detail': { # key: (header, content, redirect_url(route/None), html_class)
+                'sender': ('Sent by', msg.sender.name, None, ['sender']),
+                'title': ('Title', msg.content.title, None, ['title']),
+                'content': ('Content', msg.content.content, None, ['content']),
+
+            },
+            'adv_operation': ( 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                ('Reply', 'inbox:compose', ['compose']),
+                ('Delete', 'inbox:delete', ['delete']),
+            ),
+        },
+    });
 
 def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
