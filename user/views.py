@@ -33,7 +33,7 @@ def review_permission(user, permission):
 
     # 1. Check permission key information
     try:
-        key = Permission.objects.get(key=permission)
+        key = Permission_meta.objects.get(key=permission)
     except ObjectDoesNotExist:
         return has_right
 
