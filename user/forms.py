@@ -20,8 +20,7 @@ class UserForm(ModelForm):
     			raise forms.ValidationError('The password should as least 8 characters long.')
     	"""
     	data = self.cleaned_data['password_hash']
-    	if cc_password:
-    		if len(cc_password):
+    		if len(cc_password) < 8:
     			raise forms.ValidationError('The password should as least 8 characters long.')
 
     	return data
