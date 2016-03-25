@@ -90,10 +90,10 @@
 	<section class="info_detail">
 	{% if content.detail %}
 		{% for key in content.detail %}
-			<p>{{ content.detail.key[0] }}</p>
-			<p>{{ content.detail.key[1] }}</p>
-			<p>{{ content.detail.key[2] }}</p>
-			<p>{% for item in  content.detail.key[3] %}{{ item }} {% endfor %}}</p>
+			<p>{{ content.detail.key.0 }}</p>
+			<p>{{ content.detail.key.1 }}</p>
+			<p>{{ content.detail.key.2 }}</p>
+			<p>{% for item in  content.detail.key.3 %}{{ item }} {% endfor %}}</p>
 			}
 		{% endfor %}
 	{% endif %}
