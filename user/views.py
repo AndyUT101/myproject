@@ -37,12 +37,21 @@ def review_permission(user, permission):
     except ObjectDoesNotExist:
         return has_right
 
-    # 2. check user right fulfill key requirement
+    # 2. Check user right fulfill key requirement
     key_require = key.level
     user_level = User.objects.get(username=user).role.level
 
     if key_require <= user_level:
         has_right = True
+        return has_right
+
+    # 3. Check user have permission key right
+    try:
+        key = Permission.objects.get(permission=key.pk, user=user.pk)
+        has_right = True
+
+    except ObjectDoesNotExist:
+        return has_right
 
     return has_right
 
