@@ -89,7 +89,7 @@
 					<tr>
 					{% for data in content.list.body %}
 						<td><input type="checkbox" name="user_action" value="{{ data.pk }}"></td>
-						<td><a href="{% url 'user:view_user' data.pk %}">{{ data.username }}</a></td>
+						<td><a href="{% url 'user:view_user' data.username %}">{{ data.username }}</a></td>
 						<td>{{ data.firstname }}</td>
 						<td>{{ data.lastname }}</td>
 						<td>{{ data.role.name }}</td>

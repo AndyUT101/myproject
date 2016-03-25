@@ -179,22 +179,6 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('index'))
 
-def modifyuser_view(request, user_id):
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    user_object = get_object_or_404(User, pk = user_id)
-
-    return render(request, 'home.html', {
-        'page_title': 'Modify a user',
-        'page_header': 'Modify a user',
-        'template': 'form',
-        'content': {
-            'form': UserForm(instance=user_object).as_ul(),
-            'submit_url': 'user:modify_user',
-        },
-    })
-
 def add_user(request):
     
     # 1. Check permission
@@ -202,7 +186,7 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index'))
 
     if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('index_home'))
 
     # 2. Check GET or POST method
     if request.method == 'GET':
@@ -268,7 +252,7 @@ def remove_user(request):
         return HttpResponseRedirect(reverse('index'))
 
     if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_delete'):
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('index_home'))
 
     # 2. Check delete confirmation
     if not request.POST.get('remove_confirm', ''):
@@ -292,6 +276,67 @@ def remove_user(request):
         pass # fail
         return HttpResponse('fail removed.')
     
+def modify_user(request, username=None):
+
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    # 2. Check GET or POST method
+    if request.method == 'GET':
+        
+        # 3. (GET) Check user exist
+        try:
+            user_obj = User.objects.get(username = username)
+        except ObjectDoesNotExist:
+            return HttpResponseRedirect(reverse('user:list_user'))
+
+        # 4. (GET) Return userform
+        return render(request, 'home.html', {
+            'page_title': 'Modify a user',
+            'page_header': 'Modify a user',
+            'template': 'form',
+            'content': {
+                'form': UserForm(instance=user_obj).as_ul(),
+                'submit_url': 'user:modify_user',
+            },
+        })
+        
+
+    elif request.method == 'POST':
+        
+        # 3. (POST) Field check
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            commit_form =  user_form.save(commit=False)
+            
+            # 4. Hash the password object
+            commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+            
+    else:
+        return HttpResponseRedirect(reverse('index'))
+
+
+
+"""
+def modifyuser_view(request, user_id):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    user_object = get_object_or_404(User, pk = user_id)
+
+    return render(request, 'home.html', {
+        'page_title': 'Modify a user',
+        'page_header': 'Modify a user',
+        'template': 'form',
+        'content': {
+            'form': UserForm(instance=user_object).as_ul(),
+            'submit_url': 'user:modify_user',
+        },
+    })
 
 
 def modify_user(request, user_id):
@@ -329,6 +374,7 @@ def modify_user(request, user_id):
 
     return HttpResponseRedirect(reverse('index_home'))
     return HttpResponse(user_id)
+"""
 
 def view_user(request, user, specific_usertype=None):
     if not user_alreadyloggedin(request):
