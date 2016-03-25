@@ -45,17 +45,17 @@ class User(models.Model):
 class Permission_meta(models.Model):
     key = models.CharField(max_length=255, default="")
     description = models.CharField(max_length=255, default="")
-    level = = models.PositiveSmallIntegerField(default = 5)
+    level = models.PositiveSmallIntegerField(default = 5)
 
     def __str__(self):
-        return self.permission_key
+        return self.key
 
 class Permission(models.Model):
-    permission_key = models.ForeignKey(Permission_meta, on_delete=models.CASCADE)
+    permission = models.ForeignKey(Permission_meta, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username + ": " + self.permission_key.permission_key
+        return self.user.username + ": " + self.permission.key
 
 class Parent_contact(models.Model):
     PARENT_TYPE_CHOICE = (
