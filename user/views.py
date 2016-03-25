@@ -183,7 +183,7 @@ def add_user(request):
         if user_form.is_valid():
             # Edit password field
             user_form.save(commit=False)
-            user_form.password_hash = make_password(user_form.password_hash, hasher='bcrypt')
+            user_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
 
             try:
                 # form.save(commit=False) # if any content need to correct
