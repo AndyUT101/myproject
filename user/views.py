@@ -342,7 +342,7 @@ def modify_user(request, username=None):
                 'page_header': 'Modify a user',
                 'template': 'form',
                 'content': {
-                    'form': UsermodForm(instance=request.POST).as_ul(),
+                    'form': UsermodForm(request.POST).as_ul(),
                     'submit_url': 'user:modify_user',
                     'route_parameter': username,
                 },
