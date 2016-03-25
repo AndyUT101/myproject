@@ -11,7 +11,7 @@ from .models import User, Permission, Permission_meta
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
 
-from .forms import UserForm
+from .forms import UserForm, UsermodForm
 
 import random, string
 from datetime import datetime
@@ -301,7 +301,8 @@ def modify_user(request, username=None):
             'template': 'form',
             'content': {
                 'form': UsermodForm(instance=user_obj).as_ul(),
-                'submit_url': 'user:modify_user '+username,
+                'submit_url': 'user:modify_user',
+                'route_parameter': username,
             },
         })
         
