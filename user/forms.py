@@ -10,7 +10,7 @@ class UserForm(ModelForm):
             'password_hash': forms.PasswordInput(),
         }
 
-    def clean(self):
+    def clean_password_hash(self):
     	cleaned_data = super(UserForm, self).clean()
     	cc_password = cleaned_data.get('password_hash')
 
