@@ -45,7 +45,7 @@ class Role(models.Model):
     role_user = models.CharField(max_length = 3, choices = ROLE_USER_CHOICES, default = 'STU')
     
     # assign foreigh key linking to user
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.role_user
