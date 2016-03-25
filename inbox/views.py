@@ -119,7 +119,7 @@ def send_msg(request, reply_id = None):
             reply_msg = Inbox.objects.get(pk=reply_id, receiver=user.pk)
 
         except ObjectDoesNotExist:
-            break
+            pass
 
         reply_mode = True # Read "reply_msg" on after process
 
