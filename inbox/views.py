@@ -77,14 +77,14 @@ def view_msg(request, msg_id = None):
         raise Http404("Not yet logged in")
 
     if msg_id == None:
-        return HttpResponseRedirect(reverse('inbox'))
+        return HttpResponseRedirect(reverse('inbox:inbox'))
 
     try: 
         user = User.objects.get(username=request.session['user'])
         msg = Inbox.objects.get(pk = msg_id, receiver = user.pk)
 
     except ObjectDoesNotExist:
-        return HttpResponseRedirect(reverse('inbox'))
+        return HttpResponseRedirect(reverse('inbox:inbox'))
 
     if not msg.read:
         msg.read = True
