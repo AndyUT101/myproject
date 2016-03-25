@@ -3,6 +3,14 @@ from datetime import datetime, timedelta
 from django.db import models
 from django.utils import timezone
 
+class Role(models.Model):
+    role = models.CharField(max_length = 3, default = 'student')
+    role_level = models.PositiveSmallIntegerField(default = 0)
+    
+    def __str__(self):
+        return self.role
+
+
 class User(models.Model):
     SEX_CHOICES = (
         ('M', 'Male'),
@@ -29,26 +37,10 @@ class User(models.Model):
     national = models.CharField(max_length=24, default="", blank=True)
     location_of_birth = models.CharField(max_length=24, default="", blank=True)
     intake_date = models.CharField(max_length=24, default="", blank=True)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.username
-
-class Role(models.Model):
-    ROLE_USER_CHOICES = (
-        ('STU', 'Student'),
-        ('TEA', 'Teacher'),
-        ('STA', 'Staff'),
-        ('ALU', 'Alumni'),
-        ('ADM', 'Admin'),
-    )
-
-    role_user = models.CharField(max_length = 3, choices = ROLE_USER_CHOICES, default = 'STU')
-    
-    # assign foreigh key linking to user
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.role_user
 
 class Permission_meta(models.Model):
     permission_key = models.CharField(max_length=255, default="")

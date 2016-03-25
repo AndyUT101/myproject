@@ -30,6 +30,11 @@ def generate_token(length = 8):
 
 def review_permission(user, permission):
     pass
+    """
+        current_user = User.objects.get(username=request.session['user'])
+    if not current_user.role.role_user == 'ADM':
+        return HttpResponseRedirect(reverse('index'))
+    """
 
 def user_alreadyloggedin(request):
     status = False
@@ -180,9 +185,6 @@ def add_user(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    current_user = User.objects.get(username=request.session['user'])
-    if not current_user.role.role_user == 'ADM':
-        return HttpResponseRedirect(reverse('index'))
 
     # 2. Check GET or POST method
     if request.method == 'GET':
