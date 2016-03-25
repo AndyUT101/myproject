@@ -27,7 +27,11 @@
 <div class="sp_content">
 {% if template == "form" %}
 	<section class="content_form">
+		{% if content.route_parameter %}
+		<form action="{% url content.submit_url route_parameter %}" method="post">
+		{% else %}
 		<form action="{% url content.submit_url %}" method="post">
+		{% endif %}
 			{% csrf_token %}
 			{{ content.form|linebreaks }}
 			<input type="submit" name="Submit">
