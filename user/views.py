@@ -179,11 +179,11 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('index'))
 
-def modifyuser_view(request, username):
+def modifyuser_view(request, user_id):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    user_object = get_object_or_404(User, username = username)
+    user_object = get_object_or_404(User, user_id = username)
 
     return render(request, 'home.html', {
         'page_title': 'Modify a user',
@@ -271,7 +271,7 @@ def remove_user(request):
         return HttpResponseRedirect(reverse('index'))
 
     # 2. Check delete confirmation
-    if not request.POST.get(remove_confirm, ''):
+    if not request.POST.get('remove_confirm', ''):
         return HttpResponseRedirect(reverse('index_home'))
 
     # 3. Collect checkbox list
