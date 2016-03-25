@@ -29,12 +29,22 @@ def generate_token(length = 8):
     return make_password(random_string, hasher='md5')[4:]
 
 def review_permission(user, permission):
-    pass
-    """
-        current_user = User.objects.get(username=request.session['user'])
-    if not current_user.role.role_user == 'ADM':
-        return HttpResponseRedirect(reverse('index'))
-    """
+    has_right = False
+
+    # 1. Check permission key information
+    try:
+        key = Permission.objects.get(name=permission)
+    except ObjectDoesNotExist:
+        return has_right
+
+    # 2. check user right fulfill key requirement
+    key_require = key.level
+    user_level = User.objects.get(username=user).role.level
+
+    if key_require <= user_level:
+        has_right = True
+
+    return has_right
 
 def user_alreadyloggedin(request):
     status = False
@@ -147,22 +157,6 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('index'))
 
-"""
-def adduser_view(request):
-    if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
-
-    return render(request, 'home.html', {
-        'page_title': 'Add a user',
-        'page_header': 'Add a user',
-        'template': 'form',
-        'content': {
-            'form': UserForm().as_ul(),
-            'submit_url': 'user:add_user',
-        },
-    })
-"""
-
 def modifyuser_view(request, username):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
@@ -185,6 +179,8 @@ def add_user(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
+        return HttpResponseRedirect(reverse('index'))
 
     # 2. Check GET or POST method
     if request.method == 'GET':
