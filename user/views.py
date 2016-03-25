@@ -300,8 +300,8 @@ def modify_user(request, username=None):
             'page_header': 'Modify a user',
             'template': 'form',
             'content': {
-                'form': UserForm(instance=user_obj).as_ul(),
-                'submit_url': 'user:modify_user',
+                'form': UsermodForm(instance=user_obj).as_ul(),
+                'submit_url': 'user:modify_user '+username,
             },
         })
         
@@ -309,7 +309,7 @@ def modify_user(request, username=None):
     elif request.method == 'POST':
         
         # 3. (POST) Field check
-        user_form = UserForm(request.POST)
+        user_form = UsermodForm(request.POST)
         if user_form.is_valid():
             commit_form =  user_form.save(commit=False)
             
@@ -318,6 +318,8 @@ def modify_user(request, username=None):
                 delattr(commit_form, 'password_hash')
             else:
                 commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+
+            User.objects.get(username=username).update(request.POST)
 
     else:
         return HttpResponseRedirect(reverse('index'))
