@@ -91,7 +91,8 @@ def view_msg(request, msg_id = None):
         msg.save()
 
     return render(request, 'home.html', {
-        'page_header': msg.content.title+' : Inbox',
+        'page_title': 'Inbox: '+ msg.content.title
+        'page_header': 'Inbox',
         'template': 'detail', # operation, list, 
         'content': {
             'detail': { # key: (header, content, redirect_url(route/None), html_class)
