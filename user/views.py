@@ -338,7 +338,34 @@ def view_user(request, user_id, specific_usertype=None):
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
-    pass
+
+
+    user_list = User.objects.all()[row_count*(page-1):row_count]
+    
+    return render(request, 'home.html', {
+        'page_header': 'Inbox',
+        'template': 'testing', # operation, list, 
+        'content': {
+            'operation': ( 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                ('Compose', 'inbox:compose', 'compose'),
+                ('Delete', 'user:delete', 'delete'),
+
+            ),
+            'list': {
+                'checkbox': True,
+                'name': 'user',
+                'body': user_list,
+                'foot': (),
+            },
+            'adv_operation': ( 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                ('Compose', 'inbox:compose', ['compose']),
+                ('Delete', 'inbox:delete', ['delete']),
+
+            ),
+        },
+    })
 
     # case 1: list all user
     # case 2: list specific_usertype
