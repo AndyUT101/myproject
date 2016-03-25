@@ -183,7 +183,7 @@ def modifyuser_view(request, user_id):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    user_object = get_object_or_404(User, user_id = username)
+    user_object = get_object_or_404(User, pk = user_id)
 
     return render(request, 'home.html', {
         'page_title': 'Modify a user',
