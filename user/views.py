@@ -17,7 +17,7 @@ import random, string
 from datetime import datetime
 
 """
-template = ('home', 'list', 'form', 'detail', 'none')
+template = ('home', 'list', 'form', 'detail', 'none', 'test', 'notification')
 """
 
 def generate_token(length = 8):
@@ -108,7 +108,7 @@ def login(request):
     ## Check password hash, assign session for logged user
     if check_password(login_password, user_object.password_hash):
         if not already_logged:
-            session_timeout_minutes = 30
+            session_timeout_minutes = 120
             request.session.set_expiry(session_timeout_minutes * 60)
             request.session['token'] = generate_token()
             request.session['user'] = user_object.username
@@ -142,6 +142,7 @@ def logout(request):
 
     return HttpResponseRedirect(reverse('index'))
 
+"""
 def adduser_view(request):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
@@ -155,6 +156,7 @@ def adduser_view(request):
             'submit_url': 'user:add_user',
         },
     })
+"""
 
 def modifyuser_view(request, username):
     if not user_alreadyloggedin(request):
@@ -172,6 +174,64 @@ def modifyuser_view(request, username):
         },
     })
 
+def add_user(request):
+    
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    current_user = User.objects.get(username=request.POST['user'])
+    if not current_user.role_set.all()[0].role_user == 'ADM'
+        return HttpResponseRedirect(reverse('index'))
+
+    # 2. Check GET or POST method
+    if request.method == 'GET':
+        
+        # 3. (GET) Generate model form object
+        return render(request, 'home.html', {
+            'page_title': 'Add user',
+            'page_header': 'Add user',
+            'template': 'form',
+            'content': {
+                'form': UserForm().as_ul(),
+                'submit_url': 'user:add_user',
+            },
+        })
+
+    elif request.method == 'POST':
+        
+        # 3. (POST) Field check
+        user_form = UserForm(request.POST)
+        if user_form.is_valid():
+            commit_form =  user_form.save(commit=False)
+            
+            # 4. Hash the password object
+            commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+            
+            # 5. Apply to database
+            commit_form.save()
+
+            # 6. Return success page
+            return HttpResponse('user_added')
+
+            """
+            return render(request, 'home.html', {
+                'page_title': 'Add user',
+                'page_header': 'Add user',
+                'template': 'notification',
+                'content': {
+                    'notification': 'User ' + commit_form.username + 'add successful',
+                    'redirect_text': 'user page',
+                    'redirect_url': 'user:add_user',
+                },
+            })
+            """
+    else:
+        return HttpResponseRedirect(reverse('index')) 
+
+
+"""
+## rewrite add_user
 def add_user(request):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
@@ -194,35 +254,11 @@ def add_user(request):
 
             return HttpResponse('user_added')
 
-        return HttpResponseRedirect(reverse('add_user_view'))
+        return HttpResponseRedirect(reverse('user:add_user_view'))
 
 
     return HttpResponseRedirect(reverse('index_home'))
-
-
-    #######
-    # old code
-    # form check
-    """
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'home.html', {
-            'page_header': 'Add a user',
-            'template': 'form',
-            'redirect_url': 'user:add_user',
-            'form': form.as_ul(),
-        })
-
-        try:
-            form.save(commit=False)
-            form.save()
-        
-        except:
-            pass
-
-        return HttpResponse('user added.')
-    """
+"""
 
 def remove_user(request):
     if not user_alreadyloggedin(request):
