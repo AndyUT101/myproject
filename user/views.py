@@ -226,6 +226,18 @@ def add_user(request):
                 },
             })
             """
+        else:
+            # 6. Return user page with posted data
+            return render(request, 'home.html', {
+                'page_title': 'Add user',
+                'page_header': 'Add user',
+                'template': 'form',
+                'content': {
+                    'form': UserForm(request.POST).as_ul(),
+                    'submit_url': 'user:add_user',
+                },
+            })
+
     else:
         return HttpResponseRedirect(reverse('index')) 
 
