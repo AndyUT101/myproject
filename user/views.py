@@ -55,6 +55,19 @@ def review_permission(user, permission):
 
     return has_right
 
+def get_userrole(user):
+    """
+    return: dict({'role': 'str', 'level': 'int'})
+    """
+    try:
+        user_obj = User.objects.get(username=user)
+
+    except ObjectDoesNotExist:
+        return None
+
+    return dict({'role': user_obj.role.name, 'level': user_obj.role.level})
+
+
 def user_alreadyloggedin(request):
     status = False
     if 'token' in request.session and 'user' in request.session:
@@ -168,7 +181,7 @@ def logout(request):
 
 def modifyuser_view(request, username):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
     user_object = get_object_or_404(User, username = username)
 
@@ -241,64 +254,49 @@ def add_user(request):
                 'template': 'form',
                 'content': {
                     'form': UserForm(request.POST).as_ul(),
-                    'submit_url': 'user:add_user',
+                    'submit_url': 'index_home',
                 },
             })
 
     else:
         return HttpResponseRedirect(reverse('index')) 
 
-
-    """
-## rewrite add_user
-def add_user(request):
-    if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
-
-    if request.method == 'POST':
-        user_form = UserForm(request.POST)
-
-        # Form checking
-        if user_form.is_valid():
-            # Edit password field
-            commit_form =  user_form.save(commit=False)
-            commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
-
-            try:
-                # form.save(commit=False) # if any content need to correct
-                commit_form.save()
-
-            except IntegrityError:
-                pass
-
-            return HttpResponse('user_added')
-
-        return HttpResponseRedirect(reverse('user:add_user_view'))
-
-
-    return HttpResponseRedirect(reverse('index_home'))
-    """
-
 def remove_user(request):
+
+    # 1. Check permission
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_delete'):
+        return HttpResponseRedirect(reverse('index'))
+
+    # 2. Check delete confirmation
     if not request.POST.get(remove_confirm, ''):
-        return HttpResponse('User does not removed')
+        return HttpResponseRedirect(reverse('index_home'))
 
-    try:
-        delete_obj = get_object_or_404(User, pk=request.POST.get(user_id))
-        delete_obj.delete()
+    # 3. Collect checkbox list
+    delete_list = request.POST.getlist('msg_action')
 
-    except IntegrityError:
-        pass
+    # 4. Prevent for lower right users delete other greater right user
+    # (Functional requirement)
+    user_level = get_userrole(request.session['user'])['level']
 
-    return HttpResponse('user removed.')
+    user_removeobj = User.objects.filter(pk__in=delete_list)
+    unavailable_removeobj = User.objects.filter(role__in=Role.objects.filter(level__lte=user_level))
+
+    if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
+        user_removeobj.delete() #success
+        return HttpResponse('user removed.')
+
+    else:
+        pass # fail
+        return HttpResponse('fail removed.')
+    
 
 
 def modify_user(request, user_id):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
@@ -334,12 +332,12 @@ def modify_user(request, user_id):
 
 def view_user(request, user_id, specific_usertype=None):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
     pass
 
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
     pass
 
     # case 1: list all user

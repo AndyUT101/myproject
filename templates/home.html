@@ -44,7 +44,7 @@
 		{% endfor %}
 		</div>
 	{% endif %}
-	{% if content.list %}
+	{% if content.list.name == 'inbox' %}
 		<div class="list_table">
 			<form>
 			<table>
@@ -59,7 +59,7 @@
 				<tbody>
 					<tr>
 					{% for msg in content.list.body %}
-						<td><input type="checkbox" name="msg_id{{ msg.pk }}" value="{{ msg.pk }}"></td>
+						<td><input type="checkbox" name="msg_action" value="{{ msg.pk }}"></td>
 						<td><span class="{% if msg.read %}read{% else %}unread{% endif %}"></span></td>
 						<td><a href="{% url 'inbox:view' msg.pk %}">{{ msg.content.title }}</a></td>
 						<td>{{ msg.sender.username }}</td>
