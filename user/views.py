@@ -233,7 +233,6 @@ def add_user(request):
                 },
             })
 
-        """
         else:
             # 6. Return user page with posted data
             return render(request, 'home.html', {
@@ -250,7 +249,7 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index')) 
 
 
-"""
+    """
 ## rewrite add_user
 def add_user(request):
     if not user_alreadyloggedin(request):
@@ -278,7 +277,7 @@ def add_user(request):
 
 
     return HttpResponseRedirect(reverse('index_home'))
-"""
+    """
 
 def remove_user(request):
     if not user_alreadyloggedin(request):
