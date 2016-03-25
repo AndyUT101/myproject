@@ -11,17 +11,17 @@ class UserForm(ModelForm):
         }
 
     def clean_password_hash(self):
-    	data = self.cleaned_data['password_hash']
-    	if len(data) < 8:
-    		raise forms.ValidationError('The password should as least 8 characters long.')
+        data = self.cleaned_data['password_hash']
+        if len(data) < 8:
+            raise forms.ValidationError('The password should as least 8 characters long.')
 
-    	return data
+        return data
 
 class UsermodForm(UserForm):
 
-	def clean_password_hash(self):
-    	data = self.cleaned_data['password_hash']
-    	if len(data) < 8 and len(data) > 0:
-    		raise forms.ValidationError('The password should as least 8 characters long.')
+    def clean_password_hash(self):
+        data = self.cleaned_data['password_hash']
+        if len(data) < 8 and len(data) > 0:
+            raise forms.ValidationError('The password should as least 8 characters long.')
 
-    	return data
+        return data
