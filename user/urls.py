@@ -10,7 +10,7 @@ urlpatterns = [
 
     url(r'^delete/(?P<user_id>[0-9]+)$', views.remove_user, name='remove_users'),
     #url(r'^add/$', views.adduser_view, name='add_user'),
-    url(r'^add/process/$', views.add_user, name='add_user'),
+    url(r'^add/$', views.add_user, name='add_user'),
 
     url(r'^modify/(?P<username>.+)/$', views.modifyuser_view, name='modify_user_view'),
     url(r'^modify/process/$', views.modify_user, name='modify_user'),
