@@ -313,9 +313,12 @@ def modify_user(request, username=None):
         if user_form.is_valid():
             commit_form =  user_form.save(commit=False)
             
-            # 4. Hash the password object
-            commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
-            
+            # 4. If password is empty, skip update password
+            if (len(commit_form.password) == 0):
+                delattr(commit_form, 'password_hash')
+            else:
+                commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+
     else:
         return HttpResponseRedirect(reverse('index'))
 
