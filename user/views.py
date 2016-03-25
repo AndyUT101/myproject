@@ -238,7 +238,7 @@ def add_user(request):
                 'template': 'form',
                 'content': {
                     'form': UserForm(request.POST).as_ul(),
-                    'submit_url': 'index_home',
+                    'submit_url': 'add_user',
                 },
             })
 
