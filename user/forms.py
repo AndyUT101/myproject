@@ -9,8 +9,3 @@ class UserForm(ModelForm):
         widgets = {
             'password_hash': forms.PasswordInput(),
         }
-
-class RoleForm(ModelForm):
-    class Meta:
-        model = Role
-        fields = ["role_user"]
