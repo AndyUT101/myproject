@@ -180,7 +180,7 @@ def add_user(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    current_user = User.objects.get(username=request.POST['user'])
+    current_user = User.objects.get(username=request.session['user'])
     if not current_user.role_set.all()[0].role_user == 'ADM':
         return HttpResponseRedirect(reverse('index'))
 
