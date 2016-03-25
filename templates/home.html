@@ -36,7 +36,7 @@
 {% endif %}
 
 {% if template == "list" %}
-	<section class="info_list">
+	<section class="info_list"><form>
 	{% if content.operation %}
 		<div class="operation">
 		{% for list_item in content.operation %}
@@ -46,7 +46,7 @@
 	{% endif %}
 	{% if content.list.name == 'inbox' %}
 		<div class="list_table">
-			<form>
+			
 			<table>
 				<thead>
 					<tr>
@@ -68,12 +68,41 @@
 					{% endfor %}					
 				</tbody>
 				
-			</table></form>
+			</table>
 
 		</div>
-	{% endif %}
 		<div class="adv_operation"></div>
-	</section>
+	{% endif %}
+
+	{% if content.list.name == 'user' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>username</td>
+						<td>First name</td>
+						<td>Last name</td>
+						<td>Role</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><input type="checkbox" name="msg_action" value="{{ data.pk }}"></td>
+						<td><a href="{% url 'user:view_user' msg.pk %}">{{ msg.content.username }}</a></td>
+						<td>{{ msg.content.firstname }}</td>
+						<td>{{ msg.content.lastname }}</td>
+						<td>{{ msg.content.role.name }}</td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+		<div class="adv_operation"></div>
+	{% endif %}		
+	</form></section>
 {% endif %}
 
 {% if template == 'detail' %}
