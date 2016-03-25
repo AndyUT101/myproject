@@ -38,7 +38,7 @@ def list_inboxmsg(request):
 
     return render(request, 'home.html', {
         'page_header': 'Inbox',
-        'template': 'testing', # operation, list, 
+        'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
@@ -60,9 +60,6 @@ def list_inboxmsg(request):
             ),
         },
     })
-
-
-    pass
 
 def view_msg(request, msg_id = None):
     """
