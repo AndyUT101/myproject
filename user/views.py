@@ -322,6 +322,32 @@ def modify_user(request, username=None):
 
             User.objects.get(username=username).update(request.POST)
 
+            # 5. Return success page
+            return render(request, 'home.html', {
+                'page_title': 'Modify user',
+                'page_header': 'Modify user',
+                'template': 'notification',
+                'content': {
+                    'notification': 'User ' + commit_form.username + ' modify successful',
+                    'redirect_text': 'user page',
+                    'redirect_url': 'user:add_user',
+                    'auto_redirect': True,
+                },
+            })
+
+        else:
+            # 5. Return userform
+            return render(request, 'home.html', {
+                'page_title': 'Modify a user',
+                'page_header': 'Modify a user',
+                'template': 'form',
+                'content': {
+                    'form': UsermodForm(instance=user_obj).as_ul(),
+                    'submit_url': 'user:modify_user',
+                    'route_parameter': username,
+                },
+            })
+
     else:
         return HttpResponseRedirect(reverse('index'))
 
