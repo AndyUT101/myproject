@@ -89,9 +89,11 @@
 {% if template == 'detail' %}
 	<section class="info_detail">
 	{% if content.detail %}
-		{% for key in content.detail %}
-			<p>{{ key }}</p>
-			<p>{% for item in content.detail.key %}{{ item }} {% endfor %}}</p>
+		{% for item in content.detail %}
+			<p>{{ item.0 }}</p>
+			<p>{{ item.1 }}</p>
+			<p>{{ item.2 }}</p>
+			<p>{% for html_class in item.2 %}{{ html_class }} {% endfor %}}</p>
 			}
 		{% endfor %}
 	{% endif %}
@@ -100,3 +102,4 @@
 </div>
 
 {% endblock %}
+
