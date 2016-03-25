@@ -43,8 +43,9 @@ class User(models.Model):
         return self.username
 
 class Permission_meta(models.Model):
-    permission_key = models.CharField(max_length=255, default="")
-    permission_description = models.CharField(max_length=255, default="")
+    key = models.CharField(max_length=255, default="")
+    description = models.CharField(max_length=255, default="")
+    level = = models.PositiveSmallIntegerField(default = 5)
 
     def __str__(self):
         return self.permission_key
