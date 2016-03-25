@@ -96,9 +96,9 @@ def view_msg(request, msg_id = None):
         'template': 'detail', # operation, list, 
         'content': {
             'detail': ( # key: (header, content, redirect_url(route/None), html_class)
-                ('Sent by', msg.sender.username, None, ('sender', 'send2')),
-                ('Title', msg.content.title, None, ('title')),
-                ('Content', msg.content.content, None, ('content')),
+                ('Sent by', msg.sender.username, None, ('sender', 'send2',)),
+                ('Title', msg.content.title, None, ('title',)),
+                ('Content', msg.content.content, None, ('content',)),
 
             ),
             'adv_operation': ( 
