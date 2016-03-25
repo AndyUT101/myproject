@@ -88,14 +88,11 @@
 	{% endif %}
 	</section>
 {% endif %}
+
+
+{% if template == 'testing' %}<p>{{ page_title }}</p><p>{{ page_header }}</p><p>{{ content }}</p>{% endif %}{% endblock %}
+
 </div>
 
-{% if template == 'testing' %}
 
-<p>{{ template }}</p>
-<p>{{ content }}</p>
-
-{% endif %}
-
-{% endblock %}
 
