@@ -349,7 +349,7 @@ def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=N
             'operation': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
                 ('Compose', 'inbox:compose', 'compose'),
-                ('Delete', 'user:delete', 'delete'),
+                ('Delete', 'user:remove_user', 'delete'),
 
             ),
             'list': {
