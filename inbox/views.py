@@ -38,12 +38,12 @@ def list_inboxmsg(request):
 
     return render(request, 'home.html', {
         'page_header': 'Inbox',
-        'template': 'list', # operation, list, 
+        'template': 'testing', # operation, list, 
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Compose', 'inbox:compose', ['compose']),
-                ('Delete', 'inbox:delete', ['delete']),
+                ('Compose', 'inbox:compose', 'compose'),
+                ('Delete', 'inbox:delete', 'delete'),
 
             ),
             'list': {
@@ -96,9 +96,9 @@ def view_msg(request, msg_id = None):
         'template': 'detail', # operation, list, 
         'content': {
             'detail': ( # key: (header, content, redirect_url(route/None), html_class)
-                ('Sent by', msg.sender.username, None, ('sender', 'send2',)),
-                ('Title', msg.content.title, None, ('title',)),
-                ('Content', msg.content.content, None, ('content',)),
+                ('Sent by', msg.sender.username, None, 'sender'),
+                ('Title', msg.content.title, None, 'title'),
+                ('Content', msg.content.content, None, 'content'),
 
             ),
             'adv_operation': ( 
