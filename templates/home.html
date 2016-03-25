@@ -88,11 +88,11 @@
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><input type="checkbox" name="msg_action" value="{{ data.pk }}"></td>
-						<td><a href="{% url 'user:view_user' msg.pk %}">{{ msg.content.username }}</a></td>
-						<td>{{ msg.content.firstname }}</td>
-						<td>{{ msg.content.lastname }}</td>
-						<td>{{ msg.content.role.name }}</td>
+						<td><input type="checkbox" name="user_action" value="{{ data.pk }}"></td>
+						<td><a href="{% url 'user:view_user' data.pk %}">{{ data.content.username }}</a></td>
+						<td>{{ data.content.firstname }}</td>
+						<td>{{ data.content.lastname }}</td>
+						<td>{{ data.content.role.name }}</td>
 					<tr>
 					{% endfor %}					
 				</tbody>
