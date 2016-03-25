@@ -4,11 +4,11 @@ from django.db import models
 from django.utils import timezone
 
 class Role(models.Model):
-    role = models.CharField(max_length = 3, default = 'student')
-    role_level = models.PositiveSmallIntegerField(default = 0)
+    name = models.CharField(max_length=24, default="student")
+    level = models.PositiveSmallIntegerField(default = 0)
     
     def __str__(self):
-        return self.role
+        return self.name
 
 
 class User(models.Model):
@@ -37,7 +37,7 @@ class User(models.Model):
     national = models.CharField(max_length=24, default="", blank=True)
     location_of_birth = models.CharField(max_length=24, default="", blank=True)
     intake_date = models.CharField(max_length=24, default="", blank=True)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.username
