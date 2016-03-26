@@ -3,7 +3,13 @@
 <header class="home_header">
 	{% if topnav %}<nav class="topnav">
 		{% for nav_item in topnav %}
-		<li><a href="{% url nav_item.url_route %}">{{ nav_item.title }}{% if nav_item.sub_menu %}+{% endif %}</a></li>
+		<ul>
+			<li>
+			<a href="{% url nav_item.url_route %}">{{ nav_item.title }}{% if nav_item.sub_menu %}+{% endif %}</a>
+			{% if nav_item.sub_menu %}<ul>
+				{% for nav_subitem in nav_item.sub_menu %}<li><a href="{% url nav_subitem.url_route %}">{{ nav_subitem.title }}</a></li>{% endfor %}
+			</ul>{% endif %}</li>
+		</ul>
 		{% endfor %}
 	</nav>{% endif %}
 	<div class="heading-content">
