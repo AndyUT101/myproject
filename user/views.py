@@ -310,14 +310,16 @@ def modify_user(request, username=None):
     elif request.method == 'POST':
         
         # 3. Replace original password if request.POST get empty password_hash
+        modify_userobj = User.objects.get(username=username)
+
         perform_hashed = True
         if len(request.POST['password_hash']) == 0:
             request.POST = request.POST.copy()
-            request.POST.update ({'password_hash': User.objects.get(username=username).password_hash})
+            request.POST.update ({'password_hash': modify_userobj.password_hash})
             perform_hashed = False
 
         # 3. (POST) Field check
-        user_form = UsermodForm(request.POST)
+        user_form = UsermodForm(request.POST, instance=modify_userobj)
 
 
         if user_form.is_valid():
@@ -327,7 +329,7 @@ def modify_user(request, username=None):
             if (perform_hashed):
                 commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
 
-            User.objects.get(username=username).update(request.POST)
+            commit_form.save()
 
             # 5. Return success page
             return render(request, 'home.html', {
