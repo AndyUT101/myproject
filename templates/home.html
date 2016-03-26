@@ -40,7 +40,7 @@
 {% endif %}
 
 {% if template == "list" %}
-	<section class="info_list"><form>
+	<section class="info_list"><form>{% csrf_token %}
 	{% if content.operation %}
 		<div class="operation">
 		{% for list_item in content.operation %}
