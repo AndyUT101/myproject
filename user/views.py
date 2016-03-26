@@ -311,8 +311,9 @@ def modify_user(request, username=None):
         
         # 3. Replace original password if request.POST get empty password_hash
         perform_hashed = True
-        if (request.POST['password_hash']):
-            request.POST['password_hash'] = User.objects.get(username=username).password_hash
+        if len(request.POST['password_hash']) == 0:
+            request.POST = request.POST.copy()
+            request.POST.update ({'password_hash': User.objects.get(username=username).password_hash})
             perform_hashed = False
 
         # 3. (POST) Field check
