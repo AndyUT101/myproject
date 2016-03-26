@@ -368,7 +368,7 @@ def list_user(request, specific_usertype=None, classcode=None):
     return render(request, 'home.html', {
         'page_title': 'User management',
         'page_header': 'User management',
-        'topnav': site_topnav(get_userrole(user)['level']),
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
