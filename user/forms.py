@@ -19,9 +19,8 @@ class UserForm(ModelForm):
 
 class UsermodForm(UserForm):
 
-    def __init__(self, *args, **kwargs):
-        super(UsermodForm, self).__init__(*args, **kwargs)
-        self.fields['username'].required = False
+    class Meta:
+        exclude = ('username', )
 
     def clean_password_hash(self):
         data = self.cleaned_data['password_hash']
