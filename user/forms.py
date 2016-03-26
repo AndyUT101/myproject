@@ -19,9 +19,9 @@ class UserForm(ModelForm):
 
 class UsermodForm(UserForm):
 
-	def __init__(self, *args, **kwargs):
-		super(UserForm, self).__init__(*args, **kwargs)
-		self.fields['username'].required = False
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].required = False
 
     def clean_password_hash(self):
         data = self.cleaned_data['password_hash']
@@ -33,5 +33,5 @@ class UsermodForm(UserForm):
         return data
 
     def clean_username(self):
-    	username = self.cleaned_data['username']
-    	return username
+        username = self.cleaned_data['username']
+        return username
