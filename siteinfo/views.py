@@ -17,7 +17,7 @@ def site_overview(request):
 def site_topnav(request, user_level = 1):
     output = []
     sitemap_obj = Sitemap.objects.all().order_by('order', 'level')
-    obj = [{'title': item.title, 'url_route': item.url_route, 'pk': item.pk, 'top_level': item.top_level, 'level': item.level} for item in sitmap_obj]
+    obj = [{'title': item.title, 'url_route': item.url_route, 'pk': item.pk, 'top_level': item.top_level, 'level': item.level} for item in sitemap_obj]
 
     for item in obj:
         if item['level'] > user_level:
