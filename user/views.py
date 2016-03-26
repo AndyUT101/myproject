@@ -261,14 +261,12 @@ def remove_user(request):
     # 3. Collect checkbox list
     delete_list = request.POST.getlist('user_action')
 
-    return HttpResponse(delete_list)
-
     # 4. Prevent for lower right users delete other greater right user
     # (Functional requirement)
     user_level = get_userrole(request.session['user'])['level']
 
     user_removeobj = User.objects.filter(pk__in=delete_list)
-    unavailable_removeobj = User.objects.filter(role__in=Role.objects.filter(level__lte=user_level))
+    unavailable_removeobj = User.objects.filter(role__in=Role.objects.filter(level__gte=user_level))
 
     if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
         user_removeobj.delete() #success

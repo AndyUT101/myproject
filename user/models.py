@@ -37,7 +37,7 @@ class User(models.Model):
     national = models.CharField(max_length=24, default="", blank=True)
     location_of_birth = models.CharField(max_length=24, default="", blank=True)
     intake_date = models.DateField(default=date.today, blank=True)
-    last_logged = models.DateTimeField(default="", blank=True)
+    last_logged = models.DateTimeField(null=True, blank=True)
 
     role = models.ForeignKey(Role, on_delete=models.CASCADE, default=1)
 
