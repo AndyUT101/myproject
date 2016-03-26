@@ -31,8 +31,7 @@ class UsermodForm(UserForm):
     def clean_password_hash(self):
         data = self.cleaned_data['password_hash']
 
-        if not len(data) == 0:
-            if len(data) < 8:
-                raise forms.ValidationError('The password should as least 8 characters long.')
+        if len(data) < 8:
+            raise forms.ValidationError('The password should as least 8 characters long.')
 
         return data

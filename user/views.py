@@ -309,15 +309,21 @@ def modify_user(request, username=None):
 
     elif request.method == 'POST':
         
+        # 3. Replace original password if request.POST get empty password_hash
+        perform_hashed = True
+        if (request.POST['password_hash']):
+            request.POST['password_hash'] = User.objects.get(username=username).password_hash
+            perform_hashed = False
+
         # 3. (POST) Field check
         user_form = UsermodForm(request.POST)
+
+
         if user_form.is_valid():
             commit_form =  user_form.save(commit=False)
             
-            # 4. If password is empty, skip update password
-            if (len(commit_form.password_hash) == 0):
-                delattr(commit_form, 'password_hash')
-            else:
+            # 4. If password is remain unchanged, skip update password
+            if (perform_hashed):
                 commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
 
             User.objects.get(username=username).update(request.POST)
