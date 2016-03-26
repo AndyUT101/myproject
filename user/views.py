@@ -16,6 +16,7 @@ from .forms import UserForm, UsermodForm
 
 import random, string
 from datetime import datetime
+import math
 
 """
 template = ('home', 'list', 'form', 'detail', 'none', 'test', 'notification')
@@ -369,11 +370,36 @@ def view_user(request, user, specific_usertype=None):
         return HttpResponseRedirect(reverse('index'))
     pass
 
-def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
+def list_user(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    user_list = User.objects.all()[row_count*(page-1):row_count]
+    default_pagevalue = {'page': 1, 'row_count': 2}
+    # page=1, row_count=50
+    page_get = request.GET.get('page', default_pagevalue['page'])
+    row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
+
+    try:
+        page = int(page_get)
+        row_count = int(row_count_get)
+    except ValueError:
+        page = default_pagevalue['page']
+        row_count = default_pagevalue['row_count']
+
+    user_object = User.objects.all()
+    if not specific_usertype == None:
+        pass
+
+    # 1. GET page_number
+    return HttpResponseRedirect(reverse('list_user'))
+
+    # 1. Define list page count
+    user_count = user_object.count()
+    max_page = math.ceil(user_count/row_count)
+    if page > max_page:
+        page = default_pagevalue['page']
+
+    user_list = user_object[row_count*(page-1):row_count]
     
     return render(request, 'home.html', {
         'page_title': 'User management',
