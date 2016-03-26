@@ -17,10 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from user.views import index, index_home 
+from siteinfo.views import management_panel 
 
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^home/$', index_home, name='index_home'),
+
+    url(r'^management/$', management_panel, name='management_index'),
 
     url(r'^attendance/', include('attendance.urls', namespace="attendance")),
     url(r'^booking/', include('booking.urls', namespace="booking")),
