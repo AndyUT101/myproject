@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^user/', include('user.urls', namespace="user")),
     url(r'^inbox/', include('inbox.urls', namespace="inbox")),
     url(r'^classroom/', include('classroom.urls', namespace="classroom")),
+    url(r'^report/', include('report.urls', namespace="report")),   
     url(r'^admin/', admin.site.urls),
 ]
