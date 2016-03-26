@@ -259,7 +259,7 @@ def remove_user(request):
         return HttpResponseRedirect(reverse('index_home'))
 
     # 3. Collect checkbox list
-    delete_list = request.POST.getlist('msg_action')
+    delete_list = request.POST.getlist('user_action')
 
     # 4. Prevent for lower right users delete other greater right user
     # (Functional requirement)
