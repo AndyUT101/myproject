@@ -1,4 +1,5 @@
 from .models import User, Permission, Permission_meta, Role
+from django.contrib.auth.hashers import make_password
 import random, string
 
 def user_alreadyloggedin(request):
