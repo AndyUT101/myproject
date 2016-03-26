@@ -8,6 +8,9 @@ class Lesson(models.Model):
     title = models.CharField(max_length=50, default="")
     start_time = models.TimeField(default="")
     end_time = models.TimeField(default="")
+
+    def __str__(self):
+    	return self.title
     
 class Booking(models.Model):
     book_date = models.DateField(auto_now=True)
