@@ -36,7 +36,7 @@ def site_topnav(request, user_level = 1):
 
     return render(request, 'home.html', {
         'page_title': 'Welcome home!',
-        'page_header': 'Good to seeing you, ' + user.lastname,
+        'page_header': 'Good to seeing you',
         'template': 'testing',
         'content': {   
             'out': output,
