@@ -10,7 +10,9 @@ class Lesson(models.Model):
     end_time = models.TimeField(default="")
 
     def __str__(self):
-    	return self.title
+        start_str = " (" + str(self.start_time.strftime("%H:%M %p"))
+        end_str = "-" + str(self.end_time.strftime("%H:%M %p"))+ ')'
+        return self.title+start_str+end_str
     
 class Booking(models.Model):
     book_date = models.DateField(auto_now=True)
