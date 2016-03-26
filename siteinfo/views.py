@@ -15,23 +15,25 @@ def site_overview(request):
     pass
 
 def site_topnav(user_level = 1):
-    output = []
-    sitemap_obj = Sitemap.objects.all().order_by('order', 'level')
+    sitemap_obj = Sitemap.objects.all().order_by('order')
     obj = [{'title': item.title, 'url_route': item.url_route, 'pk': item.pk, 'top_level': item.top_level, 'level': item.level} for item in sitemap_obj]
 
+    d = {'main':[], 'sub':[]}
     for item in obj:
-        if item['level'] > user_level:
-            continue
-
         if item['top_level'] == None:
+            d['main'].append(item)
             del item['top_level']
-            output.append(item)
         else:
-            output_index = len(output) - 1
-            del item['top_level']
-            if not 'sub_menu' in output[output_index]:
-                output[output_index]['sub_menu'] = [item]
-            else:
-                output[output_index]['sub_menu'].append(item)
+            d['sub'].append(item)
 
-    return output
+    for item in d['sub']:
+        for core in d['main']:
+            if core['pk'] == item['top_level'].pk:
+                if not 'sub_menu' in core:
+                    core['sub_menu'] = [item]
+                else:
+                    core['sub_menu'].append(item)
+                continue
+        del item['top_level']
+
+    return d['main']
