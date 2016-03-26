@@ -106,13 +106,12 @@ def index_home(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ' + user.lastname,
         'topnav': site_topnav(get_userrole(user)['level']),
-        'template': 'testing',
+        'template': 'home',
         'content': {   
             'notification': {
                 'current_date': current_sysdate,
                 'inbox': inbox_count,
                 'classroom': classroom_count,
-                'topnav': site_topnav(get_userrole(user)['level']),
             },
         },
     })
@@ -200,6 +199,7 @@ def add_user(request):
         return render(request, 'home.html', {
             'page_title': 'Add user',
             'page_header': 'Add user',
+            'topnav': site_topnav(get_userrole(user)['level']),
             'template': 'form',
             'content': {
                 'form': UserForm().as_ul(),
@@ -226,6 +226,7 @@ def add_user(request):
             return render(request, 'home.html', {
                 'page_title': 'Add user',
                 'page_header': 'Add user',
+                'topnav': site_topnav(get_userrole(user)['level']),
                 'template': 'notification',
                 'content': {
                     'notification': 'User ' + commit_form.username + 'add successful',
@@ -240,6 +241,7 @@ def add_user(request):
             return render(request, 'home.html', {
                 'page_title': 'Add user',
                 'page_header': 'Add user',
+                'topnav': site_topnav(get_userrole(user)['level']),
                 'template': 'form',
                 'content': {
                     'form': UserForm(request.POST).as_ul(),
@@ -306,6 +308,7 @@ def modify_user(request, username=None):
         return render(request, 'home.html', {
             'page_title': 'Modify a user',
             'page_header': 'Modify a user',
+            'topnav': site_topnav(get_userrole(user)['level']),
             'template': 'form',
             'content': {
                 'form': UsermodForm(instance=user_obj).as_ul(),
@@ -343,6 +346,7 @@ def modify_user(request, username=None):
             return render(request, 'home.html', {
                 'page_title': 'Modify user',
                 'page_header': 'Modify user',
+                'topnav': site_topnav(get_userrole(user)['level']),
                 'template': 'notification',
                 'content': {
                     'notification': 'User ' + commit_form.username + ' modify successful',
@@ -357,6 +361,7 @@ def modify_user(request, username=None):
             return render(request, 'home.html', {
                 'page_title': 'Modify a user',
                 'page_header': 'Modify a user',
+                'topnav': site_topnav(get_userrole(user)['level']),
                 'template': 'form',
                 'content': {
                     'form': UsermodForm(request.POST).as_ul(),
@@ -377,6 +382,7 @@ def view_user(request, username, specific_usertype=None):
     return render(request, 'home.html', {
                 'page_title': 'Modify a user',
                 'page_header': 'Modify a user',
+                'topnav': site_topnav(get_userrole(user)['level']),
                 'template': 'testing',
                 'content': {
                     'obj': user_obj,
@@ -416,6 +422,7 @@ def list_user(request, specific_usertype=None, classcode=None):
     return render(request, 'home.html', {
         'page_title': 'User management',
         'page_header': 'User management',
+        'topnav': site_topnav(get_userrole(user)['level']),
         'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
