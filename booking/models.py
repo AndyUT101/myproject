@@ -18,5 +18,5 @@ class Booking(models.Model):
     book_date = models.DateField(auto_now=True)
     start_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='start_lesson_profile')
     end_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='end_lesson_profile')
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    facility = models.ForeignKey(Facilities, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
