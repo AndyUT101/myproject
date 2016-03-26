@@ -47,6 +47,19 @@ def book_room(request):
             booking.user = user
             booking.save()
 
+            return render(request, 'home.html', {
+                'page_title': 'Room Reservation',
+                'page_header': 'Reserve for a room',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Reservation is successful',
+                    'redirect_text': 'Booking page',
+                    'redirect_url': 'booking:index',
+                    'auto_redirect': True,
+                },
+            })
+
         else:
             return render(request, 'home.html', {
                 'page_title': 'Room Reservation',
