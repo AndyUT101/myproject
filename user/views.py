@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
@@ -150,10 +151,10 @@ def login(request):
             request.session['token'] = generate_token()
             request.session['user'] = user_object.username
 
-        # Redirect to page
-        # return render(request, 'login.html', {
-        #    'error_message': "Successful logged.",
-        # })
+            # Update last logged time
+            user_object.last_logged = timezone.now()
+            user_object.save()
+
         return HttpResponseRedirect(reverse('index_home'))
 
     return render(request, 'login.html', {
