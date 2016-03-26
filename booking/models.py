@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 from facilities.models import Room, Facilities
 from user.models import User
@@ -15,7 +16,7 @@ class Lesson(models.Model):
         return self.title+start_str+end_str
     
 class Booking(models.Model):
-    book_date = models.DateField(auto_now=True)
+    book_date = models.DateField(default=date.today)
     start_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='start_lesson_profile')
     end_lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='end_lesson_profile')
     facility = models.ForeignKey(Facilities, on_delete=models.CASCADE, default="")
