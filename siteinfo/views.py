@@ -15,7 +15,7 @@ def site_overview(request):
     pass
 
 def site_topnav(user_level = 1):
-    sitemap_obj = Sitemap.objects.all().order_by('order')
+    sitemap_obj = Sitemap.objects.all().filter(level__lte=user_level).order_by('order')
     obj = [{'title': item.title, 'url_route': item.url_route, 'pk': item.pk, 'top_level': item.top_level, 'level': item.level} for item in sitemap_obj]
 
     d = {'main':[], 'sub':[]}
