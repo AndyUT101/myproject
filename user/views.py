@@ -287,7 +287,7 @@ def modify_user(request, username=None):
         if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit'):
             return HttpResponseRedirect(reverse('index_home'))
     else:
-        username == request.session['user']
+        username = request.session['user']
 
     # 2. Check GET or POST method
     if request.method == 'GET':
