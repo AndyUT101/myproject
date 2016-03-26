@@ -9,10 +9,11 @@ from django.db.utils import IntegrityError
 from django.contrib.auth.hashers import check_password, make_password
 
 from .models import User, Permission, Permission_meta, Role
+from .forms import UserForm, UsermodForm
+
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
-
-from .forms import UserForm, UsermodForm
+from siteinfo.views import site_topnav
 
 import random, string
 from datetime import datetime
@@ -104,6 +105,7 @@ def index_home(request):
     return render(request, 'home.html', {
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ' + user.lastname,
+        'topnav': site_topnav(get_userrole(user)['level']),
         'template': 'home',
         'content': {   
             'notification': {

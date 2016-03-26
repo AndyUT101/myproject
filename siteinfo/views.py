@@ -14,7 +14,7 @@ def management_panel(request):
 def site_overview(request):
     pass
 
-def site_topnav(request, user_level = 1):
+def site_topnav(user_level = 1):
     output = []
     sitemap_obj = Sitemap.objects.all().order_by('order', 'level')
     obj = [{'title': item.title, 'url_route': item.url_route, 'pk': item.pk, 'top_level': item.top_level, 'level': item.level} for item in sitemap_obj]
@@ -34,12 +34,4 @@ def site_topnav(request, user_level = 1):
             else:
                 output[output_index]['sub_menu'].append(item)
 
-    return render(request, 'home.html', {
-        'page_title': 'Welcome home!',
-        'page_header': 'Good to seeing you',
-        'template': 'testing',
-        'content': {   
-            'out': output,
-        },
-    })
     return output
