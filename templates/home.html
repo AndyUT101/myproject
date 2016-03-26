@@ -1,6 +1,11 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
 <header class="home_header">
+	{% if nav %}<nav>
+		{% for nav_item in nav %}
+		<li><a href="{% url nav_item.url_route %}">{{ nav_item.title }}{% if nav_item.sub_menu %}+{% endif %}</a></li>
+		{% endfor %}
+	</nav>{% endif %}
 	<div class="heading-content">
 		<h1 class="page-header">{{ page_header }}</h1>
 		{% if template == 'home' or template == 'list' or template == 'form' or template == 'detail'  %}
