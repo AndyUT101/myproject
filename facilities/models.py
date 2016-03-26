@@ -18,6 +18,12 @@ class Room(models.Model):
     description = models.CharField(max_length=255, default="")
     available = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.plate_name
+
 class Facilities(models.Model):
     name = models.CharField(max_length=255, default="")
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
