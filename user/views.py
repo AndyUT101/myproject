@@ -397,9 +397,9 @@ def list_user(request, specific_usertype=None, classcode=None):
     user_count = user_object.count()
     max_page = math.ceil(user_count/row_count)
     if page > max_page:
-        page = default_pagevalue['page']
+        return HttpResponseRedirect(reverse('user:list_user'))
 
-    user_list = user_object[row_count*(page-1):row_count]
+    user_list = user_object[row_count*(page-1):row_count+row_count*(page-1)]
     
     return render(request, 'home.html', {
         'page_title': 'User management',
