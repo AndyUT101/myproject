@@ -8,4 +8,5 @@ urlpatterns = [
     # url(r'^login/$', views.login, name='login'),
     # url(r'^$', views.generate_report, name='index')
     url(r'^$', views.site_overview, name='overview'),
+    url(r'^sitemap/$', views.site_topnav, name='sitemap'),
 ]
