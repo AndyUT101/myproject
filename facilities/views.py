@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+from user.views import user_alreadyloggedin
+from siteinfo.views import site_topnav
+
 def list_facilities_floor(request):
     pass
     # case 1: return all facilities with floor

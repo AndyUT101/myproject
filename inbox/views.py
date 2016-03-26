@@ -7,6 +7,8 @@ from user.models import User
 from .models import Inbox_content, Inbox, Inbox_classroom
 
 from user.views import user_alreadyloggedin
+from siteinfo.views import site_topnav
+
 
 # Create your views here.
 def list_inboxmsg(request):
@@ -38,7 +40,8 @@ def list_inboxmsg(request):
 
     return render(request, 'home.html', {
         'page_header': 'Inbox',
-        'template': 'list', # operation, list, 
+        'template': 'list', # operation, list,
+        'topnav': site_topnav(get_userrole(user)['level']),
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
@@ -95,6 +98,7 @@ def view_msg(request, msg_id = None):
         'page_title': 'Inbox: '+ msg.content.title,
         'page_header': 'Inbox',
         'template': 'detail', # operation, list, 
+        'topnav': site_topnav(get_userrole(user)['level']),
         'content': {
             'detail': ( # key: (header, content, redirect_url(route/None), html_class)
                 ('Sent by', msg.sender.username, None, 'sender'),
@@ -130,6 +134,7 @@ def send_msg(request, reply_id = None):
     return render(request, 'home.html', {
         'page_title': 'Reply message: Inbox',
         'page_header': 'Reply message',
+        'topnav': site_topnav(get_userrole(user)['level']),
         'template': 'testing', # operation, form 
         'content': {
             'form': (),

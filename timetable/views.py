@@ -2,6 +2,9 @@ from django.shortcuts import render
 
 from user.models import User
 
+from user.views import user_alreadyloggedin
+from siteinfo.views import site_topnav
+
 # Helper function
 def calendar_list(request):
     # parameter: user

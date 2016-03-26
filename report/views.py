@@ -7,6 +7,9 @@ from user.models import User
 import pyexcel.ext.xlsx
 import django_excel as excel
 
+from user.views import user_alreadyloggedin
+from siteinfo.views import site_topnav
+
 # Django-excel
 # http://django-excel.readthedocs.org/en/latest/
 

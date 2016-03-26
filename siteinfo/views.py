@@ -7,6 +7,9 @@ from django.db.utils import IntegrityError
 
 from .models import Schoolinfo, Sitemap
 
+from user.views import user_alreadyloggedin
+from siteinfo.views import site_topnav
+
 # Create your views here.
 def management_panel(request):
     pass
