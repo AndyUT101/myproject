@@ -13,15 +13,15 @@ def room_booked(facilities_obj):
     # return true false
 
 def book_room(request):
-	
+
     return render(request, 'home.html', {
-            'page_title': 'Add user',
-            'page_header': 'Add user',
-            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'form',
-            'content': {
-                'form': ClassroomForm().as_ul(),
-                'submit_url': 'user:add_user',
-            },
-        })
+        'page_title': 'Add user',
+        'page_header': 'Add user',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': BookingForm().as_ul(),
+            'submit_url': 'user:add_user',
+        },
+    })
 
