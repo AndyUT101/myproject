@@ -360,63 +360,6 @@ def modify_user(request, username=None):
     else:
         return HttpResponseRedirect(reverse('index'))
 
-
-
-"""
-def modifyuser_view(request, user_id):
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    user_object = get_object_or_404(User, pk = user_id)
-
-    return render(request, 'home.html', {
-        'page_title': 'Modify a user',
-        'page_header': 'Modify a user',
-        'template': 'form',
-        'content': {
-            'form': UserForm(instance=user_object).as_ul(),
-            'submit_url': 'user:modify_user',
-        },
-    })
-
-
-def modify_user(request, user_id):
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    if request.method == 'POST':
-        user_form = UserForm(request.POST)
-
-        # Form checking
-        if user_form.is_valid():
-            user_form.save(commit=False)
-            user_form.password_hash = make_password(user_form.password_hash, hasher='bcrypt')
-            try:
-                # form.save(commit=False) # if any content need to correct
-                user = get_object_or_404(User, pk=user_id)
-                user_form = UserForm(request.POST, instance = user)
-                user_form.save()
-
-            except IntegrityError:
-                pass
-
-            return HttpResponse('user_edited')
-            
-        return render(request, 'home.html', {
-            'page_title': 'Modify a user',
-            'page_header': 'Modify a user',
-            'template': 'form',
-            'content': {
-                'form': user_form.as_ul(),
-                'submit_url': 'user:modify_user',
-            },
-        })
-
-
-    return HttpResponseRedirect(reverse('index_home'))
-    return HttpResponse(user_id)
-"""
-
 def view_user(request, user, specific_usertype=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -430,13 +373,15 @@ def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=N
     user_list = User.objects.all()[row_count*(page-1):row_count]
     
     return render(request, 'home.html', {
-        'page_header': 'Inbox',
+        'page_title': 'User management',
+        'page_header': 'User management',
         'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Compose', 'inbox:compose', 'compose'),
-                ('Delete', 'user:remove_user', 'delete'),
+                ('Create user', 'user:add_user', 'create_user'),
+                ('Modify user', 'user:modify_user', 'modify_user'),
+                ('Delete user', 'user:remove_user', 'delete_user'),
 
             ),
             'list': {
