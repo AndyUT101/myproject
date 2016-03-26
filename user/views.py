@@ -261,6 +261,8 @@ def remove_user(request):
     # 3. Collect checkbox list
     delete_list = request.POST.getlist('user_action')
 
+    return HttpResponse(delete_list)
+
     # 4. Prevent for lower right users delete other greater right user
     # (Functional requirement)
     user_level = get_userrole(request.session['user'])['level']
@@ -273,7 +275,6 @@ def remove_user(request):
         return HttpResponse('user removed.')
 
     else:
-        pass # fail
         return HttpResponse('fail removed.')
     
 def modify_user(request, username=None):
