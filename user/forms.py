@@ -20,7 +20,7 @@ class UserForm(ModelForm):
 class UsermodForm(UserForm):
 
     def __init__(self, *args, **kwargs):
-        super(UserForm, self).__init__(*args, **kwargs)
+        super(UsermodForm, self).__init__(*args, **kwargs)
         self.fields['username'].required = False
 
     def clean_password_hash(self):
@@ -31,7 +31,8 @@ class UsermodForm(UserForm):
                 raise forms.ValidationError('The password should as least 8 characters long.')
 
         return data
-
+    """
     def clean_username(self):
         username = self.cleaned_data['username']
         return username
+    """
