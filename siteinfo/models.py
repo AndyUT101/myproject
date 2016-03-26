@@ -9,5 +9,5 @@ class Sitemap(models.Model):
     order = models.PositiveSmallIntegerField(default=1)
     level = models.PositiveSmallIntegerField(default=1)
     url_route = models.CharField(max_length=255, default='')
-    top_level = models.ForeignKey('self', on_delete=models.CASCADE, default="")
+    top_level = models.ForeignKey('self', on_delete=models.CASCADE, default="", null=True, blank=True)
 
