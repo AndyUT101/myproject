@@ -7,7 +7,7 @@ from django.db.utils import IntegrityError
 
 from django.contrib.auth.hashers import check_password, make_password
 
-from .models import User, Permission, Permission_meta
+from .models import User, Permission, Permission_meta, Role
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
 
@@ -372,7 +372,6 @@ def view_user(request, user, specific_usertype=None):
 def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
-
 
     user_list = User.objects.all()[row_count*(page-1):row_count]
     
