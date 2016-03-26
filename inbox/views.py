@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from user.models import User
 from .models import Inbox_content, Inbox, Inbox_classroom
 
-from user.utils import user_alreadyloggedin
+from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
 
 

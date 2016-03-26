@@ -7,7 +7,7 @@ from django.db.utils import IntegrityError
 
 from .models import Schoolinfo, Sitemap
 
-from user.utils import user_alreadyloggedin
+from user.utils import user_alreadyloggedin, get_userrole
 
 # Create your views here.
 def management_panel(request):

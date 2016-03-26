@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from facilities.models import Facilities, Room
 
-from user.views import user_alreadyloggedin
+from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
 
 # helper function
