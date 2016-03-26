@@ -36,7 +36,9 @@ class User(models.Model):
     email = models.EmailField(max_length=254, default="", blank=True)
     national = models.CharField(max_length=24, default="", blank=True)
     location_of_birth = models.CharField(max_length=24, default="", blank=True)
-    intake_date = models.DateField(max_length=24, default=date.today, blank=True)
+    intake_date = models.DateField(default=date.today, blank=True)
+    last_logged = models.DateTimeField(default="", blank=True)
+
     role = models.ForeignKey(Role, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
