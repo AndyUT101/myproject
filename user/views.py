@@ -365,17 +365,26 @@ def modify_user(request, username=None):
     else:
         return HttpResponseRedirect(reverse('index'))
 
-def view_user(request, user, specific_usertype=None):
+def view_user(request, username, specific_usertype=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
-    pass
+    
+    user_obj = get_object_or_404(User, username=username)
+
+    return render(request, 'home.html', {
+                'page_title': 'Modify a user',
+                'page_header': 'Modify a user',
+                'template': 'testing',
+                'content': {
+                    'obj': user_obj,
+                },
+            })
 
 def list_user(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
     default_pagevalue = {'page': 1, 'row_count': 2}
-    # page=1, row_count=50
     page_get = request.GET.get('page', default_pagevalue['page'])
     row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
 
@@ -430,8 +439,10 @@ def list_user(request, specific_usertype=None, classcode=None):
             },
             'adv_operation': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Compose', 'inbox:compose', ['compose']),
-                ('Delete', 'inbox:delete', ['delete']),
+                ({'title':'Create user', 
+                   'url': 'user:add_user',
+                   # 'url_para': '',
+                   'html_class': 'create_user'}),
 
             ),
         },
