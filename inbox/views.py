@@ -41,9 +41,13 @@ def list_inboxmsg(request):
         'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
-                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Compose', 'inbox:compose', 'compose'),
-                ('Delete', 'inbox:delete', 'delete'),
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Compose', 
+                   'url': 'inbox:compose',
+                   'html_class': 'compose'}),
+                ({'title':'Delete', 
+                   'url': 'inbox:delete',
+                   'html_class': 'delete'}),
 
             ),
             'list': {

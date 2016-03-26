@@ -305,7 +305,7 @@ def modify_user(request, username=None):
             'template': 'form',
             'content': {
                 'form': UsermodForm(instance=user_obj).as_ul(),
-                'submit_url': 'user:modify_user',
+                'submit_url': 'user:list_user',
                 'route_parameter': username,
             },
         })
