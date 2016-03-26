@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from facilities.models import Facilities, Room
+from user.models import User
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
@@ -18,7 +19,8 @@ def book_room(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not review_permission(User.objects.get(username = request.session['user']), 'allow:booking'):
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:booking'):
         return HttpResponseRedirect(reverse('index_home'))
 
     # 2. Check GET or POST method
@@ -31,9 +33,30 @@ def book_room(request):
             'template': 'form',
             'content': {
                 'form': BookingForm().as_ul(),
-                'submit_url': 'user:add_user',
+                'submit_url': 'booking:reserve',
             },
         })
 
     elif request.method == 'POST':
-        pass # form submit
+
+        booking_form = BookingForm(request.POST)
+        if booking_form.is_valid():
+            booking =  booking_form.save(commit=False)
+
+            # Insert User booking content to form
+            booking.user = user
+            booking.save()
+
+        else:
+            return render(request, 'home.html', {
+                'page_title': 'Room Reservation',
+                'page_header': 'Reserve for a room',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form',
+                'content': {
+                    'form': BookingForm(request.POST).as_ul(),
+                    'submit_url': 'booking:reserve',
+                },
+            })
+
+
