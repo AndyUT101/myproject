@@ -7,6 +7,10 @@ from user.models import User
 import pyexcel.ext.xlsx
 import django_excel as excel
 
+# Django-excel
+# http://django-excel.readthedocs.org/en/latest/
+
+
 # Create your views here.
 # helper function
 def list_report():
