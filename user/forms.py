@@ -20,6 +20,11 @@ class UserForm(ModelForm):
 class UsermodForm(UserForm):
 
     class Meta:
+    	model = User
+        fields = '__all__'
+        widgets = {
+            'password_hash': forms.PasswordInput(),
+        }
         exclude = ('username', )
 
     def clean_password_hash(self):
