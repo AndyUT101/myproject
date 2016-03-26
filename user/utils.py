@@ -1,4 +1,5 @@
 from .models import User, Permission, Permission_meta, Role
+import random, string
 
 def user_alreadyloggedin(request):
     status = False

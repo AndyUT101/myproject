@@ -16,7 +16,6 @@ from classroom.models import Classroom, User_assignment
 from siteinfo.views import site_topnav
 from user.utils import *
 
-import random, string
 from datetime import datetime
 import math
 
