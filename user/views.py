@@ -14,6 +14,7 @@ from .forms import UserForm, UsermodForm
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
 from siteinfo.views import site_topnav
+from user.utils import *
 
 import random, string
 from datetime import datetime
@@ -23,60 +24,6 @@ import math
 template = ('home', 'list', 'form', 'detail', 'none', 'test', 'notification')
 """
 
-def generate_token(length = 8):
-    """
-    Generate random token for session
-    """
-    random_string = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(length))
-
-    return make_password(random_string, hasher='md5')[4:]
-
-def review_permission(user, permission):
-    has_right = False
-
-    # 1. Check permission key information
-    try:
-        key = Permission_meta.objects.get(key=permission)
-    except ObjectDoesNotExist:
-        return has_right
-
-    # 2. Check user right fulfill key requirement
-    key_require = key.level
-    user_level = User.objects.get(username=user).role.level
-
-    if key_require <= user_level:
-        has_right = True
-        return has_right
-
-    # 3. Check user have permission key right
-    try:
-        key = Permission.objects.get(permission=key.pk, user=user.pk)
-        has_right = True
-
-    except ObjectDoesNotExist:
-        return has_right
-
-    return has_right
-
-def get_userrole(user):
-    """
-    return: dict({'role': 'str', 'level': 'int'})
-    """
-    try:
-        user_obj = User.objects.get(username=user)
-
-    except ObjectDoesNotExist:
-        return None
-
-    return dict({'role': user_obj.role.name, 'level': user_obj.role.level})
-
-
-def user_alreadyloggedin(request):
-    status = False
-    if 'token' in request.session and 'user' in request.session:
-        status = True
-
-    return status
     
 def index(request):
     if 'token' in request.session and 'user' in request.session:
