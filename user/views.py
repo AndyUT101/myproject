@@ -391,7 +391,7 @@ def list_user(request, specific_usertype=None, classcode=None):
         pass
 
     # 1. GET page_number
-    return HttpResponseRedirect(reverse('user:list_user'))
+    # return HttpResponseRedirect(reverse('user:list_user'))
 
     # 1. Define list page count
     user_count = user_object.count()
