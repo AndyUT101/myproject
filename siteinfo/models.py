@@ -6,6 +6,7 @@ class Schoolinfo(models.Model):
 
 class Sitemap(models.Model):
     title = models.CharField(max_length=255, default='')
+    order = models.PositiveSmallIntegerField(default=1)
     level = models.PositiveSmallIntegerField(default=1)
     url_route = models.CharField(max_length=255, default='')
     top_level = models.ForeignKey('self', on_delete=models.CASCADE, default="")
