@@ -106,12 +106,13 @@ def index_home(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ' + user.lastname,
         'topnav': site_topnav(get_userrole(user)['level']),
-        'template': 'home',
+        'template': 'testing',
         'content': {   
             'notification': {
                 'current_date': current_sysdate,
                 'inbox': inbox_count,
                 'classroom': classroom_count,
+                'topnav': site_topnav(get_userrole(user)['level']),
             },
         },
     })
