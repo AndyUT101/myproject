@@ -282,8 +282,12 @@ def modify_user(request, username=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit'):
-        return HttpResponseRedirect(reverse('index_home'))
+    # 1. User have right to edit itself, else check for permission key
+    if not (username == None or username == request.session['user']):
+        if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit'):
+            return HttpResponseRedirect(reverse('index_home'))
+    else:
+        username == request.session['user']
 
     # 2. Check GET or POST method
     if request.method == 'GET':
@@ -378,10 +382,19 @@ def list_user(request, page=1, row_count=50, specific_usertype=None, classcode=N
         'template': 'list', # operation, list, 
         'content': {
             'operation': ( 
-                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Create user', 'user:add_user', 'create_user'),
-                ('Modify user', 'user:modify_user', 'modify_user'),
-                ('Delete user', 'user:remove_user', 'delete_user'),
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Create user', 
+                   'url': 'user:add_user',
+                   'html_class': 'create_user'}),
+
+                ({'title':'Modify user', 
+                   'url': 'user:modify_user',
+                   # 'url_para': '',
+                   'html_class': 'modify_user'}),
+
+                ({'title':'Delete user', 
+                   'url': 'user:remove_user',
+                   'html_class': 'delete_user'}),
 
             ),
             'list': {

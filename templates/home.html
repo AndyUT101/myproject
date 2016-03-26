@@ -44,7 +44,7 @@
 	{% if content.operation %}
 		<div class="operation">
 		{% for list_item in content.operation %}
-			<li><a href="{% url list_item.1 %}" class="{{ list_item.2 }}">{{ list_item.0 }}</a></li>
+			<li><a href="{% if list_item.url_para %}{% url list_item.url list_item.url_para %}{% else %}{% url list_item.url %}{% endif %}" class="{{ list_item.html_class }}">{{ list_item.title }}</a></li>
 		{% endfor %}
 		</div>
 	{% endif %}

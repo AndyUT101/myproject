@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^delete/$', views.remove_user, name='remove_user'),
     url(r'^add/$', views.add_user, name='add_user'),
 
+    url(r'^modify/$', views.modify_user, name='modify_user'),
     url(r'^modify/(?P<username>.+)/$', views.modify_user, name='modify_user'),
     url(r'^$', views.list_user, name='list_user'),
     url(r'^(?P<user>.+)/$', views.view_user, name='view_user'),
