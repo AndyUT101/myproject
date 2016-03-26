@@ -305,7 +305,7 @@ def modify_user(request, username=None):
             'template': 'form',
             'content': {
                 'form': UsermodForm(instance=user_obj).as_ul(),
-                'submit_url': 'user:list_user',
+                'submit_url': 'user:modify_user',
                 'route_parameter': username,
             },
         })
@@ -343,7 +343,7 @@ def modify_user(request, username=None):
                 'content': {
                     'notification': 'User ' + commit_form.username + ' modify successful',
                     'redirect_text': 'user page',
-                    'redirect_url': 'user:add_user',
+                    'redirect_url': 'user:list_user',
                     'auto_redirect': True,
                 },
             })
