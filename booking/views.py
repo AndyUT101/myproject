@@ -5,7 +5,7 @@ from facilities.models import Facilities, Room
 from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
 
-from .forms import ClassroomForm
+from .forms import BookingForm
 
 # helper function
 def room_booked(facilities_obj):
