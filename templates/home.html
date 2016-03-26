@@ -1,8 +1,8 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
 <header class="home_header">
-	{% if nav %}<nav>
-		{% for nav_item in nav %}
+	{% if topnav %}<nav class="topnav">
+		{% for nav_item in topnav %}
 		<li><a href="{% url nav_item.url_route %}">{{ nav_item.title }}{% if nav_item.sub_menu %}+{% endif %}</a></li>
 		{% endfor %}
 	</nav>{% endif %}
