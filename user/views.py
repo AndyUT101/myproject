@@ -315,7 +315,7 @@ def modify_user(request, username=None):
             commit_form =  user_form.save(commit=False)
             
             # 4. If password is empty, skip update password
-            if (len(commit_form.password) == 0):
+            if (len(commit_form.password_hash) == 0):
                 delattr(commit_form, 'password_hash')
             else:
                 commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
