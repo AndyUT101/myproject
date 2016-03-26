@@ -11,3 +11,5 @@ class Sitemap(models.Model):
     url_route = models.CharField(max_length=255, default='')
     top_level = models.ForeignKey('self', on_delete=models.CASCADE, default="", null=True, blank=True)
 
+    def __str__(self):
+        return self.title
