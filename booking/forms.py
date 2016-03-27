@@ -11,7 +11,7 @@ class BookingForm(ModelForm):
         exclude = ('user', )
 
     def clean(self):
-        cleaned_data = super(Booking, self).clean()
+        cleaned_data = super(BookingForm, self).clean()
         clean_bookdate = cleaned_data.get('book_date')
         clean_facility = cleaned_data.get('facility')
         clean_startlesson = cleaned_data.get('start_lesson')
