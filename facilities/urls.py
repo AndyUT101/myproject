@@ -7,4 +7,5 @@ urlpatterns = [
     # url(r'^(?P<process>.+)/(?P<user_id>[0-9]+)$', views.modify, name='modify'),
     # url(r'^login/$', views.login, name='login'),
     url(r'^$', views.list_facilities_floor, name='index'),
+    url(r'^add/$', views.add_facilities, name='add'),
 ]

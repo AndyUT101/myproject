@@ -9,6 +9,7 @@ from siteinfo.views import site_topnav
 
 from user.models import User
 from .models import Facilities, Room
+from .forms import *
 
 def list_facilities_floor(request):
 
@@ -42,8 +43,59 @@ def list_facilities_floor(request):
 
 
 def add_facilities(request):
-    pass
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
 
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:facilities_add'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    # 2. Check GET or POST method
+    if request.method == 'GET':
+
+        return render(request, 'home.html', {
+            'page_title': 'Add facilities',
+            'page_header': 'Add facilities',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form',
+            'content': {
+                'form': FacilitiesForm().as_ul(),
+                'submit_url': 'facilities:add',
+            },
+        })
+
+    elif request.method == 'POST':
+
+        facilities = FacilitiesForm(request.POST)
+
+        if facilities.is_valid():
+            facilities.save()
+
+            return render(request, 'home.html', {
+                'page_title': 'Add facilities',
+                'page_header': 'Add facilities',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Facility add successful',
+                    'redirect_text': 'Facilities page',
+                    'redirect_url': 'Facilities:index',
+                    'auto_redirect': True,
+                },
+            })
+        else:
+            return render(request, 'home.html', {
+                'page_title': 'Add facilities',
+                'page_header': 'Add facilities',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form',
+                'content': {
+                    'form': FacilitiesForm(request.POST).as_ul(),
+                    'submit_url': 'facilities:add',
+                },
+            })
+            
 def modify_facilities(request):
     pass
 
