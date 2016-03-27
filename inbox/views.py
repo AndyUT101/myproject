@@ -151,7 +151,6 @@ def send_msg(request, reply_id = None):
     if request.method == 'POST':
 
         compose_form = ComposeForm(request.POST)
-        user_listdata = request.POST.get('receiver', '')
         
         if compose_form.is_valid():
 
