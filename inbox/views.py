@@ -197,7 +197,7 @@ def delete_msg(request):
 
     msg_removeobj = Inbox.objects.filter(pk__in=delete_list, receiver=user)
 
-    if msg_removeobj.count == len(delete_list):
+    if msg_removeobj.count() == len(delete_list):
         msg_removeobj.delete() #success
         return HttpResponse('msg removed.')
 
