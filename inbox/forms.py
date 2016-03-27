@@ -11,7 +11,7 @@ class ComposeForm(ModelForm):
 """
 
 class ComposeForm(forms.Form):
-    sender = forms.CharField(max_length=255)
+    receiver = forms.CharField(max_length=255)
     title = forms.CharField(max_length=255)
     content = forms.CharField(required=False, widget=forms.Textarea)
 

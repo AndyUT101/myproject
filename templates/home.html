@@ -44,7 +44,7 @@
 		<form action="{% url content.submit_url %}" method="post">
 		{% endif %}
 			{% csrf_token %}
-			{{ content.form|linebreaks }}
+			{{ content.form|linebreaksbr }}
 			<input type="submit" name="Submit">
 		</form>
 	</section>
