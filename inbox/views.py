@@ -132,7 +132,7 @@ def send_msg(request, reply_id = None):
             'page_title': 'Reply message: Inbox',
             'page_header': 'Reply message',
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'form', # operation, form 
+            'template': 'notification', # operation, form 
             'content': {
                 'form': ComposeForm().as_ul(),
                 'submit_url': 'inbox:compose',
@@ -159,11 +159,14 @@ def send_msg(request, reply_id = None):
                 'page_title': 'Reply message: Inbox',
                 'page_header': 'Reply message',
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-                'template': 'testing', # operation, form 
+                'template': 'notification',
                 'content': {
-                    'form': userlist,
+                    'notification': 'Message send successful to '+ ', '.join(userlist),
+                    'redirect_text': 'inbox page',
+                    'redirect_url': 'inbox:inbox',
+                    'auto_redirect': True,
                 },
-            });
+            })
 
         else:
             return render(request, 'home.html', {
