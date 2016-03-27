@@ -39,7 +39,7 @@ def list_facilities_floor(request):
                    'html_class': 'delete_facility'}),
 
                 ({'title':'Add room information', 
-                   'url': 'facilities:delete',
+                   'url': 'facilities:add_room',
                    'html_class': 'add_room'}),
             ),
             'list': {
@@ -265,7 +265,7 @@ def view_room(request):
                    'html_class': 'delete_facility'}),
 
                 ({'title':'Add room information', 
-                   'url': 'facilities:delete',
+                   'url': 'facilities:add_room',
                    'html_class': 'add_room'}),
             ),
             'list': {

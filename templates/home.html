@@ -185,20 +185,20 @@
 			<table>
 				<thead>
 					<tr>
-						<td>name</td>
-						<td>Location</td>
-						<td>Start period</td>
-						<td>End period</td>
+						<td>Plate name</td>
+						<td>Floor</td>
+						<td>Capacity</td>
+						<td>Available</td>
 						<td>Operation</td>
 					<tr>
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td>{{ data.name }}</td>
-						<td>{{ data.room.floor }}/F</td>
-						<td>Room {{ data.room.plate_name }}</td>
-						<td>{% if data.room.available %}<span class='facilities_available'>available</span>{% else %}<span class='facilities_unavailable'>unavailable</span>{% endif %}</td>
-						<td><li><a href="#">Modify facilities</a></li></td>
+						<td>{{ data.plate_name }}</td>
+						<td>{{ data.floor }}/F</td>
+						<td>{{ data.capacity }}/F</td>
+						<td>{% if data.available %}<span class='facilities_available'>available</span>{% else %}<span class='facilities_unavailable'>unavailable</span>{% endif %}</td>
+						<td><li><a href="#">Remove room</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
