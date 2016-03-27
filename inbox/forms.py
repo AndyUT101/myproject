@@ -4,4 +4,4 @@ from .models import *
 class ComposeForm(ModelForm):
     class Meta:
         model = Inbox
-        fields = ["Receiver", "Content"]
+        fields = ["receiver", "content"]
