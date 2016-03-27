@@ -17,7 +17,7 @@ def list_facilities_floor(request):
         return HttpResponseRedirect(reverse('index'))
 
     user = User.objects.get(username = request.session['user'])
-    if not review_permission(user, 'view:facilites'):
+    if not review_permission(user, 'allow:facilities_view'):
         return HttpResponseRedirect(reverse('index_home'))
 
     facilities_obj = Facilities.objects.all().order_by('room')
@@ -159,7 +159,7 @@ def modify_facilities(request, facility_id):
                 'content': {
                     'notification': 'Facility modify successful',
                     'redirect_text': 'Facility page',
-                    'redirect_url': 'facilites:index',
+                    'redirect_url': 'facilities:index',
                     'auto_redirect': True,
                 },
             })
@@ -179,7 +179,7 @@ def modify_facilities(request, facility_id):
             })
 
     else:
-        return HttpResponseRedirect(reverse('facilites:index'))
+        return HttpResponseRedirect(reverse('facilities:index'))
 
 def remove_facilities(request):
     if not user_alreadyloggedin(request):
@@ -243,7 +243,7 @@ def view_room(request):
         return HttpResponseRedirect(reverse('index'))
 
     user = User.objects.get(username = request.session['user'])
-    if not review_permission(user, 'view:facilites'):
+    if not review_permission(user, 'allow:facilities_view'):
         return HttpResponseRedirect(reverse('index_home'))
 
     room_obj = Room.objects.all().order_by('plate_name')
