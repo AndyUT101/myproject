@@ -146,7 +146,7 @@ def send_msg(request, reply_id = None):
         if compose_form.is_valid():
 
             # Insert message content
-            message = ComposeForm.save()
+            message = compose_form.save()
             userlist = split_receiver(request.POST.get('receiver', ''))
 
             commit_list = []
