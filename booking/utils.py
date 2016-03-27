@@ -38,7 +38,7 @@ def occupied_lesson_id(date, facility_id):
             lesson_id_list.append(b[0])
             lesson_id_list.append(b[1])
         for lesson in lesson_dict:
-        	start_time_index = lesson_dict[b[0]]
+            start_time_index = lesson_dict[b[0]]
             end_time_index = lesson_dict[b[1]]
             lesson_time_index = lesson_dict[lesson]
             if (lesson_time_index - start_time_index) > timedelta(0) and (end_time_index - lesson_time_index) > timedelta(0):
