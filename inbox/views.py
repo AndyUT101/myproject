@@ -143,7 +143,7 @@ def send_msg(request, reply_id = None):
             'template': 'form', # operation, form 
             'content': {
                 'form': ComposeForm().as_ul(),
-                'submit_url': 'booking:send',
+                'submit_url': 'inbox:send',
             },
         });
 
