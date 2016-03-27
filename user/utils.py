@@ -1,5 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.core.urlresolvers import reverse
+
 
 from .models import User, Permission, Permission_meta, Role
 from django.contrib.auth.hashers import make_password

@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.core.urlresolvers import reverse
 
 from facilities.models import Facilities, Room
 from user.models import User
