@@ -153,16 +153,29 @@ def send_msg(request, reply_id = None):
         compose_form = ComposeForm(request.POST)
         user_listdata = request.POST.get('receiver', '')
         
+        if compose_form.is_valid():
 
-        return render(request, 'home.html', {
-            'page_title': 'Reply message: Inbox',
-            'page_header': 'Reply message',
-            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'testing', # operation, form 
-            'content': {
-                'form': request.POST,
-            },
-        });
+            return render(request, 'home.html', {
+                'page_title': 'Reply message: Inbox',
+                'page_header': 'Reply message',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'testing', # operation, form 
+                'content': {
+                    'form': request.POST,
+                },
+            });
+
+        else:
+            return render(request, 'home.html', {
+                'page_title': 'Reply message: Inbox',
+                'page_header': 'Reply message',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form', # operation, form 
+                'content': {
+                    'form': ComposeForm(request.POST).as_ul(),
+                    'submit_url': 'inbox:compose',
+                },
+            });
 
 
 def delete_msg(request):
