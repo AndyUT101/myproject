@@ -392,13 +392,13 @@ def list_user(request, specific_usertype=None, classcode=None):
                 'body': user_list,
                 'foot': (),
             },
-            'adv_operation': ( 
+            'page_nav': ( 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ({'title':'Create user', 
-                   'url': 'user:add_user',
-                   # 'url_para': '',
-                   'html_class': 'create_user'}),
-
+                'message': '',
+                'page': (
+                    'current_page': page,
+                    'max_page': max_page,
+                ),
             ),
         },
     })

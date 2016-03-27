@@ -130,9 +130,9 @@ def send_msg(request, reply_id = None):
 
         if reply_mode:
             form_data = {
-                'receiver': reply_msg.receiver.username,
+                'receiver': reply_msg.sender.username,
                 'title': 'Re: ' + reply_msg.content.title,
-                'content': '#####\nReply:\n' + reply_msg.content.title,
+                'content': '\n\n\n\n\n#####\n>> Reply:\n' + reply_msg.content.title,
             }
             compose_form = ComposeForm(form_data)
         else:
