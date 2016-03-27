@@ -29,8 +29,10 @@ def room_booked(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {   
-            'name': 'booking',
-            'body': booking_active,
+            'list': {
+                'name': 'booking',
+                'body': booking_active,
+            },
         },
     })
 
