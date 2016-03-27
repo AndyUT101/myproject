@@ -20,8 +20,8 @@ def room_booked(request):
     if not review_permission(user, 'view:booking'):
         return HttpResponseRedirect(reverse('index_home'))
 
-    booking_active = Booking.objects.filter(user = user, book_date__gte=datetime.now()).order_by('end_lesson', 'book_date')
-    #booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now())
+    booking_active = Booking.objects.filter(user = user, book_date__gte=datetime.now()).order_by('book_date','start_lesson')
+    #booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now()).order_by('end_lesson', 'book_date')[:5]
 
     return render(request, 'home.html', {
         'page_title': 'Welcome home!',
