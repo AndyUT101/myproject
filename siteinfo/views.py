@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
-
 from .models import Schoolinfo, Sitemap
 
 from user.utils import user_alreadyloggedin, get_userrole

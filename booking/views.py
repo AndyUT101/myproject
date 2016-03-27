@@ -25,7 +25,7 @@ def room_booked(request):
         return HttpResponseRedirect(reverse('index_home'))
 
     booking_active = Booking.objects.filter(user = user, book_date__gte=datetime.now()).order_by('book_date','start_lesson')
-    #booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now()).order_by('end_lesson', 'book_date')[:5]
+    booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now()).order_by('end_lesson', 'book_date')[:5]
 
     return render(request, 'home.html', {
         'page_title': 'Welcome home!',
@@ -36,6 +36,7 @@ def room_booked(request):
             'list': {
                 'name': 'booking',
                 'body': booking_active,
+                'body_footer': booking_archive,
             },
         },
     })
@@ -99,4 +100,29 @@ def book_room(request):
                 },
             })
 
+def remove_book_room(request, booking_id):
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    user = User.objects.get(username = request.session['user'])
+    try:
+        booking = Booking.objects.get(user=user, pk=booking_id, book_date__gte=datetime.now())
+    except ObjectDoesNotExist:
+    	return HttpResponseRedirect(reverse('booking:index'))
+
+    booking.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Remove booking',
+        'page_header': 'Remove booking',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Reservation removes successful',
+            'redirect_text': 'booking page',
+            'redirect_url': 'booking:index',
+            'auto_redirect': True,
+        },
+    })
 
