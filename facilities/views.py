@@ -46,7 +46,7 @@ def list_facilities_floor(request):
                 ({'title':'Add room information', 
                    'url': 'facilities:remove_facility',
                    'html_class': 'add_room'}),
-
+            ),
             'list': {
                 'name': 'facilities',
                 'body': facilities_obj,
@@ -277,7 +277,7 @@ def view_room(request):
                 ({'title':'Add room information', 
                    'url': 'facilities:remove_facility',
                    'html_class': 'add_room'}),
-
+            ),
             'list': {
                 'name': 'room',
                 'body': room_obj,
