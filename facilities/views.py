@@ -35,11 +35,11 @@ def list_facilities_floor(request):
                    'html_class': 'assign_facility'}),
 
                 ({'title':'Delete facility', 
-                   'url': 'facilities:remove_facility',
+                   'url': 'facilities:delete',
                    'html_class': 'delete_facility'}),
 
                 ({'title':'Add room information', 
-                   'url': 'facilities:remove_facility',
+                   'url': 'facilities:delete',
                    'html_class': 'add_room'}),
             ),
             'list': {
@@ -260,17 +260,12 @@ def view_room(request):
                    'url': 'facilities:add',
                    'html_class': 'assign_facility'}),
 
-                ({'title':'Modify facility', 
-                   'url': 'facilities:modify',
-                   # 'url_para': '',
-                   'html_class': 'modify_facility'}),
-
                 ({'title':'Delete facility', 
-                   'url': 'facilities:remove_facility',
+                   'url': 'facilities:delete',
                    'html_class': 'delete_facility'}),
 
                 ({'title':'Add room information', 
-                   'url': 'facilities:remove_facility',
+                   'url': 'facilities:delete',
                    'html_class': 'add_room'}),
             ),
             'list': {
