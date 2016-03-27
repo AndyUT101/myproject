@@ -122,7 +122,7 @@
 			<div class="page_idx">
 				<span>
 					{% if content.page_nav.page.current_page > 1 %}
-					<a href="?page={{ content.page_nav.page.current_page - 1 }}"><</a>
+					<a href="?page={{ content.page_nav.page.current_page|add:"-1" }}"><</a>
 					{% else %}
 					<
 					{% endif %}
@@ -130,7 +130,7 @@
 				<span>{{ content.page_nav.page.current_page }}</span>
 				<span>
 					{% if content.page_nav.page.max_page > content.page_nav.page.current_page %}
-					<a href="?page={{ content.page_nav.page.current_page - 1 }}">></a>
+					<a href="?page={{ content.page_nav.page.current_page|add:1 }}">></a>
 					{% else %}
 					>
 					{% endif %}
