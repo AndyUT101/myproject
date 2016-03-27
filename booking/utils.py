@@ -13,7 +13,7 @@ def is_occupied(booking_obj):
 def occupied_lesson_id(date, facility_id):
     # return occupied lesson id
     # datetime.strptime('2016-03-27', '%Y-%m-%d')
-    if not isinstance(date, str):
+    if isinstance(date, str):
         date = datetime.strptime(date, '%Y-%m-%d')
 
     try:

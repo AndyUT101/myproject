@@ -13,10 +13,10 @@ class BookingForm(ModelForm):
 
     def clean(self):
         cleaned_data = super(BookingForm, self).clean()
-        clean_bookdate = self.cleaned_data.get('book_date')
-        clean_facility = self.cleaned_data.get('facility')
-        clean_startlesson = self.cleaned_data.get('start_lesson')
-        clean_endlesson = self.cleaned_data.get('end_lesson')
+        clean_bookdate = cleaned_data.get('book_date')
+        clean_facility = cleaned_data.get('facility')
+        clean_startlesson = cleaned_data.get('start_lesson')
+        clean_endlesson = cleaned_data.get('end_lesson')
 
         if clean_startlesson and clean_endlesson:
             occupied_id = occupied_lesson_id(clean_bookdate, clean_facility)
@@ -25,4 +25,4 @@ class BookingForm(ModelForm):
                     "Select timeslot is already booked by other!",
                     "Please check and resubmit again."
                 )
-        
+
