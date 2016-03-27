@@ -19,7 +19,7 @@ from user.utils import *
 
 
 """
-template = ('home', 'list', 'form', 'detail', 'none', 'test', 'notification')
+template = ('home', 'list', 'form', 'detail', 'calender', 'none', 'test', 'notification')
 """
 
     

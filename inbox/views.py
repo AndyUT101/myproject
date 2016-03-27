@@ -7,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from user.models import User
 from .models import Inbox_content, Inbox, Inbox_classroom
 
+from .forms import *
+
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
@@ -119,37 +121,36 @@ def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
-    reply_mode = False
-    user = User.objects.get(username=request.session['user'])
+    if request.method == 'GET':
 
-    # check reply_id -> user_id == user_id, if fail, return
-    if not reply_id == None:
-        try:
-            reply_msg = Inbox.objects.get(pk=reply_id, receiver=user.pk)
+        reply_mode = False
+        user = User.objects.get(username=request.session['user'])
 
-        except ObjectDoesNotExist:
-            pass
+        # check reply_id -> user_id == user_id, if fail, return
+        if not reply_id == None:
+            try:
+                reply_msg = Inbox.objects.get(pk=reply_id, receiver=user.pk)
 
-        reply_mode = True # Read "reply_msg" on after process
+            except ObjectDoesNotExist:
+                pass
 
-    return render(request, 'home.html', {
-        'page_title': 'Reply message: Inbox',
-        'page_header': 'Reply message',
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing', # operation, form 
-        'content': {
-            'form': (),
-            'submit_url': '',
-        },
-    });
+            reply_mode = True # Read "reply_msg" on after process
 
-    pass
+        return render(request, 'home.html', {
+            'page_title': 'Reply message: Inbox',
+            'page_header': 'Reply message',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form', # operation, form 
+            'content': {
+                'form': ComposeForm().as_ul(),
+                'submit_url': 'booking:send',
+            },
+        });
 
 def compose_view(request):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
-
-    pass
+    
 
 def delete_msg(request):
     pass
