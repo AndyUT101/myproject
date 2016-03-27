@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
 
+from user.models import User
 from .models import Facilities, Room
 
 def list_facilities_floor(request):
