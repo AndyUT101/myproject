@@ -19,7 +19,3 @@ class Inbox(models.Model):
 
     def __str__(self):
         return self.content.title
-
-class Inbox_classroom(models.Model):
-    inbox = models.ForeignKey(Inbox, on_delete=models.CASCADE)
-    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
