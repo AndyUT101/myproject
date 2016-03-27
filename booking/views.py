@@ -10,8 +10,28 @@ from .forms import BookingForm
 
 # helper function
 def room_booked(facilities_obj):
-    pass
-    # return true false
+
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'view:booking'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    booking = Booking.objects.filter(user = user)
+
+    return render(request, 'home.html', {
+        'page_title': 'Welcome home!',
+        'page_header': 'Good to seeing you, ',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'test',
+        'content': {   
+            'notification': {
+                'booking': booking,
+            },
+        },
+    })
 
 def book_room(request):
 
