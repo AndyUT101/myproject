@@ -185,8 +185,8 @@
 			<table>
 				<thead>
 					<tr>
-						<td>Plate name</td>
 						<td>Floor</td>
+						<td>Plate name</td>
 						<td>Capacity</td>
 						<td>Available</td>
 						<td>Operation</td>
@@ -194,11 +194,11 @@
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td>{{ data.plate_name }}</td>
 						<td>{{ data.floor }}/F</td>
-						<td>{{ data.capacity }}/F</td>
+						<td>Room {{ data.plate_name }}</td>
+						<td>{{ data.capacity }}</td>
 						<td>{% if data.available %}<span class='facilities_available'>available</span>{% else %}<span class='facilities_unavailable'>unavailable</span>{% endif %}</td>
-						<td><li><a href="#">Remove room</a></li></td>
+						<td><li><a href="{% url 'facilities:remove_room' data.pk %}">Remove room</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
