@@ -143,14 +143,10 @@ def send_msg(request, reply_id = None):
             'template': 'form', # operation, form 
             'content': {
                 'form': ComposeForm().as_ul(),
-                'submit_url': 'inbox:send',
+                'submit_url': 'inbox:compose',
             },
         });
 
-def compose_view(request):
-    if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
-    
 
 def delete_msg(request):
     pass

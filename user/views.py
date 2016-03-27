@@ -338,7 +338,7 @@ def list_user(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    default_pagevalue = {'page': 1, 'row_count': 2}
+    default_pagevalue = {'page': 1, 'row_count': 50}
     page_get = request.GET.get('page', default_pagevalue['page'])
     row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
 
