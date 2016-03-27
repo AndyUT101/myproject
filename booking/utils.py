@@ -10,14 +10,14 @@ def time_to_datetime(date, time):
 def is_occupied(booking_obj):
     pass
 
-def occupied_lesson_id(date, facility_id):
+def occupied_lesson_id(date, facility):
     # return occupied lesson id
     # datetime.strptime('2016-03-27', '%Y-%m-%d')
     if isinstance(date, str):
         date = datetime.strptime(date, '%Y-%m-%d')
 
     try:
-        selected_facility = Facilities.objects.get(pk = facility_id)
+        selected_facility = Facilities.objects.get(pk = facility.pk)
 
     except ObjectDoesNotExist:
         return []
