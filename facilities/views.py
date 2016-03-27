@@ -194,7 +194,7 @@ def remove_facilities(request):
         return HttpResponseRedirect(reverse('facilities:index'))
 
     # 3. Collect checkbox list
-    delete_list = request.POST.getlist('form_action')
+    delete_list = request.POST.getlist('facilities_action')
 
     # 4. Prevent for lower right users delete other greater right user
     # (Functional requirement)
