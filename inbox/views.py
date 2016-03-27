@@ -180,6 +180,26 @@ def send_msg(request, reply_id = None):
                 },
             });
 
-
 def delete_msg(request):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    # 2. Check delete confirmation
+    if not request.POST.get('remove_confirm', ''):
+        return HttpResponseRedirect(reverse('inbox:view'))
+
+    # 3. Collect checkbox list
+    delete_list = request.POST.getlist('msg_action')
+
+    # 4. Prevent for lower right users delete other greater right user
+    # (Functional requirement)
+    user = User.objects.get(username = request.session['user'])
+
+    msg_removeobj = Inbox.objects.filter(pk__in=delete_list, receiver=user)
+
+    if msg_removeobj.count == len(delete_list):
+        msg_removeobj.delete() #success
+        return HttpResponse('msg removed.')
+
+    else:
+        return HttpResponse('fail removed.')
