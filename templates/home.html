@@ -205,7 +205,7 @@
 
 {% if template == "calendar" %}
 	{% if content.calendar.body %}
-		{{ content.calendar.body }}
+		{{ content.calendar.body|safe }}
 	{% endif %}
 {% endif %}
 
