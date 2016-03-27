@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^msg/(?P<msg_id>[0-9]+)', views.view_msg, name='view'),
 
     url(r'^compose/$', views.send_msg, name='compose'),
+    url(r'^compose/(?P<reply_id>[0-9]+)$', views.send_msg, name='reply'),
     url(r'^delete/$', views.delete_msg, name='delete'),
 ]

@@ -124,9 +124,19 @@ def send_msg(request, reply_id = None):
                 reply_msg = Inbox.objects.get(pk=reply_id, receiver=user.pk)
 
             except ObjectDoesNotExist:
-                pass
+                return HttpResponseRedirect(reverse('inbox:compose'))
 
             reply_mode = True # Read "reply_msg" on after process
+
+        if reply_mode:
+            form_data = {
+                'receiver': reply_msg.receiver.username,
+                'title': 'Re: ' + reply_msg.content.title,
+                'content': '#####\nReply:\n' + reply_msg.content.title,
+            }
+            compose_form = ComposeForm(form_data)
+        else:
+            compose_form = ComposeForm()
 
         return render(request, 'home.html', {
             'page_title': 'Send message: Inbox',
@@ -134,7 +144,7 @@ def send_msg(request, reply_id = None):
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'form', # operation, form 
             'content': {
-                'form': ComposeForm().as_ul(),
+                'form': compose_form.as_ul(),
                 'submit_url': 'inbox:compose',
             },
         });
