@@ -80,7 +80,7 @@ def add_facilities(request):
                 'content': {
                     'notification': 'Facility add successful',
                     'redirect_text': 'Facilities page',
-                    'redirect_url': 'Facilities:index',
+                    'redirect_url': 'facilities:index',
                     'auto_redirect': True,
                 },
             })
@@ -95,7 +95,7 @@ def add_facilities(request):
                     'submit_url': 'facilities:add',
                 },
             })
-            
+
 def modify_facilities(request):
     pass
 
