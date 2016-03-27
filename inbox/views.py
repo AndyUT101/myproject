@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 from user.models import User
-from .models import Inbox_content, Inbox, Inbox_classroom
+from .models import Inbox_content, Inbox
 
 from .forms import *
 
