@@ -25,7 +25,7 @@ class BookingForm(ModelForm):
             if not is_available(clean_facility):
                 self.add_error('facility', 'Selected facility is currently not available.')
 
-            if clean_startlesson.pk in occupied_id or clean_endlesson.pk in occupied_id:
+            elif clean_startlesson.pk in occupied_id or clean_endlesson.pk in occupied_id:
                 raise forms.ValidationError(
                     "Select timeslot is already booked by other! Please check and resubmit again."
                 )
