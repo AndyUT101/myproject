@@ -8,6 +8,7 @@ from user.models import User
 from .models import Inbox_content, Inbox
 
 from .forms import *
+from .utils import *
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
@@ -148,6 +149,11 @@ def send_msg(request, reply_id = None):
         });
 
     if request.method == 'POST':
+
+        compose_form = ComposeForm(request.POST)
+        user_listdata = request.POST.get('receiver', '')
+        
+
         return render(request, 'home.html', {
             'page_title': 'Reply message: Inbox',
             'page_header': 'Reply message',
