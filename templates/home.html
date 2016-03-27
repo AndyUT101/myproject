@@ -203,6 +203,12 @@
 
 {% if template == 'testing' %}<p>{{ page_title }}</p><p>{{ page_header }}</p><p>{{ content }}</p>{% endif %}{% endblock %}
 
+{% if template == "calendar" %}
+{% if content.calendar.body %}
+{{ content.calendar.body }}
+{% endif %}
+{% endif %}
+
 </div>
 
 

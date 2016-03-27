@@ -22,9 +22,9 @@ def calendar_list(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing',
+        'template': 'calendar',
         'content': {   
-            'list': {
+            'calendar': {
                 'name': 'facilities',
                 'body': esc(calendar),
             },
