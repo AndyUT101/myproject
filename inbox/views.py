@@ -17,7 +17,7 @@ from siteinfo.views import site_topnav
 # Create your views here.
 def list_inboxmsg(request):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
     # GET: ?page=page_num
 
@@ -73,16 +73,8 @@ def list_inboxmsg(request):
     })
 
 def view_msg(request, msg_id = None):
-    """
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
-    # check msg -> user_id == user_id, if fail, return
-    if msg_id == None:
-        try:
-            Inbox.objects.get(pk = msg_id).filter()
-    """
-    if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
     if msg_id == None:
         return HttpResponseRedirect(reverse('inbox:inbox'))
@@ -120,7 +112,7 @@ def view_msg(request, msg_id = None):
 
 def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
-        raise Http404("Not yet logged in")
+        return HttpResponseRedirect(reverse('index'))
 
     user = User.objects.get(username=request.session['user'])
     if request.method == 'GET':
