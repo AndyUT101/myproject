@@ -36,7 +36,7 @@ def list_facilities_floor(request):
 
                 ({'title':'Modify facility', 
                    'url': 'facilities:modify',
-                   'url_para': '#',
+                   'url_para': 0,
                    'html_class': 'modify_facility'}),
 
                 ({'title':'Delete facility', 
