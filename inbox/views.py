@@ -151,7 +151,7 @@ def send_msg(request, reply_id = None):
 
             commit_list = []
             for receiver in userlist:
-                commit_list.append(Inbox(sender=user, receiver=receiver, content=message))
+                commit_list.append(Inbox(sender=user, receiver=User.objects.get(username=receiver), content=message))
 
             Inbox.objects.bulk_create(commit_list);
 
