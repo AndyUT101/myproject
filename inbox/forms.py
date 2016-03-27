@@ -6,7 +6,7 @@ from .models import *
 class ComposeForm(ModelForm):
     receiver = forms.CharField(max_length=255)
     class Meta:
-        model = Inbox
+        model = Inbox_content
         fields = ["receiver", "content"]
 
 """
