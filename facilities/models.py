@@ -23,7 +23,7 @@ class Room(models.Model):
 
 class Facilities(models.Model):
     name = models.CharField(max_length=255, default="")
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, unique=True)
+    room = models.OneToOneField(Room, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
