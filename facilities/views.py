@@ -235,7 +235,7 @@ def remove_facilities(request):
 def add_room(request):
     pass
 
-def remove_room(request):
+def remove_room(request, room_id):
     pass
 
 def view_room(request):
