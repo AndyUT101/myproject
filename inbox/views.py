@@ -122,11 +122,10 @@ def send_msg(request, reply_id = None):
     if not user_alreadyloggedin(request):
         raise Http404("Not yet logged in")
 
+    user = User.objects.get(username=request.session['user'])
     if request.method == 'GET':
 
         reply_mode = False
-        user = User.objects.get(username=request.session['user'])
-
         # check reply_id -> user_id == user_id, if fail, return
         if not reply_id == None:
             try:
@@ -154,13 +153,23 @@ def send_msg(request, reply_id = None):
         
         if compose_form.is_valid():
 
+            # Insert message content
+            message = ComposeForm.save()
+            userlist = split_receiver(request.POST.get('receiver', ''))
+
+            commit_list = []
+            for receiver in userlist:
+                commit_list.append(Inbox(sender=user, receiver=receiver, content=message))
+
+            Inbox.objects.bulk_create(commit_list);
+
             return render(request, 'home.html', {
                 'page_title': 'Reply message: Inbox',
                 'page_header': 'Reply message',
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'testing', # operation, form 
                 'content': {
-                    'form': request.POST,
+                    'form': userlist,
                 },
             });
 
