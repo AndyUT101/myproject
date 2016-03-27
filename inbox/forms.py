@@ -12,10 +12,9 @@ class ComposeForm(ModelForm):
 
     def clean_receiver(self):
         data = self.cleaned_data['receiver']
-        user_verify = user_valid(data)
         if len(data) == 0:
             raise forms.ValidationError('No receiver received!')
-        elif user_verify[0] == False:
-            raise forms.ValidationError('Cannot send message to '+', '.join(user_verify[1]))
-            
+        elif user_valid(data)[0] == False:
+            raise forms.ValidationError('Cannot send message to '+', '.join(user_valid(data)[1]))
+
         return data

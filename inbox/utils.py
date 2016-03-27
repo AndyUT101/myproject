@@ -5,10 +5,10 @@ from operator import __or__ as OR
 from user.models import User
 
 def split_receiver(data):
-    user_listdata = user_listdata.replace(' ', '')
-    user_listdata = user_listdata.split(',')
+    data = data.replace(' ', '')
+    data = data.split(',')
 
-    return list(filter(None, set(user_listdata)))
+    return list(filter(None, set(data)))
 
 def user_valid(user_listdata):
     if not user_listdata:
