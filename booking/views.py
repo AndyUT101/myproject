@@ -6,10 +6,11 @@ from user.models import User
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
+from datetime import datetime
+
 from .models import Booking
 from .forms import BookingForm
 
-# helper function
 def room_booked(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
@@ -19,17 +20,17 @@ def room_booked(request):
     if not review_permission(user, 'view:booking'):
         return HttpResponseRedirect(reverse('index_home'))
 
-    booking = Booking.objects.filter(user = user)
+    booking_active = Booking.objects.filter(user = user, book_date__gte=datetime.now()).order_by('end_lesson', 'book_date')
+    #booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now())
 
     return render(request, 'home.html', {
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing',
+        'template': 'list',
         'content': {   
-            'notification': {
-                'booking': booking,
-            },
+            'name': 'booking',
+            'body': booking_active,
         },
     })
 

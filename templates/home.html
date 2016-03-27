@@ -118,7 +118,37 @@
 
 		</div>
 		<div class="adv_operation"></div>
-	{% endif %}		
+	{% endif %}
+
+	{% if content.list.name == 'booking' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Book Date</td>
+						<td>Location</td>
+						<td>Start period</td>
+						<td>End period</td>
+						<td>Operation</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td>{{ data.book_date }}</td>
+						<td>{{ data.facility }}</td>
+						<td>{{ data.start_lesson }}</td>
+						<td>{{ data.end_lesson }}</td>
+						<td><li>Delete booking</li><li>Send inbox message to user...</li></td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+		<div class="adv_operation"></div>
+	{% endif %}	
+
 	</form></section>
 {% endif %}
 
