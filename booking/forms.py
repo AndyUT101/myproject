@@ -3,6 +3,8 @@ from django import forms
 from .utils import occupied_lesson_id
 from .models import *
 
+from facilities.utils import is_available
+
 from datetime import datetime, time, timedelta
 
 class BookingForm(ModelForm):
@@ -24,4 +26,6 @@ class BookingForm(ModelForm):
                 raise forms.ValidationError(
                     "Select timeslot is already booked by other! Please check and resubmit again."
                 )
+            if not is_available(clean_facility):
+                self.add_error('facility', 'Selected facility is currently not available.')
 
