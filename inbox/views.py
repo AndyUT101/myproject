@@ -147,6 +147,17 @@ def send_msg(request, reply_id = None):
             },
         });
 
+    if request.method == 'POST':
+        return render(request, 'home.html', {
+            'page_title': 'Reply message: Inbox',
+            'page_header': 'Reply message',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'testing', # operation, form 
+            'content': {
+                'form': request.POST,
+            },
+        });
+
 
 def delete_msg(request):
     pass
