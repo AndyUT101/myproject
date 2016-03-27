@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
 from user.models import User

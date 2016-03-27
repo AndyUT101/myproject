@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from user.models import User
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
 # Helper function

@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Schoolinfo, Sitemap
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
 # Create your views here.
 def management_panel(request):

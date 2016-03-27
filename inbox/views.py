@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from user.models import User
 from .models import Inbox_content, Inbox, Inbox_classroom
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
 
