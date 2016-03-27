@@ -9,8 +9,7 @@ from siteinfo.views import site_topnav
 from .forms import BookingForm
 
 # helper function
-def room_booked(facilities_obj):
-
+def room_booked(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
