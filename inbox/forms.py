@@ -7,7 +7,7 @@ class ComposeForm(ModelForm):
     receiver = forms.CharField(max_length=255)
     class Meta:
         model = Inbox_content
-        fields = ["receiver", "content"]
+        fields = ["title", "content"]
 
 """
 class ComposeForm(forms.Form):
