@@ -26,7 +26,7 @@ def calendar_list(request):
         'content': {   
             'calendar': {
                 'name': 'facilities',
-                'body': esc(calendar),
+                'body': calendar,
             },
         },
     })
