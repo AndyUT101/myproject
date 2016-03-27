@@ -30,10 +30,10 @@ def list_facilities_floor(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'list',
+        'template': 'testing',
         'content': {   
             'list': {
-                'name': 'booking',
+                'name': 'facilities',
                 'body': facilities_obj,
             },
         },
