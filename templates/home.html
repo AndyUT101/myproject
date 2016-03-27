@@ -164,8 +164,8 @@
 					<tr>
 					{% for data in content.list.body %}
 						<td>{{ data.name }}</td>
-						<td>{{ data.room.floor }}</td>
-						<td>{{ data.room.plate_name }}</td>
+						<td>{{ data.room.floor }}/F</td>
+						<td>Room {{ data.room.plate_name }}</td>
 						<td>{% if data.room.available %}<span class='facilities_available'>available</span>{% else %}<span class='facilities_unavailable'>unavailable</span>{% endif %}</td>
 						<td><li><a href="{% url 'booking:delete' data.pk %}">Delete booking</a></li><li><a href="#">Send inbox message to user...</a></li></td>
 					<tr>
