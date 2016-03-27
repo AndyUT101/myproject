@@ -129,10 +129,10 @@ def send_msg(request, reply_id = None):
             reply_mode = True # Read "reply_msg" on after process
 
         return render(request, 'home.html', {
-            'page_title': 'Reply message: Inbox',
-            'page_header': 'Reply message',
+            'page_title': 'Send message: Inbox',
+            'page_header': 'Send message',
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'notification', # operation, form 
+            'template': 'form', # operation, form 
             'content': {
                 'form': ComposeForm().as_ul(),
                 'submit_url': 'inbox:compose',
@@ -156,8 +156,8 @@ def send_msg(request, reply_id = None):
             Inbox.objects.bulk_create(commit_list);
 
             return render(request, 'home.html', {
-                'page_title': 'Reply message: Inbox',
-                'page_header': 'Reply message',
+                'page_title': 'Send message: Inbox',
+                'page_header': 'Send message',
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
