@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .utils import occupied_lesson_id
+from .models import *
 
 from datetime import datetime, time, timedelta
 
