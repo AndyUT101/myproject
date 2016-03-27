@@ -392,14 +392,14 @@ def list_user(request, specific_usertype=None, classcode=None):
                 'body': user_list,
                 'foot': (),
             },
-            'page_nav': ( 
+            'page_nav': { 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
                 'message': '',
-                'page': (
+                'page': {
                     'current_page': page,
                     'max_page': max_page,
-                ),
-            ),
+                },
+            },
         },
     })
 
