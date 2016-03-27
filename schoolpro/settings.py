@@ -129,6 +129,10 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 # File upload handlers
 FILE_UPLOAD_HANDLERS = (
     "django_excel.ExcelMemoryFileUploadHandler",
