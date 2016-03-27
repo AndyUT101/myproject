@@ -6,6 +6,7 @@ from user.models import User
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
+from .models import Booking
 from .forms import BookingForm
 
 # helper function
