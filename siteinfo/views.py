@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
-
+from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.utils import IntegrityError
+
 
 from .models import Schoolinfo, Sitemap
 

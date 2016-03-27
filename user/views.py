@@ -1,12 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.utils import IntegrityError
 
 from django.contrib.auth.hashers import check_password, make_password
+
+from datetime import datetime
+import math
 
 from .models import User, Permission, Permission_meta, Role
 from .forms import UserForm, UsermodForm
@@ -16,8 +17,6 @@ from classroom.models import Classroom, User_assignment
 from siteinfo.views import site_topnav
 from user.utils import *
 
-from datetime import datetime
-import math
 
 """
 template = ('home', 'list', 'form', 'detail', 'none', 'test', 'notification')
