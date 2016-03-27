@@ -25,7 +25,7 @@ def room_booked(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'test',
+        'template': 'testing',
         'content': {   
             'notification': {
                 'booking': booking,
