@@ -325,14 +325,14 @@ def view_user(request, username, specific_usertype=None):
     user_obj = get_object_or_404(User, username=username)
 
     return render(request, 'home.html', {
-                'page_title': 'Modify a user',
-                'page_header': 'Modify a user',
-                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-                'template': 'testing',
-                'content': {
-                    'obj': user_obj,
-                },
-            })
+        'page_title': 'Modify a user',
+        'page_header': 'Modify a user',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'testing',
+        'content': {
+            'obj': user_obj,
+        },
+    })
 
 def list_user(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):

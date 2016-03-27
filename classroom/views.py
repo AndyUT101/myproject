@@ -7,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
 
+# http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
+
 # Create your views here.
 def list_classroom(request):
     pass

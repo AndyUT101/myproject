@@ -17,6 +17,7 @@ class Room(models.Model):
     floor = models.CharField(max_length = 1, choices = FLOOR_CHOICES, default = 'G')
     description = models.CharField(max_length=255, default="")
     available = models.BooleanField(default=True)
+    capacity = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
         return self.plate_name
