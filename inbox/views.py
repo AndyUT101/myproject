@@ -19,7 +19,18 @@ def list_inboxmsg(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    # GET: ?page=page_num
+    ##### page parameter ####
+    default_pagevalue = {'page': 1, 'row_count': 50}
+    page_get = request.GET.get('page', default_pagevalue['page'])
+    row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
+
+    try:
+        page = int(page_get)
+        row_count = int(row_count_get)
+    except ValueError:
+        page = default_pagevalue['page']
+        row_count = default_pagevalue['row_count']
+    ##### e:page parameter ####
 
     # GET: order by parameter
     available_para = ('send_datetime', 'content', 'read')
@@ -42,6 +53,13 @@ def list_inboxmsg(request):
 
     message_count = inbox_msg.count()
 
+    ##### page parameter ####
+    max_page = math.ceil(message_count/row_count)
+    if page > max_page:
+        return HttpResponseRedirect(reverse('inbox:list'))
+    inbox_msg = inbox_msg[row_count*(page-1):row_count+row_count*(page-1)]
+    ##### page parameter ####
+
     return render(request, 'home.html', {
         'page_header': 'Inbox',
         'template': 'list', # operation, list,
@@ -63,12 +81,14 @@ def list_inboxmsg(request):
                 'body': inbox_msg,
                 'foot': (),
             },
-            'adv_operation': ( 
+            'page_nav': { 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                ('Compose', 'inbox:compose', ['compose']),
-                ('Delete', 'inbox:delete', ['delete']),
-
-            ),
+                'message': '',
+                'page': {
+                    'current_page': page,
+                    'max_page': max_page,
+                },
+            },
         },
     })
 
