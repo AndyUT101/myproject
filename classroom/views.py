@@ -4,12 +4,47 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
 # http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
 
 def list_classroom(request):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+
+    if review_permission(user, 'allow:classroom_all'):
+        classroom = Classroom.objects.all()
+        render_body = 'classroom_manage'
+    else:
+        classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user, status='O'))
+        render_body = 'classroom'  
+    return render(request, 'home.html', {
+        'page_title': 'Classroom',
+        'page_header': 'Classroom',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list', # operation, list, 
+        'content': {
+            'list': {
+                'name': render_body,
+                'body': classroom,
+                'foot': (),
+            },
+            """
+            'page_nav': { 
+                'message': '',
+                'count': user_count,
+                'page': {
+                    'current_page': page,
+                    'max_page': max_page,
+                },
+            },
+            """
+        },
+    })
+
+def manage_classroom(request):
     pass
 
 def view_classroom(request, shortcode):
