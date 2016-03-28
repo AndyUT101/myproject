@@ -112,20 +112,11 @@ class Classroom_note(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
     note = models.ForeignKey(Note, on_delete=models.CASCADE, default="")
 
-class Material_type(models.Model):
-    """
-    type_name (eg. photo, document, zip)
-    type_description
-    """
-    type_name = models.CharField(max_length=255, default="")
-    type_description = models.TextField(default="")
-
-class Material_ext(models.Model):
-    ext_name = models.CharField(max_length=255, default="", unique=True)
-    material_type = models.ForeignKey(Material_type, on_delete=models.CASCADE, default="")
-
 class Material(models.Model):
     uploader = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
     create_date = models.DateTimeField(default=timezone.now, blank=True)
     path = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
-    material_type = models.ForeignKey(Material_type, on_delete=models.CASCADE, default="")
+
+class Material_classroom(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE, default="")
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
