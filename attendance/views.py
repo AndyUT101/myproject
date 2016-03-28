@@ -62,7 +62,7 @@ def add_rule(request):
         ruleform = RuleForm(request.POST)
 
         if ruleform.is_valid():
-            ruleform.save
+            ruleform.save()
 
             return render(request, 'home.html', {
                 'page_title': 'Attendance rule assignment',
