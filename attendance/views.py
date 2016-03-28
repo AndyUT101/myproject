@@ -45,14 +45,14 @@ def apply_rule(request):
             Applied_rule.objects.bulk_create(commit_list);
 
             return render(request, 'home.html', {
-                'page_title': 'Send message: Inbox',
-                'page_header': 'Send message',
+                'page_title': 'Attendance rule assignment',
+                'page_header': 'Attendance rule assignment',
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
                     'notification': 'Assign successful',
-                    'redirect_text': 'inbox page',
-                    'redirect_url': 'inbox:inbox',
+                    'redirect_text': 'Attendance rule page',
+                    'redirect_url': 'attendance:rulelist',
                     'auto_redirect': True,
                 },
             })
