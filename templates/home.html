@@ -86,7 +86,7 @@
 			</table>
 
 		</div>
-		<div class="page_nav"></div>
+		
 	{% endif %}
 
 	{% if content.list.name == 'user' %}
@@ -117,32 +117,7 @@
 			</table>
 
 		</div>
-		<div class="page_nav">
-			{% if content.page_nav.page %}
-			<div class="page_idx">
-				<span>
-					{% if content.page_nav.page.current_page > 1 %}
-					<a href="?page={{ content.page_nav.page.current_page|add:"-1" }}"><</a>
-					{% else %}
-					<
-					{% endif %}
-				</span>
-				<span>{{ content.page_nav.page.current_page }}</span>
-				<span>
-					{% if content.page_nav.page.max_page > content.page_nav.page.current_page %}
-					<a href="?page={{ content.page_nav.page.current_page|add:1 }}">></a>
-					{% else %}
-					>
-					{% endif %}
-				</span>
-			</div>
-			{% endif %}
-			{% if content.page_nav.message %}
-			<div class="bottom_message">
-				{{ content.page_nav.message }}
-			</div>
-			{% endif %}
-		</div>
+		
 	{% endif %}
 
 	{% if content.list.name == 'booking' %}
@@ -171,7 +146,7 @@
 			</table>
 
 		</div>
-		<div class="page_nav"></div>
+		
 	{% endif %}	
 
 	{% if content.list.name == 'facilities' %}
@@ -202,7 +177,7 @@
 			</table>
 
 		</div>
-		<div class="page_nav"></div>
+		
 	{% endif %}
 
 	{% if content.list.name == 'room' %}
@@ -231,9 +206,35 @@
 			</table>
 
 		</div>
-		<div class="page_nav"></div>
+		
 	{% endif %}
 
+		<div class="page_nav">
+			{% if content.page_nav.page %}
+			<div class="page_idx">
+				<span>
+					{% if content.page_nav.page.current_page > 1 %}
+					<a href="?page={{ content.page_nav.page.current_page|add:"-1" }}"><</a>
+					{% else %}
+					<
+					{% endif %}
+				</span>
+				<span>{{ content.page_nav.page.current_page }}</span>
+				<span>
+					{% if content.page_nav.page.max_page > content.page_nav.page.current_page %}
+					<a href="?page={{ content.page_nav.page.current_page|add:1 }}">></a>
+					{% else %}
+					>
+					{% endif %}
+				</span>
+			</div>
+			{% endif %}
+			{% if content.page_nav.message %}
+			<div class="bottom_message">
+				{{ content.page_nav.message }}
+			</div>
+			{% endif %}
+		</div>
 
 
 	</form></section>
