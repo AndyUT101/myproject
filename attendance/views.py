@@ -27,7 +27,7 @@ def rule_list(request):
 
     return render(request, 'home.html', {
         'page_header': 'Inbox',
-        'template': 'detail', # operation, list,
+        'template': 'list', # operation, list,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
             'operation': ( 
