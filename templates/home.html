@@ -299,7 +299,7 @@
 		<ul>
 		{% for value in content.custom_rule.block2 %}
 			<li>{{ value.class_code.classname }} <a href="{% url 'attendance:remove_arule' value.pk %}" class='remove_arule'></span></li>
-		{% endif %}
+		{% endfor %}
 		</ul>
 
 	{% endif %}
