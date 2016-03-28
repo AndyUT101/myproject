@@ -21,7 +21,7 @@ def rollcall(request):
         response_data['message'] = 'Please use POST to send the data'
 
     elif request.method == 'POST':
-    	response_data['status'] = False
+        response_data['status'] = False
         response_data['message'] = 'No data received'
 
 
