@@ -20,6 +20,9 @@ def rule_list(request):
     pass
 
 def apply_rule(request):
+
+	form = ApplyForm()
+
     if request.method == 'POST':
 
         form = ApplyForm(Request.POST)
