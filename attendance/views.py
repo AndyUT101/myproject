@@ -25,7 +25,7 @@ def apply_rule(request):
 
     if request.method == 'POST':
 
-        form = ApplyForm(Request.POST)
+        form = ApplyForm(request.POST)
 
         return render(request, 'home.html', {
         'page_title': 'Welcome home!',
