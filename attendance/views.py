@@ -55,21 +55,14 @@ def add_rule(request):
     if not review_permission(user, 'allow:attendance_edit'):
         return HttpResponseRedirect(reverse('index_home'))
 
-    applyform = ApplyForm()
+    ruleform = RuleForm()
 
     if request.method == 'POST':
 
-        applyform = ApplyForm(request.POST)
+        ruleform = ruleform(request.POST)
 
-        if applyform.is_valid():
-            insert_list = request.POST.getlist('class_assign')
-
-            z = applyform.save(commit=False)
-            commit_list = []
-            for applied_rule in insert_list:
-                commit_list.append(Applied_rule(rule=z.rule, exclude_weekend=z.exclude_weekend, class_code=Class_code.objects.get(pk=applied_rule)))
-
-            Applied_rule.objects.bulk_create(commit_list);
+        if ruleform.is_valid():
+            ruleform.save
 
             return render(request, 'home.html', {
                 'page_title': 'Attendance rule assignment',
@@ -77,7 +70,7 @@ def add_rule(request):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
-                    'notification': 'Assign successful',
+                    'notification': 'Rule add successful',
                     'redirect_text': 'Attendance rule page',
                     'redirect_url': 'attendance:rulelist',
                     'auto_redirect': True,
@@ -85,23 +78,23 @@ def add_rule(request):
             })
 
         return render(request, 'home.html', {
-        'page_title': 'Welcome home!',
-        'page_header': 'Good to seeing you, ',
+        'page_title': 'Attendance rule assignment',
+        'page_header': 'Attendance rule assignment',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'form': applyform.as_ul(),
+            'form': ruleform.as_ul(),
             'submit_url': 'attendance:apply_rule',
         },
     })
 
     return render(request, 'home.html', {
-        'page_title': 'Room Reservation',
-        'page_header': 'Reserve for a room',
+        'page_title': 'Attendance rule assignment',
+        'page_header': 'Attendance rule assignment',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'form': applyform.as_ul(),
+            'form': ruleform.as_ul(),
             'submit_url': 'attendance:apply_rule',
         },
     })

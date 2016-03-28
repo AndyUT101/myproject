@@ -4,7 +4,6 @@ from .models import *
 
 from user.models import Class_code
 
-
 class ApplyForm(ModelForm):
     CLASS_CODE_OPTIONS = tuple((i.pk, i.class_name) for i in Class_code.objects.all())
     class_assign = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=CLASS_CODE_OPTIONS)
@@ -12,3 +11,9 @@ class ApplyForm(ModelForm):
     class Meta:
         model = Applied_rule
         fields = ["rule", "class_assign", 'start_date', "end_date", "exclude_weekend"]
+
+class RuleForm(ModelForm):
+    
+    class Meta:
+        model = Rule
+        fields = '__all__'
