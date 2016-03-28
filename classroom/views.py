@@ -51,7 +51,7 @@ def view_classroom(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user']):
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
-	return render(request, 'home.html', {
+    return render(request, 'home.html', {
         'page_title': 'Classroom',
         'page_header': 'Classroom',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
