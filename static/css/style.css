@@ -307,3 +307,47 @@ nav.topnav
         {
             display: block;
         }
+
+
+@media only screen and ( max-width: 40em ) /* 640 */
+{
+    nav.topnav
+    {
+        position: relative;
+    }
+        nav.topnav > a
+        {
+        }
+        nav.topnav:not( :target ) > a:first-of-type,
+        nav.topnav:target > a:last-of-type
+        {
+            display: block;
+        }
+ 
+    /* first level */
+ 
+    nav.topnav > ul
+    {
+        height: auto;
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+        nav.topnav:target > ul
+        {
+            display: block;
+        }
+        nav.topnav > ul > li
+        {
+            width: 100%;
+            float: none;
+        }
+ 
+    /* second level */
+ 
+    nav.topnav li ul
+    {
+        position: static;
+    }
+}
