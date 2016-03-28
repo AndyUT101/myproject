@@ -74,6 +74,7 @@ def get_contents(shortcode):
     }
 
 def get_contentscount(contents_dict): 
+    contents_dict.pop('classroom', None)
     for key in contents_dict:
         contents_dict[key] = len(contents_dict[key])
 
