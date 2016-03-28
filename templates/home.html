@@ -290,13 +290,18 @@
 	{% endif %}
 	{% if content.custom_rule %}
 		<h2>Current Rule: {{ content.custom_rule.block1.name }}</h2>
-		<p class='remove_rule'><a href="{% url 'attendance:remove_rule' content.custom_rule.block1.pk %}">Remove this rule</a></p>
+		<ul class='operation_rule'>
+			<li class='remove_rule'><a href="{% url 'attendance:remove_rule' content.custom_rule.block1.pk %}">Remove this rule</a></li>
+		</ul>
 		<ul>
 			<li class="priority">Priority: {{ content.custom_rule.block1.priority }}</li>
 			<li class="start_time">Start time: {{ content.custom_rule.block1.start_time }}</li>
 			<li class="end_time">End time: {{ content.custom_rule.block1.end_time }}</li>
 		</ul>
 		<h3>Classes applied this rule:</h3>
+		<ul class='operation_arule'>
+			<li class='apply_arule'><a href="{% url 'attendance:apply_rule' %}">Apply class to the rule</a></li>
+		</ul>		
 		<ul>
 		{% if content.custom_rule.block2.count == 0 %}
 			<li>None</li>
