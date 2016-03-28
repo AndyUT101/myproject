@@ -2,15 +2,16 @@
 {% block content %}
 <header class="home_header">
 	{% if topnav %}<nav class="topnav">
-		{% for nav_item in topnav %}
 		<ul>
+			<li class='index_url'><a href="{% url 'index_home' %}">SchoolPro</a></li>
+		{% for nav_item in topnav %}
 			<li>
 			<a href="{% url nav_item.url_route %}">{{ nav_item.title }}{% if nav_item.sub_menu %}+{% endif %}</a>
 			{% if nav_item.sub_menu %}<ul>
 				{% for nav_subitem in nav_item.sub_menu %}<li><a href="{% url nav_subitem.url_route %}">{{ nav_subitem.title }}</a></li>{% endfor %}
 			</ul>{% endif %}</li>
-		</ul>
 		{% endfor %}
+		</ul>
 	</nav>{% endif %}
 	<div class="heading-content">
 		<h1 class="page-header">{{ page_header }}</h1>
@@ -232,7 +233,7 @@
 
 			{% if content.page_nav.count and content.page_nav.page %}
 			<div class="count">
-				<p>You are at page {{ content.page_nav.page.current_page }}, total {{ content.page_nav.count }} entries.</p>
+				<span>Page {{ content.page_nav.page.current_page }} | Total {{ content.page_nav.count }} entries.</span>
 			</div>
 			{% endif %}
 
