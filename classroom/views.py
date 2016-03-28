@@ -22,13 +22,15 @@ def list_classroom(request):
         classroom = Classroom.objects.all()
         render_body = 'classroom_manage'
     else:
-        classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user, status='O'))
-        render_body = 'classroom'  
+        classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user))
+        classroom = tuple(c for c in classroom if c.status == 'O')
+        render_body = 'classroom'
+
     return render(request, 'home.html', {
         'page_title': 'Classroom',
         'page_header': 'Classroom',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'list', # operation, list, 
+        'template': 'list', 
         'content': {
             'list': {
                 'name': render_body,
