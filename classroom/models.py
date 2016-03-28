@@ -35,7 +35,7 @@ class Announce(models.Model):
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
     title = models.CharField(max_length=255, default="")
     content = models.TextField(default="")
-    announce_date = models.DateTimeField(default=timezone.now, blank=True)
+    announce_date = models.DateTimeField(default=timezone.now)
 
 class Assignment(models.Model):
     """
@@ -53,15 +53,15 @@ class Assignment(models.Model):
         ('T', 'Text'),
     )
     handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
-    deadline_datetime = models.DateTimeField(default=timezone.now, blank=True)
+    deadline_datetime = models.DateTimeField(default=timezone.now)
     fullmark = models.PositiveSmallIntegerField(default=100)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
-    create_date = models.DateTimeField(default=timezone.now, blank=True)
+    create_date = models.DateTimeField(default=timezone.now)
 
 
 class User_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
-    assign_date = models.DateTimeField(default=timezone.now, blank=True)
+    assign_date = models.DateTimeField(default=timezone.now)
 
     ROLE_CHOICES = (
         ('STU', 'Student'),
@@ -95,7 +95,7 @@ class Note(models.Model):
     """
     title = models.CharField(max_length=255, default="")
     content = models.TextField(default="")
-    publish_datetime = models.DateTimeField(default=timezone.now, blank=True)
+    publish_datetime = models.DateTimeField(default=timezone.now)
 
     STATUS_CHOICE = (
         ('P', 'Published'),
@@ -114,7 +114,7 @@ class Classroom_note(models.Model):
 
 class Material(models.Model):
     uploader = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
-    create_date = models.DateTimeField(default=timezone.now, blank=True)
+    create_date = models.DateTimeField(default=timezone.now)
     path = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
 
 class Material_classroom(models.Model):
