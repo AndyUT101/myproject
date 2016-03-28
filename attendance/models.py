@@ -16,6 +16,9 @@ class Rule(models.Model):
     start_time = models.TimeField(default=time(8,0,0))
     end_time = models.TimeField(default=time(17,0,0))
 
+    def __str__(self):
+        return self.name
+
 class Applied_rule(models.Model):
     rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
     class_code = models.ForeignKey(Class_code, on_delete=models.CASCADE, default="")
