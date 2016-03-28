@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     # url(r'^(?P<process>.+)/(?P<user_id>[0-9]+)$', views.modify, name='modify'),
     url(r'^$', views.list_classroom, name='classroom_list'),
-    url(r'manage/^$', views.manage_classroom, name='manage'),
+    url(r'^manage/$', views.manage_classroom, name='manage'),
     url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom'),
     url(r'^(?P<shortcode>.+)/announce/$', views.announce, name='announce'),
     url(r'^(?P<shortcode>.+)/announce_all/$', views.announce_all, name='announce_all'),
