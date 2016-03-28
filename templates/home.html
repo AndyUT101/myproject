@@ -229,11 +229,19 @@
 				</span>
 			</div>
 			{% endif %}
+
+			{% if content.page_nav.count and content.page_nav.page %}
+			<div class="count">
+				<p>You are at page {{ content.page_nav.page.current_page }}, total {{ content.page_nav.count }} entries.</p>
+			</div>
+			{% endif %}
+
 			{% if content.page_nav.message %}
 			<div class="bottom_message">
 				{{ content.page_nav.message }}
 			</div>
 			{% endif %}
+
 		</div>
 
 

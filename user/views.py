@@ -395,6 +395,7 @@ def list_user(request, specific_usertype=None, classcode=None):
             'page_nav': { 
                 # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
                 'message': '',
+                'count': user_count,
                 'page': {
                     'current_page': page,
                     'max_page': max_page,
