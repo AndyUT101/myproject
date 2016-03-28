@@ -55,7 +55,7 @@ def rollcall(request):
             response_data['status'] = True
             response_data['message'] = 'Attandance logged'
             response_data['user'] = user.username
-            response_data['datetime'] = datetime.now()
+            response_data['datetime'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
 
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
