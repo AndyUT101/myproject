@@ -31,12 +31,10 @@ def apply_rule(request):
         'page_title': 'Welcome home!',
         'page_header': 'Good to seeing you, ',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing',
-        'content': {   
-            'list': {
-                'name': 'booking',
-                'body': form,
-            },
+        'template': 'form',
+        'content': {
+            'form': form.as_ul(),
+            'submit_url': 'attendance:apply_rule',
         },
     })
 
