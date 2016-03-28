@@ -210,6 +210,37 @@
 		
 	{% endif %}
 
+	{% if content.list.name == 'rule' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Floor</td>
+						<td>Plate name</td>
+						<td>Capacity</td>
+						<td>Available</td>
+						<td>Operation</td>
+						<td>Operation</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td>{{ data.name }}/F</td>
+						<td>Room {{ data.recursive }}</td>
+						<td>{{ data.priority }}</td>
+						<td>{{ data.start_time }}</td>
+						<td>{{ data.end_time }}</td>
+						<td><li><a href="{% url 'facilities:remove_room' data.pk %}">Remove room</a></li></td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+		
+	{% endif %}
+
 		<div class="page_nav">
 			{% if content.page_nav.page %}
 			<div class="page_idx">

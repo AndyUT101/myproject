@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 
-from user.utils import user_alreadyloggedin, get_userrole
+from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
 import json
@@ -17,17 +17,36 @@ from user.models import User, Class_code
 
 # Create your views here.
 def rule_list(request):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:attendance_edit'):
+        return HttpResponseRedirect(reverse('index_home')) 
+
+    rule = Rule.objects.all()
+    
+    return render(request, 'home.html', {
+        'page_header': 'Inbox',
+        'template': 'list', # operation, list,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'content': {
+            'list': {
+                'checkbox': True,
+                'name': 'rule',
+                'body': rule,
+                'foot': (),
+            },
+        },
+    })
 
 def apply_rule(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
-    """
     user = User.objects.get(username = request.session['user'])
-    if not review_permission(user, 'allow:booking'):
+    if not review_permission(user, 'allow:attendance_edit'):
         return HttpResponseRedirect(reverse('index_home'))
-    """
+
     applyform = ApplyForm()
 
     if request.method == 'POST':
