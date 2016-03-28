@@ -59,7 +59,7 @@ def add_rule(request):
 
     if request.method == 'POST':
 
-        ruleform = ruleform(request.POST)
+        ruleform = RuleForm(request.POST)
 
         if ruleform.is_valid():
             ruleform.save
