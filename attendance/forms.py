@@ -17,3 +17,4 @@ class RuleForm(ModelForm):
     class Meta:
         model = Rule
         fields = '__all__'
+        exclude = ['recursive']
