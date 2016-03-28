@@ -22,5 +22,6 @@ class Rule(models.Model):
 class Applied_rule(models.Model):
     rule = models.ForeignKey(Rule, on_delete=models.CASCADE)
     class_code = models.ForeignKey(Class_code, on_delete=models.CASCADE, default="")
-    applied_datetime = models.DateTimeField(default=timezone.now)
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(default=date.today)
     exclude_weekend = models.BooleanField(default=True)
