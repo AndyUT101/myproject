@@ -29,7 +29,7 @@ def rollcall(request):
         token = 'b8293a1035a1c929105ea870ecbef6f8'
         received_token = request.POST.get('token', '') == token
 
-       response_data['status'] = False
+        response_data['status'] = False
         response_data['message'] = 'Unknown situation'
 
         if not card_id:
