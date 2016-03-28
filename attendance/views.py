@@ -37,11 +37,10 @@ def apply_rule(request):
         if applyform.is_valid():
             insert_list = request.POST.getlist('class_assign')
 
-            applyform_z = applyform.save(commit=False)
+            z = applyform.save(commit=False)
             commit_list = []
             for applied_rule in insert_list:
-                applyform_z.class_code = Class_code.objects.get(pk=applied_rule)
-                commit_list.append(Applied_rule(applyform_z))
+                commit_list.append(Applied_rule(rule=z.rule, exclude_weekend=z.exclude_weekend, class_code=Class_code.objects.get(pk=applied_rule)))
 
             Applied_rule.objects.bulk_create(commit_list);
 
