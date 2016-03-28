@@ -232,19 +232,10 @@ def edit_rule(request, rule_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'detail',
         'content': {
-            'custom_rule': (
-                ({'title': 'Rule',
-                    'content': '',
-                    'url_para': '',
-                    'url': '',
-                    'html_class': '',}),
-                
-                ({'title': 'Rule',
-                    'content': '',
-                    'url_para': '',
-                    'url': '',
-                    'html_class': '',}),
-            ),
+            'custom_rule': {
+                'block1': rule,
+                'block2': applied_rule,
+            },
         },
     })
 
