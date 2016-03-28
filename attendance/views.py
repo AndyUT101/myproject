@@ -24,12 +24,19 @@ def rule_list(request):
         return HttpResponseRedirect(reverse('index_home')) 
 
     rule = Rule.objects.all()
-    
+
     return render(request, 'home.html', {
         'page_header': 'Inbox',
         'template': 'list', # operation, list,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add rule', 
+                   'url': 'attendance:add_rule',
+                   'html_class': 'compose'}),
+
+            ),
             'list': {
                 'checkbox': True,
                 'name': 'rule',
@@ -38,6 +45,67 @@ def rule_list(request):
             },
         },
     })
+
+
+def add_rule(request):
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:attendance_edit'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    applyform = ApplyForm()
+
+    if request.method == 'POST':
+
+        applyform = ApplyForm(request.POST)
+
+        if applyform.is_valid():
+            insert_list = request.POST.getlist('class_assign')
+
+            z = applyform.save(commit=False)
+            commit_list = []
+            for applied_rule in insert_list:
+                commit_list.append(Applied_rule(rule=z.rule, exclude_weekend=z.exclude_weekend, class_code=Class_code.objects.get(pk=applied_rule)))
+
+            Applied_rule.objects.bulk_create(commit_list);
+
+            return render(request, 'home.html', {
+                'page_title': 'Attendance rule assignment',
+                'page_header': 'Attendance rule assignment',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Assign successful',
+                    'redirect_text': 'Attendance rule page',
+                    'redirect_url': 'attendance:rulelist',
+                    'auto_redirect': True,
+                },
+            })
+
+        return render(request, 'home.html', {
+        'page_title': 'Welcome home!',
+        'page_header': 'Good to seeing you, ',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': applyform.as_ul(),
+            'submit_url': 'attendance:apply_rule',
+        },
+    })
+
+    return render(request, 'home.html', {
+        'page_title': 'Room Reservation',
+        'page_header': 'Reserve for a room',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': applyform.as_ul(),
+            'submit_url': 'attendance:apply_rule',
+        },
+    })
+
 
 def apply_rule(request):
     # 1. Check permission
@@ -98,6 +166,12 @@ def apply_rule(request):
         },
     })
 
+def remove_rule(request, rule_id):
+    pass
+
+def edit_rule(request, rule_id):
+    pass
+
 @csrf_exempt
 def rollcall(request):
     response_data = {}
@@ -139,3 +213,6 @@ def rollcall(request):
 
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def view_rule(request):
+    pass
