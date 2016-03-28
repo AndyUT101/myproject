@@ -21,7 +21,7 @@ class User(models.Model):
 
     firstname = models.CharField(max_length=255, default="")
     lastname = models.CharField(max_length=255, default="")
-    password_hashed = models.CharField(max_length=96, default="")
+    password = models.CharField(max_length=96, default="")
     sex_code = models.CharField(max_length = 1, choices = SEX_CHOICES, default = '', blank=True)
     card_id = models.CharField(max_length=20, default="", blank=True)
     strn_code = models.CharField(max_length=12, default="", blank=True)
