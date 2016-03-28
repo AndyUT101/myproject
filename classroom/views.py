@@ -9,6 +9,7 @@ from siteinfo.views import site_topnav
 
 from .models import *
 from .forms import *
+from .utils import *
 from user.models import User
 
 # http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
