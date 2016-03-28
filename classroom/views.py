@@ -43,8 +43,26 @@ def list_classroom(request):
 def manage_classroom(request):
     pass
 
+
 def view_classroom(request, shortcode):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user']):
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+	return render(request, 'home.html', {
+        'page_title': 'Classroom',
+        'page_header': 'Classroom',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'testing', 
+        'content': {
+            'list': {
+                'body': get_contents(shortcode)
+            },
+        },
+    })
+
 
 def announce(request, shortcode):
     pass

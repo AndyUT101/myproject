@@ -50,4 +50,23 @@ def is_markvalid(mark, assignment_obj):
         return True
     return False
 
+def get_contents(shortcode):
+    captured_classroom = Classroom.objects.get(shortcode=shortcode)
 
+    announce = Announce.objects.filter(classroom=captured_classroom)
+    assignment = Assignment.objects.filter(classroom=captured_classroom)
+    user_assign = User_assignment.objects.filter(classroom=captured_classroom)
+
+    note = tuple(i.note for i in Classroom_note.objects.filter(classroom=captured_classroom))
+    note = tuple(n for n in note if n.status == 'P')
+
+    material = tuple(i.material for i in Material_classroom.objects.filter(classroom=captured_classroom))
+
+    return {
+        'classroom': captured_classroom,
+        'announce': announce,
+        'assignment': assignment,
+        'user_assign': user_assign,
+        'note': note,
+        'material': material,
+    }
