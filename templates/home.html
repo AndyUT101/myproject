@@ -289,13 +289,14 @@
 		{% endfor %}
 	{% endif %}
 	{% if content.custom_rule %}
-		<h2>{{ content.custom_rule.block1.name }}</h2>
+		<h2>Current Rule: {{ content.custom_rule.block1.name }}</h2>
+		<p class='remove_rule'><a href="{% url 'attendance:remove_rule' content.custom_rule.block1.pk %}">Remove this rule</a></p>
 		<ul>
 			<li class="priority">Priority: {{ content.custom_rule.block1.priority }}</li>
 			<li class="start_time">Start time: {{ content.custom_rule.block1.start_time }}</li>
 			<li class="end_time">End time: {{ content.custom_rule.block1.end_time }}</li>
 		</ul>
-		<h2>Classes applied this rule:</h2>
+		<h3>Classes applied this rule:</h3>
 		<ul>
 		{% for value in content.custom_rule.block2 %}
 			<li>{{ value.class_code.class_name }} <a href="{% url 'attendance:remove_arule' value.pk %}" class='remove_arule'>Remove applied</a></li>
