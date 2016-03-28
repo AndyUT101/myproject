@@ -1,7 +1,6 @@
 from django import forms
 from django.forms import ModelForm
 from .models import *
-from .utils import *
 
 from user.models import Class_code
 
