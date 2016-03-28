@@ -31,16 +31,6 @@ def list_classroom(request):
                 'body': classroom,
                 'foot': (),
             },
-            """
-            'page_nav': { 
-                'message': '',
-                'count': user_count,
-                'page': {
-                    'current_page': page,
-                    'max_page': max_page,
-                },
-            },
-            """
         },
     })
 
