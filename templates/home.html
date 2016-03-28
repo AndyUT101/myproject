@@ -253,9 +253,9 @@
 						<td><a href="{% url 'classroom:classroom' data.shortcode %}">#{{ data.shortcode }}</a></td>
 						<td>{{ data.creator }}</td>
 						<td>{{ data.description }}</td>
-						<td>{% if data.status == 'O' %}Open{% elif %}Close{% endif %}</td>
+						<td>{% if data.status == 'O' %}Open{% else %}Close{% endif %}</td>
 						{% if content.list.name == 'classroom_manage' %}<td>
-						<li>{% if data.status == 'O' %}<a href="{% url 'classroom:manage' %}?close={{ data.shortcode }}">Close classroom</a>{% elif %}<a href="{% url 'classroom:manage' %}?open={{ data.shortcode }}">Open classroom</a>{% endif %}</li><li><a href="{% url 'classroom:manage' %}?delete={{ data.shortcode }}">Delete classroom</a></li></td>{% endif %}
+						<li>{% if data.status == 'O' %}<a href="{% url 'classroom:manage' %}?close={{ data.shortcode }}">Close classroom</a>{% else %}<a href="{% url 'classroom:manage' %}?open={{ data.shortcode }}">Open classroom</a>{% endif %}</li><li><a href="{% url 'classroom:manage' %}?delete={{ data.shortcode }}">Delete classroom</a></li></td>{% endif %}
 					<tr>
 					{% endfor %}					
 				</tbody>
