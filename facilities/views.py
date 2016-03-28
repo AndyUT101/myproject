@@ -233,8 +233,59 @@ def remove_facilities(request):
 
 
 def add_room(request):
-    pass
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
 
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:facilities_add'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    # 2. Check GET or POST method
+    if request.method == 'GET':
+
+        return render(request, 'home.html', {
+            'page_title': 'Add facilities',
+            'page_header': 'Add facilities',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form',
+            'content': {
+                'form': RoomForm().as_ul(),
+                'submit_url': 'facilities:add_room',
+            },
+        })
+
+    elif request.method == 'POST':
+
+        room = RoomForm(request.POST)
+
+        if room.is_valid():
+            room.save()
+
+            return render(request, 'home.html', {
+                'page_title': 'Add room',
+                'page_header': 'Add room',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Facility add successful',
+                    'redirect_text': 'Facilities page',
+                    'redirect_url': 'facilities:index',
+                    'auto_redirect': True,
+                },
+            })
+        else:
+            return render(request, 'home.html', {
+                'page_title': 'Add room',
+                'page_header': 'Add room',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form',
+                'content': {
+                    'form': RoomForm(request.POST).as_ul(),
+                    'submit_url': 'facilities:add_room',
+                },
+            })
+            
 def remove_room(request, room_id):
     pass
 
