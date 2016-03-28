@@ -11,4 +11,4 @@ class ApplyForm(ModelForm):
     
     class Meta:
         model = Applied_rule
-        fields = ["rule", "class_assign", 'start_date', 'end_date, "exclude_weekend"]
+        fields = ["rule", "class_assign", 'start_date', "end_date", "exclude_weekend"]
