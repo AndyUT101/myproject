@@ -7,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
+from user.models import User
+
 # http://stackoverflow.com/questions/5871730/need-a-minimal-django-file-upload-example
 
 def list_classroom(request):
