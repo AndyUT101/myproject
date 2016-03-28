@@ -8,5 +8,5 @@ urlpatterns = [
     # url(r'^login/$', views.login, name='login'),
     # url(r'^$', views.generate_report, name='index')
     url(r'^$', views.rule_list, name='rulelist'),
-    url(r'^applyrule$', views.apply_rule, name='applyrule'),
+    url(r'^apply_rule$', views.apply_rule, name='apply_rule'),
 ]
