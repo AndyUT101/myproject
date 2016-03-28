@@ -60,6 +60,7 @@
 		{% endfor %}
 		</div>
 	{% endif %}
+
 	{% if content.list.name == 'inbox' %}
 		<div class="list_table">
 			
@@ -87,7 +88,6 @@
 			</table>
 
 		</div>
-		
 	{% endif %}
 
 	{% if content.list.name == 'user' %}
@@ -118,7 +118,6 @@
 			</table>
 
 		</div>
-		
 	{% endif %}
 
 	{% if content.list.name == 'booking' %}
@@ -147,7 +146,6 @@
 			</table>
 
 		</div>
-		
 	{% endif %}	
 
 	{% if content.list.name == 'facilities' %}
@@ -178,7 +176,6 @@
 			</table>
 
 		</div>
-		
 	{% endif %}
 
 	{% if content.list.name == 'room' %}
@@ -206,8 +203,7 @@
 				
 			</table>
 
-		</div>
-		
+		</div>	
 	{% endif %}
 
 	{% if content.list.name == 'rule' %}
@@ -236,7 +232,37 @@
 			</table>
 
 		</div>
-		
+	{% endif %}
+
+	{% if content.list.name == 'classroom' or content.list.name == 'classroom_manage' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Classroom</td>
+						<td>Shortcode</td>
+						<td>Created by</td>
+						<td>Description</td>
+						<td>Classroom status</td>
+						{% if content.list.name == 'classroom_manage' %}<td>Operation</td>{% endif %}
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><a href="{% url 'classroom:classroom' data.shortcode %}">{{ data.name }}</a></td>
+						<td><a href="{% url 'classroom:classroom' data.shortcode %}">#{{ data.shortcode }}</a></td>
+						<td>{{ data.creator }}</td>
+						<td>{{ data.description }}</td>
+						<td>{{ data.role.status }}</td>
+						{% if content.list.name == 'classroom_manage' %}<td>
+						<li><a href="{% url 'classroom:manage' %}?delete={{ data.shortcode }}">Close classroom</a></li><li><a href="{% url 'classroom:manage' %}?delete={{ data.shortcode }}">Delete classroom</a></li></td>{% endif %}
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
 	{% endif %}
 
 		<div class="page_nav">
