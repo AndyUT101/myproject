@@ -13,19 +13,50 @@ from datetime import datetime
 
 from .models import *
 from .forms import *
-from user.models import User
+from user.models import User, Class_code
 
 # Create your views here.
 def rule_list(request):
     pass
 
 def apply_rule(request):
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
 
-    form = ApplyForm()
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:booking'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    applyform = ApplyForm()
 
     if request.method == 'POST':
 
-        form = ApplyForm(request.POST)
+        applyform = ApplyForm(request.POST)
+
+        if applyform.is_valid():
+            insert_list = request.POST.getlist('class_assign')
+
+            applyform.save(commit=False)
+            commit_list = []
+            for applied_rule in insert_list:
+                applyform_mod = Applied_rule(applyform)
+                commit_list.append(applyform_mod(class_code=Class_code.objects.get(pk=applied_rule)))
+
+            Applied_rule.objects.bulk_create(commit_list);
+
+            return render(request, 'home.html', {
+                'page_title': 'Send message: Inbox',
+                'page_header': 'Send message',
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Assign successful',
+                    'redirect_text': 'inbox page',
+                    'redirect_url': 'inbox:inbox',
+                    'auto_redirect': True,
+                },
+            })
 
         return render(request, 'home.html', {
         'page_title': 'Welcome home!',
@@ -33,7 +64,7 @@ def apply_rule(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'form': form.as_ul(),
+            'form': applyform.as_ul(),
             'submit_url': 'attendance:apply_rule',
         },
     })
@@ -44,7 +75,7 @@ def apply_rule(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'form': form.as_ul(),
+            'form': applyform.as_ul(),
             'submit_url': 'attendance:apply_rule',
         },
     })
