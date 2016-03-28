@@ -199,9 +199,9 @@ def edit_rule(request, rule_id):
     CLASS_CODE_OPTIONS = tuple((i.pk, i.class_name) for i in Class_code.objects.all())
     applied_rule = rule.applied_rule_set.all()
 
-    if request.method == POST:
+    if request.method == 'POST':
     	pass
-
+    
     return render(request, 'home.html', {
         'page_title': 'Room Reservation',
         'page_header': 'Reserve for a room',
