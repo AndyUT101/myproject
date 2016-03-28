@@ -47,7 +47,7 @@ def apply_rule(request):
         'template': 'form',
         'content': {
             'form': form.as_ul(),
-            'submit_url': 'booking:reserve',
+            'submit_url': 'attandance:apply_rule',
         },
     })
 
