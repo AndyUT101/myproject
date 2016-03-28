@@ -21,7 +21,7 @@ def rule_list(request):
 
 def apply_rule(request):
 
-	form = ApplyForm()
+    form = ApplyForm()
 
     if request.method == 'POST':
 
