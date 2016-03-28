@@ -38,9 +38,9 @@ def list_facilities_floor(request):
                    'url': 'facilities:delete',
                    'html_class': 'delete_facility'}),
 
-                ({'title':'Add room information', 
-                   'url': 'facilities:add_room',
-                   'html_class': 'add_room'}),
+                ({'title':'View room information', 
+                   'url': 'facilities:view_room',
+                   'html_class': 'view_room'}),
             ),
             'list': {
                 'name': 'facilities',
@@ -48,8 +48,6 @@ def list_facilities_floor(request):
             },
         },
     })
-
-
 
 def add_facilities(request):
     # 1. Check permission
@@ -231,7 +229,6 @@ def remove_facilities(request):
             },
         })
 
-
 def add_room(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
@@ -285,7 +282,7 @@ def add_room(request):
                     'submit_url': 'facilities:add_room',
                 },
             })
-            
+
 def remove_room(request, room_id):
     pass
 
@@ -307,17 +304,17 @@ def view_room(request):
         'content': {   
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Assign facility', 
-                   'url': 'facilities:add',
-                   'html_class': 'assign_facility'}),
-
-                ({'title':'Delete facility', 
-                   'url': 'facilities:delete',
-                   'html_class': 'delete_facility'}),
-
                 ({'title':'Add room information', 
                    'url': 'facilities:add_room',
-                   'html_class': 'add_room'}),
+                   'html_class': 'assign_room'}),
+
+                ({'title':'Delete room information', 
+                   'url': 'facilities:remove_room',
+                   'html_class': 'delete_room'}),
+
+                ({'title':'View facility', 
+                   'url': 'facilities:add_room',
+                   'html_class': 'index'}),
             ),
             'list': {
                 'name': 'room',
