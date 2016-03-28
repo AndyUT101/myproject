@@ -12,11 +12,3 @@ class ApplyForm(ModelForm):
     class Meta:
         model = Applied_rule
         fields = ["rule", "class_assign"]
-
-
-    def clean_class_assign(self):
-        data = self.cleaned_data['class_assign']
-
-        if len(data) == 0:
-            raise forms.ValidationError('No receiver received!')
-        return data
