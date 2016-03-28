@@ -309,7 +309,7 @@ def view_room(request):
                    'html_class': 'assign_room'}),
 
                 ({'title':'View facility', 
-                   'url': 'facilities:add_room',
+                   'url': 'facilities:index',
                    'html_class': 'index'}),
             ),
             'list': {

@@ -219,6 +219,7 @@
 						<td>Priority</td>
 						<td>Start time</td>
 						<td>End Time</td>
+						<td>End Time</td>
 						<td>Operation</td>
 					<tr>
 				<tbody>
@@ -228,6 +229,7 @@
 						<td>{{ data.priority }}</td>
 						<td>{{ data.start_time }}</td>
 						<td>{{ data.end_time }}</td>
+						<td>{{ data.applied_rule_set().count() }}</td>
 						<td><li><a href="{% url 'attendance:edit_rule' data.pk %}">Assign/edit rule to class</a></li><li><a href="{% url 'attendance:remove_rule' data.pk %}">Delete rule</a></li></td>
 					<tr>
 					{% endfor %}					
