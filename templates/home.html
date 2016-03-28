@@ -288,6 +288,21 @@
 			<p>{{ value.3|linebreaks }}</p>
 		{% endfor %}
 	{% endif %}
+	{% if content.custom_rule %}
+		<h2>{{ content.custom_rule.block1.name }}</h2>
+		<ul>
+			<li class="priority">Priority: {{ content.custom_rule.block1.priority }}</li>
+			<li class="start_time">Start time: {{ content.custom_rule.block1.start_time }}</li>
+			<li class="end_time">End time: {{ content.custom_rule.block1.end_time }}</li>
+		</ul>
+		<h2>Classes applied this rule:</h2>
+		<ul>
+		{% for value in content.custom_rule.block2 %}
+			<li>{{ value.class_code.classname }} <a href="{% url 'attendance:remove_arule' value.pk %}" class='remove_arule'></span></li>
+		{% endif %}
+		</ul>
+
+	{% endif %}
 	</section>
 {% endif %}
 

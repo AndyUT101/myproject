@@ -27,14 +27,17 @@ def rule_list(request):
 
     return render(request, 'home.html', {
         'page_header': 'Inbox',
-        'template': 'list', # operation, list,
+        'template': 'detail', # operation, list,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add rule', 
                    'url': 'attendance:add_rule',
-                   'html_class': 'compose'}),
+                   'html_class': 'add_rule'}),
+                ({'title':'Apply rule', 
+                   'url': 'attendance:apply_rule',
+                   'html_class': 'apple_rule'}),
 
             ),
             'list': {
@@ -196,24 +199,69 @@ def edit_rule(request, rule_id):
     except:
         return HttpResponseRedirect(reverse('attendance:rulelist')) 
 
-    CLASS_CODE_OPTIONS = tuple((i.pk, i.class_name) for i in Class_code.objects.all())
+    CLASS_CODE_OPTIONS = {i.pk: i.class_name for i in Class_code.objects.all()}
     applied_rule = rule.applied_rule_set.all()
 
-    if request.method == 'POST':
-    	pass
-    
+    """
     return render(request, 'home.html', {
         'page_title': 'Room Reservation',
         'page_header': 'Reserve for a room',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing',
+        'template': 'detail',
         'content': {
-            'form': CLASS_CODE_OPTIONS,
-            'submit_url': 'attendance:apply_rule',
-            'testing1': rule,
-            'test2': applied_rule,
+            'fields': (
+                ({'title': 'Rule',
+                    'content': '',
+                    'url_para': '',
+                    'url': '',
+                    'html_class': '',}),
+
+                ({'title': 'Rule',
+                    'content': '',
+                    'url_para': '',
+                    'url': '',
+                    'html_class': '',}),
+            ),
         },
     })
+    """
+
+    return render(request, 'home.html', {
+        'page_title': 'Room Reservation',
+        'page_header': 'Reserve for a room',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'detail',
+        'content': {
+            'custom_rule': (
+                ({'title': 'Rule',
+                    'content': '',
+                    'url_para': '',
+                    'url': '',
+                    'html_class': '',}),
+                
+                ({'title': 'Rule',
+                    'content': '',
+                    'url_para': '',
+                    'url': '',
+                    'html_class': '',}),
+            ),
+        },
+    })
+
+def remove_arule(request, arule_id):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:attendance_edit'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    try:
+        rule = Applied_rule.objects.get(pk = arule_id)
+    except:
+        return HttpResponseRedirect(reverse('attendance:rulelist')) 
+
+    rule.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @csrf_exempt
 def rollcall(request):
@@ -256,6 +304,3 @@ def rollcall(request):
 
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
-
-def view_rule(request):
-    pass
