@@ -29,7 +29,7 @@ class User(models.Model):
     jupas_app_code = models.CharField(max_length=32, default="", blank=True)
     barcode = models.CharField(max_length=32, default=None, blank=True, unique=True)
     birth_date = models.DateField(auto_now=False, null=True, blank=True)
-    hkid_card = models.CharField(max_length=12, default="", blank=True, unique=True)
+    hkid_card = models.CharField(max_length=12, default=None, blank=True, unique=True)
     address = models.TextField(default="", blank=True)
     phone = models.CharField(max_length=24, default="", blank=True)
     mobile = models.CharField(max_length=24, default="", blank=True)
