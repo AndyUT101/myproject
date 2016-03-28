@@ -23,11 +23,11 @@ def apply_rule(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
-
+"""
     user = User.objects.get(username = request.session['user'])
     if not review_permission(user, 'allow:booking'):
         return HttpResponseRedirect(reverse('index_home'))
-
+"""
     applyform = ApplyForm()
 
     if request.method == 'POST':
