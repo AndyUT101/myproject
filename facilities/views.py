@@ -308,10 +308,6 @@ def view_room(request):
                    'url': 'facilities:add_room',
                    'html_class': 'assign_room'}),
 
-                ({'title':'Delete room information', 
-                   'url': 'facilities:remove_room',
-                   'html_class': 'delete_room'}),
-
                 ({'title':'View facility', 
                    'url': 'facilities:add_room',
                    'html_class': 'index'}),
