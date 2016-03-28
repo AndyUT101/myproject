@@ -92,7 +92,7 @@ def login(request):
         })
 
     ## Check password hash, assign session for logged user
-    if check_password(login_password, user_object.password_hash):
+    if check_password(login_password, user_object.password):
         if not already_logged:
             session_timeout_minutes = 120
             request.session.set_expiry(session_timeout_minutes * 60)
@@ -160,7 +160,7 @@ def add_user(request):
             commit_form =  user_form.save(commit=False)
             
             # 4. Hash the password object
-            commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+            commit_form.password = make_password(request.POST['password'], hasher='bcrypt')
             
             # 5. Apply to database
             commit_form.save()
@@ -265,13 +265,13 @@ def modify_user(request, username=None):
 
     elif request.method == 'POST':
         
-        # 3. Replace original password if request.POST get empty password_hash
+        # 3. Replace original password if request.POST get empty password
         modify_userobj = User.objects.get(username=username)
 
         perform_hashed = True
-        if len(request.POST['password_hash']) == 0:
+        if len(request.POST['password']) == 0:
             request.POST = request.POST.copy()
-            request.POST.update ({'password_hash': modify_userobj.password_hash})
+            request.POST.update ({'password': modify_userobj.password})
             perform_hashed = False
 
         # 3. (POST) Field check
@@ -283,7 +283,7 @@ def modify_user(request, username=None):
             
             # 4. If password is remain unchanged, skip update password
             if (perform_hashed):
-                commit_form.password_hash = make_password(request.POST['password_hash'], hasher='bcrypt')
+                commit_form.password = make_password(request.POST['password'], hasher='bcrypt')
 
             commit_form.save()
 
