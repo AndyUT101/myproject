@@ -204,7 +204,7 @@ ul.errorlist {
 */
 
 /* CSS nagivation bar */
-
+/*
 nav.topnav ul ul {
 	display: none;
 }
@@ -267,4 +267,43 @@ nav.topnav ul ul li a:hover {
 
 nav.topnav ul ul ul {
 	position: absolute; left: 100%; top:0;
+}*/
+
+nav.topnav
+{
+    /* container */
 }
+    nav.topnav > a
+    {
+        display: none;
+    }
+    nav.topnav li
+    {
+        position: relative;
+    }
+ 
+    /* first level */
+ 
+    nav.topnav > ul
+    {
+        height: 3.75em;
+    }
+        nav.topnav > ul > li
+        {
+            width: 25%;
+            height: 100%;
+            float: left;
+        }
+ 
+    /* second level */
+ 
+    nav.topnav li ul
+    {
+        display: none;
+        position: absolute;
+        top: 100%;
+    }
+        nav.topnav li:hover ul
+        {
+            display: block;
+        }
