@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
 
 from user.utils import user_alreadyloggedin, get_userrole
 from siteinfo.views import site_topnav
@@ -17,6 +18,7 @@ from user.models import User
 def rule_list(request):
     pass
 
+@csrf_exempt
 def rollcall(request):
     response_data = {}
 
