@@ -12,11 +12,41 @@ import json
 from datetime import datetime
 
 from .models import *
+from .forms import *
 from user.models import User
 
 # Create your views here.
 def rule_list(request):
     pass
+
+def apply_rule(request):
+    if request.method == 'POST':
+
+        form = ApplyForm(Request.POST)
+
+        return render(request, 'home.html', {
+        'page_title': 'Welcome home!',
+        'page_header': 'Good to seeing you, ',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'testing',
+        'content': {   
+            'list': {
+                'name': 'booking',
+                'body': form,
+            },
+        },
+    })
+
+    return render(request, 'home.html', {
+        'page_title': 'Room Reservation',
+        'page_header': 'Reserve for a room',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form.as_ul(),
+            'submit_url': 'booking:reserve',
+        },
+    })
 
 @csrf_exempt
 def rollcall(request):
