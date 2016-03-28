@@ -1,7 +1,9 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block content %}
 <header class="home_header">
-	{% if topnav %}<nav class="topnav">
+	{% if topnav %}<nav id="topnav" role="navigation">
+		<a href="#topnav" title="Show navigation">Show navigation</a>
+		<a href="#" title="Hide navigation">Hide navigation</a>
 		<ul>
 			<li class='index_url'><a href="{% url 'index_home' %}">SchoolPro</a></li>
 		{% for nav_item in topnav %}

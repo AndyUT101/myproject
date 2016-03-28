@@ -205,15 +205,15 @@ ul.errorlist {
 
 /* CSS nagivation bar */
 /*
-nav.topnav ul ul {
+nav#topnav ul ul {
 	display: none;
 }
 
-nav.topnav ul li:hover > ul {
+nav#topnav ul li:hover > ul {
 	display: block;
 }
 
-nav.topnav ul {
+nav#topnav ul {
 	background: #efefef; 
 	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
 	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
@@ -225,24 +225,24 @@ nav.topnav ul {
 	position: relative;
 	display: inline-table;
 }
-nav.topnav ul:after {
+nav#topnav ul:after {
 	content: ""; clear: both; display: block;
 }
 
-nav.topnav ul li {
+nav#topnav ul li {
 	float: left;
 }
-nav.topnav ul li:hover {
+nav#topnav ul li:hover {
 	background: #4b545f;
 	background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
 	background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
 	background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
 }
-nav.topnav ul li:hover a {
+nav#topnav ul li:hover a {
 	color: #fff;
 }
 	
-nav.topnav ul li a {
+nav#topnav ul li a {
 	display: block; padding: 25px 40px;
 	color: #757575; text-decoration: none;
 }
@@ -269,39 +269,39 @@ nav.topnav ul ul ul {
 	position: absolute; left: 100%; top:0;
 }*/
 
-/*
-nav.topnav
+
+nav#topnav
 {
 }
-    nav.topnav > a
+    nav#topnav > a
     {
         display: none;
     }
-    nav.topnav li
+    nav#topnav li
     {
         position: relative;
     }
  
  
-    nav.topnav > ul
+    nav#topnav > ul
     {
         height: 3.75em;
     }
-        nav.topnav > ul > li
+        nav#topnav > ul > li
         {
-            width: 25%;
+            width: 12.5%;
             height: 100%;
             float: left;
         }
  
  
-    nav.topnav li ul
+    nav#topnav li ul
     {
         display: none;
         position: absolute;
         top: 100%;
     }
-        nav.topnav li:hover ul
+        nav#topnav li:hover ul
         {
             display: block;
         }
@@ -309,21 +309,21 @@ nav.topnav
 
 @media only screen and ( max-width: 40em )
 {
-    nav.topnav
+    nav#topnav
     {
         position: relative;
     }
-        nav.topnav > a
+        nav#topnav > a
         {
         }
-        nav.topnav:not( :target ) > a:first-of-type,
-        nav.topnav:target > a:last-of-type
+        nav#topnav:not( :target ) > a:first-of-type,
+        nav#topnav:target > a:last-of-type
         {
             display: block;
         }
  
  
-    nav.topnav > ul
+    nav#topnav > ul
     {
         height: auto;
         display: none;
@@ -331,221 +331,19 @@ nav.topnav
         left: 0;
         right: 0;
     }
-        nav.topnav:target > ul
+        nav#topnav:target > ul
         {
             display: block;
         }
-        nav.topnav > ul > li
+        nav#topnav > ul > li
         {
             width: 100%;
             float: none;
         }
   
-    nav.topnav li ul
+    nav#topnav li ul
     {
         position: static;
     }
-} */
-
-		nav.topnav
-		{
-			width: 60em; /* 1000 */
-			font-family: 'Open Sans', sans-serif;
-			font-weight: 400;
-			position: absolute;
-			top: 25%;
-			left: 50%;
-			margin-left: -30em; /* 30 480 */
-		}
-
-			nav.topnav > a
-			{
-				display: none;
-			}
-
-			nav.topnav li
-			{
-				position: relative;
-			}
-				nav.topnav li a
-				{
-					color: #fff;
-					display: block;
-				}
-				nav.topnav li a:active
-				{
-					background-color: #c00 !important;
-				}
-
-			nav.topnav span:after
-			{
-				width: 0;
-				height: 0;
-				border: 0.313em solid transparent; /* 5 */
-				border-bottom: none;
-				border-top-color: #efa585;
-				content: '';
-				vertical-align: middle;
-				display: inline-block;
-				position: relative;
-				right: -0.313em; /* 5 */
-			}
-
-			/* first level */
-
-			nav.topnav > ul
-			{
-				height: 3.75em; /* 60 */
-				background-color: #e15a1f;
-			}
-				nav.topnav > ul > li
-				{
-					width: 25%;
-					height: 100%;
-					float: left;
-				}
-					nav.topnav > ul > li > a
-					{
-						height: 100%;
-						font-size: 1.5em; /* 24 */
-						line-height: 2.5em; /* 60 (24) */
-						text-align: center;
-					}
-						nav.topnav > ul > li:not( :last-child ) > a
-						{
-							border-right: 1px solid #cc470d;
-						}
-						nav.topnav > ul > li:hover > a,
-						nav.topnav > ul:not( :hover ) > li.active > a
-						{
-							background-color: #cc470d;
-						}
-
-
-				/* second level */
-
-				nav.topnav li ul
-				{
-					background-color: #cc470d;
-					display: none;
-					position: absolute;
-					top: 100%;
-				}
-					nav.topnav li:hover ul
-					{
-						display: block;
-						left: 0;
-						right: 0;
-					}
-						nav.topnav li:not( :first-child ):hover ul
-						{
-							left: -1px;
-						}
-						nav.topnav li ul a
-						{
-							font-size: 1.25em; /* 20 */
-							border-top: 1px solid #e15a1f;
-							padding: 0.75em; /* 15 (20) */
-						}
-							nav.topnav li ul li a:hover,
-							nav.topnav li ul:not( :hover ) li.active a
-							{
-								background-color: #e15a1f;
-							}
-
-
-		@media only screen and ( max-width: 62.5em ) /* 1000 */
-		{
-			nav.topnav
-			{
-				width: 100%;
-				position: static;
-				margin: 0;
-			}
-		}
-
-		@media only screen and ( max-width: 40em ) /* 640 */
-		{
-			html
-			{
-				font-size: 75%; /* 12 */
-			}
-
-			nav.topnav
-			{
-				position: relative;
-				top: auto;
-				left: auto;
-			}
-				nav.topnav > a
-				{
-					width: 3.125em; /* 50 */
-					height: 3.125em; /* 50 */
-					text-align: left;
-					text-indent: -9999px;
-					background-color: #e15a1f;
-					position: relative;
-				}
-					nav.topnav > a:before,
-					nav.topnav > a:after
-					{
-						position: absolute;
-						border: 2px solid #fff;
-						top: 35%;
-						left: 25%;
-						right: 25%;
-						content: '';
-					}
-					nav.topnav > a:after
-					{
-						top: 60%;
-					}
-
-				nav.topnav:not( :target ) > a:first-of-type,
-				nav.topnav:target > a:last-of-type
-				{
-					display: block;
-				}
-
-
-			/* first level */
-
-			nav.topnav > ul
-			{
-				height: auto;
-				display: none;
-				position: absolute;
-				left: 0;
-				right: 0;
-			}
-				nav.topnav:target > ul
-				{
-					display: block;
-				}
-				nav.topnav > ul > li
-				{
-					width: 100%;
-					float: none;
-				}
-					nav.topnav > ul > li > a
-					{
-						height: auto;
-						text-align: left;
-						padding: 0 0.833em; /* 20 (24) */
-					}
-						nav.topnav > ul > li:not( :last-child ) > a
-						{
-							border-right: none;
-							border-bottom: 1px solid #cc470d;
-						}
-
-
-				/* second level */
-
-				nav.topnav li ul
-				{
-					position: static;
-					padding: 1.25em; /* 20 */
-					padding-top: 0;
-				}
-		}
+}
+/*http://osvaldas.info/drop-down-navigation-responsive-and-touch-friendly*/
