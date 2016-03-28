@@ -46,7 +46,6 @@ def rule_list(request):
         },
     })
 
-
 def add_rule(request):
     # 1. Check permission
     if not user_alreadyloggedin(request):
@@ -98,7 +97,6 @@ def add_rule(request):
             'submit_url': 'attendance:add_rule',
         },
     })
-
 
 def apply_rule(request):
     # 1. Check permission
@@ -160,10 +158,62 @@ def apply_rule(request):
     })
 
 def remove_rule(request, rule_id):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:attendance_edit'):
+        return HttpResponseRedirect(reverse('index_home')) 
+
+    try:
+        rule = Rule.objects.get(pk = rule_id)
+    except:
+        return HttpResponseRedirect(reverse('attendance:rulelist')) 
+
+    rule.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Attendance rule assignment',
+        'page_header': 'Attendance rule assignment',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Rule delete successful',
+            'redirect_text': 'Attendance rule page',
+            'redirect_url': 'attendance:rulelist',
+            'auto_redirect': True,
+        },
+    })
 
 def edit_rule(request, rule_id):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'allow:attendance_edit'):
+        return HttpResponseRedirect(reverse('index_home')) 
+
+    try:
+        rule = Rule.objects.get(pk = rule_id)
+    except:
+        return HttpResponseRedirect(reverse('attendance:rulelist')) 
+
+    CLASS_CODE_OPTIONS = tuple((i.pk, i.class_name) for i in Class_code.objects.all())
+    applied_rule = rule.applied_rule_set.all()
+
+    if request.method == POST:
+    	pass
+
+    return render(request, 'home.html', {
+        'page_title': 'Room Reservation',
+        'page_header': 'Reserve for a room',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'testing',
+        'content': {
+            'form': CLASS_CODE_OPTIONS,
+            'submit_url': 'attendance:apply_rule',
+            'testing1': rule,
+            'test2': applied_rule,
+        },
+    })
 
 @csrf_exempt
 def rollcall(request):
