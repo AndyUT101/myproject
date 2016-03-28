@@ -52,14 +52,19 @@ def view_classroom(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user']):
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
+    c = get_contents(shortcode)
+
     return render(request, 'home.html', {
         'page_title': 'Classroom',
         'page_header': 'Classroom',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing', 
+        'template': 'classroom', 
         'content': {
-            'list': {
-                'body': get_contents(shortcode)
+            'classroom': {
+                'title': c['classroom'].name,
+                'count': get_contentscount(c),
+                'right_nav': right_nav(shortcode),
+                'right_notice': right_nav(shortcode),
             },
         },
     })

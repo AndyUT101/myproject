@@ -55,18 +55,41 @@ def get_contents(shortcode):
 
     announce = Announce.objects.filter(classroom=captured_classroom)
     assignment = Assignment.objects.filter(classroom=captured_classroom)
-    user_assign = User_assignment.objects.filter(classroom=captured_classroom)
+    user_assign_stu = User_assignment.objects.filter(classroom=captured_classroom, role='STU')
+    user_assign_tea = User_assignment.objects.filter(classroom=captured_classroom, role='TEA')
 
-    note = tuple(i.note for i in Classroom_note.objects.filter(classroom=captured_classroom))
-    note = tuple(n for n in note if n.status == 'P')
+    note = [i.note for i in Classroom_note.objects.filter(classroom=captured_classroom)]
+    note = [n for n in note if n.status == 'P']
 
-    material = tuple(i.material for i in Material_classroom.objects.filter(classroom=captured_classroom))
+    material = [i.material for i in Material_classroom.objects.filter(classroom=captured_classroom)]
 
     return {
         'classroom': captured_classroom,
         'announce': announce,
         'assignment': assignment,
-        'user_assign': user_assign,
+        'user_assign_stu': user_assign_stu,
+        'user_assign_tea': user_assign_tea,
         'note': note,
         'material': material,
     }
+
+def get_contentscount(contents_dict): 
+    for key in contents_dict:
+        contents_dict[key] = len(contents_dict[key])
+
+    return contents_dict
+
+def right_nav(shortcode):
+    return (
+                {'title': 'Announce','url': 'classroom:announce',
+                'url_para': shortcode,},
+
+                {'title': 'Assignment', 'url': 'classroom:assignment_list',
+                'url_para': shortcode, },
+
+                {'title': 'Note', 'url': 'classroom:note',
+                'url_para': shortcode, },
+
+                {'title': 'Note', 'url': 'classroom:note',
+                'url_para': shortcode, },
+            )
