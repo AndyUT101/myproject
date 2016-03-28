@@ -25,9 +25,9 @@ def rollcall(request):
         response_data['message'] = 'Please use POST to send the rollcall data'
 
     elif request.method == 'POST':
-    	card_id = request.POST.get('card_id', '')
-    	token = 'b8293a1035a1c929105ea870ecbef6f8'
-    	received_token = request.POST.get('token', '') == token
+        card_id = request.POST.get('card_id', '')
+        token = 'b8293a1035a1c929105ea870ecbef6f8'
+        received_token = request.POST.get('token', '') == token
 
         response_data['status'] = False
         response_data['message'] = 'Unknown situation'
