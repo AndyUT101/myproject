@@ -84,7 +84,7 @@ def add_rule(request):
         'template': 'form',
         'content': {
             'form': ruleform.as_ul(),
-            'submit_url': 'attendance:apply_rule',
+            'submit_url': 'attendance:add_rule',
         },
     })
 
@@ -95,7 +95,7 @@ def add_rule(request):
         'template': 'form',
         'content': {
             'form': ruleform.as_ul(),
-            'submit_url': 'attendance:apply_rule',
+            'submit_url': 'attendance:add_rule',
         },
     })
 
