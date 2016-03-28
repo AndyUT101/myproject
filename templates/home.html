@@ -307,7 +307,12 @@
 			<li>None</li>
 		{% else %}
 		{% for value in content.custom_rule.block2 %}
-			<li>{{ value.class_code.class_name }} <a href="{% url 'attendance:remove_arule' value.pk %}" class='remove_arule'>Remove applied</a></li>
+			<li>{{ value.class_code.class_name }} 
+				<ul>
+					<li>From {{ value.start_date }} to {{ value.end_date }}</li>
+					<li>{% if value.exclude_weekend %}Exclude Saturday, Sunday{% else %}<strong>NOT</strong> exclude Saturday, Sunday{% endif %}</li>
+					<li><a href="{% url 'attendance:remove_arule' value.pk %}" class='remove_arule'>Remove applied</a></li>
+				<ul></li>
 		{% endfor %}
 		{% endif %}
 		</ul>
