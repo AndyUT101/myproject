@@ -58,7 +58,7 @@ def view_classroom(request, shortcode):
         'page_title': 'Classroom',
         'page_header': 'Classroom',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'classroom', 
+        'template': 'testing', 
         'content': {
             'classroom': {
                 'title': c['classroom'].name,
