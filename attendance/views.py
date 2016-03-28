@@ -18,7 +18,7 @@ def rollcall(request):
 
     if request.method == 'GET':
         response_data['status'] = False
-        response_data['message'] = 'Please use POST to send the data'
+        response_data['message'] = 'Please use POST to send the rollcall data'
 
     elif request.method == 'POST':
         response_data['status'] = False
