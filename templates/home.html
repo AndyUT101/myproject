@@ -224,11 +224,11 @@
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td>{{ data.name }}/F</td>
+						<td><strong>{{ data.name }}</strong></td>
 						<td>{{ data.priority }}</td>
 						<td>{{ data.start_time }}</td>
 						<td>{{ data.end_time }}</td>
-						<td><li><a href="{% url 'facilities:remove_room' data.pk %}">Assign/edit rule to class</a></li><li><a href="{% url 'facilities:remove_room' data.pk %}">Delete rule</a></li></td>
+						<td><li><a href="{% url 'attendant:edit_rule' data.pk %}">Assign/edit rule to class</a></li><li><a href="{% url 'attendant:remove_rule' data.pk %}">Delete rule</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
