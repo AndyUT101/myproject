@@ -25,7 +25,7 @@ def site_overview(request):
 
     return render(request, 'home.html', {
         'page_header': page_title,
-        'template': 'list', # operation, list,
+        'template': 'testing', # operation, list,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
             'list': {
