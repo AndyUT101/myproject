@@ -36,7 +36,7 @@ def list_facilities_floor(request):
 
                 ({'title':'Delete facility', 
                    'url': 'facilities:delete',
-                   'html_class': 'delete_facility'}),
+                   'html_class': 'delete'}),
 
                 ({'title':'View room information', 
                    'url': 'facilities:view_room',
@@ -188,8 +188,8 @@ def remove_facilities(request):
         return HttpResponseRedirect(reverse('facilities:index'))
 
     # 2. Check delete confirmation
-    if not request.POST.get('remove_confirm', ''):
-        return HttpResponseRedirect(reverse('facilities:index'))
+    # if not request.POST.get('remove_confirm', ''):
+    #     return HttpResponseRedirect(reverse('facilities:index'))
 
     # 3. Collect checkbox list
     delete_list = request.POST.getlist('facilities_action')

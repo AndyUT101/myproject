@@ -12,6 +12,14 @@ $(document).ready(function(){
 		$('ul.errorlist li').prepend('&#x25BE; ');
 	}
 
+	// 
+	$('section.info_list form a.delete').click(function(){
+		$('section.info_list form').attr('method', 'POST');
+		$('section.info_list form').attr('action', $('section.info_list form a.delete').attr('href'));
+		$('section.info_list form a.delete_user').attr('href', '#')
+		$('section.info_list form').submit();
+	});
+
 });
 
 // $( "input[name='user_action']:checked" ).length

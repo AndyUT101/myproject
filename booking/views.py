@@ -16,6 +16,7 @@ from .models import Booking
 from .forms import BookingForm
 
 def room_booked(request):
+    page_title = 'All Booking'
     # 1. Check permission
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -28,8 +29,36 @@ def room_booked(request):
     booking_archive = Booking.objects.filter(user = user, book_date__lt=datetime.now()).order_by('end_lesson', 'book_date')[:5]
 
     return render(request, 'home.html', {
-        'page_title': 'Welcome home!',
-        'page_header': 'Good to seeing you, ',
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {   
+            'list': {
+                'name': 'booking',
+                'body': booking_active,
+                'body_footer': booking_archive,
+            },
+        },
+    })
+
+def all_booking(request):
+    page_title = 'All Booking'
+
+    # 1. Check permission
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    user = User.objects.get(username = request.session['user'])
+    if not review_permission(user, 'view:booking'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    booking_active = Booking.objects.filter(book_date__gte=datetime.now()).order_by('book_date','start_lesson')
+    booking_archive = Booking.objects.filter(book_date__lt=datetime.now()).order_by('end_lesson', 'book_date')[:5]
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {   
