@@ -223,6 +223,8 @@ nav#topnav{
     nav#topnav li
     {
         position: relative;
+        list-style-type: none;
+        padding: 10px;
     }
  
  
