@@ -6,7 +6,6 @@ urlpatterns = [
     # url(r'^(?P<process>.+)/(?P<user_id>[0-9]+)$', views.modify, name='modify'),
     url(r'^$', views.list_classroom, name='classroom_list'),
     url(r'^manage/$', views.manage_classroom, name='manage'),
-    url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom'),
     url(r'^(?P<shortcode>.+)/announce/$', views.announce, name='announce'),
     url(r'^(?P<shortcode>.+)/announce_all/$', views.announce_all, name='announce_all'),
     url(r'^(?P<shortcode>.+)/announce_add/$', views.announce_add, name='announce_add'),
@@ -22,8 +21,12 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/note/$', views.note, name='note'),
     url(r'^(?P<shortcode>.+)/note_add/$', views.note_add, name='note_add'),
     url(r'^(?P<shortcode>.+)/note_modify/$', views.note_modify, name='note_modify'),
-    url(r'^(?P<shortcode>.+)/note_remove/$', views.note_remove, name='note_remove')
+    url(r'^(?P<shortcode>.+)/note_remove/$', views.note_remove, name='note_remove'),
+
+    url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
+
 ]
+
 
 """
 view
