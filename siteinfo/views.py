@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Schoolinfo, Sitemap
 from user.models import User
 
-from .utils import *
+from .utils import data.name
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
 # Create your views here.
@@ -21,7 +21,7 @@ def site_overview(request):
     if not review_permission(User.objects.get(username = request.session['user']), 'allow:site_edit'):
         return HttpResponseRedirect(reverse('index_home'))
 
-    site_option = site_option()
+    site_option = Site_option()
 
     return render(request, 'home.html', {
         'page_header': page_title,

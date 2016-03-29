@@ -1,4 +1,4 @@
-def site_option():
+def Site_option():
     option = (
         ({'name': 'SiteNav editor',
             'url': 'siteinfo:sitemap_view'}),
