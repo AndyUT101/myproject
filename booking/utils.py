@@ -45,8 +45,3 @@ def occupied_lesson_id(date, facility):
                 lesson_id_list.append(lesson)
 
     return list(set(lesson_id_list))
-
-
-
-
-    pass

@@ -26,27 +26,3 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
 
 ]
-
-
-"""
-view
-announce
-announce_all
-announce_mod
-announce_del
-assignment_list
-assignment_add
-assignment_modify
-assignment_delete
-assignment_detail
-assignment_submit
-material
-material_upload
-material_remove
-note
-note_add
-note_modify
-note_remove
-"""
-
-

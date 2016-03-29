@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Schoolinfo, Sitemap
+from user.models import User
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
@@ -38,3 +39,38 @@ def site_topnav(user_level = 1):
         del item['top_level']
 
     return d['main']
+
+def sitemap_view(request):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    sitemap = Sitemap.objects.all()
+
+    return render(request, 'home.html', {
+        'page_header': 'Inbox',
+        'template': 'list', # operation, list,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'content': {
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Compose', 
+                   'url': 'siteinfo:sp_add',
+                   'html_class': 'sp_add'}),
+            ),
+            'list': {
+                'checkbox': True,
+                'name': 'sitemap',
+                'body': sitemap,
+                'foot': (),
+            },
+        },
+    })
+
+def sitemap_edit(request):
+    pass
+
+def sitemap_delete(request):
+    pass

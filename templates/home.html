@@ -201,7 +201,7 @@
 		</div>
 	{% endif %}	
 
-{% if content.list.name == 'booking_all' %}
+	{% if content.list.name == 'booking_all' %}
 		<div class="list_table">
 			<table>
 				<thead>
@@ -337,6 +337,36 @@
 						<td>{% if data.status == 'O' %}Open{% else %}Close{% endif %}</td>
 						{% if content.list.name == 'classroom_manage' %}<td>
 						<li>{% if data.status == 'O' %}<a href="{% url 'classroom:manage' %}?close={{ data.shortcode }}">Close classroom</a>{% else %}<a href="{% url 'classroom:manage' %}?open={{ data.shortcode }}">Open classroom</a>{% endif %}</li><li><a href="{% url 'classroom:manage' %}?delete={{ data.shortcode }}">Delete classroom</a></li></td>{% endif %}
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
+	{% if content.list.name == 'sitemap' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Title</td>
+						<td>Order</td>
+						<td>level</td>
+						<td>Url route</td>
+						<td>Top level</td>
+						<td>Operation</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.title }}</strong></td>
+						<td>{{ data.order }}</td>
+						<td>{{ data.level }}</td>
+						<td>{{ data.url_route }}</td>
+						<td>{{ data.top_level.title }}</td>
+						<td><li><a href="{% url 'sitemap:sp_edit' data.pk %}">Assign/edit sitemap (Advance)</a></li><li><a href="{% url 'sitemap:sp_del' data.pk %}">Delete sitemap rule</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
