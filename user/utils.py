@@ -37,7 +37,7 @@ def review_permission(user, permission):
 
     # 2. Check user right fulfill key requirement
     key_require = key.level
-    user_level = User.objects.get(username=user).role.level
+    user_level = User.objects.get(pk=user.pk).role.level
 
     if key_require <= user_level:
         has_right = True
