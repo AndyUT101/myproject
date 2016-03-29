@@ -13,6 +13,7 @@
 				{% for nav_subitem in nav_item.sub_menu %}<li><a href="{% url nav_subitem.url_route %}">{{ nav_subitem.title }}</a></li>{% endfor %}
 			</ul>{% endif %}</li>
 		{% endfor %}
+			<li class='index_logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 	</nav>{% endif %}
 	<div class="heading-content">
@@ -32,7 +33,6 @@
 			<li class="active_classroom"><span class="classroom_emoji">&nbsp;</span><a href="{% url 'classroom:classroom_list' %}">{{ content.notification.classroom }} classroom{% if content.notification.classroom > 1 %}s{% endif %}</a></li>
 		{% endif %}{% endif %}
 
-			<li class='logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 		{% endif %}
 	</div>
