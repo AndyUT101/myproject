@@ -353,7 +353,7 @@
 {% if template == 'notification' %}
 	<section class="notification">
 		{% if content.notification %}<h1 class="notification_title">{{ content.notification }}</h1>{% endif %}
-		{% if content.auto_redirect %}You will automatically be redirected to <a href="{% url content.redirect_url %}">{{ content.redirect_text }}</a> in 5 seconds...<script>setTimeout('window.location="{% url content.redirect_url %}"', 5000)</script>{% endif %}
+		{% if content.auto_redirect %}You will automatically be redirected to <a href="{% if content.redirect_para %}{% url content.redirect_url content.redirect_para %}{% else %}{% url content.redirect_url %}{% endif %}">{{ content.redirect_text }}</a> in 5 seconds...<script>setTimeout('window.location="{% url content.redirect_url %}"', 5000)</script>{% endif %}
 	</section>
 {% endif %}
 

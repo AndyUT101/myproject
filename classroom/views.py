@@ -167,6 +167,7 @@ def announce_add(request, shortcode):
                     'redirect_text': 'all announcement',
                     'redirect_url': return_url,
                     'auto_redirect': True,
+                    'redirect_para': shortcode,
                 },
             })
         else:
