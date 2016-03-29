@@ -357,7 +357,7 @@
 {% if template == 'notification' %}
 	<section class="notification">
 		{% if content.notification %}<h1 class="notification_title">{{ content.notification }}</h1>{% endif %}
-		{% if content.auto_redirect %}You will automatically be redirected to <a href="{% if content.redirect_para %}{% if content.route_parameter2 %}{% url content.redirect_url content.redirect_para2 %}{% else %}{% url content.redirect_url content.redirect_para %}{% endif %}{% else %}{% url content.redirect_url %}{% endif %}">{{ content.redirect_text }}</a> in 5 seconds...<script>setTimeout('window.location="{% if content.redirect_para %}{% url content.redirect_url content.redirect_para %}{% else %}{% url content.redirect_url %}{% endif %}"', 5000)</script>{% endif %}
+		{% if content.auto_redirect %}You will automatically be redirected to <a href="{% if content.redirect_para %}{% if content.route_parameter2 %}{% url content.redirect_url content.redirect_para content.redirect_para2 %}{% else %}{% url content.redirect_url content.redirect_para %}{% endif %}{% else %}{% url content.redirect_url %}{% endif %}">{{ content.redirect_text }}</a> in 5 seconds...<script>setTimeout('window.location="{% if content.redirect_para %}{% url content.redirect_url content.redirect_para %}{% else %}{% url content.redirect_url %}{% endif %}"', 5000)</script>{% endif %}
 	</section>
 {% endif %}
 
