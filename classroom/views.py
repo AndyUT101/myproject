@@ -104,9 +104,9 @@ def announce_all(request, shortcode):
         return HttpResponseRedirect(reverse('index'))
 
     memberinfo = is_memberinfo(shortcode, request.session['user'])
-    
+
     if not memberinfo[0]:
-        return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
+        return HttpResponseRedirect(reverse('classroom:classroom', args=[shortcode]))
 
     permission = allow_contentadd(memberinfo[1])
 
