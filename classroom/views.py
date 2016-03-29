@@ -123,6 +123,7 @@ def announce_all(request, shortcode):
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add announcement', 
                    'url': 'classroom:announce_add',
+                   'url_para': shortcode,
                    'html_class': 'add_announcement'}),
             ),
             'list': {
