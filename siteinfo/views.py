@@ -31,7 +31,19 @@ def site_overview(request):
             'list': {
                 'checkbox': True,
                 'name': 'overview',
-                'body': site_overview,
+                'body': (
+                    ({'name': 'SiteNav editor',
+                        'url': 'siteinfo:sitemap_view'}),
+
+                    ({'name': 'Classroom management',
+                        'url': 'classroom:manage'}),
+
+                    ({'name': 'User management',
+                        'url': 'user'}),
+
+                    ({'name': 'Class management',
+                        'url': 'user'}),
+                ),
                 'foot': (),
             },
         },
