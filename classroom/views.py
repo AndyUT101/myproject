@@ -81,6 +81,7 @@ def announce(request, shortcode):
     c = get_contents(shortcode)
 
     announce_data = c['announce'].order_by('-announce_date')
+    announce_count = len(announce_data)
 
     return render(request, 'home.html', {
         'page_title': 'Announcement: '+c['classroom'].name,
@@ -145,7 +146,7 @@ def announce_add(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo[0] or not permission:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
 
     form_obj = AnnounceForm()
@@ -206,17 +207,17 @@ def announce_del(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo[0] or not permission:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     delete_index = request.GET.get('delete', '')
     if not delete_index:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url)], args=[shortcode])
 
     # delete announce
     try:
         announce = Announce.objects.get(pk = delete_index)
     except ObjectDoesNotExist:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     announce.delete()
 
@@ -281,7 +282,7 @@ def assignment_add(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo or not permission:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
 
     form_obj = AssignmentForm()
@@ -339,17 +340,17 @@ def assignment_delete(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo[0] or not permission:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     delete_index = request.GET.get('delete', '')
     if not delete_index:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     # delete assignment
     try:
         assignment = Assignment.objects.get(pk = delete_index)
     except ObjectDoesNotExist:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     assignment.delete()
 
@@ -377,7 +378,7 @@ def assignment_detail(request, shortcode, assignment_id):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo or not classroom_has_assignment(shortcode, assignment_id):
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     assignment_obj = Assignemnt.objects.get(pk = assignment_id)
 
@@ -406,7 +407,7 @@ def assignment_submit(request, shortcode, assignment_id):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     form_obj = Assignment_submitForm()
     if request.method == 'POST':
