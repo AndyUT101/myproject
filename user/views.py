@@ -359,7 +359,7 @@ def list_user(request, specific_usertype=None, classcode=None):
     # 1. Define list page count
     user_count = user_object.count()
     max_page = math.ceil(user_count/row_count)
-    if page > max_page and max_page > 0::
+    if page > max_page and max_page > 0:
         return HttpResponseRedirect(reverse('user:list_user'))
 
     user_list = user_object[row_count*(page-1):row_count+row_count*(page-1)]
