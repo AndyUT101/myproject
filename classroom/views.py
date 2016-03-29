@@ -77,22 +77,6 @@ def announce(request, shortcode):
 
     announce_data = c['announce'].order_by('-announce_date')
 
-    return render(request, 'home.html', {
-        'page_title': 'Announcement: '+c['classroom'].name,
-        'page_header': 'Announcement: '+c['classroom'].name,
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'classroom', 
-        'content': {
-            'shortcode': shortcode,
-            'classroom': {
-                'title': 'Recently announcement',
-                'count': announce_count,
-                'right_nav': right_nav(shortcode),
-                'right_notice': right_nav(shortcode),
-                'content': announce_data,
-            },
-        },
-    })
 
 def announce_all(request, shortcode):
     if not user_alreadyloggedin(request):
