@@ -61,7 +61,7 @@
 			<p>You have {{ content.notification.classroom }} classroom.</p>
 			<ul>
 			{% for c in content.block2.content %}
-			<li><a href="{% url 'classroom:classroom' c.classroom.name %}">{{ c.name }}</a></li>
+			<li><a href="{% url 'classroom:classroom' c.classroom.name %}">{{ c.classroom.name }}</a></li>
 			{% endfor %}
 			</ul>
 			</div>
@@ -74,10 +74,10 @@
 			<h3>{{ content.block3.title }}</h3>
 			<div>
 			<ul>
-			<li><strong>{{ content.block3.username }}</strong></li>
-			<li><strong>{{ content.block3.role }}</strong></li>
-			<li>{{ content.block3.lastname }} {{ content.block3.firstname }}</li>
-			<li>Last logged: {{ content.block3.last_logged }}</li>
+			<li><strong>{{ content.block3.content.username }}</strong></li>
+			<li><strong>{{ content.block3.content.role }}</strong></li>
+			<li>{{ content.block3.content.lastname }} {{ content.block3.content.firstname }}</li>
+			<li>Last logged: {{ content.block3.content.last_logged }}</li>
 			</ul>
 			</div>
 		</div>
