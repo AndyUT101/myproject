@@ -217,8 +217,6 @@ def delete_msg(request):
         return HttpResponseRedirect(reverse('index'))
 
     # 2. Check delete confirmation
-    if not request.POST.get('remove_confirm', ''):
-        return HttpResponseRedirect(reverse('inbox:view'))
 
     # 3. Collect checkbox list
     delete_list = request.POST.getlist('msg_action')

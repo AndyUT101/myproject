@@ -10,11 +10,31 @@ from user.models import User
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
 # Create your views here.
-def management_panel(request):
-    pass
 
 def site_overview(request):
-    pass
+    page_title = 'Site management'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:site_edit'):
+        return HttpResponseRedirect(reverse('index_home'))
+
+    site_option = site_option()
+
+    return render(request, 'home.html', {
+        'page_header': page_title,
+        'template': 'list', # operation, list,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'content': {
+            'list': {
+                'checkbox': True,
+                'name': 'sitemap',
+                'body': site_overview,
+                'foot': (),
+            },
+        },
+    })
 
 def site_topnav(user_level = 1):
     sitemap_obj = Sitemap.objects.all().filter(level__lte=user_level).order_by('order')
@@ -41,12 +61,12 @@ def site_topnav(user_level = 1):
     return d['main']
 
 def sitemap_view(request):
-    page_title = 'Sitemap editor'
+    page_title = 'SiteNav editor'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:site_edit'):
         return HttpResponseRedirect(reverse('index_home'))
 
     sitemap = Sitemap.objects.all()
