@@ -23,10 +23,12 @@ class User_assignmentForm(ModelForm):
         model = User_assignment
         fields = '__all__'
 
-class Assignment_poolForm(ModelForm):
+class Assignment_submitForm(ModelForm):
     class Meta:
         model = Assignment_pool
         fields = '__all__'
+
+        exclude = ['assignment', 'mark', 'user_assign']
 
 class NoteForm(ModelForm):
     class Meta:

@@ -392,6 +392,7 @@ def assignment_detail(request, shortcode, assignment_id):
 
 def assignment_submit(request, shortcode, assignment_id):
     page_title = 'Assignment submission'
+    submit_url = 'classroom:assignment_submit'
     return_url = 'classroom:assignment_detail'
 
     if not user_alreadyloggedin(request):
@@ -403,6 +404,45 @@ def assignment_submit(request, shortcode, assignment_id):
     if not memberinfo or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url))
 
+    form_obj = Assignment_submitForm()
+    if request.method == 'POST':
+        form_obj = Assignment_submitForm(request.POST, request.FILES)
+
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form',
+            'content': {
+                'form': form_obj.as_ul(),
+                'submit_url': submit_url,
+            },
+        })
+
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'Assignment delete successful',
+                'redirect_text': 'all assignment',
+                'redirect_url': return_url,
+                'auto_redirect': True,
+            },
+        })
+
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+        },
+    })
 
 
 def material(request, shortcode):
