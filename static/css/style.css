@@ -293,6 +293,8 @@ nav#topnav
 section.index_block {
 	float: left;
 	min-height: 400px;
+    width: 33%;
+    padding: 10px;
 }
 .clearfix {
 	clear: both;
