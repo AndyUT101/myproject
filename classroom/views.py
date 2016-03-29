@@ -246,6 +246,7 @@ def assignment_list(request, shortcode):
     c = get_contents(shortcode)
 
     assignment_data = c['assignment'].order_by('-deadline_datetime')
+    assignment_count = len(assignment_data)
 
     return render(request, 'home.html', {
         'page_title': 'Announcement: '+c['classroom'].name,
@@ -256,7 +257,7 @@ def assignment_list(request, shortcode):
             'shortcode': shortcode,
             'classroom': {
                 'title': 'Recently announcement',
-                'count': announce_count,
+                'count': assignment_count,
                 'right_nav': right_nav(shortcode),
                 'right_notice': right_nav(shortcode),
                 'content': assignment_data,
