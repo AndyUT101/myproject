@@ -375,6 +375,29 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'overview' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Administration tools</td>
+						<td>Operation</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.name }}</strong></td>
+						<td><li><a href="{% url data.url %}">Use the tools</a></li></td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
+
 		<div class="page_nav">
 			{% if content.page_nav.page %}
 			<div class="page_idx">

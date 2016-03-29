@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Schoolinfo, Sitemap
 from user.models import User
 
+from .utils import *
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
 # Create your views here.
@@ -29,7 +30,7 @@ def site_overview(request):
         'content': {
             'list': {
                 'checkbox': True,
-                'name': 'sitemap',
+                'name': 'overview',
                 'body': site_overview,
                 'foot': (),
             },
