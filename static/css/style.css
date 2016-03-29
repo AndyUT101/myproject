@@ -193,6 +193,14 @@ ul.errorlist {
 	font-size: 0.7em;
 	color: #f00;
 }
+
+div.list_table {
+	overflow-x:auto;
+}
+
+div.list_table table {
+	width: 100%;
+}
 /* nav bar
 
     padding: 10px;
