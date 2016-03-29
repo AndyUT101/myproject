@@ -18,6 +18,19 @@ def is_memberinfo(shortcode, username):
 
     return (True, captured_assignment.role)
 
+def user_assign_assignment(username, assignment_id):
+    try:
+        captured_user = User.objects.get(username=username)
+        captured_classroom = Classroom.objects.get(shortcode=shortcode)
+
+        captured_assignment = User_assignment.objects.get(user=captured_user, classroom=captured_classroom)
+
+        return captured_assignment
+        
+    except ObjectDoesNotExist:
+        return False
+
+
 def allow_contentadd(role):
     if role == 'TEA' or role == 'ADM':
         return True

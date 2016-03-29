@@ -421,6 +421,27 @@ def assignment_submit(request, shortcode, assignment_id):
     if request.method == 'POST':
         form_obj = Assignment_submitForm(request.POST, request.FILES)
 
+        if form_obj.is_valid():
+
+            form_obj = form_obj.save(commit=False)
+            form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
+            form_obj.assignment = Assignment.objects.get(pk=assignment_id)
+            form_obj.save()
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Assignment submit successful',
+                    'redirect_text': 'all assignment',
+                    'redirect_url': return_url,
+                    'redirect_para': shortcode,
+                    'auto_redirect': True,
+                },
+            })
+
         return render(request, 'home.html', {
             'page_title': page_title,
             'page_header': page_title,
@@ -433,21 +454,6 @@ def assignment_submit(request, shortcode, assignment_id):
                 'route_parameter2': assignment_id,
             },
         })
-
-        return render(request, 'home.html', {
-            'page_title': page_title,
-            'page_header': page_title,
-            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'notification',
-            'content': {
-                'notification': 'Assignment submit successful',
-                'redirect_text': 'all assignment',
-                'redirect_url': return_url,
-                'redirect_para': shortcode,
-                'auto_redirect': True,
-            },
-        })
-
 
     return render(request, 'home.html', {
         'page_title': page_title,
