@@ -42,7 +42,7 @@ class User(models.Model):
     role = models.ForeignKey(Role, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
-        return self.username
+        return self.lastname + self.firstname
 
 class Permission_meta(models.Model):
     key = models.CharField(max_length=255, default="")
