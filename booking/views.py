@@ -16,7 +16,7 @@ from .models import Booking
 from .forms import BookingForm
 
 def room_booked(request):
-    page_title = 'All Booking'
+    page_title = 'My Booking'
     # 1. Check permission
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -33,7 +33,30 @@ def room_booked(request):
         'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
-        'content': {   
+        'content': {
+            'operation': ( 
+                ({'title':'Make booking', 
+                   'url': 'booking:reserve',
+                   'html_class': 'booking'}),
+                ({'title':'View all booking', 
+                   'url': 'booking:all',
+                   'html_class': 'view_booking'}),
+            ),
+            'list': {
+                'checkbox': True,
+                'name': 'inbox',
+                'body': inbox_msg,
+                'foot': (),
+            },
+            'page_nav': { 
+                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
+                'message': '',
+                'page': {
+                    'current_page': page,
+                    'max_page': max_page,
+                },
+            },
+
             'list': {
                 'name': 'booking',
                 'body': booking_active,
@@ -61,7 +84,15 @@ def all_booking(request):
         'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
-        'content': {   
+        'content': {
+            'operation': ( 
+                ({'title':'Make booking', 
+                   'url': 'booking:reserve',
+                   'html_class': 'booking'}),
+                ({'title':'View my booking', 
+                   'url': 'booking:index',
+                   'html_class': 'view_booking'}),
+            ),
             'list': {
                 'name': 'booking_all',
                 'body': booking_active,
