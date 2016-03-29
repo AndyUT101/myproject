@@ -8,9 +8,9 @@ $(document).ready(function(){
 	}
 
 	// errorlist style
-	$('ul.errorlist li').each(function([index]){
-		$('ul.errorlist li')[index].html('&#x25BE; '+$('ul.errorlist li')[index].html());
-	})
+	if ($('ul.errorlist li').length > 0) {
+		$('ul.errorlist li').prepend('&#x25BE; ');
+	}
 
 });
 
