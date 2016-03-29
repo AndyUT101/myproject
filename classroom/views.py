@@ -45,7 +45,6 @@ def list_classroom(request):
 def manage_classroom(request):
     pass
 
-
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -69,7 +68,6 @@ def view_classroom(request, shortcode):
             },
         },
     })
-
 
 def announce(request, shortcode):
     if not user_alreadyloggedin(request):
@@ -469,7 +467,6 @@ def assignment_submit(request, shortcode, assignment_id):
         },
     })
 
-
 def material(request, shortcode):
     pass
 
@@ -490,23 +487,3 @@ def note_modify(request, shortcode):
 
 def note_remove(request, shortcode):
     pass
-
-"""
-announce
-announce_all
-announce_mod
-announce_del
-assignment_list
-assignment_add
-assignment_modify
-assignment_delete
-assignment_detail
-assignment_submit
-material
-material_upload
-material_remove
-note
-note_add
-note_modify
-note_remove
-"""

@@ -16,7 +16,7 @@ from siteinfo.views import site_topnav
 
 # Create your views here.
 # helper function
-def list_report():
+def list_report(request):
     pass
 
 def generate_report(request):

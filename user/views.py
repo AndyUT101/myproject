@@ -400,10 +400,12 @@ def list_user(request, specific_usertype=None, classcode=None):
                     'current_page': page,
                     'max_page': max_page,
                 },
+                'filter': {
+                    'usertype': 'student',
+                }
             },
         },
-    })
-
+    })    
     # case 1: list all user v
     # case 2: list specific_usertype
     # case 3: filter class_code
