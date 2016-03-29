@@ -13,7 +13,6 @@
 				{% for nav_subitem in nav_item.sub_menu %}<li><a href="{% url nav_subitem.url_route %}">{{ nav_subitem.title }}</a></li>{% endfor %}
 			</ul>{% endif %}</li>
 		{% endfor %}
-			<li class='index_logout'><a href="{% url 'user:logout' %}">Logout</a></li>
 		</ul>
 	</nav>{% endif %}
 	<div class="heading-content">

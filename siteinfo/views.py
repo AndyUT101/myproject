@@ -41,6 +41,8 @@ def site_topnav(user_level = 1):
     return d['main']
 
 def sitemap_view(request):
+    page_title = 'Sitemap editor'
+
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
@@ -50,7 +52,7 @@ def sitemap_view(request):
     sitemap = Sitemap.objects.all()
 
     return render(request, 'home.html', {
-        'page_header': 'Inbox',
+        'page_header': page_title,
         'template': 'list', # operation, list,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
