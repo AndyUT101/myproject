@@ -72,11 +72,6 @@ def view_classroom(request, shortcode):
 
 
 def announce(request, shortcode):
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    if not is_memberinfo(shortcode, request.session['user'])[0]:
-        return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
     c = get_contents(shortcode)
 
