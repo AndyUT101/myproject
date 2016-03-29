@@ -178,6 +178,7 @@ def announce_add(request, shortcode):
                 'content': {
                     'form': form_obj.as_ul(),
                     'submit_url': submit_url,
+                    'route_parameter': shortcode,
                 },
             })
 
