@@ -55,8 +55,7 @@ def sitemap_view(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
             'operation': ( 
-                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Compose', 
+                ({'title':'Edit site nav', 
                    'url': 'siteinfo:sp_add',
                    'html_class': 'sp_add'}),
             ),
