@@ -141,10 +141,10 @@ def announce_add(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
 
-    if not memberinfo or not permission:
+    if not memberinfo[0] or not permission:
         return HttpResponseRedirect(reverse(return_url))
 
 
@@ -199,10 +199,10 @@ def announce_del(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
 
-    if not memberinfo or not permission:
+    if not memberinfo[0] or not permission:
         return HttpResponseRedirect(reverse(return_url))
 
     delete_index = request.GET.get('delete', '')
@@ -332,10 +332,10 @@ def assignment_delete(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
 
-    if not memberinfo or not permission:
+    if not memberinfo[0] or not permission:
         return HttpResponseRedirect(reverse(return_url))
 
     delete_index = request.GET.get('delete', '')
@@ -399,10 +399,10 @@ def assignment_submit(request, shortcode, assignment_id):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
 
-    if not memberinfo or not classroom_has_assignment(shortcode, assignment_id):
+    if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url))
 
     form_obj = Assignment_submitForm()
