@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from datetime import datetime, timedelta
 from django.core.exceptions import ObjectDoesNotExist
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
@@ -190,15 +191,72 @@ def announce_add(request, shortcode):
         },
     })
 
-
-def announce_mod(request, shortcode):
-    pass
-
 def announce_del(request, shortcode):
-    pass
+    page_title = 'Remove announcement'
+    return_url = 'classroom:announce_all'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo or not permission:
+        return HttpResponseRedirect(reverse(return_url))
+
+    delete_index = request.GET.get('delete', '')
+    if not delete_index:
+        return HttpResponseRedirect(reverse(return_url))
+
+    # delete announce
+    try:
+        announce = Announce.objects.get(pk = delete_index)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse(return_url))
+
+    announce.delete()
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Announcement delete successful',
+            'redirect_text': 'all announcement',
+            'redirect_url': return_url,
+            'auto_redirect': True,
+        },
+    })
 
 def assignment_list(request, shortcode):
-    pass
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    c = get_contents(shortcode)
+
+    assignment_data = c['assignment'].order_by('-deadline_datetime')
+    
+    return render(request, 'home.html', {
+        'page_title': 'Announcement: '+c['classroom'].name,
+        'page_header': 'Announcement: '+c['classroom'].name,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'classroom', 
+        'content': {
+            'shortcode': shortcode,
+            'classroom': {
+                'title': 'Recently announcement',
+                'count': announce_count,
+                'right_nav': right_nav(shortcode),
+                'right_notice': right_nav(shortcode),
+                'content': assignment_data,
+            },
+        },
+    })
 
 def assignment_add(request, shortcode):
     pass

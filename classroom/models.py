@@ -37,6 +37,10 @@ class Announce(models.Model):
     content = models.TextField(default="")
     announce_date = models.DateTimeField(default=timezone.now)
 
+class Assignment_format(models.Model):
+    datatype = models.CharField(max_length=255)
+    dataext = models.CharField(max_length=255)
+
 class Assignment(models.Model):
     """
     title
@@ -52,7 +56,7 @@ class Assignment(models.Model):
         ('U', 'Upload'),
         ('T', 'Text'),
     )
-    handin_method = models.CharField(max_length=1, choices=METHOD_CHOICE, default="D")
+    upload_format = models.ForeignKey(Assignment_format, on_delete=models.CASCADE, default="")
     deadline_datetime = models.DateTimeField(default=timezone.now)
     fullmark = models.PositiveSmallIntegerField(default=100)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, default="")
