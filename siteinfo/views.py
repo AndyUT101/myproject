@@ -33,7 +33,7 @@ def site_overview(request):
                 'name': 'overview',
                 'body': (
                     ({'name': 'SiteNav editor',
-                        'url': 'siteinfo:sitemap_view'}),
+                        'url': 'siteinfo:sp_view'}),
 
                     ({'name': 'Classroom management',
                         'url': 'classroom:manage'}),
