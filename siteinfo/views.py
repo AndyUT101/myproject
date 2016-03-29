@@ -72,5 +72,5 @@ def sitemap_view(request):
 def sitemap_edit(request, sitemap_id):
     pass
 
-def sitemap_delete(request):
+def sitemap_delete(request, sitemap_id):
     pass

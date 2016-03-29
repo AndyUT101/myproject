@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^$', views.site_overview, name='overview'),
     url(r'^sitemap_view/$', views.sitemap_view, name='sp_view'),
     url(r'^sitemap_edit/(?P<sitemap_id>[0-9]+)$', views.sitemap_edit, name='sp_edit'),
-    url(r'^sitemap_delete/$', views.sitemap_delete, name='sp_del'),
+    url(r'^sitemap_delete/(?P<sitemap_id>[0-9]+)$', views.sitemap_delete, name='sp_del'),
     url(r'^sitemap_add/$', views.sitemap_delete, name='sp_add'),
 ]
