@@ -63,7 +63,7 @@ def all_booking(request):
         'template': 'list',
         'content': {   
             'list': {
-                'name': 'booking',
+                'name': 'booking_all',
                 'body': booking_active,
                 'body_footer': booking_archive,
             },
