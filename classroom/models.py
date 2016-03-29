@@ -86,7 +86,7 @@ class Assignment_pool(models.Model):
     content (json form)
     """
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE, default="")
-    content_json = models.TextField(default="")
+    content = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
     mark = models.PositiveSmallIntegerField(default=100)
     user_assign = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
 
