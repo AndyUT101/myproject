@@ -284,7 +284,30 @@ def add_room(request):
             })
 
 def remove_room(request, room_id):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:facilities_delete'):
+        return HttpResponseRedirect(reverse('facilities:index'))
+
+    room_removeobj = Room.objects.filter(pk = room_id)
+    room_removeobj.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Remove Room',
+        'page_header': 'Remove Room',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Remove remove successful',
+            'redirect_text': 'Room page',
+            'redirect_url': 'facilities:view_room',
+            'auto_redirect': True,
+        },
+    })
+
+    else:
+        return HttpResponseRedirect(reverse('facilities:view_room'))
 
 def view_room(request):
     if not user_alreadyloggedin(request):
