@@ -304,6 +304,7 @@ def assignment_add(request, shortcode):
                     'notification': 'Assignment add successful',
                     'redirect_text': 'all assignment',
                     'redirect_url': return_url,
+                    'redirect_para': shortcode,
                     'auto_redirect': True,
                 },
             })
@@ -364,6 +365,7 @@ def assignment_delete(request, shortcode):
             'notification': 'Assignment delete successful',
             'redirect_text': 'all assignment',
             'redirect_url': return_url,
+            'redirect_para': shortcode,
             'auto_redirect': True,
         },
     })
@@ -434,6 +436,7 @@ def assignment_submit(request, shortcode, assignment_id):
                 'notification': 'Assignment delete successful',
                 'redirect_text': 'all assignment',
                 'redirect_url': return_url,
+                'redirect_para': shortcode,
                 'auto_redirect': True,
             },
         })
