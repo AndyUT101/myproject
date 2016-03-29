@@ -173,7 +173,7 @@ div.operation li:last {
 }
 
 section.content_form form li {
-	display: inline-block;
+	display: block;
 	margin: 10px 0;
 }
 
