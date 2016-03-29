@@ -317,6 +317,7 @@ def assignment_add(request, shortcode):
                 'content': {
                     'form': form_obj.as_ul(),
                     'submit_url': submit_url,
+                    'route_parameter': shortcode,
                 },
             })
 
@@ -328,6 +329,7 @@ def assignment_add(request, shortcode):
         'content': {
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
+            'route_parameter': shortcode,
         },
     })
 
@@ -424,6 +426,7 @@ def assignment_submit(request, shortcode, assignment_id):
             'content': {
                 'form': form_obj.as_ul(),
                 'submit_url': submit_url,
+                'route_parameter': shortcode,
             },
         })
 
@@ -450,6 +453,7 @@ def assignment_submit(request, shortcode, assignment_id):
         'content': {
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
+            'route_parameter': shortcode,
         },
     })
 
