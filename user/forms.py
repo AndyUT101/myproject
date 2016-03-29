@@ -7,13 +7,13 @@ class UserForm(ModelForm):
         model = User
         fields = '__all__'
         widgets = {
-            'password_hash': forms.PasswordInput(),
+            'password': forms.PasswordInput(),
 
         }
         exclude = ('last_logged', )
 
-    def clean_password_hash(self):
-        data = self.cleaned_data['password_hash']
+    def clean_password(self):
+        data = self.cleaned_data['password']
         if len(data) < 8:
             raise forms.ValidationError('The password should as least 8 characters long.')
 
@@ -25,6 +25,6 @@ class UsermodForm(UserForm):
         model = User
         fields = '__all__'
         widgets = {
-            'password_hash': forms.PasswordInput(),
+            'password': forms.PasswordInput(),
         }
         exclude = ('username', 'last_logged', )
