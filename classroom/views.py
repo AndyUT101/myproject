@@ -153,7 +153,7 @@ def announce_add(request, shortcode):
         form_obj = AnnounceForm(request.POST)
 
         if form_obj.is_valid():
-            form_obj.save(commit=False)
+            form_obj = form_obj.save(commit=False)
             form_obj.classroom = Classroom.objects.get(shortcode = shortcode)
             form_obj.save()
 
@@ -288,7 +288,7 @@ def assignment_add(request, shortcode):
         form_obj = AssignmentForm(request.POST)
 
         if form_obj.is_valid():
-            form_obj.save(commit=False)
+            form_obj = form_obj.save(commit=False)
             form_obj.classroom = Classroom.objects.get(shortcode = shortcode)
             form_obj.save()
 
