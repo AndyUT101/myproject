@@ -36,6 +36,7 @@ h1.login_header img {
 .login_infofield .design_wrapper, .login_submitfield .design_wrapper {
 	width: 80%;
 	margin: 14px auto;
+	min-height: 30px;
 }
 
 .login_infofield {
