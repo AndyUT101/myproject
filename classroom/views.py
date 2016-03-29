@@ -230,6 +230,7 @@ def announce_del(request, shortcode):
             'notification': 'Announcement delete successful',
             'redirect_text': 'all announcement',
             'redirect_url': return_url,
+            'redirect_para': shortcode,
             'auto_redirect': True,
         },
     })
