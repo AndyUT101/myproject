@@ -94,3 +94,11 @@ def right_nav(shortcode):
                 {'title': 'Note', 'url': 'classroom:note',
                 'url_para': shortcode, },
             )
+
+def classroom_has_assignment(shortcode, assignment_id):
+    captured_assignment = Assignment.objects.get(pk = assignment_id)
+    captured_classroom = Classroom.objects.get(shortcode = shortcode)
+
+    if captured_assignment.classroom == captured_classroom:
+        return True
+    return False

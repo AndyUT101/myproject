@@ -11,6 +11,9 @@ class UserForm(ModelForm):
 
         }
         exclude = ('last_logged', )
+        help_texts = {
+            'password': 'The password should at least 8 characters.'
+        }
 
     def clean_password(self):
         data = self.cleaned_data['password']
