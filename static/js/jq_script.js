@@ -21,5 +21,3 @@ $(document).ready(function(){
 	});
 
 });
-
-// $( "input[name='user_action']:checked" ).length

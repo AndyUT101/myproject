@@ -40,6 +40,50 @@
 </header>
 
 <div class="sp_content">
+
+{% if template == "home" %}
+	{% if content.block1 %}
+	<section class="block1">
+		<div>
+			<h3>{{ content.block1.title }}</h3>
+			<div>
+			<p>{{ content.block1.content|safe }}</p>
+			</div>
+		</div>
+	</section>
+	{% endif %}
+	
+	{% if content.block2 %}
+	<section class="block2">
+		<div>
+			<h3>{{ content.block2.title }}</h3>
+			<div>
+			<p>You have {{ content.notification.classroom }} classroom.</p>
+			<ul>
+			{% for c in content.block2.content %}
+			<li><a href="{% url classroom:classroom c.name %}">{{ c.name }}</a></li>
+			{% endfor %}
+			</ul>
+			</div>
+		</div>
+	</section>
+	{% endif %}
+	
+	{% if content.block3 %}<section class="block3">
+		<div>
+			<h3>{{ content.block3.title }}</h3>
+			<div>
+			<ul>
+			<li><strong>{{ content.block3.username }}</strong></li>
+			<li><strong>{{ content.block3.role }}</strong></li>
+			<li>{{ content.block3.lastname }} {{ content.block3.firstname }}</li>
+			<li>Last logged: {{ content.block3.last_logged }}</li>
+			</ul>
+			</div>
+		</div>
+	</section>
+	{% endif %}
+
 {% if template == "form" %}
 	<section class="content_form">
 		{% if content.route_parameter %}

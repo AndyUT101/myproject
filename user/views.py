@@ -16,6 +16,7 @@ from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
 from siteinfo.views import site_topnav
 from user.utils import *
+from timetable.utils import *
 
 
 """
@@ -57,6 +58,18 @@ def index_home(request):
                 'current_date': current_sysdate,
                 'inbox': inbox_count,
                 'classroom': classroom_count,
+            },
+            'block1': {
+                'title': 'Calendar',
+                'content': generate_calender(),
+            },
+            'block2': {
+                'title': 'Classroom',
+                'content': User_assignment.objects.filter(user=user.id),
+            },
+            'block3': {
+                'title': 'You',
+                'content': user,
             },
         },
     })
