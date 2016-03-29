@@ -57,7 +57,7 @@ def list_inboxmsg(request):
 
     ##### page parameter ####
     max_page = math.ceil(message_count/row_count)
-    if page > max_page:
+    if page > max_page or not page == 0:
         return HttpResponseRedirect(reverse('inbox:inbox'))
     inbox_msg = inbox_msg[row_count*(page-1):row_count+row_count*(page-1)]
     ##### page parameter ####
