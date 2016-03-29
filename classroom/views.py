@@ -438,6 +438,7 @@ def assignment_submit(request, shortcode, assignment_id):
                     'redirect_text': 'all assignment',
                     'redirect_url': return_url,
                     'redirect_para': shortcode,
+                    'redirect_para2': assignment_id,
                     'auto_redirect': True,
                 },
             })
