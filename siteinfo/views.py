@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Schoolinfo, Sitemap
 from user.models import User
 
-from .utils import data.name
+from .utils import Site_option
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 
 # Create your views here.
