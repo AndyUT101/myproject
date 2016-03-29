@@ -39,10 +39,10 @@ def site_overview(request):
                         'url': 'classroom:manage'}),
 
                     ({'name': 'User management',
-                        'url': 'user'}),
+                        'url': 'user:list_user'}),
 
                     ({'name': 'Class management',
-                        'url': 'user'}),
+                        'url': 'user:list_user'}),
                 ),
                 'foot': (),
             },
