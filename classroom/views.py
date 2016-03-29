@@ -211,7 +211,7 @@ def announce_del(request, shortcode):
 
     delete_index = request.GET.get('delete', '')
     if not delete_index:
-        return HttpResponseRedirect(reverse(return_url)], args=[shortcode])
+        return HttpResponseRedirect(reverse(return_url), args=[shortcode])
 
     # delete announce
     try:
