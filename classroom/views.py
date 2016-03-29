@@ -145,7 +145,7 @@ def announce_add(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo or not permission:
-        return HttpResponseRedirect(reverse(return_url))
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
 
     form_obj = AnnounceForm()
