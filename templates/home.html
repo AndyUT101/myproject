@@ -366,7 +366,7 @@
 						<td>{{ data.level }}</td>
 						<td>{{ data.url_route }}</td>
 						<td>{{ data.top_level.title }}</td>
-						<td><li><a href="{% url 'sitemap:sp_edit' data.pk %}">Assign/edit sitemap (Advance)</a></li><li><a href="{% url 'sitemap:sp_del' data.pk %}">Delete sitemap rule</a></li></td>
+						<td><li><a href="{% url 'siteinfo:sp_edit' data.pk %}">Assign/edit sitemap (Advance)</a></li><li><a href="{% url 'siteinfo:sp_del' data.pk %}">Delete sitemap rule</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
