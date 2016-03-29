@@ -41,6 +41,9 @@ class Assignment_format(models.Model):
     datatype = models.CharField(max_length=255)
     dataext = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.datatype+" ("+self.dataext+")"
+
 class Assignment(models.Model):
     """
     title
