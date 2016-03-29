@@ -49,19 +49,19 @@ def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not is_memberinfo(shortcode, request.session['user']):
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
     c = get_contents(shortcode)
 
     return render(request, 'home.html', {
-        'page_title': 'Classroom',
-        'page_header': 'Classroom',
+        'page_title': c['classroom'].name +':Classroom',
+        'page_header': 'Classroom '+c['classroom'].name,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'testing', 
         'content': {
             'classroom': {
-                'title': c['classroom'].name,
+                'title': 'Classroom Portal',
                 'count': get_contentscount(c),
                 'right_nav': right_nav(shortcode),
                 'right_notice': right_nav(shortcode),
@@ -71,10 +71,125 @@ def view_classroom(request, shortcode):
 
 
 def announce(request, shortcode):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    c = get_contents(shortcode)
+
+    announce_data = c['announce'].order_by('-announce_date')
+
+    return render(request, 'home.html', {
+        'page_title': 'Announcement: '+c['classroom'].name,
+        'page_header': 'Announcement: '+c['classroom'].name,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'classroom', 
+        'content': {
+            'shortcode': shortcode,
+            'classroom': {
+                'title': 'Recently announcement',
+                'count': announce_count,
+                'right_nav': right_nav(shortcode),
+                'right_notice': right_nav(shortcode),
+                'content': announce_data,
+            },
+        },
+    })
 
 def announce_all(request, shortcode):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    if not memberinfo:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    permission = allow_contentadd(memberinfo[1])
+
+    announce = get_contents(shortcode)['announce']
+
+    return render(request, 'home.html', {
+        'page_title': 'All announcement: '+c['classroom'].name,
+        'page_header': 'All announcement: '+c['classroom'].name,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'permission': permission,
+            'shortcode': shortcode,
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add announcement', 
+                   'url': 'classroom:announce_add',
+                   'html_class': 'add_announcement'}),
+            ),
+            'list': {
+                'name': 'announcement',
+                'body': announce,
+            },
+        },
+    })
+
+def announce_add(request, shortcode):
+    page_title = 'Add announcement'
+    submit_url = 'classroom:announce_add'
+    return_url = 'classroom:announce_all'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
+    permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo or not permission:
+        return HttpResponseRedirect(reverse(return_url))
+
+
+    form_obj = AnnounceForm()
+    if request.method == 'POST':
+        form_obj = AnnounceForm(request.POST)
+
+        if form_obj.is_valid():
+            form_obj.save(commit=False)
+            form_obj.classroom = Classroom.objects.get(shortcode = shortcode)
+            form_obj.save()
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Announcement add successful',
+                    'redirect_text': 'all announcement',
+                    'redirect_url': return_url,
+                    'auto_redirect': True,
+                },
+            })
+        else:
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form',
+                'content': {
+                    'form': form_obj.as_ul(),
+                    'submit_url': submit_url,
+                },
+            })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+        },
+    })
+
 
 def announce_mod(request, shortcode):
     pass

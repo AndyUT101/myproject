@@ -11,6 +11,7 @@ class AnnounceForm(ModelForm):
     class Meta:
         model = Announce
         fields = '__all__'
+        exclude = ['classroom', 'announce_date']
 
 class AssignmentForm(ModelForm):
     class Meta:
