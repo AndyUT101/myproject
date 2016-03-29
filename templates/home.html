@@ -43,7 +43,11 @@
 {% if template == "form" %}
 	<section class="content_form">
 		{% if content.route_parameter %}
+		{% if content.route_parameter2 %}
+		<form action="{% url content.submit_url content.route_parameter content.route_parameter2 %}" method="post">
+		{% else %}
 		<form action="{% url content.submit_url content.route_parameter %}" method="post">
+		{% endif %}
 		{% else %}
 		<form action="{% url content.submit_url %}" method="post">
 		{% endif %}

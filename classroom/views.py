@@ -236,6 +236,8 @@ def announce_del(request, shortcode):
     })
 
 def assignment_list(request, shortcode):
+    page_title = 'Remove announcement'
+    return_url = 'classroom:announce_all'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -249,14 +251,14 @@ def assignment_list(request, shortcode):
     assignment_count = len(assignment_data)
 
     return render(request, 'home.html', {
-        'page_title': 'Announcement: '+c['classroom'].name,
-        'page_header': 'Announcement: '+c['classroom'].name,
+        'page_title': page_title,
+        'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'classroom', 
         'content': {
             'shortcode': shortcode,
             'classroom': {
-                'title': 'Recently announcement',
+                'title': 'Recently assignment',
                 'count': assignment_count,
                 'right_nav': right_nav(shortcode),
                 'right_notice': right_nav(shortcode),
@@ -386,7 +388,7 @@ def assignment_detail(request, shortcode, assignment_id):
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
-    assignment_obj = Assignemnt.objects.get(pk = assignment_id)
+    assignment_obj = Assignment.objects.get(pk = assignment_id)
 
     return render(request, 'home.html', {
         'page_title': page_title,
@@ -428,6 +430,7 @@ def assignment_submit(request, shortcode, assignment_id):
                 'form': form_obj.as_ul(),
                 'submit_url': submit_url,
                 'route_parameter': shortcode,
+                'route_parameter2': assignment_id,
             },
         })
 
@@ -437,7 +440,7 @@ def assignment_submit(request, shortcode, assignment_id):
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'notification',
             'content': {
-                'notification': 'Assignment delete successful',
+                'notification': 'Assignment submit successful',
                 'redirect_text': 'all assignment',
                 'redirect_url': return_url,
                 'redirect_para': shortcode,
@@ -455,6 +458,7 @@ def assignment_submit(request, shortcode, assignment_id):
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,
+            'route_parameter2': assignment_id,
         },
     })
 
