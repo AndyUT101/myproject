@@ -213,8 +213,8 @@ div.list_table table tr:hover {
 	background-color: #f5f5f5
 }
 
-nav#topnav
-{
+nav#topnav{
+    background: rgba(50,50,50,.9);
 }
     nav#topnav > a
     {
@@ -229,12 +229,15 @@ nav#topnav
     nav#topnav > ul
     {
         height: 3.75em;
+        margin: 0;
     }
         nav#topnav > ul > li
         {
-            width: 12.5%;
+            width: 10%;
             height: 100%;
             float: left;
+            list-style-type: none;
+            text-align: center
         }
  
  
@@ -243,6 +246,9 @@ nav#topnav
         display: none;
         position: absolute;
         top: 100%;
+        background: #222;
+    padding: 20px
+    margin-top: -20px;
     }
         nav#topnav li:hover ul
         {
@@ -294,6 +300,8 @@ section.index_block {
 	float: left;
 	min-height: 400px;
     width: 33%;
+}
+section.index_block div {
     padding: 10px;
 }
 .clearfix {
