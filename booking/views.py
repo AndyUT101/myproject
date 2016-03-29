@@ -42,20 +42,6 @@ def room_booked(request):
                    'url': 'booking:all',
                    'html_class': 'view_booking'}),
             ),
-            'list': {
-                'checkbox': True,
-                'name': 'inbox',
-                'body': inbox_msg,
-                'foot': (),
-            },
-            'page_nav': { 
-                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                'message': '',
-                'page': {
-                    'current_page': page,
-                    'max_page': max_page,
-                },
-            },
 
             'list': {
                 'name': 'booking',
