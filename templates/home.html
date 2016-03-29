@@ -43,7 +43,7 @@
 
 {% if template == "home" %}
 	{% if content.block1 %}
-	<section class="block1">
+	<section class="block1 index_block">
 		<div>
 			<h3>{{ content.block1.title }}</h3>
 			<div>
@@ -54,7 +54,7 @@
 	{% endif %}
 	
 	{% if content.block2 %}
-	<section class="block2">
+	<section class="block2 index_block">
 		<div>
 			<h3>{{ content.block2.title }}</h3>
 			<div>
@@ -69,15 +69,15 @@
 	</section>
 	{% endif %}
 	
-	{% if content.block3 %}<section class="block3">
+	{% if content.block3 %}<section class="block3 index_block">
 		<div>
 			<h3>{{ content.block3.title }}</h3>
 			<div>
 			<ul>
 			<li><strong>{{ content.block3.content.username }}</strong></li>
-			<li><strong>{{ content.block3.content.role }}</strong></li>
+			<li>Role: <strong>{{ content.block3.content.role }}</strong></li>
 			<li>{{ content.block3.content.lastname }} {{ content.block3.content.firstname }}</li>
-			<li>Last logged: {{ content.block3.content.last_logged }}</li>
+			<li>Last logged at {{ content.block3.content.last_logged }}</li>
 			</ul>
 			</div>
 		</div>

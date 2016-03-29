@@ -366,4 +366,12 @@ nav#topnav
         position: static;
     }
 }
-/*http://osvaldas.info/drop-down-navigation-responsive-and-touch-friendly*/
+
+section.index_block {
+	float: left;
+	min-height: 400px;
+}
+section.block3:last {
+	content: ' ';
+	clear: both;
+}
