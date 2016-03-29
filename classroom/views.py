@@ -102,6 +102,7 @@ def announce(request, shortcode):
 def announce_all(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
+    raise ""
 
     memberinfo = is_memberinfo(shortcode, request.session['user'])[0]
     if not memberinfo:
