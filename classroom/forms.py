@@ -17,6 +17,7 @@ class AssignmentForm(ModelForm):
     class Meta:
         model = Assignment
         fields = '__all__'
+        exclude = ['classroom', 'create_date']
 
 class User_assignmentForm(ModelForm):
     class Meta:

@@ -272,7 +272,7 @@ def assignmentformat_delete(request):
     pass
 
 def assignment_add(request, shortcode):
-    page_title = 'Add announcement'
+    page_title = 'Add assignment'
     submit_url = 'classroom:assignment_add'
     return_url = 'classroom:assignment_list'
 
