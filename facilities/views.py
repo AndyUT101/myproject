@@ -293,18 +293,18 @@ def remove_room(request, room_id):
     room_removeobj = Room.objects.filter(pk = room_id)
     room_removeobj.delete()
 
-    return render(request, 'home.html', {
-        'page_title': 'Remove Room',
-        'page_header': 'Remove Room',
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'notification',
-        'content': {
-            'notification': 'Remove remove successful',
-            'redirect_text': 'Room page',
-            'redirect_url': 'facilities:view_room',
-            'auto_redirect': True,
-        },
-    })
+        return render(request, 'home.html', {
+            'page_title': 'Remove Room',
+            'page_header': 'Remove Room',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'Remove remove successful',
+                'redirect_text': 'Room page',
+                'redirect_url': 'facilities:view_room',
+                'auto_redirect': True,
+            },
+        })
 
     else:
         return HttpResponseRedirect(reverse('facilities:view_room'))
