@@ -72,28 +72,48 @@ def view_classroom(request, shortcode):
 
 
 def announce(request, shortcode):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
     c = get_contents(shortcode)
 
     announce_data = c['announce'].order_by('-announce_date')
 
+    return render(request, 'home.html', {
+        'page_title': 'Announcement: '+c['classroom'].name,
+        'page_header': 'Announcement: '+c['classroom'].name,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'classroom', 
+        'content': {
+            'shortcode': shortcode,
+            'classroom': {
+                'title': 'Recently announcement',
+                'count': announce_count,
+                'right_nav': right_nav(shortcode),
+                'right_notice': right_nav(shortcode),
+                'content': announce_data,
+            },
+        },
+    })
 
 def announce_all(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
     memberinfo = is_memberinfo(shortcode, request.session['user'])
-
     if not memberinfo[0]:
-        return HttpResponseRedirect(reverse('classroom:classroom', args=[shortcode]))
+        return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
 
     permission = allow_contentadd(memberinfo[1])
 
     announce = get_contents(shortcode)['announce']
 
     return render(request, 'home.html', {
-        'page_title': 'All announcement: '+c['classroom'].name,
-        'page_header': 'All announcement: '+c['classroom'].name,
+        'page_title': 'All announcement',
+        'page_header': 'All announcement',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
@@ -124,7 +144,7 @@ def announce_add(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo or not permission:
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+        return HttpResponseRedirect(reverse(return_url))
 
 
     form_obj = AnnounceForm()
