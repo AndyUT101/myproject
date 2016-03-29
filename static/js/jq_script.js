@@ -7,6 +7,9 @@ $(document).ready(function(){
 		$('span.classroom_emoji').html(twemoji.parse('\uD83C\uDFEB')+'&nbsp;');
 	}
 
+	// errorlist style
+	$('ul.errorlist li').html('&#x25BE; '+$('ul.errorlist li').html());
+
 });
 
 // $( "input[name='user_action']:checked" ).length
