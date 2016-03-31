@@ -38,13 +38,13 @@ def list_report(request):
                 'name': 'overview',
                 'body': (
                     ({'name': 'Attendant Report',
-                        'url': 'attendance:attend_form'}),
+                        'url': 'report:attend_form'}),
 
                     ({'name': 'Class student list',
-                        'url': 'attendance:generate_class_report'}),
+                        'url': 'report:generate_class_report'}),
 
                     ({'name': 'All student list',
-                        'url': 'attendance:all_student'}),
+                        'url': 'report:all_student'}),
                 ),
                 'foot': (),
             },
