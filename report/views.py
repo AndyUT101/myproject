@@ -8,6 +8,7 @@ import pyexcel.ext.xlsx
 import django_excel as excel
 
 from .forms import *
+from *.utils import *
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
@@ -19,12 +20,36 @@ from siteinfo.views import site_topnav
 # Create your views here.
 # helper function
 def list_report(request):
+    page_title = 'Report management'
+
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
     if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
         return HttpResponseRedirect(reverse('index_home'))
 
+    return render(request, 'home.html', {
+        'page_header': page_title,
+        'template': 'list', # operation, list,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'content': {
+            'list': {
+                'checkbox': True,
+                'name': 'overview',
+                'body': (
+                    ({'name': 'Attendant Report',
+                        'url': 'attendance:attend_form'}),
+
+                    ({'name': 'Class student list',
+                        'url': 'attendance:generate_class_report'}),
+
+                    ({'name': 'All student list',
+                        'url': 'attendance:all_student'}),
+                ),
+                'foot': (),
+            },
+        },
+    })
 
 def generate_report(request):
     user_dataset = User.objects.all()
