@@ -448,10 +448,8 @@
 	<section class="info_detail">
 	{% if content.detail %}
 		{% for value in content.detail %}
-			<p>{{ value.0|linebreaks }}</p>
+			<p><strong>{{ value.0 }}</strong></p>
 			<p>{{ value.1|linebreaks }}</p>
-			<p>{{ value.2|linebreaks }}</p>
-			<p>{{ value.3|linebreaks }}</p>
 		{% endfor %}
 	{% endif %}
 	{% if content.custom_rule %}
