@@ -43,9 +43,6 @@ def list_report(request):
                     ({'name': 'Class student list',
                         'url': 'report:class_report'}),
 
-                    ({'name': 'All student list',
-                        'url': 'report:all_student',
-                        'para': '2B'}),
                 ),
                 'foot': (),
             },
