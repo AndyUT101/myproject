@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@!kim3y01!zio(@&@5#&nzox=*+&ns+m-5z-g@6_48iqix44k6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['fyp', 'fyp.utrepository.com']
-
+# ALLOWED_HOSTS = ['fyp', 'fyp.utrepository.com']
+ALLOW_HOSTS = []
 
 # Application definition
 
