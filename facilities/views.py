@@ -198,7 +198,7 @@ def remove_facilities(request):
     # (Functional requirement)
     user = User.objects.get(username = request.session['user'])
 
-    facility_removeobj = Facilities.objects.filter(pk__in=delete_list, receiver=user)
+    facility_removeobj = Facilities.objects.filter(pk__in=delete_list)
 
     if facility_removeobj.count() == len(delete_list):
         facility_removeobj.delete() #success
