@@ -8,7 +8,7 @@ import pyexcel.ext.xlsx
 import django_excel as excel
 
 from .forms import *
-from *.utils import *
+from .utils import *
 
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
