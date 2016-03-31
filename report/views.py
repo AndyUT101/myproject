@@ -41,8 +41,11 @@ def list_report(request):
                         'url': 'report:attend_form'}),
 
                     ({'name': 'Class student list',
-                        'url': 'report:class_report'}),
+                        'url': 'report:class_report',
+                        'para': '2B'}),
 
+                    ({'name': 'All student list',
+                        'url': 'report:all_student'}),
                 ),
                 'foot': (),
             },
