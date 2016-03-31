@@ -118,10 +118,19 @@ def view_msg(request, msg_id = None):
         'template': 'detail', # operation, list, 
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'content': {
+
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Reply', 
+                   'url': 'inbox:compose',
+                   'para': msg_id,
+                   'html_class': 'compose'}),
+              
             'detail': ( # key: (header, content, redirect_url(route/None), html_class)
                 ('Sent by', msg.sender.username, None, 'sender'),
                 ('Title', msg.content.title, None, 'title'),
                 ('Content', msg.content.content, None, 'content'),
+
 
             ),
             'adv_operation': ( 
