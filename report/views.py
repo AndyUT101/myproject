@@ -19,7 +19,12 @@ from siteinfo.views import site_topnav
 # Create your views here.
 # helper function
 def list_report(request):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
+        return HttpResponseRedirect(reverse('index_home'))
+
 
 def generate_report(request):
     user_dataset = User.objects.all()
@@ -30,7 +35,7 @@ def generate_class_report(request, class_name):
     user_class_dataset = Class_code.objects.get(class_name = class_name)
     user_list = [i.user for  i in user_class_dataset.class_assignment_set.all() if i.user.role == Role.objects.get(name='student')]
     column_name = ['pk', 'username', 'firstname', 'lastname', 'role.name']
-    return excel.make_response_from_query_sets(user_dataset, column_name, 'xlsx', file_name=class_name.'_stu')
+    return excel.make_response_from_query_sets(user_dataset, column_name, 'xlsx', file_name=class_name+'_stu')
 
 def attend_form(request):
     form_obj = Report_attend()
