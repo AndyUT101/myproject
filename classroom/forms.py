@@ -50,3 +50,8 @@ class Material_classroomForm(ModelForm):
     class Meta:
         model = Material_classroom
         fields = '__all__'
+
+class FormatForm(ModelForm):
+    class Meta:
+        model = Assignment_format
+        fields = '__all__'
