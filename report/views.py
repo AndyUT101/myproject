@@ -41,7 +41,7 @@ def list_report(request):
                         'url': 'report:attend_form'}),
 
                     ({'name': 'Class student list',
-                        'url': 'report:generate_class_report'}),
+                        'url': 'report:class_report'}),
 
                     ({'name': 'All student list',
                         'url': 'report:all_student'}),
