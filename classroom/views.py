@@ -265,7 +265,7 @@ def assignment_list(request, shortcode):
         },
     })
 
-def assignmentformat_add(request):
+def format_add(request):
     page_title = 'Add assignment format'
     submit_url = 'classroom:assignmentformat_add'
     return_url = 'classroom:assignmentformat_add'
@@ -282,7 +282,7 @@ def assignmentformat_add(request):
     if request.method == "POST":
         pass
 
-    
+
     return render(request, 'home.html', {
         'page_title': page_title,
         'page_header': page_title,
@@ -296,9 +296,9 @@ def assignmentformat_add(request):
     })
 
 
-def assignmentformat_modify(request):
+def format_modify(request, format_id):
     pass
-def assignmentformat_delete(request):
+def format_delete(request):
     pass
 
 def assignment_add(request, shortcode):
@@ -500,7 +500,35 @@ def material(request, shortcode):
     pass
 
 def material_upload(request, shortcode):
-    pass
+    page_title = 'Add assignment format'
+    submit_url = 'classroom:assignmentformat_add'
+    return_url = 'classroom:assignmentformat_add'
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo[0] or not permission:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+    form_obj = MaterialForm()
+    if request.method == "POST":
+        form_obj = MaterialForm(request.POST, request.FILES)
+
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+            'route_parameter': shortcode,
+        },
+    })
+
 
 def material_remove(request, shortcode):
     pass
