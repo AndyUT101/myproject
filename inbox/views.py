@@ -226,8 +226,6 @@ def delete_msg(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    # 2. Check delete confirmation
-
     # 3. Collect checkbox list
     delete_list = request.POST.getlist('msg_action')
 
@@ -239,7 +237,18 @@ def delete_msg(request):
 
     if msg_removeobj.count() == len(delete_list):
         msg_removeobj.delete() #success
-        return HttpResponse('msg removed.')
+        return render(request, 'home.html', {
+            'page_title': 'Delete message: Inbox',
+            'page_header': 'Send message',
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'Message removed',
+                'redirect_text': 'inbox page',
+                'redirect_url': 'inbox:inbox',
+                'auto_redirect': True,
+            },
+        })
 
     else:
-        return HttpResponse('fail removed.')
+        return HttpResponseRedirect(reverse('inbox:delete'))
