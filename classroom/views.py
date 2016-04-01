@@ -574,7 +574,25 @@ def material_upload(request, shortcode):
 
 
 def material_remove(request, shortcode, material_id):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    material = Material.objects.get(pk=material_id)
+    material.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Remove material',
+        'page_header': 'Remove material',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'material removes successful',
+            'redirect_text': 'material page',
+            'redirect_url': 'classroom:material',
+            'auto_redirect': True,
+        },
+    })
+
 
 def note(request, shortcode):
     page_title = 'View notes'
@@ -608,4 +626,21 @@ def note_modify(request, shortcode, note_id):
     pass
 
 def note_remove(request, shortcode, note_id):
-    pass
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    note = Note.objects.get(pk=note_id)
+    note.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Remove note',
+        'page_header': 'Remove note',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Note removes successful',
+            'redirect_text': 'note page',
+            'redirect_url': 'classroom:note',
+            'auto_redirect': True,
+        },
+    })
