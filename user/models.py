@@ -83,3 +83,6 @@ class Class_assignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     class_code = models.ForeignKey(Class_code, on_delete=models.CASCADE)
     class_number = models.IntegerField(default=0)
+
+    def __str__():
+        return self.user.name + ": " + self.class_code + self.class_number
