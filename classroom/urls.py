@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/note_remove/$', views.note_remove, name='note_remove'),
     url(r'^(?P<shortcode>.+)/format_add/$', views.format_add, name='format_add'),
     url(r'^(?P<shortcode>.+)/format_modify/$', views.format_modify, name='format_modify'),
-    url(r'^(?P<shortcode>.+)/format_remove/$', views.format_remove, name='format_remove'),
+    url(r'^(?P<shortcode>.+)/format_delete/$', views.format_delete, name='format_delete'),
 
     url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
 
