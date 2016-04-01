@@ -85,4 +85,4 @@ class Class_assignment(models.Model):
     class_number = models.IntegerField(default=0)
 
     def __str__():
-        return self.user.name + ": " + self.class_code + self.class_number
+        return self.user.username + ": " + self.class_code + self.class_number
