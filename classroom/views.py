@@ -319,7 +319,7 @@ def format_add(request):
 
 def format_modify(request, format_id):
     pass
-def format_delete(request):
+def format_delete(request, format_id):
     pass
 
 def assignment_add(request, shortcode):
@@ -573,7 +573,7 @@ def material_upload(request, shortcode):
     })
 
 
-def material_remove(request, shortcode):
+def material_remove(request, shortcode, material_id):
     pass
 
 def note(request, shortcode):
@@ -604,8 +604,8 @@ def note(request, shortcode):
 def note_add(request, shortcode):
     pass
 
-def note_modify(request, shortcode):
+def note_modify(request, shortcode, note_id):
     pass
 
-def note_remove(request, shortcode):
+def note_remove(request, shortcode, note_id):
     pass

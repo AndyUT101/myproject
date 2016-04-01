@@ -17,14 +17,14 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/assignment_submit/(?P<assignment_id>[0-9]+)/$', views.assignment_submit, name='assignment_submit'),
     url(r'^(?P<shortcode>.+)/material/$', views.material, name='material'),
     url(r'^(?P<shortcode>.+)/material_upload/$', views.material_upload, name='material_upload'),
-    url(r'^(?P<shortcode>.+)/material_remove/$', views.material_remove, name='material_remove'),
+    url(r'^(?P<shortcode>.+)/material_remove/(?P<material_id>.+)$', views.material_remove, name='material_remove'),
     url(r'^(?P<shortcode>.+)/note/$', views.note, name='note'),
     url(r'^(?P<shortcode>.+)/note_add/$', views.note_add, name='note_add'),
-    url(r'^(?P<shortcode>.+)/note_modify/$', views.note_modify, name='note_modify'),
-    url(r'^(?P<shortcode>.+)/note_remove/$', views.note_remove, name='note_remove'),
+    url(r'^(?P<shortcode>.+)/note_modify/(?P<note_id>.+)$', views.note_modify, name='note_modify'),
+    url(r'^(?P<shortcode>.+)/note_remove/(?P<note_id>.+)$', views.note_remove, name='note_remove'),
     url(r'^(?P<shortcode>.+)/format_add/$', views.format_add, name='format_add'),
-    url(r'^(?P<shortcode>.+)/format_modify/$', views.format_modify, name='format_modify'),
-    url(r'^(?P<shortcode>.+)/format_delete/$', views.format_delete, name='format_delete'),
+    url(r'^(?P<shortcode>.+)/format_modify/(?P<format_id>.+)$', views.format_modify, name='format_modify'),
+    url(r'^(?P<shortcode>.+)/format_delete/(?P<format_id>.+)$', views.format_delete, name='format_delete'),
 
     url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
 
