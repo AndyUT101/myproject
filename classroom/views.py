@@ -43,7 +43,28 @@ def list_classroom(request):
     })
 
 def manage_classroom(request):
-    pass
+    page_title = 'Manage classroom'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    classroom = Classroom.objects.all().order_by('shortcode')
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'list': {
+                'name': 'classroom',
+                'body': classroom,
+            },
+        },
+    })   
 
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
@@ -497,7 +518,29 @@ def assignment_submit(request, shortcode, assignment_id):
     })
 
 def material(request, shortcode):
-    pass
+    page_title = 'View materials'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    classroom = Classroom.objects.get(shortcode=shortcode)
+    material = Material_classroom.objects.filter(classroom = classroom)
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'list': {
+                'name': 'material',
+                'body': material,
+            },
+        },
+    })   
 
 def material_upload(request, shortcode):
     page_title = 'Add assignment format'
@@ -534,7 +577,29 @@ def material_remove(request, shortcode):
     pass
 
 def note(request, shortcode):
-    pass
+    page_title = 'View notes'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    classroom = Classroom.objects.get(shortcode=shortcode)
+    note = Classroom_note.objects.filter(classroom = classroom)
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'list': {
+                'name': 'note',
+                'body': note,
+            },
+        },
+    })
 
 def note_add(request, shortcode):
     pass
