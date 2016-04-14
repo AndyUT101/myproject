@@ -500,5 +500,17 @@
 	{% endif %}
 {% endif %}
 
+{% if template == "classroom" %}
+	<section class="classroom">
+		<div class="right_nav">
+			<ul>
+			{% for item in content.classroom.right_nav %}
+				<li><a href="{% url item.url item.url_para %}">{{ item.title }}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="right_notice"></div>
+	</section>
+{% endif %}
 
 {% endblock %}</div>
