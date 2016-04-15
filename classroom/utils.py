@@ -104,7 +104,7 @@ def right_nav(shortcode):
                 {'title': 'Note', 'url': 'classroom:note',
                 'url_para': shortcode, },
 
-                {'title': 'Note', 'url': 'classroom:note',
+                {'title': 'Material', 'url': 'classroom:material',
                 'url_para': shortcode, },
             )
 
