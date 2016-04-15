@@ -79,7 +79,7 @@ def view_classroom(request, shortcode):
         'page_title': c['classroom'].name +':Classroom',
         'page_header': 'Classroom '+c['classroom'].name,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'classroom', 
+        'template': 'testing', 
         'content': {
             'classroom': {
                 'title': 'Classroom Portal',
