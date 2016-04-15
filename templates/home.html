@@ -18,7 +18,7 @@
 	</nav>{% endif %}
 	<div class="heading-content">
 		<h1 class="page-header">{{ page_header }}</h1>
-		{% if template == 'home' or template == 'list' or template == 'form' or template == 'detail'  %}
+		{% if template == 'home' or template == 'list' or template == 'form' or template == 'detail' or template == 'classroom'  %}
 		<ul class="notification">
 
 		{% if content.notification.current_date %}
@@ -32,6 +32,10 @@
 		{% if content.notification.classroom %}{% if content.notification.classroom > 0 %}
 			<li class="active_classroom"><span class="classroom_emoji">&nbsp;</span><a href="{% url 'classroom:classroom_list' %}">{{ content.notification.classroom }} classroom{% if content.notification.classroom > 1 %}s{% endif %}</a></li>
 		{% endif %}{% endif %}
+
+		{% if content.notification.current_classroom %}
+			<li class="current_classroom"><span class="classroom_emoji">&nbsp;</span> Current classroom: <a href="{% url 'classroom:classroom' content.notification.url %}">{{ content.notification.current_classroom }}</a></li>
+		{% endif %}
 
 		</ul>
 		{% endif %}

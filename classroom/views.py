@@ -81,6 +81,10 @@ def view_classroom(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'classroom', 
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'url': shortcode,
+            },
             'classroom': {
                 'title': 'Classroom Portal',
                 'count': get_contentscount(c),
