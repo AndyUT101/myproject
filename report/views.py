@@ -67,17 +67,17 @@ def attend_form(request):
     form_obj = Report_attend()
 
     if request.method == 'POST':
-        form_obj = Report_attend(Request.POST)
+        form_obj = Report_attend(request.POST)
         if form_obj.is_valid():
             class_pk = form_obj['class_pk']
             attend_date = form_obj['attend_date']
-            user_dataset = User.objects.all()
+            return HttpResponseRedirect(reverse('attend_export'))
 
 
 
     return render(request, 'home.html', {
-        'page_title': 'Attendance report today',
-        'page_header': 'Attendance report today',
+        'page_title': 'Generate attendant report',
+        'page_header': 'Generate attendant report',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
@@ -85,3 +85,7 @@ def attend_form(request):
             'submit_url': 'report:attend_form',
         },
     })
+
+def attend_export(request, attend_date, class_pk):
+    pass
+    
