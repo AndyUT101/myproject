@@ -73,8 +73,8 @@ def attend_form(request):
     if request.method == 'POST':
         form_obj = Report_attend(request.POST)
         if form_obj.is_valid():
-            class_code = form_obj['class_code']
-            attend_date = form_obj['attend_date']
+            class_code = request.POST.get('class_code', '')
+            attend_date = request.POST.get('attend_date', '')
             return HttpResponseRedirect(reverse('report:attend_export', kwargs={'attend_date': attend_date, 'class_code': class_code}))
 
 
