@@ -1,5 +1,9 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.core.urlresolvers import reverse
+from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
+
 from django import forms
 from django.template import RequestContext
 from user.models import User, Class_assignment, Class_code, Role
