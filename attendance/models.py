@@ -8,6 +8,7 @@ from user.models import User, Class_code
 class Attandance(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     logged_datetime = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=10, default="")
 
 class Rule(models.Model):
     name = models.CharField(max_length=255, default="")
