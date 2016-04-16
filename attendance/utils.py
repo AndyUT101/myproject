@@ -53,9 +53,9 @@ def list_attendance(class_code, date_val):
     return att_list
 
 def current_rule(class_code):
-	# return Rule object
+    # return Rule object
     class_obj = Class_code.objects.get(class_name = class_code)
-    current_applied_rule = Applied_rule.objects.filter(class_code = class_obj, start_date__gte = date.today(), end_date__lte = date.today())
+    current_applied_rule = Applied_rule.objects.filter(class_code = class_obj, start_date__lte = date.today(), end_date__gte = date.today())
     rule_index = {}
     for i in current_applied_rule:
         rule_index[i.rule.priority] = i
