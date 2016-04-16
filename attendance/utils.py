@@ -17,7 +17,7 @@ def list_attendance(class_code, date_val):
 
     abs_list = []
     for u in user_list:
-        if Attandance.objects.filter(user= logged_datetime__range=(date_min, date_max)).count() == 0:
+        if Attandance.objects.filter(user=u, logged_datetime__range=(date_min, date_max)).count() == 0:
             abs_list.append(u)
     user_list = abs_list.symmetric_difference(user_list)
 
