@@ -25,13 +25,13 @@ def list_attendance(class_code, date_val):
     user_list = [i.user for  i in class_obj.class_assignment_set.all() if i.user.role == Role.objects.get(name='student')]
 
     no_card_list = [i for i in user_list if not i.card_id == ""]
-    user_list = no_card_list.symmetric_difference(user_list)
+    user_list = list(set(user_list) - set(no_card_list))
 
     abs_list = []
     for u in user_list:
         if Attandance.objects.filter(user=u, logged_datetime__range=(date_min, date_max)).count() == 0:
             abs_list.append(u)
-    user_list = abs_list.symmetric_difference(user_list)
+    user_list = list(set(user_list) - set(abs_list))
 
     on_time_list = []
 
@@ -40,7 +40,7 @@ def list_attendance(class_code, date_val):
         if used_rule.start_time - arrive_time >= timedelta(0):
             on_time_list.append(u)
 
-    user_list = on_time_list.symmetric_difference(user_list)
+    user_list = list(set(user_list) - set(on_time_list))
     late_list = user_list
 
     att_list = {}

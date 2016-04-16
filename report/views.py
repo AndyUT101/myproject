@@ -8,12 +8,15 @@ from django import forms
 from django.template import RequestContext
 from user.models import User, Class_assignment, Class_code, Role
 
+from datetime import date, time, timedelta, datetime
+
 import pyexcel.ext.xlsx
 import django_excel as excel
 
 from .forms import *
 from .utils import *
 
+from attendance.utils import *
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
 from siteinfo.views import site_topnav
 
@@ -91,5 +94,14 @@ def attend_form(request):
     })
 
 def attend_export(request, attend_date, class_code):
-    pass
+    return render(request, 'home.html', {
+        'page_title': 'Generate attendant report',
+        'page_header': 'Generate attendant report',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'testing',
+        'content': {
+            'form': list_attendance('class_code', date(2016, 4, 16))
+        },
+    }) 
+    
     
