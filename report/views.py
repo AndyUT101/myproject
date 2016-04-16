@@ -69,7 +69,7 @@ def attend_form(request):
     if request.method == 'POST':
         form_obj = Report_attend(request.POST)
         if form_obj.is_valid():
-            class_pk = form_obj['class_pk']
+            class_pk = form_obj['class_code']
             attend_date = form_obj['attend_date']
             return HttpResponseRedirect(reverse('attend_export'))
 
@@ -86,6 +86,6 @@ def attend_form(request):
         },
     })
 
-def attend_export(request, attend_date, class_pk):
+def attend_export(request, attend_date, class_code):
     pass
     
