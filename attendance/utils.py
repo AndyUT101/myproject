@@ -1,7 +1,7 @@
 from .models import *
 from user.models import User, Class_assignment, Class_code, Role
 
-from datetime import date, time, timedelta
+from datetime import date, time, timedelta, datetime
 
 def current_rule(class_code):
     # return Rule object
