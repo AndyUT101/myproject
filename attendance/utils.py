@@ -60,6 +60,6 @@ def current_rule(class_code):
     for i in current_applied_rule:
         rule_index[i.rule.priority] = i
 
-    applied_rule = rule_index(sorted(rule_index)[-1])
+    applied_rule = rule_index[sorted(rule_index)[-1]]
 
     return applied_rule.rule
