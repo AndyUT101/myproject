@@ -100,7 +100,7 @@ def attend_export(request, attend_date, class_code):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'testing',
         'content': {
-            'form': list_attendance('class_code', date(2016, 4, 16))
+            'form': list_attendance(class_code, date(2016, 4, 16))
         },
     }) 
     
