@@ -71,8 +71,8 @@ def add_classroom(request):
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Create classroom', 
-                   'url': 'user:add_user',
-                   'html_class': 'create_user'}),
+                   'url': 'classroom:add_classroom',
+                   'html_class': 'create_classroom'}),
 
             ),
             'list': {
@@ -138,6 +138,9 @@ def create_classroom(request):
         },
     })
 
+def manage_classroom(request):
+    pass
+
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -155,7 +158,7 @@ def view_classroom(request, shortcode):
         'content': {
             'notification': {
                 'current_classroom': c['classroom'].name,
-                'classroom_role': is_memberinfo(shortcode, request.session['user'])[1],
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
                 'url': shortcode,
             },
             'classroom': {

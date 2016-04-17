@@ -30,6 +30,9 @@ def user_assign_assignment(shortcode, username):
 
     return captured_assignment
 
+def role_tidyprint(role_short):
+    role = {'STU': 'Student', 'TEA': 'Teacher', 'ADM': 'Admin', 'VIS': 'Visitor'}
+    return role(role_short)
 
 def allow_contentadd(role):
     if role == 'TEA' or role == 'ADM':
