@@ -96,5 +96,5 @@ def attend_form(request):
 
 def attend_export(request, attend_date, class_code):
     attendance_data = list_attendance(class_code, date(2016, 4, 16), class_code)
-    return export_excel(attendance_xls(attendance_data)
+    return export_excel(attendance_xls(attendance_data))
 
