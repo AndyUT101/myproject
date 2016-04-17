@@ -144,8 +144,9 @@ def announce(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not is_memberinfo(shortcode, request.session['user'])[0]:
-        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    if not memberinfo[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
 
     permission = allow_contentadd(memberinfo[1])
     c = get_contents(shortcode)
