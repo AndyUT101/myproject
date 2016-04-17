@@ -153,18 +153,23 @@ def announce(request, shortcode):
     announce_count = len(announce_data)
 
     return render(request, 'home.html', {
-        'page_title': 'Announcement: '+c['classroom'].name,
-        'page_header': 'Announcement: '+c['classroom'].name,
+        'page_title': 'All announcement',
+        'page_header': 'All announcement',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'classroom', 
+        'template': 'list',
         'content': {
+            'permission': permission,
             'shortcode': shortcode,
-            'classroom': {
-                'title': 'Recently announcement',
-                'count': announce_count,
-                'right_nav': right_nav(shortcode),
-                'right_notice': right_nav(shortcode),
-                'content': announce_data,
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add announcement', 
+                   'url': 'classroom:announce_add',
+                   'url_para': shortcode,
+                   'html_class': 'add_announcement'}),
+            ),
+            'list': {
+                'name': 'announcement',
+                'body': announce_data,
             },
         },
     })
@@ -323,7 +328,7 @@ def assignment_list(request, shortcode):
         'page_title': page_title,
         'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'classroom', 
+        'template': 'list', 
         'content': {
             'shortcode': shortcode,
             'classroom': {
