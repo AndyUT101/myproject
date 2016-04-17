@@ -60,6 +60,22 @@ def manage_classroom(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Create user', 
+                   'url': 'user:add_user',
+                   'html_class': 'create_user'}),
+
+                ({'title':'Modify user', 
+                   'url': 'user:modify_user',
+                   # 'url_para': '',
+                   'html_class': 'modify_user'}),
+
+                ({'title':'Delete user', 
+                   'url': 'user:remove_user',
+                   'html_class': 'delete'}),
+
+            ),
             'list': {
                 'name': 'classroom',
                 'body': classroom,
