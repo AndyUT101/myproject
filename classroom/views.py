@@ -26,8 +26,8 @@ def list_classroom(request):
         operation = ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Create classroom', 
-                   'url': 'user:add_user',
-                   'html_class': 'create_user'}),
+                   'url': 'user:add_classroom',
+                   'html_class': 'create_classroom'}),
         )
     else:
         classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user))
@@ -101,7 +101,6 @@ def create_classroom(request):
         'content': {
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
-            'route_parameter': shortcode,
         },
     })
 
