@@ -650,6 +650,18 @@ def material_upload(request, shortcode):
                 },
             })
 
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form',
+            'content': {
+                'form': form_obj.as_ul(),
+                'submit_url': submit_url,
+                'route_parameter': shortcode,
+            },
+        })
+
     return render(request, 'home.html', {
         'page_title': page_title,
         'page_header': page_title,
