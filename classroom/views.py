@@ -52,6 +52,7 @@ def list_classroom(request):
 
 def create_classroom(request):
     page_title = 'Create classroom'
+    submit_url = 'classroom:add'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
