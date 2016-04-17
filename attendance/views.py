@@ -121,7 +121,7 @@ def apply_rule(request):
             z = applyform.save(commit=False)
             commit_list = []
             for applied_rule in insert_list:
-                commit_list.append(Applied_rule(rule=z.rule, exclude_weekend=z.exclude_weekend, class_code=Class_code.objects.get(pk=applied_rule)))
+                commit_list.append(Applied_rule(rule=z.rule, end_date=z.end_date, start_date=z.start_date, exclude_weekend=z.exclude_weekend, class_code=Class_code.objects.get(pk=applied_rule)))
 
             Applied_rule.objects.bulk_create(commit_list);
 
