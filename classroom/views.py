@@ -147,6 +147,7 @@ def announce(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
+    permission = allow_contentadd(memberinfo[1])
     c = get_contents(shortcode)
 
     announce_data = c['announce'].order_by('-announce_date')
