@@ -11,7 +11,7 @@ def export_excel(xlsx_data):
 
     return response
 
-def attendance_xls(raw_data, class_code):
+def attendance_xls(raw_data, class_code, attend_date):
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
 
@@ -36,6 +36,9 @@ def attendance_xls(raw_data, class_code):
 
     title_text = "Attendance report of " + class_code
     worksheet_s.merge_range('B2:E2', title_text, title)
+
+    date_text = "Date: " + attend_date
+    worksheet_s.merge_range('B3:E3', date_text, title)
 
     worksheet_s.write(4, 1, "Class", header)
     worksheet_s.write(4, 2, "Class number", header)
