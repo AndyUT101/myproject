@@ -16,8 +16,10 @@ def attendance_xls(raw_data, class_code):
     workbook = xlsxwriter.Workbook(output)
 
     worksheet_s = workbook.add_worksheet("Attendance")
-    worksheet_s.set_column(1, 1, 20)
-    worksheet_s.set_column('D:D', 50)
+    worksheet_s.set_column('B:B', 10)
+    worksheet_s.set_column('C:C', 15)
+    worksheet_s.set_column('D:D', 30)
+    worksheet_s.set_column('E:E', 15)
     title = workbook.add_format({
         'bold': True,
         'font_size': 14,
