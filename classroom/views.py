@@ -50,38 +50,6 @@ def list_classroom(request):
         },
     })
 
-def add_classroom(request):
-    page_title = 'Add classroom'
-
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-    user = User.objects.get(username = request.session['user'])
-
-    if not review_permission(user, 'allow:classroom_all'):
-        return HttpResponseRedirect(reverse('classroom:classroom_list'))
-
-    classroom = Classroom.objects.all().order_by('shortcode')
-
-    return render(request, 'home.html', {
-        'page_title': page_title,
-        'page_header': page_title,
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'list',
-        'content': {
-            'operation': ( 
-                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Create classroom', 
-                   'url': 'classroom:add_classroom',
-                   'html_class': 'create_classroom'}),
-
-            ),
-            'list': {
-                'name': 'classroom',
-                'body': classroom,
-            },
-        },
-    })   
-
 def create_classroom(request):
     page_title = 'Create classroom'
 
