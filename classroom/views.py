@@ -79,7 +79,6 @@ def create_classroom(request):
                     'redirect_text': 'Classroom list',
                     'redirect_url': return_url,
                     'auto_redirect': True,
-                    'redirect_para': shortcode,
                 },
             })
         else:
@@ -91,7 +90,6 @@ def create_classroom(request):
                 'content': {
                     'form': form_obj.as_ul(),
                     'submit_url': submit_url,
-                    'route_parameter': shortcode,
                 },
             })
 
