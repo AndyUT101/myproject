@@ -15,6 +15,7 @@ import django_excel as excel
 
 from .forms import *
 from .utils import *
+from .toexcel import *
 
 from attendance.utils import *
 from user.utils import user_alreadyloggedin, get_userrole, review_permission
@@ -94,6 +95,7 @@ def attend_form(request):
     })
 
 def attend_export(request, attend_date, class_code):
+    return export_excel(attendance_xls('attend_date', class_code))
     return render(request, 'home.html', {
         'page_title': 'Generate attendant report',
         'page_header': 'Generate attendant report',
