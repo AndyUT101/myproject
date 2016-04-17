@@ -155,7 +155,7 @@ def view_classroom(request, shortcode):
         'content': {
             'notification': {
                 'current_classroom': c['classroom'].name,
-                'classroom_role': is_memberinfo(shortcode, request.session['user'])[1]
+                'classroom_role': is_memberinfo(shortcode, request.session['user'])[1],
                 'url': shortcode,
             },
             'classroom': {
