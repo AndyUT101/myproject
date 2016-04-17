@@ -577,7 +577,7 @@ def material(request, shortcode):
         operation = ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add material', 
-                   'url': 'classroom:material',
+                   'url': 'classroom:material_upload',
                    'url_para': shortcode,
                    'html_class': 'add_material'}),
 
@@ -605,8 +605,8 @@ def material(request, shortcode):
 
 def material_upload(request, shortcode):
     page_title = 'Add assignment format'
-    submit_url = 'classroom:assignmentformat_add'
-    return_url = 'classroom:assignmentformat_add'
+    submit_url = 'classroom:assignment'
+    return_url = 'classroom:assignment'
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
