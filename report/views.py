@@ -33,7 +33,7 @@ def list_report(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_add'):
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:report'):
         return HttpResponseRedirect(reverse('index_home'))
 
     return render(request, 'home.html', {
@@ -48,12 +48,11 @@ def list_report(request):
                     ({'name': 'Attendant Report',
                         'url': 'report:attend_form'}),
 
-                    ({'name': 'Class student list',
-                        'url': 'report:class_report',
-                        'para': '2B'}),
+                    ({'name': 'All class student list',
+                        'url': 'report:all_student'}),
 
                     ({'name': 'All student list',
-                        'url': 'report:all_student'}),
+                        'url': 'report:all_student_list'}),
                 ),
                 'foot': (),
             },
@@ -72,6 +71,14 @@ def generate_class_report(request, class_name):
     return excel.make_response_from_query_sets(user_dataset, column_name, 'xlsx', file_name=class_name+'_stu')
 
 def attend_form(request):
+    page_title = 'Report management'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:report'):
+        return HttpResponseRedirect(reverse('index_home'))
+
     form_obj = Report_attend()
 
     if request.method == 'POST':
@@ -95,10 +102,26 @@ def attend_form(request):
     })
 
 def attend_export(request, attend_date, class_code):
+    page_title = 'Report management'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:report'):
+        return HttpResponseRedirect(reverse('index_home'))
+
     attendance_data = list_attendance(class_code, date(2016, 4, 16))
     return export_excel(attendance_xls(attendance_data, class_code, attend_date))
 
 def class_student_export(request):
+    page_title = 'Report management'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:report'):
+        return HttpResponseRedirect(reverse('index_home'))
+
     class_contents = {}
     class_codelist = {code.class_name: (code.pk) for code in Class_code.objects.all()}
 
@@ -108,6 +131,14 @@ def class_student_export(request):
     return export_excel(all_student_class(class_contents))
 
 def all_student_export(request):
+    page_title = 'Report management'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if not review_permission(User.objects.get(username = request.session['user']), 'allow:report'):
+        return HttpResponseRedirect(reverse('index_home'))
+
     class_contents = {}
     class_codelist = {code.class_name: (code.pk) for code in Class_code.objects.all()}
 
