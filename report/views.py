@@ -95,7 +95,10 @@ def attend_form(request):
     })
 
 def attend_export(request, attend_date, class_code):
-    return export_excel(attendance_xls(list_attendance(class_code, date(2016, 4, 16), class_code))
+    attendance_data = list_attendance(class_code, date(2016, 4, 16), class_code)
+    return export_excel(attendance_xls(attendance_data)
+
+
     return render(request, 'home.html', {
         'page_title': 'Generate attendant report',
         'page_header': 'Generate attendant report',
