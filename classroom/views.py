@@ -319,11 +319,14 @@ def assignment_list(request, shortcode):
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
+    
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
 
-    if not is_memberinfo(shortcode, request.session['user'])[0]:
+    if not memberinfo[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
-    if allow_contentadd(is_memberinfo(shortcode, request.session['user'])[1]):
+    if allow_contentadd(memberinfo[1]):
         operation = ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add assignment', 
