@@ -106,3 +106,43 @@ def all_student_class(class_contents):
     xlsx_data = output.getvalue()
 
     return xlsx_data
+
+def all_student(class_contents):
+    output = io.BytesIO()
+    workbook = xlsxwriter.Workbook(output)
+
+    worksheet_s = workbook.add_worksheet("Attendance")
+    title = workbook.add_format({
+        'bold': True,
+        'font_size': 14,
+        'align': 'center',
+        'valign': 'vcenter'
+    })
+    header = workbook.add_format({
+        'bg_color': '#F7F7F7',
+        'color': 'black',
+        'align': 'center',
+        'valign': 'top',
+        'border': 1
+    })
+
+    title_text = "Student information report"
+    worksheet_s.merge_range('B2:E2', title_text, title)
+    
+    wb_header = ['Class', 'Class number', 'Student name', 'Sex code', 'Card id', 'Strn code', 'birthday', 'email']
+    for index, key in enumerate(wb_header, 1)
+        worksheet_s.write(4, index, key, header)
+
+
+    for index, key in enumerate(raw_data):
+        row = 5 + index
+        output_data = raw_data[key]
+        worksheet_s.write(row, 1, class_code, header)
+        worksheet_s.write(row, 2, output_data[0], header)
+        worksheet_s.write(row, 3, output_data[1].firstname + " " + output_data[1].lastname, header)
+        worksheet_s.write(row, 4, output_data[2], header)
+
+    workbook.close()
+    xlsx_data = output.getvalue()
+
+    return xlsx_data
