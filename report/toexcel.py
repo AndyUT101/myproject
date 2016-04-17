@@ -63,7 +63,8 @@ def all_student_class(class_contents):
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
 
-    for class_code in class_contents:
+    class_code_key = sorted(list(class_contents.keys()))
+    for class_code in class_code_key:
         worksheet_s = workbook.add_worksheet(class_code)
         worksheet_s.set_column('B:B', 10)
         worksheet_s.set_column('C:C', 15)
@@ -91,10 +92,8 @@ def all_student_class(class_contents):
         worksheet_s.write(4, 3, "Sex", header)
         worksheet_s.write(4, 4, "Checkbox", header)
 
-        class_code_key = sorted(list(class_contents.keys()))
-        for index, key in enumerate(class_code_key):
+        for index, content in enumerate(class_contents[class_code]):
             row = 5 + index
-            content = class_contents[key]
             if len(content) == 0:
                 continue
             worksheet_s.write(row, 1, content[0], header)
