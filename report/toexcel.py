@@ -16,6 +16,7 @@ def attendance_xls(raw_data, class_code):
     workbook = xlsxwriter.Workbook(output)
 
     worksheet_s = workbook.add_worksheet("Attendance")
+    worksheet_s.set_column(1, 1, 15)
     title = workbook.add_format({
         'bold': True,
         'font_size': 14,
@@ -30,7 +31,7 @@ def attendance_xls(raw_data, class_code):
         'border': 1
     })
 
-    title_text = "Attendance report of"
+    title_text = "Attendance report of " + class_code
     worksheet_s.merge_range('B2:H2', title_text, title)
 
     worksheet_s.write(4, 0, "Class", header)
