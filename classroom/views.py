@@ -71,7 +71,7 @@ def create_classroom(request):
             form_obj.creator = user
 
             form_obj.save()
-            User_assignment(user=user, role='ADM', form_obj).save()
+            User_assignment(user=user, role='ADM', classroom=form_obj).save()
 
             return render(request, 'home.html', {
                 'page_title': page_title,
