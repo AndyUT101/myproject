@@ -12,7 +12,7 @@ def export_excel(xlsx_data):
     return response
 
 def attendance_xls(raw_data, class_code):
-    output = StringIO.StringIO()
+    output = StringIO()
     workbook = xlsxwriter.Workbook(output)
 
     worksheet_s = workbook.add_worksheet("Attendance")
