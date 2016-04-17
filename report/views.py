@@ -98,3 +98,12 @@ def attend_export(request, attend_date, class_code):
     attendance_data = list_attendance(class_code, date(2016, 4, 16))
     return export_excel(attendance_xls(attendance_data, class_code, attend_date))
 
+def class_student_export(request):
+    class_contents = {}
+    class_codelist = {code.class_name: (code.pk) for code in Class_code.objects.all()}
+
+    for class_code in class_codelist:
+        class_contents[class_code] = [[u.class_number, u.user.firstname + " " + u.user.lastname, u.user.sexcode] for u in Class_assignment.objects.filter(class_code=class_codelist[class_code])]
+    
+    return export_excel(all_student_class(class_contents))
+
