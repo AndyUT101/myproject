@@ -133,9 +133,9 @@ def all_student(class_contents):
     for index, key in enumerate(wb_header, 1):
         worksheet_s.write(4, index, key, header)
 
-    for index, key in enumerate(raw_data):
+    for index, key in enumerate(class_contents):
         row = 5 + index
-        output_data = raw_data[key]
+        output_data = class_contents
         worksheet_s.write(row, 1, class_code, header)
         worksheet_s.write(row, 2, output_data[0], header)
         worksheet_s.write(row, 3, output_data[1].firstname + " " + output_data[1].lastname, header)
