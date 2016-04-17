@@ -404,6 +404,30 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'announcement' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Title</td>
+						<td>content</td>
+						<td>announce_date</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.title }}</strong></td>
+						<td>{{ data.content }}</td>
+						<td>{{ data.announce_date }}</td>
+						<td><li><a href="{% url 'siteinfo:sp_edit' data.pk %}">Assign/edit sitemap (Advance)</a></li><li><a href="{% url 'siteinfo:sp_del' data.pk %}">Delete sitemap rule</a></li></td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
 
 		<div class="page_nav">
 			{% if content.page_nav.page %}
