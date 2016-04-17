@@ -113,7 +113,7 @@ def all_student_export(request):
 
     for class_code in class_codelist:
         #['Class', 'Class number', 'Student name', 'Sex code', 'Card id', 'Strn code', 'birthday', 'email']
-        class_contents[class_code] = [[u.class_code, u.class_number, u.user.firstname + " " + u.user.lastname, u.user.sex_code, u.user.card_id, u.user.strn_code, u.user.birth_date, u.email] for u in Class_assignment.objects.all().order_by('class_name')]
+        class_contents[class_code] = [[u.class_code, u.class_number, u.user.firstname + " " + u.user.lastname, u.user.sex_code, u.user.card_id, u.user.strn_code, u.user.birth_date, u.email] for u in Class_assignment.objects.all().order_by('class_code')]
     
     return export_excel(all_student(class_contents))
   
