@@ -684,6 +684,7 @@ def material_remove(request, shortcode):
             'notification': 'material removes successful',
             'redirect_text': 'material page',
             'redirect_url': 'classroom:material',
+            'redirect_para': shortcode,
             'auto_redirect': True,
         },
     })
