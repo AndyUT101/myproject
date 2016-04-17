@@ -91,8 +91,10 @@ def all_student_class(class_contents):
         worksheet_s.write(4, 3, "Sex", header)
         worksheet_s.write(4, 4, "Checkbox", header)
 
-        for index, content in enumerate(class_contents[class_code]):
+        class_code_key = sorted(list(class_contents.keys()))
+        for index, key in enumerate(class_code_key):
             row = 5 + index
+            content = class_content[class_code_key]
             if len(content) == 0:
                 continue
             worksheet_s.write(row, 1, content[0], header)
