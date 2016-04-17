@@ -621,6 +621,34 @@ def material_upload(request, shortcode):
     if request.method == "POST":
         form_obj = MaterialForm(request.POST, request.FILES)
 
+        if form_obj.is_valid():
+
+            form_obj = form_obj.save(commit=False)
+
+            classroom = Classroom.objects.get(shortcode = shortcode)
+            user = User.objects.get(username = request.session['user'])
+            user_assign = User_assignment.objects.get(classroom = classroom, user = user)
+
+            form_obj.uploader = user_assign
+            form_obj.create_date = timezone.now()
+            form_obj.save()
+
+            Material_classroom(material = form_obj.pk, classroom = classroom).save()
+
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Material uploaded successful',
+                    'redirect_text': 'all materials',
+                    'redirect_url': return_url,
+                    'redirect_para': shortcode,
+                    'auto_redirect': True,
+                },
+            })
 
     return render(request, 'home.html', {
         'page_title': page_title,
