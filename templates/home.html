@@ -419,7 +419,7 @@
 						<td><strong>{{ data.title }}</strong></td>
 						<td>{{ data.content }}</td>
 						<td>{{ data.announce_date }}</td>
-						<td><li><a href="{% url 'siteinfo:sp_edit' data.pk %}">Assign/edit sitemap (Advance)</a></li><li><a href="{% url 'siteinfo:sp_del' data.pk %}">Delete sitemap rule</a></li></td>
+						<td><li><a href="{% url 'classroom:announce_del' %}/?delete={{ data.pk }}">Delete anouncement</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>

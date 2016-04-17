@@ -185,8 +185,10 @@ def announce_all(request, shortcode):
         return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
 
     permission = allow_contentadd(memberinfo[1])
+    c = get_contents(shortcode)
 
-    announce = get_contents(shortcode)['announce']
+    announce_data = c['announce'].order_by('-announce_date')
+    announce_count = len(announce_data)
 
     return render(request, 'home.html', {
         'page_title': 'All announcement',
@@ -205,7 +207,7 @@ def announce_all(request, shortcode):
             ),
             'list': {
                 'name': 'announcement',
-                'body': announce,
+                'body': announce_data,
             },
         },
     })
