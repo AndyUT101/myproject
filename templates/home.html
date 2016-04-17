@@ -419,7 +419,7 @@
 						<td><strong>{{ data.title }}</strong></td>
 						<td>{{ data.content }}</td>
 						<td>{{ data.announce_date }}</td>
-						<td><li><a href="{% url 'classroom:announce_del' data.pk %}/?delete={{ data.pk }}">Delete anouncement</a></li></td>
+						<td><li><a href="{% url 'classroom:announce_del' content.shortcode %}?delete={{ data.pk }}">Delete anouncement</a></li></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
