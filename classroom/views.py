@@ -331,6 +331,7 @@ def assignment_list(request, shortcode):
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add assignment', 
                    'url': 'classroom:assignment_add',
+                   'url_para': shortcode,
                    'html_class': 'add_assignment'}),
 
         )
@@ -360,7 +361,7 @@ def assignment_list(request, shortcode):
             },
             'list': {
                 'name': 'assignment',
-                'body': assignment_data,
+                'body': assignment_data, 
             },
         },
     })
