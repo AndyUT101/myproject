@@ -639,7 +639,12 @@ def material_remove(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    material = Material.objects.get(pk=material_id)
+    delete_index = request.GET.get('delete', '')
+    if not delete_index:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+
+    material = Material.objects.get(pk=delete_index)
     material.delete()
 
     return render(request, 'home.html', {
