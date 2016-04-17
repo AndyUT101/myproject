@@ -98,10 +98,10 @@
 		{% if content.route_parameter2 %}
 		<form action="{% url content.submit_url content.route_parameter content.route_parameter2 %}" method="post" enctype="multipart/form-data">
 		{% else %}
-		<form action="{% url content.submit_url content.route_parameter %}" method="post">
+		<form action="{% url content.submit_url content.route_parameter %}" method="post" enctype="multipart/form-data">
 		{% endif %}
 		{% else %}
-		<form action="{% url content.submit_url %}" method="post">
+		<form action="{% url content.submit_url %}" method="post" enctype="multipart/form-data">
 		{% endif %}
 			{% csrf_token %}
 			{{ content.form }}
