@@ -481,12 +481,10 @@
 						<td>{{ data.uploader.user.username }}</td>
 						<td>
 						{% if content.permission %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Mark assignment</a></li>
-						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li>
+						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete material</a></li>
 						</td>
 						{% else %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Assignment detail</a></li>
-						<li><a href="{% url 'classroom:assignment_submit' content.shortcode data.pk %}">Submit assignment</a></li>
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Download material</a></li>
 						{% endif %}
 					<tr>
 					{% endfor %}					
