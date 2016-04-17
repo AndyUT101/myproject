@@ -23,10 +23,17 @@ def list_classroom(request):
     if review_permission(user, 'allow:classroom_all'):
         classroom = Classroom.objects.all()
         render_body = 'classroom_manage'
+        operation = ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Create classroom', 
+                   'url': 'user:add_user',
+                   'html_class': 'create_user'}),
+        ),
     else:
         classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user))
         classroom = tuple(c for c in classroom if c.status == 'O')
         render_body = 'classroom'
+        operation = False
 
     return render(request, 'home.html', {
         'page_title': 'Classroom',
@@ -34,6 +41,7 @@ def list_classroom(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list', 
         'content': {
+            'operation': operation,
             'list': {
                 'name': render_body,
                 'body': classroom,
@@ -62,18 +70,9 @@ def manage_classroom(request):
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Create user', 
+                ({'title':'Create classroom', 
                    'url': 'user:add_user',
                    'html_class': 'create_user'}),
-
-                ({'title':'Modify user', 
-                   'url': 'user:modify_user',
-                   # 'url_para': '',
-                   'html_class': 'modify_user'}),
-
-                ({'title':'Delete user', 
-                   'url': 'user:remove_user',
-                   'html_class': 'delete'}),
 
             ),
             'list': {
@@ -82,6 +81,16 @@ def manage_classroom(request):
             },
         },
     })   
+
+def create_classroom(request):
+    page_title = 'Create classroom'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
+
+    if not review_permission(user, 'allow:classroom_all'):
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
