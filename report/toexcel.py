@@ -33,10 +33,10 @@ def attendance_xls(raw_data, class_code):
     title_text = "Attendance report of" + class_code
     worksheet_s.merge_range('B2:H2', title_text, title)
 
-    worksheet_s.write(4, 0, ugettext("Class"), header)
-    worksheet_s.write(4, 1, ugettext("Class number"), header)
-    worksheet_s.write(4, 2, ugettext("Name"), header)
-    worksheet_s.write(4, 3, ugettext("Status"), header)
+    worksheet_s.write(4, 0, "Class", header)
+    worksheet_s.write(4, 1, "Class number", header)
+    worksheet_s.write(4, 2, "Name", header)
+    worksheet_s.write(4, 3, "Status", header)
 
 
     workbook.close()
