@@ -635,7 +635,7 @@ def material_upload(request, shortcode):
     })
 
 
-def material_remove(request, shortcode, material_id):
+def material_remove(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
