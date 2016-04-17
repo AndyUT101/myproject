@@ -6,6 +6,7 @@ class ClassroomForm(ModelForm):
     class Meta:
         model = Classroom
         fields = '__all__'
+        exclude = ['creator']
 
 class AnnounceForm(ModelForm):
     class Meta:
