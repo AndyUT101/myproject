@@ -42,10 +42,10 @@ def attendance_xls(raw_data, class_code):
     for index, key in enumerate(raw_data):
         row = 5 + index
         output_data = raw_data[key]
-        worksheet_s.write(index, 0, class_code, header)
-        worksheet_s.write(index, 1, output_data[0], header)
-        worksheet_s.write(index, 2, output_data[1].firstname + " " + output_data[1].lastname, header)
-        worksheet_s.write(index, 3, output_data[2], header)
+        worksheet_s.write(row, 0, class_code, header)
+        worksheet_s.write(row, 1, output_data[0], header)
+        worksheet_s.write(row, 2, output_data[1].firstname + " " + output_data[1].lastname, header)
+        worksheet_s.write(row, 3, output_data[2], header)
 
 
 
