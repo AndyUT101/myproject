@@ -28,7 +28,7 @@ def list_classroom(request):
                 ({'title':'Create classroom', 
                    'url': 'user:add_user',
                    'html_class': 'create_user'}),
-        ),
+        )
     else:
         classroom = tuple(i.classroom for i in User_assignment.objects.filter(user=user))
         classroom = tuple(c for c in classroom if c.status == 'O')
