@@ -596,6 +596,7 @@ def material(request, shortcode):
         'content': {
             'permission': permission,
             'operation': operation, 
+            'shortcode':shortcode,
             'list': {
                 'name': 'material',
                 'body': material,
