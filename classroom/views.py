@@ -314,14 +314,25 @@ def announce_del(request, shortcode):
     })
 
 def assignment_list(request, shortcode):
-    page_title = 'Remove announcement'
-    return_url = 'classroom:announce_all'
+    page_title = 'Assignment list'
+    return_url = 'classroom:assignment_list'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    if allow_contentadd(is_memberinfo(shortcode, request.session['user'])[1]):
+        operation = ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add assignment', 
+                   'url': 'classroom:assignment_add',
+                   'html_class': 'add_assignment'}),
+
+        )
+    else:
+        operation = False
 
     c = get_contents(shortcode)
 
@@ -335,6 +346,8 @@ def assignment_list(request, shortcode):
         'template': 'list', 
         'content': {
             'shortcode': shortcode,
+            'operation': operation,
+            'permission': permission,            
             'classroom': {
                 'title': 'Recently assignment',
                 'count': assignment_count,
@@ -348,42 +361,6 @@ def assignment_list(request, shortcode):
             },
         },
     })
-
-def format_add(request):
-    page_title = 'Add assignment format'
-    submit_url = 'classroom:assignmentformat_add'
-    return_url = 'classroom:assignmentformat_add'
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    memberinfo = is_memberinfo(shortcode, request.session['user'])
-    permission = allow_contentadd(memberinfo[1])
-
-    if not memberinfo[0] or not permission:
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
-
-    form_obj = FormatForm()
-    if request.method == "POST":
-        pass
-
-
-    return render(request, 'home.html', {
-        'page_title': page_title,
-        'page_header': page_title,
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'form',
-        'content': {
-            'form': form_obj.as_ul(),
-            'submit_url': submit_url,
-            'route_parameter': shortcode,
-        },
-    })
-
-
-def format_modify(request, format_id):
-    pass
-def format_delete(request, format_id):
-    pass
 
 def assignment_add(request, shortcode):
     page_title = 'Add assignment'
