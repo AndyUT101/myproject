@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 
-from io import BytesIO
+import io
 import xlsxwriter
 
 def export_excel(xlsx_data):
@@ -12,7 +12,7 @@ def export_excel(xlsx_data):
     return response
 
 def attendance_xls(raw_data, class_code):
-    output = BytesIO()
+    output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
 
     worksheet_s = workbook.add_worksheet("Attendance")
