@@ -605,7 +605,7 @@ def material(request, shortcode):
     })   
 
 def material_upload(request, shortcode):
-    page_title = 'Add assignment format'
+    page_title = 'Add material'
     submit_url = 'classroom:material_upload'
     return_url = 'classroom:material'
     if not user_alreadyloggedin(request):
@@ -633,7 +633,7 @@ def material_upload(request, shortcode):
             form_obj.create_date = timezone.now()
             form_obj.save()
 
-            Material_classroom(material = form_obj.pk, classroom = classroom).save()
+            Material_classroom(material = form_obj, classroom = classroom).save()
 
 
             return render(request, 'home.html', {
@@ -649,18 +649,6 @@ def material_upload(request, shortcode):
                     'auto_redirect': True,
                 },
             })
-
-        return render(request, 'home.html', {
-            'page_title': page_title,
-            'page_header': page_title,
-            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-            'template': 'form',
-            'content': {
-                'form': form_obj.as_ul(),
-                'submit_url': submit_url,
-                'route_parameter': shortcode,
-            },
-        })
 
     return render(request, 'home.html', {
         'page_title': page_title,
