@@ -32,7 +32,7 @@ def user_assign_assignment(shortcode, username):
 
 def role_tidyprint(role_short):
     role = {'STU': 'Student', 'TEA': 'Teacher', 'ADM': 'Admin', 'VIS': 'Visitor'}
-    return role(role_short)
+    return role[role_short]
 
 def allow_contentadd(role):
     if role == 'TEA' or role == 'ADM':
