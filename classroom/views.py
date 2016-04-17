@@ -47,8 +47,9 @@ def manage_classroom(request):
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
+    user = User.objects.get(username = request.session['user'])
 
-    if not is_memberinfo(shortcode, request.session['user'])[0]:
+    if not review_permission(user, 'allow:classroom_all'):
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
     classroom = Classroom.objects.all().order_by('shortcode')
