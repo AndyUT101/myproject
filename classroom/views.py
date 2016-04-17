@@ -26,7 +26,7 @@ def list_classroom(request):
         operation = ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Create classroom', 
-                   'url': 'user:add_classroom',
+                   'url': 'classroom:add_classroom',
                    'html_class': 'create_classroom'}),
         )
     else:
@@ -53,6 +53,7 @@ def list_classroom(request):
 def create_classroom(request):
     page_title = 'Create classroom'
     submit_url = 'classroom:add_classroom'
+    return_url = 'classroom:classroom_list'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
