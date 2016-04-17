@@ -151,7 +151,7 @@ def announce(request, shortcode):
     permission = allow_contentadd(memberinfo[1])
     c = get_contents(shortcode)
 
-    announce_data = c['announce'].order_by('announce_date')
+    announce_data = c['announce'].order_by('-announce_date')
     announce_count = len(announce_data)
 
     return render(request, 'home.html', {
