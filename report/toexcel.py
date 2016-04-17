@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 
-import StringIO
+from io import StringIO
 import xlsxwriter
 
 def export_excel(xlsx_data):
