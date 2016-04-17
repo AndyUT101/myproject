@@ -94,7 +94,7 @@ def all_student_class(class_contents):
         class_code_key = sorted(list(class_contents.keys()))
         for index, key in enumerate(class_code_key):
             row = 5 + index
-            content = class_contents[class_code_key]
+            content = class_contents[key]
             if len(content) == 0:
                 continue
             worksheet_s.write(row, 1, content[0], header)
