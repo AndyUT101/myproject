@@ -606,7 +606,7 @@ def material(request, shortcode):
 
 def material_upload(request, shortcode):
     page_title = 'Add assignment format'
-    submit_url = 'classroom:material'
+    submit_url = 'classroom:material_upload'
     return_url = 'classroom:material'
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
