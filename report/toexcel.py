@@ -17,6 +17,7 @@ def attendance_xls(raw_data, class_code):
 
     worksheet_s = workbook.add_worksheet("Attendance")
     worksheet_s.set_column(1, 1, 20)
+    worksheet_s.set_column('D:D', 50)
     title = workbook.add_format({
         'bold': True,
         'font_size': 14,
@@ -32,20 +33,20 @@ def attendance_xls(raw_data, class_code):
     })
 
     title_text = "Attendance report of " + class_code
-    worksheet_s.merge_range('B2:H2', title_text, title)
+    worksheet_s.merge_range('B2:E2', title_text, title)
 
-    worksheet_s.write(4, 0, "Class", header)
-    worksheet_s.write(4, 1, "Class number", header)
-    worksheet_s.write(4, 2, "Name", header)
-    worksheet_s.write(4, 3, "Status", header)
+    worksheet_s.write(4, 1, "Class", header)
+    worksheet_s.write(4, 2, "Class number", header)
+    worksheet_s.write(4, 3, "Name", header)
+    worksheet_s.write(4, 4, "Status", header)
 
     for index, key in enumerate(raw_data):
         row = 5 + index
         output_data = raw_data[key]
-        worksheet_s.write(row, 0, class_code, header)
-        worksheet_s.write(row, 1, output_data[0], header)
-        worksheet_s.write(row, 2, output_data[1].firstname + " " + output_data[1].lastname, header)
-        worksheet_s.write(row, 3, output_data[2], header)
+        worksheet_s.write(row, 1, class_code, header)
+        worksheet_s.write(row, 2, output_data[0], header)
+        worksheet_s.write(row, 3, output_data[1].firstname + " " + output_data[1].lastname, header)
+        worksheet_s.write(row, 4, output_data[2], header)
 
 
 
