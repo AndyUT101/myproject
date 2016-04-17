@@ -429,6 +429,34 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'assignment' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Title</td>
+						<td>Upload format</td>
+						<td>Fullmark</td>
+						<td>Create date</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.title }}</strong></td>
+						<td>{{ data.upload_format }}</td>
+						<td>{{ data.fullmark }}</td>
+						<td>{{ data.create_date }}</td>
+						<td><li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li></td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
+
 		<div class="page_nav">
 			{% if content.page_nav.page %}
 			<div class="page_idx">

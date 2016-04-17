@@ -342,6 +342,10 @@ def assignment_list(request, shortcode):
                 'right_notice': right_nav(shortcode),
                 'content': assignment_data,
             },
+            'list': {
+                'name': 'assignment',
+                'body': assignment_data,
+            },
         },
     })
 
