@@ -50,8 +50,8 @@ def list_classroom(request):
         },
     })
 
-def manage_classroom(request):
-    page_title = 'Manage classroom'
+def add_classroom(request):
+    page_title = 'Add classroom'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -92,6 +92,52 @@ def create_classroom(request):
     if not review_permission(user, 'allow:classroom_all'):
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
+    form_obj = ClassroomForm()
+    if request.method == 'POST':
+        form_obj = ClassroomForm(request.POST)
+
+        if form_obj.is_valid():
+            form_obj = form_obj.save(commit=False)
+            form_obj.save()
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Classroom add successful',
+                    'redirect_text': 'Classroom list',
+                    'redirect_url': return_url,
+                    'auto_redirect': True,
+                    'redirect_para': shortcode,
+                },
+            })
+        else:
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'form',
+                'content': {
+                    'form': form_obj.as_ul(),
+                    'submit_url': submit_url,
+                    'route_parameter': shortcode,
+                },
+            })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+            'route_parameter': shortcode,
+        },
+    })
+
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -109,6 +155,7 @@ def view_classroom(request, shortcode):
         'content': {
             'notification': {
                 'current_classroom': c['classroom'].name,
+                'classroom_role': is_memberinfo(shortcode, request.session['user'])[1]
                 'url': shortcode,
             },
             'classroom': {

@@ -35,6 +35,7 @@
 
 		{% if content.notification.current_classroom %}
 			<li class="current_classroom"><span class="classroom_emoji">&nbsp;</span> Current classroom: <a href="{% url 'classroom:classroom' content.notification.url %}">{{ content.notification.current_classroom }}</a></li>
+			<li class="classroom_role"><span class="role_emoji">&nbsp;</span> Your role: {{ content.notification.classroom_role }}</li>
 		{% endif %}
 
 		</ul>
