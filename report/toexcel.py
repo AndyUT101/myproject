@@ -30,7 +30,7 @@ def attendance_xls(raw_data, class_code):
         'border': 1
     })
 
-    title_text = "{0} {1}".format(ugettext("Weather History for"), class_code)
+    title_text = "Attendance report of" + class_code
     worksheet_s.merge_range('B2:H2', title_text, title)
 
     worksheet_s.write(4, 0, ugettext("Class"), header)
