@@ -567,8 +567,23 @@ def material(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    if allow_contentadd(memberinfo[1]):
+        operation = ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add material', 
+                   'url': 'classroom:material',
+                   'url_para': shortcode,
+                   'html_class': 'add_material'}),
+
+        )
+    else:
+        operation = False
 
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
@@ -579,6 +594,8 @@ def material(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'permission': permission,
+            'operation': operation, 
             'list': {
                 'name': 'material',
                 'body': material,

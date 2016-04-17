@@ -464,6 +464,38 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'Material' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>File</td>
+						<td>Create date</td>
+						<td>Uploader</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.path }}</strong></td>
+						<td>{{ data.create_date }}</td>
+						<td>{{ data.uploader.user.username }}</td>
+						<td>
+						{% if content.permission %}
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Mark assignment</a></li>
+						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li>
+						</td>
+						{% else %}
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Assignment detail</a></li>
+						<li><a href="{% url 'classroom:assignment_submit' content.shortcode data.pk %}">Submit assignment</a></li>
+						{% endif %}
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
 
 		<div class="page_nav">
 			{% if content.page_nav.page %}
@@ -549,6 +581,7 @@
 		</ul>
 
 	{% endif %}
+
 	</section>
 {% endif %}
 
