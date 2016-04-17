@@ -44,7 +44,7 @@ def attendance_xls(raw_data, class_code):
         output_data = raw_data[key]
         worksheet_s.write(index, 0, class_code, header)
         worksheet_s.write(index, 1, output_data[0], header)
-        worksheet_s.write(index, 2, output_data[1].first_name + " " + output_data[1].last_name, header)
+        worksheet_s.write(index, 2, output_data[1].firstname + " " + output_data[1].lastname, header)
         worksheet_s.write(index, 3, output_data[2], header)
 
 
