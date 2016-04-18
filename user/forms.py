@@ -31,3 +31,13 @@ class UsermodForm(UserForm):
             'password': forms.PasswordInput(),
         }
         exclude = ('username', 'last_logged', )
+
+class ClasscodeForm(ModelForm):
+    class Meta:
+        model = Class_code
+        fields = '__all__'
+
+class ClassassignForm(ModelForm):
+    class Meta:
+        model = Class_assignment
+        fields = '__all__'

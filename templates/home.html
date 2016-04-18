@@ -179,6 +179,36 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'class' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>username</td>
+						<td>First name</td>
+						<td>Last name</td>
+						<td>Role</td>
+						<td>Last login</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><input type="checkbox" name="user_action" value="{{ data.pk }}"></td>
+						<td><a href="{% url 'user:view_user' data.username %}">{{ data.username }}</a></td>
+						<td>{{ data.firstname }}</td>
+						<td>{{ data.lastname }}</td>
+						<td>{{ data.role.name }}</td>
+						<td>{{ data.last_logged }}</td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
 	{% if content.list.name == 'booking' %}
 		<div class="list_table">
 			<table>

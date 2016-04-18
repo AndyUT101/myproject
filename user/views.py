@@ -425,32 +425,8 @@ def list_class(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    default_pagevalue = {'page': 1, 'row_count': 50}
-    page_get = request.GET.get('page', default_pagevalue['page'])
-    row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
+    class_list = Class_code.objects.all().order_by('class_name')
 
-    try:
-        page = int(page_get)
-        row_count = int(row_count_get)
-    except ValueError:
-        page = default_pagevalue['page']
-        row_count = default_pagevalue['row_count']
-
-    user_object = User.objects.all()
-    if not specific_usertype == None:
-        pass
-
-    # 1. GET page_number
-    # return HttpResponseRedirect(reverse('user:list_user'))
-
-    # 1. Define list page count
-    user_count = user_object.count()
-    max_page = math.ceil(user_count/row_count)
-    if page > max_page and max_page > 0:
-        return HttpResponseRedirect(reverse('user:list_user'))
-
-    user_list = user_object[row_count*(page-1):row_count+row_count*(page-1)]
-    
     return render(request, 'home.html', {
         'page_title': 'User management',
         'page_header': 'User management',
@@ -462,40 +438,58 @@ def list_class(request, specific_usertype=None, classcode=None):
                 ({'title':'Create class', 
                    'url': 'user:add_user',
                    'html_class': 'create_class'}),
-
-                ({'title':'Modify class', 
-                   'url': 'user:modify_class',
-                   # 'url_para': '',
-                   'html_class': 'modify_class'}),
-
-                ({'title':'Delete class', 
-                   'url': 'user:delete_class',
-                   'html_class': 'delete_class'}),
-
             ),
             'list': {
                 'checkbox': True,
-                'name': 'user',
-                'body': user_list,
+                'name': 'class',
+                'body': class_list,
                 'foot': (),
-            },
-            'page_nav': { 
-                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                'message': '',
-                'count': user_count,
-                'page': {
-                    'current_page': page,
-                    'max_page': max_page,
-                },
-                'filter': {
-                    'usertype': 'student',
-                }
             },
         },
     })
 
 def create_class(request):
-    pass
+    page_title = 'Add class'
+    submit_url = 'user:create_class'
+    return_url = 'user:list_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    form_obj = ClasscodeForms()
+    if request.method == 'POST':
+        form_obj = ClasscodeForms(request.POST)
+
+        if form_obj.is_valid():
+            form_obj = form_obj.save(commit=False)
+
+            form_obj.save()
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Note add successful',
+                    'redirect_text': 'all note',
+                    'redirect_url': return_url,
+                    'redirect_para': shortcode,
+                    'auto_redirect': True,
+                },
+            })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+            'route_parameter': shortcode,
+        },
+    })
 
 def modify_class(request):
     # add student
