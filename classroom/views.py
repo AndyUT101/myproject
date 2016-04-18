@@ -697,6 +697,7 @@ def note(request, shortcode):
         return HttpResponseRedirect(reverse('index'))
 
     memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
 
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
@@ -724,6 +725,7 @@ def note(request, shortcode):
         'content': {
             'shortcode': shortcode,
             'operation': operation,
+            'permission': permission,
             'list': {
                 'name': 'note',
                 'body': note,

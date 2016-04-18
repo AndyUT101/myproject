@@ -512,10 +512,10 @@
 						<td>{{ data.note.publish_datetime }}</td>
 						<td>
 						{% if content.permission %}
-						<li><a href="{% url 'classroom:material_remove' content.shortcode %}?delete={{ data.pk }}">Delete material</a></li>
+						<li><a href="{% url 'classroom:note_remove' content.shortcode %}?delete={{ data.pk }}">Delete note</a></li>
 						</td>
 						{% else %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Download material</a></li>
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">View note</a></li>
 						{% endif %}
 					<tr>
 					{% endfor %}					
