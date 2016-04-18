@@ -494,7 +494,7 @@ def list_class(request, specific_usertype=None, classcode=None):
         },
     })
 
-def class_assign(request):
+def class_assign(request, specific_usertype = None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
