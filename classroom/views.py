@@ -109,6 +109,7 @@ def create_classroom(request):
     })
 
 def manage_classroom(request):
+    # remove and on/off classroom
     pass
 
 def view_classroom(request, shortcode):
@@ -671,9 +672,11 @@ def material_remove(request, shortcode):
     if not delete_index:
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
-
     material = Material.objects.get(pk=delete_index)
-    material.delete()
+    classroom = Classroom.objects.get(shortcode = shortcode)
+
+    del_item = Material_classroom.objects.get(material = material, classroom = classroom)
+    del_item.delete()
 
     return render(request, 'home.html', {
         'page_title': 'Remove material',
@@ -695,6 +698,8 @@ def note(request, shortcode):
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
 
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
