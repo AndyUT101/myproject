@@ -671,11 +671,8 @@ def material_remove(request, shortcode):
     delete_index = request.GET.get('delete', '')
     if not delete_index:
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
-
-    material = Material.objects.get(pk=delete_index)
-    classroom = Classroom.objects.get(shortcode = shortcode)
-
-    del_item = Material_classroom.objects.get(material = material, classroom = classroom)
+        
+    del_item = Material_classroom.objects.get(pk = delete_index)
     del_item.delete()
 
     return render(request, 'home.html', {
@@ -798,6 +795,12 @@ def note_remove(request, shortcode):
     delete_index = request.GET.get('delete', '')
     if not delete_index:
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+    material = Material.objects.get(pk=delete_index)
+    classroom = Classroom.objects.get(shortcode = shortcode)
+
+    del_item = Material_classroom.objects.get(material = material, classroom = classroom)
+    del_item.delete()
 
     note = Note.objects.get(pk=note_id)
     note.delete()
