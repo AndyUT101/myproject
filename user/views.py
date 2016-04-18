@@ -9,8 +9,8 @@ from django.contrib.auth.hashers import check_password, make_password
 from datetime import datetime
 import math
 
-from .models import User, Permission, Permission_meta, Role
-from .forms import UserForm, UsermodForm
+from .models import *
+from .forms import *
 
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
