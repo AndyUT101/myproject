@@ -509,7 +509,7 @@
 					{% for data in content.list.body %}
 						<td><strong>{{ data.note.title }}</strong></td>
 						<td>{{ data.note.content }}</td>
-						<td>{{ data.note.uploader.publish_datetime }}</td>
+						<td>{{ data.note.publish_datetime }}</td>
 						<td>
 						{% if content.permission %}
 						<li><a href="{% url 'classroom:material_remove' content.shortcode %}?delete={{ data.pk }}">Delete material</a></li>
@@ -525,7 +525,7 @@
 
 		</div>
 	{% endif %}
-	
+
 		<div class="page_nav">
 			{% if content.page_nav.page %}
 			<div class="page_idx">
