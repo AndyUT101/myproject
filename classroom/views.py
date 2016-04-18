@@ -699,6 +699,18 @@ def note(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
+    if allow_contentadd(memberinfo[1]):
+        operation = ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add assignment', 
+                   'url': 'classroom:assignment_add',
+                   'url_para': shortcode,
+                   'html_class': 'add_assignment'}),
+
+        )
+    else:
+        operation = False
+
     classroom = Classroom.objects.get(shortcode=shortcode)
     note = Classroom_note.objects.filter(classroom = classroom)
 
@@ -709,6 +721,7 @@ def note(request, shortcode):
         'template': 'list',
         'content': {
             'shortcode': shortcode,
+            'operation': operation,
             'list': {
                 'name': 'note',
                 'body': note,
@@ -773,9 +786,13 @@ def note_add(request, shortcode):
 def note_modify(request, shortcode, note_id):
     pass
 
-def note_remove(request, shortcode, note_id):
+def note_remove(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
+
+    delete_index = request.GET.get('delete', '')
+    if not delete_index:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
     note = Note.objects.get(pk=note_id)
     note.delete()
