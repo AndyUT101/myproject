@@ -798,11 +798,8 @@ def note_remove(request, shortcode):
     if not delete_index:
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
-    del_item = Material_classroom.objects.get(pk = delete_index)
+    del_item = Classroom_note.objects.get(pk = delete_index)
     del_item.delete()
-
-    note = Note.objects.get(pk=note_id)
-    note.delete()
 
     return render(request, 'home.html', {
         'page_title': 'Remove note',
