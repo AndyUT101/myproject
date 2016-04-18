@@ -714,7 +714,7 @@ def note(request, shortcode):
         operation = False
 
     classroom = Classroom.objects.get(shortcode=shortcode)
-    note = Classroom_note.objects.filter(classroom = classroom)
+    note = Classroom_note.objects.filter(classroom = classroom).order_by('-note.publish_datetime')
 
     return render(request, 'home.html', {
         'page_title': page_title,
