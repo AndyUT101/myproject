@@ -716,7 +716,58 @@ def note(request, shortcode):
     })
 
 def note_add(request, shortcode):
-    pass
+    page_title = 'Add note'
+    submit_url = 'classroom:note_add'
+    return_url = 'classroom:note'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo[0] or not permission:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+
+    form_obj = NoteForm()
+    if request.method == 'POST':
+        form_obj = NoteForm(request.POST)
+
+        if form_obj.is_valid():
+            form_obj = form_obj.save(commit=False)
+            classroom = Classroom.objects.get(shortcode = shortcode)
+            form_obj.classroom = classroom
+            form_obj.save()
+
+            Classroom_note(classroom = classroom, note = form_obj).save()
+
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Note add successful',
+                    'redirect_text': 'all note',
+                    'redirect_url': return_url,
+                    'redirect_para': shortcode,
+                    'auto_redirect': True,
+                },
+            })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+            'route_parameter': shortcode,
+        },
+    })
 
 def note_modify(request, shortcode, note_id):
     pass
