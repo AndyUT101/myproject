@@ -500,15 +500,13 @@
 			<table>
 				<thead>
 					<tr>
-						<td>Title</td>
 						<td>Content</td>
 						<td>Publish on</td>
 					<tr>
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><strong>{{ data.note.title }}</strong></td>
-						<td>{{ data.note.content }}</td>
+						<td><strong>{{ data.note.title }}</strong><br/>{{ data.note.content|linebreaks }}</td>
 						<td>{{ data.note.publish_datetime }}</td>
 						<td>
 						{% if content.permission %}
