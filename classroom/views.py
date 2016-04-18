@@ -787,9 +787,6 @@ def note_add(request, shortcode):
         },
     })
 
-def note_modify(request, shortcode, note_id):
-    pass
-
 def note_remove(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
