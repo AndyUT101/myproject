@@ -469,7 +469,7 @@ def list_class(request, specific_usertype=None, classcode=None):
                    'html_class': 'modify_class'}),
 
                 ({'title':'Delete class', 
-                   'url': 'user:remove_class',
+                   'url': 'user:delete_class',
                    'html_class': 'delete_class'}),
 
             ),
