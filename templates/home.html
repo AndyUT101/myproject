@@ -501,13 +501,14 @@
 				<thead>
 					<tr>
 						<td>Content</td>
-						<td>Publish on</td>
 					<tr>
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><strong>{{ data.note.title }}</strong><br/>{{ data.note.content|linebreaks }}</td>
-						<td>{{ data.note.publish_datetime }}</td>
+						<td><strong>{{ data.note.title }}</strong><br/>
+						Publish on:{{ data.note.publish_datetime }} 
+						{{ data.note.content|linebreaks }}
+						</td>
 						<td>
 						{% if content.permission %}
 						<li><a href="{% url 'classroom:note_remove' content.shortcode %}?delete={{ data.pk }}">Delete note</a></li>
