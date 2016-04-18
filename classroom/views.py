@@ -708,6 +708,7 @@ def note(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'shortcode': shortcode,
             'list': {
                 'name': 'note',
                 'body': note,
