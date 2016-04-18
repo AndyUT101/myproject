@@ -10,6 +10,7 @@ from datetime import datetime
 import math
 
 from .models import *
+from .models import Class_code
 from .forms import *
 
 from inbox.models import Inbox
