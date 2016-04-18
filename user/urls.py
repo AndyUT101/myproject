@@ -12,9 +12,13 @@ urlpatterns = [
     url(r'^add/$', views.add_user, name='add_user'),
 
     url(r'^modify/$', views.modify_user, name='modify_user'),
-    url(r'^class/$', views.class_assign, name='class_assign'),
     url(r'^modify/(?P<username>.+)/$', views.modify_user, name='modify_user'),
     url(r'^$', views.list_user, name='list_user'),
     url(r'^(?P<username>.+)/$', views.view_user, name='view_user'),
+
+    url(r'^class/$', views.list_class, name='list_class'),
+    url(r'^class/add/$', views.add_class, name='add_class'),
+    url(r'^class/modify/$', views.modify_class, name='modify_class'),
+    url(r'^class/delete/$', views.delete_class, name='delete_class'),
 
 ]

@@ -459,79 +459,6 @@ def list_class(request, specific_usertype=None, classcode=None):
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Create user', 
-                   'url': 'user:add_user',
-                   'html_class': 'create_user'}),
-
-                ({'title':'Modify user', 
-                   'url': 'user:modify_user',
-                   # 'url_para': '',
-                   'html_class': 'modify_user'}),
-
-                ({'title':'Delete user', 
-                   'url': 'user:remove_user',
-                   'html_class': 'delete_user'}),
-
-            ),
-            'list': {
-                'checkbox': True,
-                'name': 'user',
-                'body': user_list,
-                'foot': (),
-            },
-            'page_nav': { 
-                # operation pattern ('title', 'redirect_url(url:name)', 'assign html class name in list')
-                'message': '',
-                'count': user_count,
-                'page': {
-                    'current_page': page,
-                    'max_page': max_page,
-                },
-                'filter': {
-                    'usertype': 'student',
-                }
-            },
-        },
-    })
-
-def class_assign(request, specific_usertype = None):
-    if not user_alreadyloggedin(request):
-        return HttpResponseRedirect(reverse('index'))
-
-    default_pagevalue = {'page': 1, 'row_count': 50}
-    page_get = request.GET.get('page', default_pagevalue['page'])
-    row_count_get = request.GET.get('row_count', default_pagevalue['row_count'])
-
-    try:
-        page = int(page_get)
-        row_count = int(row_count_get)
-    except ValueError:
-        page = default_pagevalue['page']
-        row_count = default_pagevalue['row_count']
-
-    class_object = Class_code.objects.all()
-    if not specific_usertype == None:
-        pass
-
-    # 1. GET page_number
-    # return HttpResponseRedirect(reverse('user:list_user'))
-
-    # 1. Define list page count
-    user_count = class_object.count()
-    max_page = math.ceil(user_count/row_count)
-    if page > max_page and max_page > 0:
-        return HttpResponseRedirect(reverse('user:list_user'))
-
-    user_list = class_object[row_count*(page-1):row_count+row_count*(page-1)]
-    
-    return render(request, 'home.html', {
-        'page_title': 'User management',
-        'page_header': 'User management',
-        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'list', # operation, list, 
-        'content': {
-            'operation': ( 
-                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Create class', 
                    'url': 'user:add_user',
                    'html_class': 'create_class'}),
@@ -566,3 +493,13 @@ def class_assign(request, specific_usertype = None):
             },
         },
     })
+
+def create_class(request):
+    pass
+
+def modify_class(request):
+    # add student
+    pass
+
+def delete_class(request):
+    pass
