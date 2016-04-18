@@ -704,10 +704,10 @@ def note(request, shortcode):
     if allow_contentadd(memberinfo[1]):
         operation = ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Add assignment', 
-                   'url': 'classroom:assignment_add',
+                ({'title':'Add note', 
+                   'url': 'classroom:note_add',
                    'url_para': shortcode,
-                   'html_class': 'add_assignment'}),
+                   'html_class': 'add_note'}),
 
         )
     else:
