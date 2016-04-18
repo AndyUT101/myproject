@@ -810,6 +810,7 @@ def note_remove(request, shortcode):
             'notification': 'Note removes successful',
             'redirect_text': 'note page',
             'redirect_url': 'classroom:note',
+            'route_parameter': shortcode,
             'auto_redirect': True,
         },
     })
