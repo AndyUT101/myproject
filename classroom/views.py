@@ -161,6 +161,11 @@ def announce(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'permission': permission,
             'shortcode': shortcode,
             'operation': ( 
@@ -197,6 +202,11 @@ def announce_all(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'permission': permission,
             'shortcode': shortcode,
             'operation': ( 
@@ -221,6 +231,8 @@ def announce_add(request, shortcode):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+    c = get_contents(shortcode)
+
     memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
 
@@ -243,6 +255,11 @@ def announce_add(request, shortcode):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
+                    'notification': {
+                        'current_classroom': c['classroom'].name,
+                        'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                        'url': shortcode,
+                    },
                     'notification': 'Announcement add successful',
                     'redirect_text': 'all announcement',
                     'redirect_url': return_url,
@@ -257,6 +274,11 @@ def announce_add(request, shortcode):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'form',
                 'content': {
+                    'notification': {
+                        'current_classroom': c['classroom'].name,
+                        'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                        'url': shortcode,
+                    },
                     'form': form_obj.as_ul(),
                     'submit_url': submit_url,
                     'route_parameter': shortcode,
@@ -269,6 +291,11 @@ def announce_add(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,
@@ -350,6 +377,11 @@ def assignment_list(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list', 
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'shortcode': shortcode,
             'operation': operation,
             'permission': permission,            
@@ -480,7 +512,7 @@ def assignment_detail(request, shortcode, assignment_id):
 
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
-
+    c = get_contents(shortcode)
     assignment_obj = Assignment.objects.get(pk = assignment_id)
 
     return render(request, 'home.html', {
@@ -489,6 +521,11 @@ def assignment_detail(request, shortcode, assignment_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'testing', 
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'classroom': {
                 'title': 'Assignment detail',
                 'content': assignment_obj,
