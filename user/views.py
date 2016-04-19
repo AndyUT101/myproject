@@ -298,7 +298,7 @@ def modify_user(request, username=None):
             redirect_text = 'user page'
         else:
             userform = UsersimpleForm(request.POST, instance=modify_userobj)
-            redirect_url = 'home'
+            redirect_url = 'index_home'
             redirect_text = 'home page'
 
         if userform.is_valid():
