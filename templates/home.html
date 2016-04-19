@@ -585,7 +585,7 @@
 					{% for data in content.list.body %}
 						<td><strong>{{ data.material.path }}</strong></td>
 						<td>{{ data.material.create_date }}</td>
-						<td>{{ data.material.uploader.user.username }}</td>
+						<td>{{ data.username }}</td>
 						<td>
 						{% if content.permission %}
 						<li><a href="{% url 'classroom:material_remove' content.shortcode %}?delete={{ data.pk }}">Delete material</a></li>

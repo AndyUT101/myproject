@@ -581,7 +581,7 @@ def assignment_detail(request, shortcode, assignment_id):
                 'url': shortcode,
             },
             'assignment': {
-                'title': 'Assignment detail',
+                'title': assignment_obj.title,
                 'content': assignment_content,
                 'upload': uploaded,
                 'a_id': assignment_id,
@@ -695,6 +695,13 @@ def material(request, shortcode):
 
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
+    material_content = {
+        'path': material.material.path,
+        'create_date': material.material.create_date,
+        'uploader': material.material.uploader,
+        'username': material.material.uploader.user.username,
+
+    }
 
     return render(request, 'home.html', {
         'page_title': page_title,
@@ -712,7 +719,7 @@ def material(request, shortcode):
             'shortcode':shortcode,
             'list': {
                 'name': 'material',
-                'body': material,
+                'body': material_content,
             },
         },
     })   
