@@ -110,6 +110,7 @@ def create_classroom(request):
     })
 
 def manage_classroom(request):
+    page_title = 'Classroom management'
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
