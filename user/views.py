@@ -525,6 +525,10 @@ def modify_class(request, class_code):
                 ({'title':'Create class', 
                    'url': 'user:create_class',
                    'html_class': 'create_class'}),
+                ({'title':'Delete class', 
+                   'url': 'user:delete_class',
+                   'url_para': class_code,
+                   'html_class': 'create_class'}),
             ),
             'list': {
                 'name': 'class_d',
@@ -534,5 +538,29 @@ def modify_class(request, class_code):
         },
     })
 
-def delete_class(request):
-    pass
+def delete_class(request, class_code):
+    page_title = 'Remove assignment'
+    return_url = 'user:list_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    try:
+        class_item = Class_code.objects.get(class_name = class_code)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse(return_url))
+
+    class_item.delete()
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Class delete successful',
+            'redirect_text': 'all class',
+            'redirect_url': return_url,
+            'auto_redirect': True,
+        },
+    })
