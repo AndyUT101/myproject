@@ -122,9 +122,9 @@ def view_msg(request, msg_id = None):
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Reply', 
-                   'url': 'inbox:compose',
+                   'url': 'inbox:reply',
                    'url_para': msg_id,
-                   'html_class': 'compose'}),
+                   'html_class': 'reply'}),
             ),  
             'detail': ( 
                 # key: (header, content, redirect_url(route/None), html_class)
