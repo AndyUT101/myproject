@@ -697,9 +697,9 @@ def material(request, shortcode):
     material = Material_classroom.objects.filter(classroom = classroom)
     material_content = [{
         'path': i.material.path,
-        'create_date': i.create_date,
-        'uploader': i.uploader,
-        'username': i.uploader.user.username,
+        'create_date': i.material.create_date,
+        'uploader': i.material.uploader,
+        'username': i.material.uploader.user.username,
 
     } for i in material]
 
