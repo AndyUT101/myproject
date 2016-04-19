@@ -650,7 +650,7 @@ def assignment_submit(request, shortcode, assignment_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'notice': 'Only accept ' + assignment_obj.upload_format.dataext
+            'notice': 'Only accept ' + assignment_obj.upload_format.dataext,
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,
