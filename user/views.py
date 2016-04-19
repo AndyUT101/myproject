@@ -562,7 +562,7 @@ def delete_class(request, class_code):
     })
 
 def remove_classmember(request, class_code, user_id):
-    page_title = 'Remove announcement'
+    page_title = 'Remove class member'
     return_url = 'classroom:modify_class'
 
     if not user_alreadyloggedin(request):
@@ -579,14 +579,14 @@ def remove_classmember(request, class_code, user_id):
     del_item.delete()
 
     return render(request, 'home.html', {
-        'page_title': 'Remove material',
-        'page_header': 'Remove material',
+        'page_title': page_title,
+        'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'notification',
         'content': {
             'notification': 'Class member removes successful',
             'redirect_text': 'Class page',
-            'redirect_url': 'classroom:material',
+            'redirect_url': return_url,
             'redirect_para': class_code,
             'auto_redirect': True,
         },
