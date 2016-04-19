@@ -511,7 +511,7 @@ def modify_class(request, class_code):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
  
-    class_obj = Class_code.objects.get(class_code = class_code)
+    class_obj = Class_code.objects.get(class_name = class_code)
     class_d = Class_assignment.objects.filter(class_code = class_obj).order_by('class_number')
 
     return render(request, 'home.html', {
