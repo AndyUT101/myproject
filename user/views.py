@@ -492,7 +492,7 @@ def create_class(request):
             'list': {
                 'checkbox': True,
                 'name': 'class',
-                'body': class_list,
+                'body': form_obj,
                 'foot': (),
             },
         },
