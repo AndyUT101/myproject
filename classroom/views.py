@@ -552,7 +552,11 @@ def assignment_detail(request, shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
     c = get_contents(shortcode)
     assignment_obj = Assignment.objects.get(pk = assignment_id)
-    uploaded = Assignment_pool.objects.filter(assignment=assignment_obj, user_assign=user_assign_assignment(shortcode, request.session['user'])).order_by('-submit_datetime')[0]
+    uploaded = Assignment_pool.objects.filter(assignment=assignment_obj, user_assign=user_assign_assignment(shortcode, request.session['user'])).order_by('-submit_datetime')
+    if len(uploaded) > 0:
+        uploaded = uploaded[0]
+    else:
+        uploaded = None
 
     return render(request, 'home.html', {
         'page_title': page_title,
