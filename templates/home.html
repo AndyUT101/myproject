@@ -557,7 +557,7 @@
 					{% for data in content.list.body %}
 						<td><strong>{{ data.note.title }}</strong><br/>
 						Publish on: {{ data.note.publish_datetime }} 
-						{{ data.note.content|linebreaks }}
+						{{ data.note.content|linebreaks|urlize }}
 						</td>
 						<td>
 						{% if content.permission %}
