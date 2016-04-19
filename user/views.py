@@ -669,9 +669,11 @@ def modify_classnumber(request, class_code, user_id):
         form_obj = ClasscodeForm(request.POST)
 
         if form_obj.is_valid():
-            form_obj.class_code = Class_code.objects.get(class_name=class_code)
+            form_obj. = form_obj.save(commit=False)
+            class_code = Class_code.objects.get(class_name=class_code)
 
-            if Class_assignment.objects.filter(user=mod_user, class_code=form_obj.class_code, class_number=form_obj.class_number):
+            class_number = form_obj.class_number
+            if Class_assignment.objects.filter(user=mod_user, class_code=class_code, class_number=class_number):
                 return HttpResponseRedirect(reverse(return_url, class_code))
 
             mod_item = Class_assignment.objects.get(user=mod_user, class_code=form_obj.class_code)
