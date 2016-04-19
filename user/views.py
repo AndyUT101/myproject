@@ -470,8 +470,8 @@ def create_class(request):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
-                    'notification': 'Note add successful',
-                    'redirect_text': 'all note',
+                    'notification': 'Class add successful',
+                    'redirect_text': 'all class',
                     'redirect_url': return_url,
                     'auto_redirect': True,
                 },
@@ -508,12 +508,8 @@ def modify_class(request, class_code):
         'content': {
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Create class', 
+                ({'title':'Add member', 
                    'url': 'user:create_class',
-                   'html_class': 'create_class'}),
-                ({'title':'Delete class', 
-                   'url': 'user:delete_class',
-                   'url_para': class_code,
                    'html_class': 'create_class'}),
             ),
             'list': {
