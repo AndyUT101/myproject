@@ -561,7 +561,7 @@ def assignment_detail(request, shortcode, assignment_id):
 
     assignment_content = {
         'upload_format': assignment_obj.upload_format,
-        'deadline': handin_remaintime(assignment_obj),
+        'deadline': handin_remaintime(assignment_obj)[1],
         'deadline_datetime': assignment_obj.deadline_datetime,
         'instruction': assignment_obj.instruction,
         'fullmark': assignment_obj.fullmark,
