@@ -12,6 +12,7 @@ import math
 from .models import *
 from .models import Class_code
 from .forms import *
+from .forms import ClasscodeForm
 
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
