@@ -213,7 +213,7 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index')) 
 
 def remove_user(request):
-    return_url = 'user'
+    return_url = 'list_user'
     page_title = 'Remove user'
 
     # 1. Check permission
