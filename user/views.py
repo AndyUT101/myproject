@@ -477,7 +477,6 @@ def create_class(request):
                     'notification': 'Note add successful',
                     'redirect_text': 'all note',
                     'redirect_url': return_url,
-                    'redirect_para': shortcode,
                     'auto_redirect': True,
                 },
             })
