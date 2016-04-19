@@ -977,7 +977,7 @@ def add_cmmember(request, shortcode):
 
     role = Q(role=Role.objects.get(name='teacher')) | Q(role=Role.objects.get(name='student'))
     user_inclassm = [i.user.pk for i in User_assignment.objects.filter(classroom=mod_classroom)]
-    available_user = User.objects.exclude(pk__in=user_inclass).filter(role)
+    available_user = User.objects.exclude(pk__in=user_inclassm).filter(role)
 
     return render(request, 'home.html', {
         'page_title': page_title,
