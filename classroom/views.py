@@ -197,6 +197,18 @@ def announce_all(request, shortcode):
     announce_data = c['announce'].order_by('-announce_date')
     announce_count = len(announce_data)
 
+
+    if permission:
+        operation = ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add announcement', 
+                   'url': 'classroom:announce_add',
+                   'url_para': shortcode,
+                   'html_class': 'add_announcement'}),
+        )
+    else:
+        operation = False
+
     return render(request, 'home.html', {
         'page_title': 'All announcement',
         'page_header': 'All announcement',
@@ -210,13 +222,7 @@ def announce_all(request, shortcode):
             },
             'permission': permission,
             'shortcode': shortcode,
-            'operation': ( 
-                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Add announcement', 
-                   'url': 'classroom:announce_add',
-                   'url_para': shortcode,
-                   'html_class': 'add_announcement'}),
-            ),
+            'operation': operation,
             'list': {
                 'name': 'announcement',
                 'body': announce_data,
