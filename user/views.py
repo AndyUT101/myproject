@@ -568,10 +568,6 @@ def remove_classmember(request, class_code, user_id):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    delete_index = request.GET.get('delete', '')
-    if not delete_index:
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
-
     user = User.objects.get(pk = user_id)
     class_data = Class_code.objects.get(class_name = class_code)
 

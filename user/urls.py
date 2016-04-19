@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^class/modify/(?P<class_code>.+)/$', views.modify_class, name='modify_class'),
     url(r'^class/delete/(?P<class_code>.+)/$', views.delete_class, name='delete_class'),
 
-    url(r'^class/delete/(?P<class_code>.+)/(?P<user_id>.+)/$', views.remove_classmember, name='remove_classmember'),
+    url(r'^class/delete/(?P<class_code>.+)/(?P<user_id>[0-9]+)/$', views.remove_classmember, name='remove_classmember'),
 
     url(r'^(?P<username>.+)/$', views.view_user, name='view_user'),
 ]
