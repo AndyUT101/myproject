@@ -25,7 +25,7 @@ urlpatterns = [
 
     url(r'^(?P<shortcode>.+)/user/remove/(?P<user_assign_id>[0-9]+)/$', views.remove_cmmember, name='remove_cmmember'),
     url(r'^(?P<shortcode>.+)/user/$', views.modify_cmmember, name='modify_cmmember'),
-
+    url(r'^(?P<shortcode>.+)/user/add/$', views.add_cmmember, name='add_cmmember'),
 
     url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
 
