@@ -12,7 +12,6 @@ import math
 from .models import *
 from .models import Class_code
 from .forms import *
-from .forms import ClasscodeForm
 
 from inbox.models import Inbox
 from classroom.models import Classroom, User_assignment
@@ -460,9 +459,9 @@ def create_class(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
-    form_obj = ClasscodeForms()
+    form_obj = ClasscodeForm()
     if request.method == 'POST':
-        form_obj = ClasscodeForms(request.POST)
+        form_obj = ClasscodeForm(request.POST)
 
         if form_obj.is_valid():
             form_obj = form_obj.save(commit=False)
