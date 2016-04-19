@@ -427,7 +427,7 @@ def list_class(request, specific_usertype=None, classcode=None):
 
     class_list = Class_code.objects.all().order_by('class_name')
     
-    [{'class_name':i.class_name, 'class_description': i.class_description, 'count': Class_assignment.objects.filter(class_code = i).count()} for i in class_list]
+    class_list = [{'class_name':i.class_name, 'class_description': i.class_description, 'count': Class_assignment.objects.filter(class_code = i).count()} for i in class_list]
 
 
     return render(request, 'home.html', {
