@@ -562,7 +562,7 @@ def assignment_detail(request, shortcode, assignment_id):
         'page_title': page_title,
         'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing', 
+        'template': 'classroom', 
         'content': {
             'notification': {
                 'current_classroom': c['classroom'].name,
