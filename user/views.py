@@ -372,6 +372,7 @@ def view_user(request, username, specific_usertype=None):
             'operation': ( 
                 ({'title':'Modify user', 
                    'url': 'user:modify_user',
+                   'url_para': username,
                    'html_class': 'modify_user'}),
             ),
             'detail_user': {
