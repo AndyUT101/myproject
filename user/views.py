@@ -549,11 +549,12 @@ def delete_class(request, class_code):
 
 def remove_classmember(request, class_code, user_id):
     page_title = 'Remove class member'
-    return_url = 'classroom:modify_class'
+    return_url = 'user:modify_class'
 
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+    return_para = class_code
     user = User.objects.get(pk = user_id)
     class_data = Class_code.objects.get(class_name = class_code)
 
@@ -569,7 +570,7 @@ def remove_classmember(request, class_code, user_id):
             'notification': 'Class member removes successful',
             'redirect_text': 'Class page',
             'redirect_url': return_url,
-            'redirect_para': class_code,
+            'redirect_para': return_para,
             'auto_redirect': True,
         },
     })
