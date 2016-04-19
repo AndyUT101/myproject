@@ -44,14 +44,8 @@ class UsersimpleForm(UserForm):
 
 class ClasscodeForm(ModelForm):
     class Meta:
-        model = Class_code
+        model = Class_assignment
         fields = ['class_number']
         help_texts = {
             'class_number': 'Assign class number for the user'
         }
-
-
-class ClassassignForm(ModelForm):
-    class Meta:
-        model = Class_assignment
-        fields = '__all__'
