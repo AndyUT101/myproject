@@ -862,3 +862,74 @@ def note_remove(request, shortcode):
             'auto_redirect': True,
         },
     })
+
+
+
+def remove_cmmember(request, shortcode, user_assign_id):
+    page_title = 'Remove classroom member'
+    return_url = 'classroom:modify_cmmember'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    del_item = User_assignment.objects.get(pk = user_assign_id)
+    del_item.delete()
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Classroom member removes successful',
+            'redirect_text': 'Classroom member page',
+            'redirect_url': return_url,
+            'redirect_para': shortcode,
+            'auto_redirect': True,
+        },
+    })
+
+def modify_cmmember(request, shortcode):
+    mod_classroom = Classroom.objects.get(shortcode=shortcode)
+    page_title = 'View classroom user - ' + mod_classroom.name
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+ 
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    classm_d = [i.user, i.role, i.assign_date for i in User_assignment.objects.filter(classroom = mod_classroom)]
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Add member', 
+                   'url': 'classroom:add_cmmember',
+                   'url_para': shortcode,
+                   'html_class': 'add_cmmember'}),
+            ),
+            'list': {
+                'name': 'classm_d',
+                'body': classm_d,
+                'foot': (),
+            },
+        },
+    })
+
+def add_cmmember(request, shortcode):
+    pass
