@@ -695,13 +695,13 @@ def material(request, shortcode):
 
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
-    material_content = {
-        'path': material.path,
-        'create_date': material.create_date,
-        'uploader': material.uploader,
-        'username': material.uploader.user.username,
+    material_content = [{
+        'path': i.material.path,
+        'create_date': i.create_date,
+        'uploader': i.uploader,
+        'username': i.uploader.user.username,
 
-    }
+    } for i in material]
 
     return render(request, 'home.html', {
         'page_title': page_title,
