@@ -700,5 +700,6 @@ def modify_classnumber(request, class_code, user_id):
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': class_code,
+            'route_parameter2': user_id,
         },
     })
