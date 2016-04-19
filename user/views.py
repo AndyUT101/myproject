@@ -489,7 +489,6 @@ def create_class(request):
         'content': {
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
-            'route_parameter': shortcode,
         },
     })
 
