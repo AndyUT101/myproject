@@ -696,7 +696,7 @@ def material(request, shortcode):
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
     material_content = [{
-        'path': i.material.path.split('/')[-1],
+        'path': str(i.material.path).split('/')[-1],
         'create_date': i.material.create_date,
         'uploader': i.material.uploader,
         'username': i.material.uploader.user.username,
