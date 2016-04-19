@@ -583,8 +583,8 @@
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><strong>{{ data.material.path }}</strong></td>
-						<td>{{ data.material.create_date }}</td>
+						<td><strong>{{ data.path }}</strong></td>
+						<td>{{ data.create_date }}</td>
 						<td>{{ data.username }}</td>
 						<td>
 						{% if content.permission %}

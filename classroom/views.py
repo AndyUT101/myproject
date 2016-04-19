@@ -696,10 +696,10 @@ def material(request, shortcode):
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
     material_content = {
-        'path': material.material.path,
-        'create_date': material.material.create_date,
-        'uploader': material.material.uploader,
-        'username': material.material.uploader.user.username,
+        'path': material.path,
+        'create_date': material.create_date,
+        'uploader': material.uploader,
+        'username': material.uploader.user.username,
 
     }
 
