@@ -909,7 +909,7 @@ def modify_cmmember(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
-    classm_d = [(i.user, i.role, i.assign_date, i.pk) for i in User_assignment.objects.filter(classroom = mod_classroom)]
+    classm_d = [{'user':i.user, 'role':i.role, 'assign_date':i.assign_date, 'pk':i.pk} for i in User_assignment.objects.filter(classroom = mod_classroom)]
 
     return render(request, 'home.html', {
         'page_title': page_title,
