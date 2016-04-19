@@ -253,6 +253,9 @@
 			</table>
 
 		</div>
+		{% if content.list.foot.enable %}
+		<input type="submit" value="{{ content.list.foot.submit.title }}" class='bottom_btn'>
+		{% endif %}
 	{% endif %}
 
 	{% if content.list.name == 'booking' %}

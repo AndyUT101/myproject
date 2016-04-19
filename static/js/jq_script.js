@@ -21,4 +21,10 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$('section.info_list form input.bottom_btn').click(function(){
+		$('section.info_list form').attr('method', 'POST');
+		$('section.info_list form').attr('action', $(location).attr('href'));
+		$('section.info_list form').submit();
+		return false;
+	});
 });

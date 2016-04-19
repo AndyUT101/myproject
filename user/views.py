@@ -644,7 +644,12 @@ def add_classmember(request, class_code):
                 #'name': 'user',
                 'name': 'class_add',
                 'body': available_user,
-                'foot': (),
+                'foot': {
+                    'enable': True,
+                    'submit': {
+                        'title':'Add users to class', 
+                    },
+                },
             },
         },
     })
