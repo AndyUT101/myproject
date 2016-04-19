@@ -749,6 +749,8 @@
 
 {% if template == "classroom" %}
 	<section class="classroom">
+
+	{% if content.classroom %}
 		<h2>{{ content.classroom.title }}</h2>
 		<div class="details">
 			<ul>
@@ -768,6 +770,33 @@
 			</ul>
 		</div>
 		<div class="right_notice"></div>
+	{% endif %}
+
+	{% if content.assignment %}
+		<h2>Assignment detail: {{ content.assignment.title }}</h2>
+		<div class="details">
+			<ul>
+				<li>Submitted: Yes No</li>
+				<li><a href="#">submission</a></li>
+				<li>Deadline: {{ content.assignment.content.deadline_datetime }}</li>
+				<li><strong>Instruction: </strong><br/>
+				{{ content.assignment.content.instruction|linebreaks|urlize }}</li>
+				<li>Upload format: {{ content.assignment.content.upload_format }}</li>
+				<li>Fullmark: {{ content.assignment.content.fullmark }}</li>
+				<li>Create date: {{ content.assignment.content.create_date }}</li>
+
+			</ul>
+		</div>
+		<div class="right_nav">
+			<ul>
+			{% for item in content.classroom.right_nav %}
+				<li><a href="{% url item.url item.url_para %}">{{ item.title }}</a></li>
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="right_notice"></div>
+	{% endif %}
+
 	</section>
 {% endif %}
 
