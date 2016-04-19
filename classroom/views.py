@@ -891,7 +891,6 @@ def remove_cmmember(request, shortcode, user_assign_id):
             'redirect_text': 'Classroom member page',
             'redirect_url': return_url,
             'redirect_para': shortcode,
-            'redirect_para2': 1,
             'auto_redirect': True,
         },
     })
@@ -934,4 +933,68 @@ def modify_cmmember(request, shortcode):
     })
 
 def add_cmmember(request, shortcode):
-    pass
+    mod_classroom = Classroom.objects.get(shortcode=shortcode)
+    page_title = 'Add classroom user - ' + mod_classroom.name
+    return_url = 'classroom:modify_cmmember'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+ 
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not is_memberinfo(shortcode, request.session['user'])[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list'))
+
+    if request.method == 'POST':
+
+        add_list = request.POST.getlist('user_action')
+        user_addlist = User.objects.filter(pk__in=add_list)
+        class_item = classroom.objects.get(shortcode=shortcode)
+
+        commit_list = []
+        for user_item in user_addlist:
+            commit_list.append(User_assignment(user=user_item, classroom=class_item))
+
+        User_assignment.objects.bulk_create(commit_list);
+
+        #if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
+
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'Class member add successful',
+                'redirect_url': return_url,
+                'redirect_text': 'the current class',
+                'redirect_para': shortcode,
+                'auto_redirect': True,
+            },
+        })
+
+    role = Q(role=Role.objects.get(name='teacher')) | Q(role=Role.objects.get(name='student'))
+    user_inclassm = [i.user.pk for i in User_assignment.objects.filter(classroom=mod_classroom)]
+    available_user = User.objects.exclude(pk__in=user_inclass).filter(role)
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list', # operation, list, 
+        'content': {
+            'list': {
+                'checkbox': True,
+                #'name': 'user',
+                'name': 'class_add',
+                'body': available_user,
+                'foot': {
+                    'enable': True,
+                    'submit': {
+                        'title':'Add users to class', 
+                    },
+                },
+            },
+        },
+    })
