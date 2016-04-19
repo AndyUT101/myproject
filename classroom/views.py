@@ -909,7 +909,7 @@ def modify_cmmember(request, shortcode):
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
-    classm_d = [(i.user, i.role, i.assign_date) for i in User_assignment.objects.filter(classroom = mod_classroom)]
+    classm_d = [(i.user, i.role, i.assign_date, i.pk) for i in User_assignment.objects.filter(classroom = mod_classroom)]
 
     return render(request, 'home.html', {
         'page_title': page_title,
@@ -917,6 +917,7 @@ def modify_cmmember(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'shortcode': shortcode,
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add member', 
