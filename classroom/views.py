@@ -136,7 +136,6 @@ def manage_classroom(request):
                 'redirect_text': 'all classroom',
                 'redirect_url': 'classroom:classroom_list',
                 'auto_redirect': True,
-                'redirect_para': shortcode,
             },
         })
 
