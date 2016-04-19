@@ -690,7 +690,7 @@
 	{% endif %}
 
 	{% if content.detail_user %}
-		<h2>User inforation of: {{ content.obj.detail_user.username }} ({{ content.obj.detail_user.lastname }} {{ content.obj.detail_user.firstname }})</h2>
+		<h2>User inforation of: {{ content.detail_user.obj.username }} ({{ content.detail_user.obj.lastname }} {{ content.detail_user.obj.firstname }})</h2>
 		<ul>
 			<li>Sex: {{ content.detail_user.obj.sex_code }}</li>
 			<li>SmartCard ID: {{ content.detail_user.obj.card_id }}</li>
