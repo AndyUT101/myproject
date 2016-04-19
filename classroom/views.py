@@ -121,8 +121,8 @@ def manage_classroom(request):
     c = get_contents(shortcode)
 
     if permission:
-        delete_index = request.GET.get('delete', '')
-        Classroom.objects.get(shortcode=delete_index).delete()
+        shortcode = request.GET.get('delete', '')
+        Classroom.objects.get(shortcode=shortcode).delete()
 
         return render(request, 'home.html', {
             'page_title': page_title,
