@@ -553,6 +553,7 @@ def assignment_detail(request, shortcode, assignment_id):
     c = get_contents(shortcode)
     assignment_obj = Assignment.objects.get(pk = assignment_id)
     uploaded = Assignment_pool.objects.filter(assignment=assignment_obj, user_assign=user_assign_assignment(shortcode, request.session['user'])).order_by('-submit_datetime')
+    
     if len(uploaded) > 0:
         uploaded = uploaded[0]
     else:
@@ -569,7 +570,7 @@ def assignment_detail(request, shortcode, assignment_id):
                 'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
                 'url': shortcode,
             },
-            'classroom': {
+            'assignment': {
                 'title': 'Assignment detail',
                 'content': assignment_obj,
                 'upload': uploaded,
