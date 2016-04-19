@@ -243,9 +243,11 @@ def modify_user(request, username=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+
     # 1. User have right to edit itself, else check for permission key
+    rp = review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit')
     if not (username == None or username == request.session['user']):
-        if not review_permission(User.objects.get(username = request.session['user']), 'allow:user_edit'):
+        if not rp:
             return HttpResponseRedirect(reverse('index_home'))
     else:
         username = request.session['user']
@@ -260,13 +262,18 @@ def modify_user(request, username=None):
             return HttpResponseRedirect(reverse('user:list_user'))
 
         # 4. (GET) Return userform
+        if rp:
+            userform = UsermodForm(instance=user_obj)
+        else:
+            userform = UsersimpleForm(instance=user_obj)
+
         return render(request, 'home.html', {
             'page_title': 'Modify a user',
             'page_header': 'Modify a user',
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'form',
             'content': {
-                'form': UsermodForm(instance=user_obj).as_ul(),
+                'form': userform.as_ul(),
                 'submit_url': 'user:modify_user',
                 'route_parameter': username,
             },
@@ -313,13 +320,17 @@ def modify_user(request, username=None):
 
         else:
             # 5. Return userform
+            if rp:
+                userform = UsermodForm(request.POST)
+            else:
+                userform = UsersimpleForm(request.POST)
             return render(request, 'home.html', {
                 'page_title': 'Modify a user',
                 'page_header': 'Modify a user',
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'form',
                 'content': {
-                    'form': UsermodForm(request.POST).as_ul(),
+                    'form': userform.as_ul(),
                     'submit_url': 'user:modify_user',
                     'route_parameter': username,
                 },

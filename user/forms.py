@@ -32,6 +32,16 @@ class UsermodForm(UserForm):
         }
         exclude = ('username', 'last_logged', )
 
+class UsersimpleForm(UserForm):
+
+    class Meta:
+        model = User
+        fields = ['firstname', 'lastname', 'password', 'phone', 'mobile', 'email']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
+
 class ClasscodeForm(ModelForm):
     class Meta:
         model = Class_code
