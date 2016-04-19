@@ -131,11 +131,6 @@ def manage_classroom(request):
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'notification',
             'content': {
-                'notification': {
-                    'current_classroom': c['classroom'].name,
-                    'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
-                    'url': shortcode,
-                },
                 'permission': permission,
                 'notification': 'Classroom remove successful',
                 'redirect_text': 'all classroom',
