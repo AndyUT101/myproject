@@ -621,7 +621,7 @@ def assignment_submit(request, shortcode, assignment_id):
                 file_pass = True
 
             if not file_pass:
-                break
+                return
 
             form_obj = form_obj.save(commit=False)
             form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
