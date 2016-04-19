@@ -483,18 +483,8 @@ def create_class(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'operation': ( 
-                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
-                ({'title':'Create class', 
-                   'url': 'user:create_class',
-                   'html_class': 'create_class'}),
-            ),
-            'list': {
-                'checkbox': True,
-                'name': 'class',
-                'body': form_obj,
-                'foot': (),
-            },
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
         },
     })
 
