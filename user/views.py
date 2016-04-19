@@ -375,9 +375,7 @@ def view_user(request, username, specific_usertype=None):
                    'url_para': username,
                    'html_class': 'modify_user'}),
             ),
-            'detail_user': {
-                'obj': user_obj,
-            },
+            'detail_user': user_obj,
         },
     })
 

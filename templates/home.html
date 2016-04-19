@@ -690,16 +690,16 @@
 	{% endif %}
 
 	{% if content.detail_user %}
-		<h2>User inforation of: {{ content.detail_user.obj.username }} ({{ content.detail_user.obj.lastname }} {{ content.detail_user.obj.firstname }})</h2>
+		<h2>User inforation of: {{ content.detail_user.username }} ({{ content.detail_user.lastname }} {{ content.detail_user.firstname }})</h2>
 		<ul>
-			<li>Sex: {{ content.detail_user.obj.sex_code }}</li>
-			<li>SmartCard ID: {{ content.detail_user.obj.card_id }}</li>
-			<li>Strn code: {{ content.detail_user.obj.strn_code }}</li>
-			<li>SAMS code: {{ content.detail_user.obj.sams_code }}</li>
-			<li>Birthday: {{ content.detail_user.obj.birth_date }}</li>
-			<li>Address: {{ content.detail_user.obj.address }}</li>
-			<li>Contact number: (P) {{ content.detail_user.obj.phone }}, (M) {{ content.detail_user.obj.mobile }}</li>
-			<li>email: {{ content.detail_user.obj.email }}</li>
+			<li>Sex: {{ content.detail_user.sex_code }}</li>
+			<li>SmartCard ID: {{ content.detail_user.card_id }}</li>
+			<li>Strn code: {{ content.detail_user.strn_code }}</li>
+			<li>SAMS code: {{ content.detail_user.sams_code }}</li>
+			<li>Birthday: {{ content.detail_user.birth_date }}</li>
+			<li>Address: {{ content.detail_user.address }}</li>
+			<li>Contact number: (H) {{ content.detail_user.phone }}, (M) {{ content.detail_user.mobile }}</li>
+			<li>email: {{ content.detail_user.email }}</li>
 		</ul>
 	{% endif %}
 
