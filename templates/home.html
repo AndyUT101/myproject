@@ -777,7 +777,7 @@
 		<div class="details">
 			<ul>
 				<li>Submitted: Yes No</li>
-				<li><a href="#">submission</a>
+				<li><a href="{% url 'classroom:assignment_submit' content.shortcode content.assignment.a_id %}">submission</a>
 				<span class="upload_format">Upload format: {{ content.assignment.content.upload_format }}</span></li>
 				<li>Deadline: {{ content.assignment.content.deadline }} ({{ content.assignment.content.deadline_datetime }})</li>
 				<li><strong>Instruction: </strong><br/>

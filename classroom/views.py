@@ -574,6 +574,7 @@ def assignment_detail(request, shortcode, assignment_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'classroom', 
         'content': {
+            'shortcode': shortcode,
             'notification': {
                 'current_classroom': c['classroom'].name,
                 'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
@@ -583,6 +584,7 @@ def assignment_detail(request, shortcode, assignment_id):
                 'title': 'Assignment detail',
                 'content': assignment_content,
                 'upload': uploaded,
+                'a_id': assignment_id,
             },
         },
     })
