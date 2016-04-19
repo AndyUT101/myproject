@@ -611,7 +611,7 @@ def assignment_submit(request, shortcode, assignment_id):
 
         ext_list = assignment_obj.upload_format.dataext.split(',')
 
-        if form_obj.is_valid() and file_pass:
+        if form_obj.is_valid():
 
             for filename, file in request.FILES.iteritems():
                 file_name = request.FILES[filename].name
@@ -619,6 +619,9 @@ def assignment_submit(request, shortcode, assignment_id):
             file_pass = False
             if os.path.splitext(file_name)[1] in ext_list:
                 file_pass = True
+
+            if not file_pass:
+                break
 
             form_obj = form_obj.save(commit=False)
             form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
