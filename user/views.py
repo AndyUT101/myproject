@@ -294,8 +294,12 @@ def modify_user(request, username=None):
         # 3. (POST) Field check
         if rp:
             userform = UsermodForm(request.POST, instance=modify_userobj)
+            redirect_url = 'user:list_user'
+            redirect_text = 'user page'
         else:
             userform = UsersimpleForm(request.POST, instance=modify_userobj)
+            redirect_url = 'home'
+            redirect_text = 'home page'
 
         if userform.is_valid():
             commit_form =  userform.save(commit=False)
@@ -314,8 +318,8 @@ def modify_user(request, username=None):
                 'template': 'notification',
                 'content': {
                     'notification': 'User ' + commit_form.username + ' modify successful',
-                    'redirect_text': 'user page',
-                    'redirect_url': 'user:list_user',
+                    'redirect_text': redirect_text,
+                    'redirect_url': redirect_url,
                     'auto_redirect': True,
                 },
             })
