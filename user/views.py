@@ -654,3 +654,51 @@ def add_classmember(request, class_code):
             },
         },
     })
+
+def modify_classnumber(request, class_code, user_id):
+    mod_user = User.objects.get(pk=user_id)
+    page_title = 'Modify class code - ' + mod_user.lastname + mod_user.firstname
+    submit_url = 'user:modify_classnumber'
+    return_url = 'user:modify_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    form_obj = ClasscodeForm()
+    if request.method == 'POST':
+        form_obj = ClasscodeForm(request.POST)
+
+        if form_obj.is_valid():
+            form_obj.class_code = Class_code.objects.get(class_name=class_code)
+
+            if Class_assignment.objects.filter(user=mod_user, class_code=form_obj.class_code, class_number=form_obj.class_number):
+                return HttpResponseRedirect(reverse(return_url, class_code))
+
+            mod_item = Class_assignment.objects.get(user=mod_user, class_code=form_obj.class_code)
+            mod_item.save()
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Class number modify successful',
+                    'redirect_text': 'Current class',
+                    'redirect_url': return_url,
+                    'redirect_para': class_code,
+                    'auto_redirect': True,
+                },
+            })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'form': form_obj.as_ul(),
+            'submit_url': class_code,
+            'route_parameter': shortcode,
+        },
+    })
