@@ -416,11 +416,7 @@ def list_user(request, specific_usertype=None, classcode=None):
             },
         },
     })    
-    # case 1: list all user v
-    # case 2: list specific_usertype
-    # case 3: filter class_code
-    # case 4: search mode (GET + POST data)
-
+    
 def list_class(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))

@@ -65,7 +65,7 @@
 			<p>You have {{ content.notification.classroom }} classroom.</p>
 			<ul>
 			{% for c in content.block2.content %}
-			<li><a href="{% url 'classroom:classroom' c.classroom.name %}">{{ c.classroom.name }}</a></li>
+			<li><a href="{% url 'classroom:classroom' c.classroom.shortcode %}">{{ c.classroom.name }}</a></li>
 			{% endfor %}
 			</ul>
 			</div>
