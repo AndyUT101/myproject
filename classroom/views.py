@@ -613,7 +613,7 @@ def assignment_submit(request, shortcode, assignment_id):
 
         file = request.FILES['content'].name
         file_pass = False
-        if file.split(".").lower()[-1] in ext_list:
+        if file.split(".")[-1].lower() in ext_list:
             file_pass = True
         
         if file_pass:
