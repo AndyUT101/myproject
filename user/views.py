@@ -65,11 +65,11 @@ def index_home(request):
                 'content': generate_calender(),
             },
             'block2': {
-                'title': 'Classroom',
+                'title': 'Your Classroom',
                 'content': User_assignment.objects.filter(user=user.id),
             },
             'block3': {
-                'title': 'You',
+                'title': 'About You',
                 'content': user,
             },
         },

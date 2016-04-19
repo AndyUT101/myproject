@@ -296,6 +296,12 @@ nav#topnav{
     {
         position: static;
     }
+    section.index_block {
+    float: none;
+    display: block;
+    min-height: 400px;
+    width: 100%;
+}
 }
 
 section.index_block {

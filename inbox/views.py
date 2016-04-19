@@ -123,7 +123,7 @@ def view_msg(request, msg_id = None):
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Reply', 
                    'url': 'inbox:compose',
-                   'para': msg_id,
+                   'url_para': msg_id,
                    'html_class': 'compose'}),
             ),  
             'detail': ( 
