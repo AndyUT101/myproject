@@ -623,6 +623,8 @@ def material(request, shortcode):
     else:
         operation = False
 
+    c = get_contents(shortcode)
+
     classroom = Classroom.objects.get(shortcode=shortcode)
     material = Material_classroom.objects.filter(classroom = classroom)
 
@@ -632,6 +634,11 @@ def material(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'permission': permission,
             'operation': operation, 
             'shortcode':shortcode,
@@ -751,6 +758,8 @@ def note(request, shortcode):
     else:
         operation = False
 
+    c = get_contents(shortcode)
+
     classroom = Classroom.objects.get(shortcode=shortcode)
     note = Classroom_note.objects.filter(classroom = classroom).order_by('-note__publish_datetime')
 
@@ -760,6 +769,11 @@ def note(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
             'shortcode': shortcode,
             'operation': operation,
             'permission': permission,
