@@ -609,7 +609,14 @@ def assignment_submit(request, shortcode, assignment_id):
     if request.method == 'POST':
         form_obj = Assignment_submitForm(request.POST, request.FILES)
 
-        if form_obj.is_valid():
+        ext_list = assignment_obj.upload_format.dataext.split(',')
+        filename = request.FILES['file']
+        import os
+        file_pass = False
+        if os.path.splitext(filename)[1] in ext_list:
+            file_pass = True
+
+        if form_obj.is_valid() and file_pass:
 
             form_obj = form_obj.save(commit=False)
             form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
@@ -622,6 +629,7 @@ def assignment_submit(request, shortcode, assignment_id):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
+                    'notice': 'File format requirement: only accept ' + assignment_obj.upload_format.dataext,
                     'notification': 'Assignment submit successful',
                     'redirect_text': 'all assignment',
                     'redirect_url': return_url,
@@ -637,6 +645,7 @@ def assignment_submit(request, shortcode, assignment_id):
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'form',
             'content': {
+                'notice': 'File format requirement: only accept ' + assignment_obj.upload_format.dataext,
                 'form': form_obj.as_ul(),
                 'submit_url': submit_url,
                 'route_parameter': shortcode,
@@ -650,7 +659,7 @@ def assignment_submit(request, shortcode, assignment_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'notice': 'Only accept ' + assignment_obj.upload_format.dataext,
+            'notice': 'File format requirement: only accept ' + assignment_obj.upload_format.dataext,
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,
