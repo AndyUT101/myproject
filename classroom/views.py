@@ -261,6 +261,7 @@ def announce_add(request, shortcode):
                         'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
                         'url': shortcode,
                     },
+                    'permission': permission,
                     'notification': 'Announcement add successful',
                     'redirect_text': 'all announcement',
                     'redirect_url': return_url,
@@ -892,6 +893,7 @@ def remove_cmmember(request, shortcode, user_assign_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'notification',
         'content': {
+            'permission': permission,
             'notification': 'Classroom member removes successful',
             'redirect_text': 'Classroom member page',
             'redirect_url': return_url,
@@ -921,6 +923,7 @@ def modify_cmmember(request, shortcode):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {
+            'permission': permission,
             'shortcode': shortcode,
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
