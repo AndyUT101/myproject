@@ -611,7 +611,7 @@ def assignment_submit(request, shortcode, assignment_id):
 
         ext_list = assignment_obj.upload_format.dataext.split(',')
 
-        file = UploadedFile.name
+        file = request.FILES[0]
         import os
         file_pass = False
         if os.path.splitext(file)[1] in ext_list:
