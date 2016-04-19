@@ -109,9 +109,43 @@ def create_classroom(request):
         },
     })
 
-def manage_classroom(request):
-    # remove and on/off classroom
-    pass
+def manage_classroom(request, shortcode):
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    if not memberinfo[0]:
+        return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
+
+    permission = allow_contentadd(memberinfo[1])
+    c = get_contents(shortcode)
+
+    if permission:
+        Classroom.objects.get(shortcode=shortcode).delete()
+
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': {
+                    'current_classroom': c['classroom'].name,
+                    'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                    'url': shortcode,
+                },
+                'permission': permission,
+                'notification': 'Classroom remove successful',
+                'redirect_text': 'all classroom',
+                'redirect_url': 'classroom:classroom_list',
+                'auto_redirect': True,
+                'redirect_para': shortcode,
+            },
+        })
+
+    return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
+
+
 
 def view_classroom(request, shortcode):
     if not user_alreadyloggedin(request):
