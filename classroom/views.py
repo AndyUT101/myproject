@@ -113,12 +113,12 @@ def manage_classroom(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
+    shortcode = request.GET.get('delete', '')
     memberinfo = is_memberinfo(shortcode, request.session['user'])
     if not memberinfo[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
 
     permission = allow_contentadd(memberinfo[1])
-    shortcode = request.GET.get('delete', '')
     c = get_contents(shortcode)
 
     if permission:
