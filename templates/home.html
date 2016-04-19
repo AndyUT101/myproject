@@ -515,12 +515,15 @@
 				<thead>
 					<tr>
 						<td>Content</td>
+						{% if content.permission %}
+						<td>Operation</td>
+						{% endif %}
 					<tr>
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
 						<td><strong>{{ data.title }}</strong><br/>Announce_date: {{ data.announce_date }}<br/>{{ data.content|linebreaks|urlize }}</td>
-						<td><li><a href="{% url 'classroom:announce_del' content.shortcode %}?delete={{ data.pk }}">Delete anouncement</a></li></td>
+						{% if content.permission %}<td><li><a href="{% url 'classroom:announce_del' content.shortcode %}?delete={{ data.pk }}">Delete anouncement</a></li></td>{% endif %}
 					<tr>
 					{% endfor %}					
 				</tbody>
