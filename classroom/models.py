@@ -92,6 +92,7 @@ class Assignment_pool(models.Model):
     content = models.FileField(upload_to='uploads/%Y/%m/%d/', default="")
     mark = models.PositiveSmallIntegerField(default=100)
     user_assign = models.ForeignKey(User_assignment, on_delete=models.CASCADE, default="")
+    submit_datetime = models.DateTimeField(default=timezone.now)
 
 class Note(models.Model):
     """
