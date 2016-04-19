@@ -508,7 +508,7 @@ def create_class(request):
 
 def modify_class(request, class_code):
     # add student
-    page_title = 'View class'
+    page_title = 'View class, '+ class_code
     submit_url = 'user:create_class'
     return_url = 'user:list_class'
 
