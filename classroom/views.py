@@ -891,6 +891,7 @@ def remove_cmmember(request, shortcode, user_assign_id):
             'redirect_text': 'Classroom member page',
             'redirect_url': return_url,
             'redirect_para': shortcode,
+            'redirect_para2': 1,
             'auto_redirect': True,
         },
     })

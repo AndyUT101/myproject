@@ -241,7 +241,7 @@
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><a href="{% url 'user:remove_classmember' data.class_code data.user.pk %}">Remove</a></td>
+						<td><a href="{% url 'classroom:remove_cmmember' content.redirect_para content.redirect_para2 %}">Remove</a></td>
 						<td>{{ data.user.lastname }} {{ data.user.firstname }}</td>
 						<td>{{ data.user.role }}</td>
 					<tr>
@@ -267,7 +267,7 @@
 					<tr>
 					{% for data in content.list.body %}
 						<td><input type="checkbox" name="user_action" value="{{ data.pk }}"></td>
-						<td><a href="{% url 'user:view_user' data.username %}">{{ data.username }}</a></td>
+						<td>{{ data.username }}</td>
 						<td>{{ data.lastname }} {{ data.firstname }}</td>
 						<td>{{ data.role.name }}</td>
 					<tr>
