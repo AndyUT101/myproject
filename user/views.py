@@ -213,6 +213,8 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index')) 
 
 def remove_user(request):
+    return_url = 'user'
+    page_title = 'Remove user'
 
     # 1. Check permission
     if not user_alreadyloggedin(request):
@@ -233,10 +235,19 @@ def remove_user(request):
 
     if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
         user_removeobj.delete() #success
-        return HttpResponse('user removed.')
-
-    else:
-        return HttpResponse('fail removed.')
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'User delete successful',
+                'redirect_text': 'all user',
+                'redirect_url': return_url,
+                'auto_redirect': True,
+            },
+        })
+    return HttpResponseRedirect(reverse(return_url))
     
 def modify_user(request, username=None):
 
