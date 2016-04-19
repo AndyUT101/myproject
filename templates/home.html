@@ -779,7 +779,7 @@
 				<li>Submitted: Yes No</li>
 				<li><a href="#">submission</a>
 				<span class="upload_format">Upload format: {{ content.assignment.content.upload_format }}</span></li>
-				<li>Deadline: {{ content.assignment.content.deadline_datetime }}</li>
+				<li>Deadline: {{ content.assignment.content.deadline }} ({{ content.assignment.content.deadline_datetime }})</li>
 				<li><strong>Instruction: </strong><br/>
 				{{ content.assignment.content.instruction|linebreaks|urlize }}</li>
 
