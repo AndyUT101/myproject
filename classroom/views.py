@@ -951,7 +951,7 @@ def add_cmmember(request, shortcode):
 
         add_list = request.POST.getlist('user_action')
         user_addlist = User.objects.filter(pk__in=add_list)
-        class_item = classroom.objects.get(shortcode=shortcode)
+        class_item = Classroom.objects.get(shortcode=shortcode)
 
         commit_list = []
         for user_item in user_addlist:
