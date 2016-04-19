@@ -617,8 +617,7 @@ def assignment_submit(request, shortcode, assignment_id):
         if os.path.splitext(file)[1] in ext_list:
             file_pass = True
         
-        if not file_pass:
-            return
+        if file_pass:
 
             form_obj = form_obj.save(commit=False)
             form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
