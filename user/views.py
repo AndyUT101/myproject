@@ -623,7 +623,8 @@ def add_classmember(request, class_code):
             'template': 'notification',
             'content': {
                 'notification': 'Class member add successful',
-                'redirect_text': 'all class',
+                'redirect_url': return_url,
+                'redirect_text': 'the current class',
                 'redirect_para': class_code,
                 'auto_redirect': True,
             },
