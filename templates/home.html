@@ -229,6 +229,32 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'class_add' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>username</td>
+						<td>Name</td>
+						<td>Role</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><input type="checkbox" name="user_action" value="{{ data.pk }}"></td>
+						<td><a href="{% url 'user:view_user' data.username %}">{{ data.username }}</a></td>
+						<td>{{ data.lastname }} {{ data.firstname }}</td>
+						<td>{{ data.role.name }}</td>
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
 	{% if content.list.name == 'booking' %}
 		<div class="list_table">
 			<table>

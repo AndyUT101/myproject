@@ -616,18 +616,18 @@ def add_classmember(request, class_code):
 
         #if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
 
-            return render(request, 'home.html', {
-                'page_title': page_title,
-                'page_header': page_title,
-                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-                'template': 'notification',
-                'content': {
-                    'notification': 'Class member add successful',
-                    'redirect_text': 'all class',
-                    'redirect_para': class_code,
-                    'auto_redirect': True,
-                },
-            })
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'notification',
+            'content': {
+                'notification': 'Class member add successful',
+                'redirect_text': 'all class',
+                'redirect_para': class_code,
+                'auto_redirect': True,
+            },
+        })
 
     role = Q(role=Role.objects.get(name='teacher')) | Q(role=Role.objects.get(name='student'))
     user_inclass = [i.user.pk for i in Class_assignment.objects.all()]
