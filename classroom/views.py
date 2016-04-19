@@ -879,6 +879,10 @@ def remove_cmmember(request, shortcode, user_assign_id):
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
 
+    if not memberinfo[0] or not permission:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+
     del_item = User_assignment.objects.get(pk = user_assign_id)
     del_item.delete()
 
@@ -943,6 +947,9 @@ def add_cmmember(request, shortcode):
  
     memberinfo = is_memberinfo(shortcode, request.session['user'])
     permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo[0] or not permission:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
     if not is_memberinfo(shortcode, request.session['user'])[0]:
         return HttpResponseRedirect(reverse('classroom:classroom_list'))
