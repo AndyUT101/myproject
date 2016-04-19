@@ -256,7 +256,17 @@ nav#topnav{
         {
             display: block;
         }
-
+section.index_block {
+    float: left;
+    min-height: 400px;
+    width: 33%;
+}
+section.index_block div {
+    padding: 10px;
+}
+.clearfix {
+    clear: both;
+}
 
 @media only screen and ( max-width: 40em )
 {
@@ -299,19 +309,8 @@ nav#topnav{
     section.index_block {
     float: none;
     display: block;
-    min-height: 400px;
+    min-height: 0;
     width: 100%;
 }
 }
 
-section.index_block {
-	float: left;
-	min-height: 400px;
-    width: 33%;
-}
-section.index_block div {
-    padding: 10px;
-}
-.clearfix {
-	clear: both;
-}
