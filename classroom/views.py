@@ -613,11 +613,9 @@ def assignment_submit(request, shortcode, assignment_id):
 
         if form_obj.is_valid():
 
-            for filename, file in request.FILES.iteritems():
-                file_name = request.FILES[filename].name
             import os
             file_pass = False
-            if os.path.splitext(file_name)[1] in ext_list:
+            if os.path.splitext(request.FILES.name)[1] in ext_list:
                 file_pass = True
 
             if not file_pass:
