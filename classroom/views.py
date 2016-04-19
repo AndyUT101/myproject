@@ -701,6 +701,7 @@ def material(request, shortcode):
         'uploader': i.material.uploader,
         'username': i.material.uploader.user.username,
         'pk': i.pk,
+        'link': i.material.path.url,
 
     } for i in material]
 

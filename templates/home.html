@@ -591,7 +591,7 @@
 						<li><a href="{% url 'classroom:material_remove' content.shortcode %}?delete={{ data.pk }}">Delete material</a></li>
 						</td>
 						{% else %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Download material</a></li>
+						<li><a href="{{ data.link }}">Download material</a></li>
 						{% endif %}
 					<tr>
 					{% endfor %}					
