@@ -669,7 +669,7 @@ def modify_classnumber(request, class_code, user_id):
         form_obj = ClasscodeForm(request.POST)
 
         if form_obj.is_valid():
-            form_obj. = form_obj.save(commit=False)
+            form_obj = form_obj.save(commit=False)
             class_code = Class_code.objects.get(class_name=class_code)
 
             class_number = form_obj.class_number
