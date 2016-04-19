@@ -42,7 +42,7 @@ def allow_contentadd(role):
 def handin_remaintime(assignment_obj):
     # return (int in days, Remain Text)
     current_time = datetime.now()
-    deadline_time = assignment_obj.deadline_datetime
+    deadline_time = assignment_obj.deadline_datetime.replace(tzinfo=None)
 
     day_left = (deadline_time - current_time).days
     remain_text = ''
