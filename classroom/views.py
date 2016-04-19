@@ -559,6 +559,14 @@ def assignment_detail(request, shortcode, assignment_id):
     else:
         uploaded = None
 
+    assignment_content = {
+        'upload_format': assignment_obj.upload_format,
+        'deadline_datetime': assignment_obj.deadline_datetime,
+        'instruction': assignment_obj.instruction,
+        'fullmark': assignment_obj.fullmark,
+        'create_date': assignment_obj.create_date,
+    }
+
     return render(request, 'home.html', {
         'page_title': page_title,
         'page_header': page_title,
@@ -572,7 +580,7 @@ def assignment_detail(request, shortcode, assignment_id):
             },
             'assignment': {
                 'title': 'Assignment detail',
-                'content': assignment_obj,
+                'content': assignment_content,
                 'upload': uploaded,
             },
         },

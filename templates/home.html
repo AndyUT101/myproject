@@ -777,11 +777,12 @@
 		<div class="details">
 			<ul>
 				<li>Submitted: Yes No</li>
-				<li><a href="#">submission</a></li>
+				<li><a href="#">submission</a>
+				<span class="upload_format">Upload format: {{ content.assignment.content.upload_format }}</span></li>
 				<li>Deadline: {{ content.assignment.content.deadline_datetime }}</li>
 				<li><strong>Instruction: </strong><br/>
 				{{ content.assignment.content.instruction|linebreaks|urlize }}</li>
-				<li>Upload format: {{ content.assignment.content.upload_format }}</li>
+
 				<li>Fullmark: {{ content.assignment.content.fullmark }}</li>
 				<li>Create date: {{ content.assignment.content.create_date }}</li>
 
