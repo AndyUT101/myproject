@@ -416,7 +416,7 @@ def list_user(request, specific_usertype=None, classcode=None):
             },
         },
     })    
-    
+
 def list_class(request, specific_usertype=None, classcode=None):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
@@ -560,3 +560,35 @@ def delete_class(request, class_code):
             'auto_redirect': True,
         },
     })
+
+def remove_classmember(request, class_code, user_id):
+    page_title = 'Remove announcement'
+    return_url = 'classroom:modify_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    delete_index = request.GET.get('delete', '')
+    if not delete_index:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+    user = User.objects.get(pk = user_id)
+    class_data = Class_code.objects.get(class_name = class_code)
+
+    del_item = Class_assignment.objects.get(user = user, class_code= class_data)
+    del_item.delete()
+
+    return render(request, 'home.html', {
+        'page_title': 'Remove material',
+        'page_header': 'Remove material',
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'notification',
+        'content': {
+            'notification': 'Class member removes successful',
+            'redirect_text': 'Class page',
+            'redirect_url': 'classroom:material',
+            'redirect_para': class_code,
+            'auto_redirect': True,
+        },
+    })
+
