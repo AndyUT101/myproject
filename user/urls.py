@@ -17,6 +17,7 @@ urlpatterns = [
 
     url(r'^class/$', views.list_class, name='list_class'),
     url(r'^class/add/$', views.create_class, name='create_class'),
+    url(r'^class/add/(?P<class_code>.+)/$', views.add_classmember, name='add_classmember'),
     url(r'^class/modify/(?P<class_code>.+)/$', views.modify_class, name='modify_class'),
     url(r'^class/delete/(?P<class_code>.+)/(?P<user_id>[0-9]+)/$', views.remove_classmember, name='remove_classmember'),    
     url(r'^class/delete/(?P<class_code>.+)/$', views.delete_class, name='delete_class'),

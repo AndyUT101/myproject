@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 from django.contrib.auth.hashers import check_password, make_password
 
@@ -526,8 +527,9 @@ def modify_class(request, class_code):
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Add member', 
-                   'url': 'user:create_class',
-                   'html_class': 'create_class'}),
+                   'url': 'user:add_classmember',
+                   'url_para': class_code,
+                   'html_class': 'add_classmember'}),
             ),
             'list': {
                 'name': 'class_d',
@@ -592,3 +594,57 @@ def remove_classmember(request, class_code, user_id):
         },
     })
 
+def add_classmember(request, class_code):
+    page_title = 'Add class member'
+    submit_url = 'user:add_classmember'
+    return_url = 'user:modify_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    if request.method == 'POST':
+
+        add_list = request.POST.getlist('user_action')
+        user_addlist = User.objects.filter(pk__in=add_list)
+        class_item = Class_code.objects.get(class_name=class_code)
+
+        commit_list = []
+        for user_item in user_addlist:
+            commit_list.append(Class_assignment(user=user_item, class_code=class_item, class_number=0))
+
+        Class_assignment.objects.bulk_create(commit_list);
+
+        #if len(set(user_removeobj).intersection(set(unavailable_removeobj))) == 0:
+
+            return render(request, 'home.html', {
+                'page_title': page_title,
+                'page_header': page_title,
+                'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                'template': 'notification',
+                'content': {
+                    'notification': 'Class member add successful',
+                    'redirect_text': 'all class',
+                    'redirect_para': class_code,
+                    'auto_redirect': True,
+                },
+            })
+
+    role = Q(role=Role.objects.get(name='teacher')) | Q(role=Role.objects.get(name='student'))
+    user_inclass = [i.user.pk for i in Class_assignment.objects.all()]
+    available_user = User.objects.exclude(pk__in=user_inclass).filter(role)
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list', # operation, list, 
+        'content': {
+            'list': {
+                'checkbox': True,
+                #'name': 'user',
+                'name': 'class_add',
+                'body': available_user,
+                'foot': (),
+            },
+        },
+    })
