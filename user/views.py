@@ -676,7 +676,8 @@ def modify_classnumber(request, class_code, user_id):
             if Class_assignment.objects.filter(user=mod_user, class_code=class_code, class_number=class_number):
                 return HttpResponseRedirect(reverse(return_url, class_code))
 
-            mod_item = Class_assignment.objects.get(user=mod_user, class_code=form_obj.class_code)
+            mod_item = Class_assignment.objects.get(user=mod_user, class_code=class_code)
+            mod_item.class_number = class_number
             mod_item.save()
 
             return render(request, 'home.html', {
