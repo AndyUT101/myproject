@@ -487,14 +487,52 @@ def create_class(request):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'form': form_obj.as_ul(),
-            'submit_url': submit_url,
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Create class', 
+                   'url': 'user:create_class',
+                   'html_class': 'create_class'}),
+            ),
+            'list': {
+                'checkbox': True,
+                'name': 'class',
+                'body': class_list,
+                'foot': (),
+            },
         },
     })
 
-def modify_class(request):
+def modify_class(request, class_code):
     # add student
-    pass
+    page_title = 'View class'
+    submit_url = 'user:create_class'
+    return_url = 'user:list_class'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+ 
+    class_obj = Class_code.objects.get(class_code = class_code)
+    class_d = Class_assignment.objects.filter(class_code = class_obj).order_by('class_number')
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'list',
+        'content': {
+            'operation': ( 
+                # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
+                ({'title':'Create class', 
+                   'url': 'user:create_class',
+                   'html_class': 'create_class'}),
+            ),
+            'list': {
+                'name': 'class_d',
+                'body': class_d,
+                'foot': (),
+            },
+        },
+    })
 
 def delete_class(request):
     pass
