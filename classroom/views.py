@@ -603,6 +603,8 @@ def assignment_submit(request, shortcode, assignment_id):
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
+    assignment_obj = Assignment.objects.get(pk=assignment_id)
+
     form_obj = Assignment_submitForm()
     if request.method == 'POST':
         form_obj = Assignment_submitForm(request.POST, request.FILES)
@@ -611,7 +613,7 @@ def assignment_submit(request, shortcode, assignment_id):
 
             form_obj = form_obj.save(commit=False)
             form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
-            form_obj.assignment = Assignment.objects.get(pk=assignment_id)
+            form_obj.assignment = assignment_obj
             form_obj.save()
 
             return render(request, 'home.html', {
@@ -648,6 +650,7 @@ def assignment_submit(request, shortcode, assignment_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
+            'notice': 'Only accept ' + assignment_obj.upload_format.dataext
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,

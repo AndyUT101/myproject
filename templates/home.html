@@ -104,6 +104,9 @@
 		<form action="{% url content.submit_url %}" method="post" enctype="multipart/form-data">
 		{% endif %}
 			{% csrf_token %}
+			{% if content.notice %}
+			<p class='important'>{{ content.notice }}</p>
+			{% endif %}
 			{{ content.form }}
 			<input type="submit" name="Submit">
 		</form>
