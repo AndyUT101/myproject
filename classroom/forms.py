@@ -30,7 +30,16 @@ class Assignment_submitForm(ModelForm):
         model = Assignment_pool
         fields = '__all__'
 
-        exclude = ['assignment', 'mark', 'user_assign']
+        exclude = ['mark']
+        widgets = {
+            'assignment': forms.HiddenInput(),
+            'user_assign': forms.HiddenInput(),
+        }
+        
+
+    def clean_upload_format(self):
+        content = self.cleaned_data['upload_format']
+
 
 class NoteForm(ModelForm):
     class Meta:
