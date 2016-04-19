@@ -7,6 +7,10 @@ $(document).ready(function(){
 		$('span.classroom_emoji').html(twemoji.parse('\uD83C\uDFEB')+'&nbsp;');
 	}
 
+	if ($('.unread').length > 0) {
+		$('.unread').html(twemoji.parse('\u2709\uFE0F')+'&nbsp;');
+	}
+
 	// errorlist style
 	if ($('ul.errorlist li').length > 0) {
 		$('ul.errorlist li').prepend('&#x25BE; ');
