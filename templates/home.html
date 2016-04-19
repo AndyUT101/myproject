@@ -193,7 +193,7 @@
 					{% for data in content.list.body %}
 						<td><a href="{% url 'user:list_class' %}">{{ data.class_name }}</a></td>
 						<td>{{ data.class_description }}</td>
-						<td>0</td>
+						<td>{{ data.count }}</td>
 					<tr>
 					{% endfor %}					
 				</tbody>

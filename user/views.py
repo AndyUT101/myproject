@@ -426,6 +426,9 @@ def list_class(request, specific_usertype=None, classcode=None):
         return HttpResponseRedirect(reverse('index'))
 
     class_list = Class_code.objects.all().order_by('class_name')
+    
+    [{'class_name':i.class_name, 'class_description': i.class_description, 'count': Class_assignment.objects.filter(class_code = i).count()} for i in class_list]
+
 
     return render(request, 'home.html', {
         'page_title': 'User management',
@@ -436,7 +439,7 @@ def list_class(request, specific_usertype=None, classcode=None):
             'operation': ( 
                 # operation pattern ('title', 'url(url:name)', 'url_para' 'assign html class name in list')
                 ({'title':'Create class', 
-                   'url': 'user:add_user',
+                   'url': 'user:create_class',
                    'html_class': 'create_class'}),
             ),
             'list': {
