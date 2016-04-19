@@ -292,8 +292,10 @@ def modify_user(request, username=None):
             perform_hashed = False
 
         # 3. (POST) Field check
-        user_form = UsermodForm(request.POST, instance=modify_userobj)
-
+        if rp:
+            userform = UsermodForm(request.POST, instance=modify_userobj)
+        else:
+            userform = UsersimpleForm(request.POST, instance=modify_userobj)
 
         if user_form.is_valid():
             commit_form =  user_form.save(commit=False)
