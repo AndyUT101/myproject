@@ -109,7 +109,7 @@ def create_classroom(request):
         },
     })
 
-def manage_classroom(request, shortcode):
+def manage_classroom(request):
     if not user_alreadyloggedin(request):
         return HttpResponseRedirect(reverse('index'))
 
@@ -121,7 +121,8 @@ def manage_classroom(request, shortcode):
     c = get_contents(shortcode)
 
     if permission:
-        Classroom.objects.get(shortcode=shortcode).delete()
+        delete_index = request.GET.get('delete', '')
+        Classroom.objects.get(shortcode=delete_index).delete()
 
         return render(request, 'home.html', {
             'page_title': page_title,
