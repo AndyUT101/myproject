@@ -612,10 +612,11 @@ def assignment_submit(request, shortcode, assignment_id):
         ext_list = assignment_obj.upload_format.dataext.split(',')
 
         if form_obj.is_valid():
-
+            if 'file' in request.FILES:
+                file = request.FILES['file']
             import os
             file_pass = False
-            if os.path.splitext(request.FILES.name)[1] in ext_list:
+            if os.path.splitext(file)[1] in ext_list:
                 file_pass = True
 
             if not file_pass:
