@@ -698,7 +698,7 @@ def modify_classnumber(request, class_code, user_id):
         'template': 'form',
         'content': {
             'form': form_obj.as_ul(),
-            'submit_url': class_code,
-            'route_parameter': shortcode,
+            'submit_url': submit_url,
+            'route_parameter': class_code,
         },
     })
