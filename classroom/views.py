@@ -1003,7 +1003,7 @@ def add_cmmember(request, shortcode):
 
         right_dict = {'student': 'STU', 'teacher': 'TEA', 'admin': 'ADM', 'principal': 'ADM', 'GO Staff': 'VIS', 'alumni': 'VIS'}
         for user_item in user_addlist:
-            commit_list.append(User_assignment(user=user_item, classroom=class_item, role = right_dict[user_item]))
+            commit_list.append(User_assignment(user=user_item, classroom=class_item, role = right_dict[user_item.role.name]))
 
         User_assignment.objects.bulk_create(commit_list);
 
