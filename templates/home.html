@@ -489,13 +489,11 @@
 				<thead>
 					<tr>
 						<td>Content</td>
-						<td>Announce_date</td>
 					<tr>
 				<tbody>
 					<tr>
 					{% for data in content.list.body %}
-						<td><strong>{{ data.title }}</strong><br/>{{ data.content|linebreaks|urlize }}</td>
-						<td>{{ data.announce_date }}</td>
+						<td><strong>{{ data.title }}</strong><br/>Announce_date: {{ data.announce_date }}<br/>{{ data.content|linebreaks|urlize }}</td>
 						<td><li><a href="{% url 'classroom:announce_del' content.shortcode %}?delete={{ data.pk }}">Delete anouncement</a></li></td>
 					<tr>
 					{% endfor %}					
