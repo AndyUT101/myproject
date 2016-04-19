@@ -118,10 +118,10 @@ def manage_classroom(request):
         return HttpResponseRedirect(reverse('classroom:classroom_list')+shortcode)
 
     permission = allow_contentadd(memberinfo[1])
+    shortcode = request.GET.get('delete', '')
     c = get_contents(shortcode)
 
     if permission:
-        shortcode = request.GET.get('delete', '')
         Classroom.objects.get(shortcode=shortcode).delete()
 
         return render(request, 'home.html', {
