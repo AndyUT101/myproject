@@ -297,8 +297,8 @@ def modify_user(request, username=None):
         else:
             userform = UsersimpleForm(request.POST, instance=modify_userobj)
 
-        if user_form.is_valid():
-            commit_form =  user_form.save(commit=False)
+        if userform.is_valid():
+            commit_form =  userform.save(commit=False)
             
             # 4. If password is remain unchanged, skip update password
             if (perform_hashed):
