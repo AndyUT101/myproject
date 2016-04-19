@@ -689,6 +689,21 @@
 
 	{% endif %}
 
+	{% if content.detail_user %}
+		<h2>User inforation of: {{ content.obj.detail_user.username }} ({{ content.obj.detail_user.lastname }} {{ content.obj.detail_user.firstname }})</h2>
+		<ul>
+			<li>Sex: {{ content.detail_user.obj.sex_code }}</li>
+			<li>SmartCard ID: {{ content.detail_user.obj.card_id }}</li>
+			<li>Strn code: {{ content.detail_user.obj.strn_code }}</li>
+			<li>SAMS code: {{ content.detail_user.obj.sams_code }}</li>
+			<li>Birthday: {{ content.detail_user.obj.birth_date }}</li>
+			<li>Address: {{ content.detail_user.obj.address }}</li>
+			<li>Contact number: (P) {{ content.detail_user.obj.phone }}, (M) {{ content.detail_user.obj.mobile }}</li>
+			<li>email: {{ content.detail_user.obj.email }}</li>
+		</ul>
+	{% endif %}
+
+
 	</section>
 {% endif %}
 

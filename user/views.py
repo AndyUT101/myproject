@@ -213,7 +213,7 @@ def add_user(request):
         return HttpResponseRedirect(reverse('index')) 
 
 def remove_user(request):
-    return_url = 'list_user'
+    return_url = 'user:list_user'
     page_title = 'Remove user'
 
     # 1. Check permission
@@ -367,9 +367,16 @@ def view_user(request, username, specific_usertype=None):
         'page_title': 'Modify a user',
         'page_header': 'Modify a user',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'testing',
+        'template': 'detail',
         'content': {
-            'obj': user_obj,
+            'operation': ( 
+                ({'title':'Modify user', 
+                   'url': 'user:modify_user',
+                   'html_class': 'modify_user'}),
+            ),
+            'detail_user': {
+                'obj': user_obj,
+            },
         },
     })
 
@@ -415,10 +422,6 @@ def list_user(request, specific_usertype=None, classcode=None):
                    'url': 'user:add_user',
                    'html_class': 'create_user'}),
 
-                ({'title':'Modify user', 
-                   'url': 'user:modify_user',
-                   # 'url_para': '',
-                   'html_class': 'modify_user'}),
 
                 ({'title':'Delete user', 
                    'url': 'user:remove_user',
