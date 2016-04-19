@@ -243,7 +243,7 @@
 					<tr>
 					{% for data in content.list.body %}
 						{% if content.permission %}<td>{% if data.user.role.name == 'admin' %} {% else %}<a href="{% url 'classroom:remove_cmmember' content.shortcode data.pk %}">Remove</a>{% endif %}</td>{% endif %}
-						<td>{{ data.user.lastname }} {{ data.user.firstname }}</td>
+						<td><a href="{% url 'user:view_user' data.user.username  %}">{{ data.user.lastname }} {{ data.user.firstname }}</a></td>
 						<td>{{ data.user.role }}</td>
 						<td>{{ data.user.assign_date }}</td>
 					<tr>
