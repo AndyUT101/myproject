@@ -610,7 +610,7 @@ def assignment_submit(request, shortcode, assignment_id):
         form_obj = Assignment_submitForm(request.POST, request.FILES)
 
         ext_list = assignment_obj.upload_format.dataext.split(',')
-        filename = request.FILES['file']
+        filename = request.FILES['content']
         import os
         file_pass = False
         if os.path.splitext(filename)[1] in ext_list:
