@@ -785,8 +785,8 @@
 		<h2>{{ content.classroom.title }}</h2>
 		<div class="details">
 			<ul>
-				<li>Student: {{ content.classroom.count.user_assign_stu }}</li>
-				<li>Teacher: {{ content.classroom.count.user_assign_tea }}</li>
+				<li><a href="{% url 'classroom:modify_cmmember' content.notification.url %}">Student: {{ content.classroom.count.user_assign_stu }}</a></li>
+				<li><a href="{% url 'classroom:modify_cmmember' content.notification.url %}">Teacher: {{ content.classroom.count.user_assign_tea }}</a></li>
 				<li>Announce: {{ content.classroom.count.announce }}</li>
 				<li>Material: {{ content.classroom.count.material }}</li>
 				<li>Assignment: {{ content.classroom.count.assignment }}</li>
