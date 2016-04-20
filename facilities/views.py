@@ -265,9 +265,9 @@ def add_room(request):
                 'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                 'template': 'notification',
                 'content': {
-                    'notification': 'Facility add successful',
-                    'redirect_text': 'Facilities page',
-                    'redirect_url': 'facilities:index',
+                    'notification': 'Room add successful',
+                    'redirect_text': 'Room page',
+                    'redirect_url': 'facilities:view_room',
                     'auto_redirect': True,
                 },
             })
