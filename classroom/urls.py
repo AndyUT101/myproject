@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/assignment_delete/$', views.assignment_delete, name='assignment_delete'),
     url(r'^(?P<shortcode>.+)/assignment_detail/(?P<assignment_id>[0-9]+)/$', views.assignment_detail, name='assignment_detail'),
     url(r'^(?P<shortcode>.+)/assignment_submit/(?P<assignment_id>[0-9]+)/$', views.assignment_submit, name='assignment_submit'),
+    url(r'^(?P<shortcode>.+)/assignment_mark/(?P<pool_id>[0-9]+)/$', views.assignment_mark, name='assignment_mark'),
     url(r'^(?P<shortcode>.+)/assignment_status/(?P<assignment_id>[0-9]+)/$', views.assignment_submitstatus , name='assignment_submitstatus'),
     url(r'^(?P<shortcode>.+)/material/$', views.material, name='material'),
     url(r'^(?P<shortcode>.+)/material_upload/$', views.material_upload, name='material_upload'),
