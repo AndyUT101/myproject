@@ -571,6 +571,43 @@
 		</div>
 	{% endif %}
 
+	{% if content.list.name == 'assignment_status' %}
+		<div class="list_table">
+			<table>
+				<thead>
+					<tr>
+						<td>Username</td>
+						<td>Student</td>
+						<td>Mark</td>
+						<td>Assignment material</td>
+						<td>Operation</td>
+					<tr>
+				<tbody>
+					<tr>
+					{% for data in content.list.body %}
+						<td><strong>{{ data.username }}</strong></td>
+						<td>{{ data.user }}</td>
+						<td>{{ data.mark }}</td>
+						<td><a href="{{ data.content.url }}">Download Assignment document</a></td>
+						<td><a href="#">Grading</a></td>
+						<td>
+						{% if content.permission %}
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Mark assignment</a></li>
+						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li>
+						</td>
+						{% else %}
+						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Assignment detail</a></li>
+						<li><a href="{% url 'classroom:assignment_submit' content.shortcode data.pk %}">Submit assignment</a></li>
+						{% endif %}
+					<tr>
+					{% endfor %}					
+				</tbody>
+				
+			</table>
+
+		</div>
+	{% endif %}
+
 	{% if content.list.name == 'material' %}
 		<div class="list_table">
 			<table>
