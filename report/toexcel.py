@@ -132,15 +132,16 @@ def all_student(class_contents):
     wb_header = ['Class', 'Class number', 'Student name', 'Sex code', 'Card id', 'Strn code', 'birthday', 'email']
     for index, key in enumerate(wb_header, 1):
         set_header = header
-        if index == 7:
-            set_header = workbook.add_format({'num_format': 'yyyy/mm/dd'})
         worksheet_s.write(4, index, key, set_header)
 
     for index, key in enumerate(class_contents):
         row = 5 + index
         output_data = key
         for ix, kx in enumerate(wb_header):
-            worksheet_s.write(row, ix+1, output_data[ix], header)
+            set_header = header
+            if ix == 7:
+                set_header = workbook.add_format({'num_format': 'yyyy/mm/dd'})
+            worksheet_s.write(row, ix+1, output_data[ix], set_header)
 
     workbook.close()
     xlsx_data = output.getvalue()
