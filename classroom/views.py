@@ -702,7 +702,7 @@ def assignment_submitstatus(request, shortcode, assignment_id):
         'page_title': page_title,
         'page_header': page_title,
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
-        'template': 'test',
+        'template': 'testing',
         'content': {
             'notification': {
                 'current_classroom': c['classroom'].name,
