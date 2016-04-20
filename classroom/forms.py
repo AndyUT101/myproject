@@ -32,6 +32,11 @@ class Assignment_submitForm(ModelForm):
 
         exclude = ['assignment', 'mark', 'user_assign']
 
+class Assignment_markForm(ModelForm):
+    class Meta:
+        model = Assignment_pool
+        fields = ('mark')
+
 class NoteForm(ModelForm):
     class Meta:
         model = Note

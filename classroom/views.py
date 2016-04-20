@@ -685,9 +685,7 @@ def assignment_submitstatus(request, shortcode, assignment_id):
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))  
 
-
     c = get_contents(shortcode)
-
 
     pool = Assignment_pool.objects.filter(assignment__pk = assignment_id).order_by('submit_datetime')
     pool_data = [{
@@ -716,6 +714,78 @@ def assignment_submitstatus(request, shortcode, assignment_id):
                 'name': 'assignment_status',
                 'body': pool_data,
             },
+        },
+    })
+
+def assignment_mark(request, shortcode, pool_id):
+    page_title = 'Assignment marking'
+    submit_url = 'classroom:assignment_mark'
+    return_url = 'classroom:assignment_submitstatus'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    pool_obj = Assignment_pool.objects.get(pk=pool_id)
+    assignment_obj = pool_obj.assignment
+
+    if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_obj):
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
+    form_obj = Assignment_markForm()
+    if request.method == 'POST':
+        form_obj = Assignment_markForm(request.POST)
+
+        if form_obj.is_valid():
+
+            mark = request.POST.getlist('mark')
+            if assignment_obj.fullmark >= mark:
+                pool_obj.mark = mark
+                pool_obj.save()
+
+                return render(request, 'home.html', {
+                    'page_title': page_title,
+                    'page_header': page_title,
+                    'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+                    'template': 'notification',
+                    'content': {
+                        'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+                        'notification': 'Assignment mark add successful',
+                        'redirect_text': 'all assignment',
+                        'redirect_url': return_url,
+                        'redirect_para': shortcode,
+                        'redirect_para2': assignment_obj.pk,
+                        'auto_redirect': True,
+                    },
+                })
+
+        return render(request, 'home.html', {
+            'page_title': page_title,
+            'page_header': page_title,
+            'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+            'template': 'form',
+            'content': {
+                'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+                'form': form_obj.as_ul(),
+                'submit_url': submit_url,
+                'route_parameter': shortcode,
+                'route_parameter2': pool_id,
+            },
+        })
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'form',
+        'content': {
+            'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+            'form': form_obj.as_ul(),
+            'submit_url': submit_url,
+            'route_parameter': shortcode,
+            'route_parameter2': pool_id,
         },
     })    
 
