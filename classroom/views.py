@@ -751,7 +751,7 @@ def assignment_mark(request, shortcode, pool_id):
                     'topnav': site_topnav(get_userrole(request.session['user'])['level']),
                     'template': 'notification',
                     'content': {
-                        'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+                        'notice': 'The full mark of the assignment is ' + str(assignment_obj.fullmark),
                         'notification': 'Assignment mark add successful',
                         'redirect_text': 'all assignment',
                         'redirect_url': return_url,
@@ -767,7 +767,7 @@ def assignment_mark(request, shortcode, pool_id):
             'topnav': site_topnav(get_userrole(request.session['user'])['level']),
             'template': 'form',
             'content': {
-                'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+                'notice': 'The full mark of the assignment is ' + str(assignment_obj.fullmark),
                 'form': form_obj.as_ul(),
                 'submit_url': submit_url,
                 'route_parameter': shortcode,
@@ -781,7 +781,7 @@ def assignment_mark(request, shortcode, pool_id):
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'form',
         'content': {
-            'notice': 'The full mark of the assignment is ' + assignment_obj.fullmark,
+            'notice': 'The full mark of the assignment is ' + str(assignment_obj.fullmark),
             'form': form_obj.as_ul(),
             'submit_url': submit_url,
             'route_parameter': shortcode,
