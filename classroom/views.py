@@ -605,6 +605,10 @@ def assignment_submit(request, shortcode, assignment_id):
 
     assignment_obj = Assignment.objects.get(pk=assignment_id)
 
+    # reject late submission
+    if handin_remaintime(assignment_obj)[0] < 0:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+
     form_obj = Assignment_submitForm()
     if request.method == 'POST':
         form_obj = Assignment_submitForm(request.POST, request.FILES)
@@ -666,6 +670,54 @@ def assignment_submit(request, shortcode, assignment_id):
             'route_parameter2': assignment_id,
         },
     })
+
+def assignment_submitstatus(request, shortcode, assignment_id):
+    page_title = 'Assignment marking and submission status'
+    submit_url = 'classroom:assignment_submit'
+    return_url = 'classroom:assignment_detail'
+
+    if not user_alreadyloggedin(request):
+        return HttpResponseRedirect(reverse('index'))
+
+    memberinfo = is_memberinfo(shortcode, request.session['user'])
+    permission = allow_contentadd(memberinfo[1])
+
+    if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))  
+    if not permission:
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode])) 
+
+    c = get_contents(shortcode)
+
+
+    pool = Assignment_pool.objects.filter(assignment__pk = assignment_id).order_by('submit_datetime')
+    pool_data = [{
+        'content': i.content,
+        'mark': i.mark,
+        'user': i.user_assign.user.lastname + ' ' + i.user_assign.user.firstname, 
+        'submit_datetime': i.submit_datetime,
+        'username': i.user_assign.user.username, 
+    } for i in pool]
+
+    return render(request, 'home.html', {
+        'page_title': page_title,
+        'page_header': page_title,
+        'topnav': site_topnav(get_userrole(request.session['user'])['level']),
+        'template': 'test',
+        'content': {
+            'notification': {
+                'current_classroom': c['classroom'].name,
+                'classroom_role': role_tidyprint(is_memberinfo(shortcode, request.session['user'])[1]),
+                'url': shortcode,
+            },
+            'permission': permission,
+            'shortcode':shortcode,
+            'list': {
+                'name': 'assignment_status',
+                'body': pool_data,
+            },
+        },
+    })    
 
 def material(request, shortcode):
     page_title = 'View materials'
