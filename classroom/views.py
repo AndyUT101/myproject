@@ -623,7 +623,12 @@ def assignment_submit(request, shortcode, assignment_id):
         if file_pass:
 
             form_obj = form_obj.save(commit=False)
-            form_obj.user_assign = user_assign_assignment(shortcode, request.session['user'])
+            user_assign = user_assign_assignment(shortcode, request.session['user'])
+            
+            # clear old assignment
+            Assignment_pool.objects.filter(assignment__pk = assignment_id, user_assign = user_assign).delete()
+
+            form_obj.user_assign = user_assign
             form_obj.assignment = assignment_obj
             form_obj.save()
 
