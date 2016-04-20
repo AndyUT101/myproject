@@ -684,8 +684,7 @@ def assignment_submitstatus(request, shortcode, assignment_id):
 
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))  
-    if not permission:
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode])) 
+
 
     c = get_contents(shortcode)
 

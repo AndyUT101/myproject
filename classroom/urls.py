@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/assignment_delete/$', views.assignment_delete, name='assignment_delete'),
     url(r'^(?P<shortcode>.+)/assignment_detail/(?P<assignment_id>[0-9]+)/$', views.assignment_detail, name='assignment_detail'),
     url(r'^(?P<shortcode>.+)/assignment_submit/(?P<assignment_id>[0-9]+)/$', views.assignment_submit, name='assignment_submit'),
+    url(r'^(?P<shortcode>.+)/assignment_status/(?P<assignment_id>[0-9]+)/$', views.assignment_submitstatus , name='assignment_submitstatus'),
     url(r'^(?P<shortcode>.+)/material/$', views.material, name='material'),
     url(r'^(?P<shortcode>.+)/material_upload/$', views.material_upload, name='material_upload'),
     url(r'^(?P<shortcode>.+)/material_remove/$', views.material_remove, name='material_remove'),
@@ -27,6 +28,10 @@ urlpatterns = [
     url(r'^(?P<shortcode>.+)/user/$', views.modify_cmmember, name='modify_cmmember'),
     url(r'^(?P<shortcode>.+)/user/add/$', views.add_cmmember, name='add_cmmember'),
 
-    url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom')
+
+
+    url(r'^(?P<shortcode>.+)/$', views.view_classroom , name='classroom'),
+
+    
 
 ]
