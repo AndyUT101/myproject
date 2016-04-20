@@ -731,7 +731,7 @@ def assignment_mark(request, shortcode, pool_id):
     pool_obj = Assignment_pool.objects.get(pk=pool_id)
     assignment_obj = pool_obj.assignment
 
-    if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_obj):
+    if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_obj.pk):
         return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
 
     form_obj = Assignment_markForm()
