@@ -131,7 +131,10 @@ def all_student(class_contents):
     
     wb_header = ['Class', 'Class number', 'Student name', 'Sex code', 'Card id', 'Strn code', 'birthday', 'email']
     for index, key in enumerate(wb_header, 1):
-        worksheet_s.write(4, index, key, header)
+        set_header = header
+        if index == 7:
+            set_header = workbook.add_format({'num_format': 'yyyy/mm/dd'})
+        worksheet_s.write(4, index, key, set_header)
 
     for index, key in enumerate(class_contents):
         row = 5 + index

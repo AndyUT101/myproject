@@ -23,8 +23,8 @@ def list_facilities_floor(request):
     facilities_obj = Facilities.objects.all().order_by('room')
 
     return render(request, 'home.html', {
-        'page_title': 'Welcome home!',
-        'page_header': 'Good to seeing you, ',
+        'page_title': 'Facilities',
+        'page_header': 'Facilities list',
         'topnav': site_topnav(get_userrole(request.session['user'])['level']),
         'template': 'list',
         'content': {   
