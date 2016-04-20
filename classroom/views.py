@@ -601,13 +601,13 @@ def assignment_submit(request, shortcode, assignment_id):
     permission = allow_contentadd(memberinfo[1])
 
     if not memberinfo[0] or not classroom_has_assignment(shortcode, assignment_id):
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode, assignment_id]))
 
     assignment_obj = Assignment.objects.get(pk=assignment_id)
 
     # reject late submission
     if handin_remaintime(assignment_obj)[0] < 0:
-        return HttpResponseRedirect(reverse(return_url, args=[shortcode]))
+        return HttpResponseRedirect(reverse(return_url, args=[shortcode, assignment_id]))
 
     form_obj = Assignment_submitForm()
     if request.method == 'POST':
