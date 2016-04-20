@@ -740,7 +740,7 @@ def assignment_mark(request, shortcode, pool_id):
 
         if form_obj.is_valid():
 
-            mark = request.POST.getlist('mark')
+            mark = request.POST.get('mark', '')
             if assignment_obj.fullmark >= mark:
                 pool_obj.mark = mark
                 pool_obj.save()
