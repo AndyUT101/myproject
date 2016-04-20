@@ -35,7 +35,7 @@ class Assignment_submitForm(ModelForm):
 class Assignment_markForm(ModelForm):
     class Meta:
         model = Assignment_pool
-        fields = ('mark')
+        fields = ('mark',)
 
 class NoteForm(ModelForm):
     class Meta:
