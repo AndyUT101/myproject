@@ -282,16 +282,17 @@ def rollcall(request):
         if received_token and card_id:
             try:
                 user = User.objects.get(card_id=card_id)
+                Attandance(user=user).save()
+
+                response_data['status'] = True
+                response_data['message'] = 'Attandance logged'
+                response_data['user'] = user.username
+                response_data['datetime'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+
             except ObjectDoesNotExist:
                 response_data['status'] = False
                 response_data['message'] = 'No user record'
 
-            Attandance(user=user).save()
-
-            response_data['status'] = True
-            response_data['message'] = 'Attandance logged'
-            response_data['user'] = user.username
-            response_data['datetime'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-
+            
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")

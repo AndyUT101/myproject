@@ -111,7 +111,7 @@ def all_student(class_contents):
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output)
 
-    worksheet_s = workbook.add_worksheet("Attendance")
+    worksheet_s = workbook.add_worksheet("All_student")
     title = workbook.add_format({
         'bold': True,
         'font_size': 14,
