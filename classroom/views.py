@@ -695,7 +695,8 @@ def assignment_submitstatus(request, shortcode, assignment_id):
         'mark': i.mark,
         'user': i.user_assign.user.lastname + ' ' + i.user_assign.user.firstname, 
         'submit_datetime': i.submit_datetime,
-        'username': i.user_assign.user.username, 
+        'username': i.user_assign.user.username,
+        'pk' = i.pk, 
     } for i in pool]
 
     return render(request, 'home.html', {
