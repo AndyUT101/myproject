@@ -589,7 +589,7 @@
 						<td>{{ data.user }}</td>
 						<td>{% if data.mark == "" %} -- {% else %}{{ data.mark }}{% endif %}</td>
 						<td><a href="{{ data.content.url }}">Download Assignment document</a></td>
-						<td><a href="#">Mark assignment</a></td>
+						<td><a href="{% url 'classroom:assignment_mark' content.shortcode data.pk %}">Mark assignment</a></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
