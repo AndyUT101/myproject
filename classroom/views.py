@@ -122,7 +122,9 @@ def manage_classroom(request):
     permission = allow_contentadd(memberinfo[1])
     c = get_contents(shortcode)
 
-    if permission:
+    user = User.objects.get(username = request.session['user'])
+
+    if permission or review_permission(user, 'allow:classroom_all'):
         Classroom.objects.get(shortcode=shortcode).delete()
 
         return render(request, 'home.html', {
