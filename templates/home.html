@@ -587,7 +587,7 @@
 					{% for data in content.list.body %}
 						<td><strong>{{ data.username }}</strong></td>
 						<td>{{ data.user }}</td>
-						<td>{% if data.mark == "" %} -- {% else %}{{ date.mark }}{% endif %}</td>
+						<td>{% if data.mark == "" %} -- {% else %}{{ data.mark }}{% endif %}</td>
 						<td><a href="{{ data.content.url }}">Download Assignment document</a></td>
 						<td><a href="#">Mark assignment</a></td>
 					<tr>
