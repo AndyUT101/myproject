@@ -578,7 +578,7 @@
 					<tr>
 						<td>Username</td>
 						<td>Student</td>
-						<td>Mark</td>
+						<td>Mark got</td>
 						<td>Assignment material</td>
 						<td>Operation</td>
 					<tr>
@@ -587,18 +587,9 @@
 					{% for data in content.list.body %}
 						<td><strong>{{ data.username }}</strong></td>
 						<td>{{ data.user }}</td>
-						<td>{{ data.mark }}</td>
+						<td>{% if data.mark == "" %} -- {% else %}{{ date.mark }}{% endif %}</td>
 						<td><a href="{{ data.content.url }}">Download Assignment document</a></td>
-						<td><a href="#">Grading</a></td>
-						<td>
-						{% if content.permission %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Mark assignment</a></li>
-						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li>
-						</td>
-						{% else %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Assignment detail</a></li>
-						<li><a href="{% url 'classroom:assignment_submit' content.shortcode data.pk %}">Submit assignment</a></li>
-						{% endif %}
+						<td><a href="#">Mark assignment</a></td>
 					<tr>
 					{% endfor %}					
 				</tbody>
