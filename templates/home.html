@@ -555,7 +555,7 @@
 						<td>{{ data.deadline_datetime }}</td>
 						<td>
 						{% if content.permission %}
-						<li><a href="{% url 'classroom:assignment_detail' content.shortcode data.pk %}">Mark assignment</a></li>
+						<li><a href="{% url 'classroom:assignment_mark' content.shortcode data.pk %}">Mark assignment</a></li>
 						<li><a href="{% url 'classroom:assignment_delete' content.shortcode %}?delete={{ data.pk }}">Delete assignment</a></li>
 						</td>
 						{% else %}
